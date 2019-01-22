@@ -26,7 +26,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack -w --mode=development"
+    "postinstall": "./node_modules/.bin/webpack --mode=production",
+    "start": "./node_modules/.bin/webpack --mode=production",
+    "webpack": "webpack --mode=development --watch"
   },
   "repository": {
     "type": "git",
@@ -38,5 +40,10 @@
   "bugs": {
     "url": "https://github.com/ge2016/takeNote/issues"
   },
-  "homepage": "https://github.com/ge2016/takeNote#readme"
+  "homepage": "https://github.com/ge2016/takeNote#readme",
+  "engines": {
+    "node": "11.6.0",
+    "npm": "6.5.0"
+  },
+  "devDependencies": {}
 }
