@@ -10,6 +10,7 @@ class SessionForm extends React.Component {
       formType: props.formType
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
     // this.renderErrors = this.renderErrors.bind(this);
   }
 
@@ -29,6 +30,12 @@ class SessionForm extends React.Component {
     this.props.processForm(user);
   }
 
+  demoLogin(e) {
+    e.preventDefault();
+    const user = Object.assign({}, {email: 'demo@demo', password: 'password'});
+    this.props.processForm(user);
+  }
+
   renderErrors() {
     return (
       <ul className='form-errors'>
@@ -45,10 +52,15 @@ class SessionForm extends React.Component {
     let formButton;
     let formSwitchText;
     let formSwitchLink;
+    let formDemoButton;
+
     if (this.state.formType === 'login') {
       formButton = (<input className='form-button' type='submit' value='Login' />);
       formSwitchText = 'Don\'t have an account?';
       formSwitchLink = (<Link to='/signup'>Create account</Link>);
+      formDemoButton = (
+        <button className='form-button' onClick={(e) => this.demoLogin(e)}>Demo Login</button>
+      );
     } else {
         formButton = (<input className='form-button' type='submit' value='Continue' />);
         formSwitchText = 'Already have an account?';
@@ -71,6 +83,9 @@ class SessionForm extends React.Component {
               <input className='form-input' placeholder='Password' type='password' value={this.state.password} onChange={this.update('password')} />
               <>
                 {formButton}
+              </>
+              <>
+                {formDemoButton}
               </>
             </form>
           </div>
