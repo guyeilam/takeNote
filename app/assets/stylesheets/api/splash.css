@@ -1,0 +1,180 @@
+.splash-header li {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.splash-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 130px;
+  max-width: 1220px;
+  margin: 0 auto;
+  /* border: 2px blue dotted; */
+}
+
+.auth-buttons {
+  margin-left: auto;
+  margin-right: 60px;
+}
+
+.or-text {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.button {
+  color: #00a82d;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  height: 40px;
+  font-size: 14px;
+  line-height: 37px;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: .5px;
+  padding: 0 10px;
+}
+
+.button:hover {
+  color: #14CC45;
+  transition: .3s color ease-in-out;
+}
+
+.button-outline {
+  border: 2px solid #00a82d;
+  border-radius: 3px;
+  min-width: 120px;
+  color: #00a82d;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  height: 40px;
+  font-size: 14px;
+  line-height: 37px;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: .5px;
+  padding: 0 10px;
+}
+
+.button-outline:hover {
+  border: 2px solid #14CC45;
+  color: #14CC45;
+  transition: .3s color ease-in-out, .3s border ease-in-out;
+}
+
+.header-logo-text {
+  font-family: 'Volkhov', serif;
+  font-size: 42px;
+  text-align: center;
+}
+
+.header-logo {
+  background: url('https://fast.brandfolder.io/I6FML9WY/as/pgm3fv-4oc7fs-6mju3w/evernote-icon.png') center;
+  background-size: contain;
+  height: 75px;
+  width: 75px;
+  /* margin-left: 40px; */
+}
+
+.splash-content-1 {
+  background: url('https://evernote.com/img/backgrounds/patterns/main-green.png') center;
+  background-color: #00a82d;
+  width: 100%;
+  height: 100%;
+}
+
+.splash-content-container {
+  /* border: 2px red dotted; */
+  /* padding: 20px 80px 20px 80px; */
+  display: flex;
+  align-items: center;
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 100px 20px;
+}
+
+.splash-content-text {
+  margin-right: 10px;
+  width: 50%;
+}
+
+.splash-content-text-header {
+  color: white;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-size: 47px;
+  line-height: 65px;
+  font-weight: 400;
+  letter-spacing: 1.3px;
+}
+
+.splash-content-text-subheader {
+  margin-top: 10px;
+  color: white;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  line-height: 40px;
+  font-weight: 300;
+  letter-spacing: 1.3px;
+}
+
+.splash-content-image {
+  width: 50%;
+}
+
+.splash-image {
+  width: 400px;
+  margin: auto;
+}
+
+.hero-button {
+  margin-top: 30px;
+}
+
+.hero-button-white {
+  color: #00A82D;
+  background-color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  border: 0;
+  border-radius: 3px;
+  padding: 18px 32px 17px;
+  letter-spacing: 1.5px;
+  width: 160px;
+}
+
+.hero-button-white:hover {
+  background-color: #F7F7F7;
+  transition: .2s background ease-in-out;
+}
+
+.splash-footer {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.splash-footer-container {
+  /* border: 2px red dotted; */
+  /* padding: 20px 80px 20px 80px; */
+  display: flex;
+  align-items: center;
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.splash-footer-text {
+  margin: 20px 0 10px 0;
+  color: gray;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  /* line-height: 40px; */
+  font-weight: 300;
+  /* letter-spacing: 1.3px; */
+}
