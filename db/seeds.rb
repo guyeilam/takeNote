@@ -7,8 +7,24 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.delete_all
+Notebook.delete_all
 
 User.create!(
   email: 'demo@demo',
   password: 'password'
+)
+
+User.create!(
+  email: 'User 2',
+  password: 'password'
+)
+
+Notebook.create!(
+  title: 'Notebook One',
+  user_id: User.first.id
+)
+
+Notebook.create!(
+  title: 'Notebook Two',
+  user_id: User.last.id
 )
