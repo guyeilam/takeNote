@@ -18,7 +18,7 @@ class NotebookDetail extends Component {
     return (
       <section className='notebook-detail'>
         <div>
-          {this.props.notebook.title}
+          <span>{this.props.notebook.title}</span>
         </div>
       </section>
     );

@@ -1,0 +1,36 @@
+.notebooks-list-container {
+  margin: 20px;
+}
+
+.notebooks-list-header {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 40px;
+  font-weight: 400;
+  color: #313131;
+  margin-bottom: 10px;
+}
+
+.notebooks-list-menubar-header {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #313131;
+  margin: 10px 0px;
+}
+
+.notebook-item-icon {
+  margin-right: 5px;
+}
+
+.notebooks-index-item {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #313131;
+}
+
+.notebooks-list-content li:nth-child(odd){
+  background-color: #4C8BF5;
+  color: #fff;
+}

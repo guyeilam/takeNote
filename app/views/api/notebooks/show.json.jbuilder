@@ -1,7 +1,11 @@
-json.notebook do
-  json.extract! @notebook, :id, :title
-  # :note_ids
+json.set! @notebook.id do
+    json.extract! @notebook, :id, :title, :user_id
+    json.note_ids []
 end
+# json.notebook do
+  # json.extract! @notebook, :id, :title
+  # :note_ids
+# end
 
 # json.notes do
 #   @notebook.notes.each do |note|

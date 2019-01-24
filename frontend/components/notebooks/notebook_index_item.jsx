@@ -4,12 +4,9 @@ import NotebookDetailContainer from './notebook_detail_container';
 
 const NotebooksIndexItem = ({ notebook }) => (
   <li className='notebooks-index-item'>
-    <Route
-          path="/notebooks/:notebookId"
-          component={NotebookDetailContainer}
-        />
     <Link to={`/notebooks/${notebook.id}`}>
-      <span>{notebook.title}</span>
+      <span className='notebook-item-icon'><i className="fas fa-book"/></span>
+      <span className='notebook-item-title'>{notebook.title}</span>
     </Link>
   </li>
 );

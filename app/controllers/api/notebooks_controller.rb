@@ -6,7 +6,12 @@ class Api::NotebooksController < ApplicationController
   end
 
   def show
-    @notebook = current_user.notebooks.find(params[:id])
+    @notebook = current_user.notebooks.find_by(id: params[:id])
+    if @notebook
+      render :show
+    else
+      render json: ['Notebook does not exist.']
+    end
   end
 
   def create
@@ -26,19 +31,19 @@ class Api::NotebooksController < ApplicationController
     if @notebook.update_attributes(notebook_params)
       render :show
     else
-      render json: @notebooks.errors.full_messages, status: 422
+      render json: @notebook.errors.full_messages, status: 422
     end
   end
 
   def destroy
-    @notebook = current_user.notebooks.find(params[:id])
+    @notebook = current_user.notebooks.find_by(id: params[:id])
     @notebook.destroy
 
     render :show
   end
 
   private
-  def notebooks_params
-    params.require(:notebooks).permit(:title)
+  def notebook_params
+    params.require(:notebook).permit(:title)
   end
 end

@@ -11,13 +11,18 @@ class NotebooksIndex extends Component {
   render() {
     return (
       <section className='notebooks'>
-        {/* <Route
-          path="/notebooks/:notebookId"
-          component={NotebookDetailContainer}
-        /> */}
-        <ul>
-          {this.props.notebooks.map(notebook => <NotebooksIndexItem key={notebook.id} notebook={notebook} />)}
-        </ul>
+        <div className='notebooks-list-container'>
+          <div className='notebooks-list-header'>Notebooks</div>
+          <div className='notebooks-list-menubar'>
+            <div className='notebooks-list-menubar-header'>My notebook list</div>
+          </div>
+          <hr />
+          <div className='notebooks-list-content'>
+            <ul>
+              {this.props.notebooks.map(notebook => <NotebooksIndexItem key={notebook.id} notebook={notebook} />)}
+            </ul>
+          </div>
+        </div>
       </section>
     )
   }

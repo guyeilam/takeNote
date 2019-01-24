@@ -25,6 +25,16 @@ Notebook.create!(
 )
 
 Notebook.create!(
+  title: 'Notebook Two by first user',
+  user_id: User.first.id
+)
+
+Notebook.create!(
+  title: 'Notebook Three by first user',
+  user_id: User.first.id
+)
+
+Notebook.create!(
   title: 'Notebook Two',
   user_id: User.last.id
 )
