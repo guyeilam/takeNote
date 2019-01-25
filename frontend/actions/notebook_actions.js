@@ -12,10 +12,10 @@ export const receiveAllNotebooks = (notebooks) => {
   });
 }
 
-export const receiveSingleNotebook = (notebook) => {
+export const receiveSingleNotebook = (payload) => {
   return ({
     type: RECEIVE_SINGLE_NOTEBOOK,
-    notebook
+    payload
   });
 }
 
@@ -46,8 +46,8 @@ export const requestAllNotebooks = () => {
 
 export const requestSingleNotebook = (notebookId) => {
   return (dispatch) => {
-    return NotebookAPIUtil.fetchSingleNotebook(notebookId).then((notebook) => {
-      return dispatch(receiveSingleNotebook(notebook));
+    return NotebookAPIUtil.fetchSingleNotebook(notebookId).then((payload) => {
+      return dispatch(receiveSingleNotebook(payload));
     },
       (err) => {
         return dispatch(receiveNotebookErrors(err.responseJSON));

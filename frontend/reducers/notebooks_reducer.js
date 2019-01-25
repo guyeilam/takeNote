@@ -13,7 +13,7 @@ const notebooksReducer = (oldState = {}, action) => {
     case RECEIVE_ALL_NOTEBOOKS:
       return action.notebooks;
     case RECEIVE_SINGLE_NOTEBOOK:
-      const newNotebook = action.notebook;
+      const newNotebook = action.payload.notebook;
       return merge({}, oldState, newNotebook);
     case REMOVE_NOTEBOOK:
       newState = merge({}, oldState);

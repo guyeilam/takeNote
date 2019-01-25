@@ -114,3 +114,7 @@ Notebook.create!(title: 'Operative optimizing help-desk', user_id: User.first.id
 Notebook.create!(title: 'Automated maximized orchestration', user_id: User.first.id)
 Notebook.create!(title: 'Profit-focused clear-thinking intranet', user_id: User.first.id)
 Notebook.create!(title: 'Polarised methodical local area network', user_id: User.first.id)
+
+Note.create!(title: 'Note 1', content: 'Content of note 1', user_id: User.first.id, notebook_id: Notebook.first.id)
+Note.create!(title: 'Note 2', content: 'Content of note 2', user_id: User.first.id, notebook_id: Notebook.first.id)
+Note.create!(title: 'Note 3', content: 'Content of note 3', user_id: User.first.id, notebook_id: Notebook.first.id)
