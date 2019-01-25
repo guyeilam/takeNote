@@ -7,15 +7,20 @@ class NewNotebookForm extends React.Component {
     this.state = {
       title: '',
       user_id: '',
-      note_ids: []
+      note_ids: [],
+      disabled: true
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   update(field) {
-    return e => this.setState({
-      [field]: e.currentTarget.value
-    });
+    return e => {
+      if (e.currentTarget.value.length > 0) {
+        return this.setState({ [field]: e.currentTarget.value, ['disabled']: false });
+      } else {
+        return this.setState({ [field]: e.currentTarget.value, ['disabled']: true });
+      }
+    }
   }
 
   handleSubmit(e) {
@@ -59,7 +64,7 @@ class NewNotebookForm extends React.Component {
             </label>
             <div className='new-notebook-form-buttons'>
               <button onClick={this.props.closeModal} className='white-cancel-button'>Cancel</button>
-              <input className="white-new-notebook-continue-button" type="submit" value='Continue' />
+              <input className="white-new-notebook-continue-button" type="submit" value='Continue' disabled={this.state.disabled}/>
             </div>
           </div>
          </form>

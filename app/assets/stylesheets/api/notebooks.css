@@ -212,7 +212,7 @@
   cursor: default;
     border: none;
     color: #fff;
-    background-color: #dcdfe3;
+    background-color: green;
     align-items: center;
     vertical-align: middle;
     border-radius: 4px;
@@ -223,6 +223,10 @@
     text-align: center;
     line-height: 1;
     letter-spacing: 0;
+}
+
+.white-new-notebook-continue-button:disabled {
+  background-color: gray;
 }
 
 .new-notebook-form-header {
@@ -247,7 +251,8 @@
 }
 
 .close-x:hover {
-  opacity: 0.5;
+  /* opacity: 0.5; */
+  color: rgb(184, 184, 184);
   transition: all 1s ease-out;
 }
 
