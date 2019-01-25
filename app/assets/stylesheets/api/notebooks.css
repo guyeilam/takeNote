@@ -234,8 +234,13 @@
 }
 
 .close-x {
-  margin-right: auto;
+  margin-left: auto;
   cursor: pointer;
+}
+
+.close-x:hover {
+  opacity: 0.5;
+  transition: all 1s ease-out;
 }
 
 .new-notebook-form-input {
