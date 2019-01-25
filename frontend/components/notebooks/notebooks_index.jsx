@@ -5,8 +5,20 @@ import { Route } from 'react-router-dom';
 import Modal from '../modal/modal';
 
 class NotebooksIndex extends Component {
+  constructor(props) {
+    super(props);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+  
   componentDidMount() {
     this.props.requestAllNotebooks();
+  }
+
+  handleDelete(notebook) {
+    // e.preventDefault();
+    return (e) => {
+      this.props.deleteNotebook(notebook);
+    }
   }
 
   render() {
@@ -30,7 +42,7 @@ class NotebooksIndex extends Component {
             </ul>
             <div className='notebooks-list-content'>
               <ul className='notebooks-list-content-ul'>
-                {this.props.notebooks.map(notebook => <NotebooksIndexItem key={notebook.id} notebook={notebook} />)}
+                {this.props.notebooks.map(notebook => <NotebooksIndexItem key={notebook.id} notebook={notebook} deleteNotebook={this.handleDelete}/>)}
               </ul>
             </div>
           </div>

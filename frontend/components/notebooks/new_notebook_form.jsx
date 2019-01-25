@@ -47,14 +47,17 @@ class NewNotebookForm extends React.Component {
           <div className='new-notebbook-form-text'>Notebooks are useful for grouping notes around a common topic. They can be private or shared.</div>
           <div className="new-notebook-form-content">
             <div className='new-notebook-form-errors'>{this.renderErrors()}</div>
-            <label>Title:
-                <input type="text"
-                value={this.state.title}
-                onChange={this.update('title')}
-                className="new-notebook-form-input"
-              />
+            <label><div className='new-notebook-form-title-label'>Title:</div>
+              <div className='new-notebook-form-title-input'>
+                <input required id='new-notebook-title' type="text"
+                  value={this.state.title}
+                  onChange={this.update('title')}
+                  className="new-notebook-form-input"
+                  placeholder='Notebook name'
+                />
+                </div>
             </label>
-            <div class='new-notebook-form-buttons'>
+            <div className='new-notebook-form-buttons'>
               <button onClick={this.props.closeModal} className='white-cancel-button'>Cancel</button>
               <input className="white-new-notebook-continue-button" type="submit" value='Continue' />
             </div>

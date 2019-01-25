@@ -1,5 +1,5 @@
 json.set! @notebook.id do
-    json.extract! @notebook, :id, :title, :user_id
+    json.extract! @notebook, :id, :title, :user_id, :updated_at
     json.note_ids []
 end
 # json.notebook do
