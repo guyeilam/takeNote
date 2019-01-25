@@ -175,11 +175,12 @@
   min-height: 150px;
   width: 500px;
   margin: 0px auto 28px auto;
-  padding: 40px 70px 48px;
-  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
+  padding: 20px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .08), 0 2px 15px rgba(0, 0, 0, .2);
+  border-radius: 4px;
   text-align: left;
   line-height: 1.1875;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, san-serif;
 }
 
 .white-cancel-button {
@@ -235,4 +236,16 @@
 .close-x {
   margin-right: auto;
   cursor: pointer;
+}
+
+.new-notebook-form-input {
+  color: #333333;
+  border: 1px solid #e6e6e6;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 4px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.1875;
 }

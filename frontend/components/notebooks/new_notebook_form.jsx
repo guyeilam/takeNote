@@ -5,8 +5,9 @@ class NewNotebookForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: ''
+      title: '',
+      user_id: '',
+      note_ids: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -19,8 +20,8 @@ class NewNotebookForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const user = Object.assign({}, this.state);
-    this.props.processForm(user).then(this.props.closeModal);
+    const notebook = Object.assign({}, this.state);
+    this.props.processForm(notebook).then(this.props.closeModal);
   }
 
   renderErrors() {
@@ -46,11 +47,11 @@ class NewNotebookForm extends React.Component {
           <div className='new-notebbook-form-text'>Notebooks are useful for grouping notes around a common topic. They can be private or shared.</div>
           <div className="new-notebook-form-content">
             <div className='new-notebook-form-errors'>{this.renderErrors()}</div>
-            <label>Username:
+            <label>Title:
                 <input type="text"
-                value={this.state.username}
-                onChange={this.update('username')}
-                className="login-input"
+                value={this.state.title}
+                onChange={this.update('title')}
+                className="new-notebook-form-input"
               />
             </label>
             <div class='new-notebook-form-buttons'>
