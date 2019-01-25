@@ -15,10 +15,18 @@ class NotebooksIndex extends Component {
           <div className='notebooks-list-header'>Notebooks</div>
           <div className='notebooks-list-menubar'>
             <div className='notebooks-list-menubar-header'>My notebook list</div>
+            <div className='notebooks-list-menubar-new-notebook-button button'><i className="fas fa-user-plus"/> New Notebook</div>
+            <div className='notebooks-list-menubar-sort-button'><i className="fas fa-sort-amount-down"/></div>
           </div>
-          <hr />
+          <ul className='notebooks-list-table-header'>
+            <li>Title</li>
+            <li>Created By</li>
+            <li>Updated</li>
+            <li>Shared With</li>
+            <li>Actions</li>
+          </ul>
           <div className='notebooks-list-content'>
-            <ul>
+            <ul className='notebooks-list-content-ul'>
               {this.props.notebooks.map(notebook => <NotebooksIndexItem key={notebook.id} notebook={notebook} />)}
             </ul>
           </div>
