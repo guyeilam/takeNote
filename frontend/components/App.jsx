@@ -6,9 +6,11 @@ import NotebooksIndexContainer from '../components/notebooks/notebooks_index_con
 import NotebookDetailContainer from '../components/notebooks/notebook_detail_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import { Route, Switch } from 'react-router-dom';
+// import Modal from './modal/modal';
 
 const App = () => (
   <div className='main'>
+    {/* <Modal /> */}
     <Route exact path="/" component={SplashContainer} />
     <ProtectedRoute exact path="/client" component={NotebooksIndexContainer} />
     <AuthRoute path="/login" component={LoginFormContainer} />

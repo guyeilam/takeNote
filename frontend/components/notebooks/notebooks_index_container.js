@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { openModal } from '../../actions/modal_actions';
 import NotebooksIndex from './notebooks_index';
 import { requestAllNotebooks } from '../../actions/notebook_actions';
 import { selectAllNotebooks } from '../../reducers/selectors';
@@ -12,7 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    requestAllNotebooks: () => dispatch(requestAllNotebooks())
+    requestAllNotebooks: () => dispatch(requestAllNotebooks()),
+    openModal: modal => dispatch(openModal(modal))
   });
 }
 
