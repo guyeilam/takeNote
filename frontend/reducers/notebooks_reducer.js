@@ -3,7 +3,7 @@ import merge from 'lodash/merge';
 import {
   RECEIVE_ALL_NOTEBOOKS,
   RECEIVE_SINGLE_NOTEBOOK,
-  REMOVE_NOTEBOOK
+  REMOVE_NOTEBOOK,
 } from '../actions/notebook_actions';
 
 const notebooksReducer = (oldState = {}, action) => {

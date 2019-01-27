@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, Route, withRouter } from 'react-router-dom';
-import NotebookDetailContainer from './notebook_detail_container';
 
 const NotebooksIndexItem = ({ notebook, deleteNotebook }) => (
   <li className='notebooks-index-item'>

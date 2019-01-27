@@ -82,6 +82,16 @@
   text-decoration: underline;
 }
 
+.sorted-normal {
+  display: flex;
+  flex-direction: column;
+}
+
+.sorted-reverse {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .notebooks-list-content-ul li:nth-child(even){
   background-color: #f8f8f8;
 }
