@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
+// import { selectNotebookNotes } from '../../reducers/selectors';
 
 class NotebookDetail extends Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class NotebookDetail extends Component {
   }
   componentDidMount() {
     this.props.requestSingleNotebook(this.props.match.params.notebookId);
+    // selectNotebookNotes(this.state, this.props.notebook);
   }
 
   // componentDidUpdate(prevProps) {
@@ -24,7 +26,7 @@ class NotebookDetail extends Component {
         <div className='notebook-detail-notes'>
           <div className='notebook-detail-notebook-title'>{this.props.notebook.title}</div>
           <ul className='notebook-detail-notes-list'>
-            {/* {this.props.notebook.map(notebook => <NotebooksIndexItem key={notebook.id} notebook={notebook} */}
+            {this.props.notes.map(note => <li key={note.id}>{note.title}</li>)}
           </ul>
         </div>
       </section>
