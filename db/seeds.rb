@@ -134,8 +134,8 @@ end
 
 100.times do
     Note.create!(
-      title: Faker::Lorem.sentence(word_count = 5, supplemental = false, random_words_to_add = 0)[0...-1],
-      content: Faker::Lorem.paragraph(sentence_count = 5, supplemental = false, random_sentences_to_add = 0),
+      title: Faker::Lorem.sentence(word_count = 10, supplemental = false, random_words_to_add = 0)[0...-1],
+      content: Faker::Lorem.paragraph(sentence_count = 100, supplemental = false, random_sentences_to_add = 0),
       user_id: User.first.id,
       notebook_id: Notebook.all.sample.id
     )

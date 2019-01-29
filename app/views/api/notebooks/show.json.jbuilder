@@ -15,9 +15,9 @@
 #   end
 # end
 
-json.notebook do
-  json.partial! '/api/notebooks/notebook', notebook: @notebook
-  json.noteIds @notebook.notes.pluck(:id)
+json.notebooks do
+    json.partial! '/api/notebooks/notebook', notebook: @notebook
+    json.noteIds @notebook.notes.pluck(:id)
 end
 
 json.notes do

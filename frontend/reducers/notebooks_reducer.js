@@ -10,11 +10,12 @@ const notebooksReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
   let newState;
   switch (action.type) {
-    case RECEIVE_ALL_NOTEBOOKS:
+    case RECEIVE_ALL_NOTEBOOKS:  
       return action.notebooks;
-    case RECEIVE_SINGLE_NOTEBOOK:
-      const newNotebook = action.payload.notebook;
-      return merge({}, oldState, newNotebook);
+    case RECEIVE_SINGLE_NOTEBOOK:  
+      return action.payload.notebooks;
+    // const newNotebook = action.payload.notebooks;
+      // return merge({}, oldState, newNotebook);
     case REMOVE_NOTEBOOK:
       newState = merge({}, oldState);
       delete newState[action.notebookId];

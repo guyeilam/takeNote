@@ -49,16 +49,27 @@ class LeftNavBar extends Component {
               All notes
             </div>
         </div>
+        
         <Link to='/client'>
-        <div className='left-nav-notebooks'>
-          <div className='left-nav-notebooks-icon'>
-              <i className="fas fa-book"></i>
+          <div className='left-nav-notebooks'>
+            <div className='left-nav-notebooks-icon'>
+                <i className="fas fa-book"></i>
+            </div>
+            <div className='left-nav-notebooks-text'>
+              Notebooks
+            </div>
           </div>
-          <div className='left-nav-notebooks-text'>
-            Notebooks
-          </div>
-        </div>
         </Link>
+
+          <div className='left-nav-tags'>
+            <div className='left-nav-tags-icon'>
+              <i className="fas fa-tag"></i>
+            </div>
+            <div className='left-nav-tags-text'>
+              Tags
+            </div>
+          </div>
+
       </div>
       </>
     );

@@ -14,6 +14,39 @@ class Api::NotesController < ApplicationController
     end
   end
 
+def create
+    @note = Note.new(note_params)
+    @note.user_id = current_user.id
+    @note.notebook_id = params[:notebook_id]
+
+    if @note.save
+      render :show
+    else
+      render json: @note.errors.full_messages, status: 422
+    end
+  end
+
+  def update
+    @note = Note.find_by(id: params[:id])
+
+    if @note.update_attributes(note_params)
+      render :show
+    else
+      render json: @note.errors.full_messages, status: 422
+    end
+  end
+
+  def destroy
+    @note = Note.find_by(id: params[:id])
+    if @note
+      @note.destroy
+      render :show
+    else
+      render json: ['Note does not exist'], status: 500
+    end
+  end
+
+
   private
   def note_params
     params.require(:note).permit(:title, :content)

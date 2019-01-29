@@ -4,3 +4,26 @@ export const fetchSingleNote = (id) => {
     url: `/api/notes/${id}`
   });
 }
+
+export const createNote = (note) => {
+  return $.ajax({
+    method: 'post',
+    url: '/api/notes',
+    data: { note }
+  });
+}
+
+export const deleteNote = (id) => {
+  return $.ajax({
+    method: 'delete',
+    url: `/api/notes/${id}`
+  });
+}
+
+export const updateNote = (note) => {
+  return $.ajax({
+    method: 'patch',
+    url: `/api/notes/${note.id}`,
+    data: { note }
+  });
+}

@@ -38,10 +38,10 @@ class NotebooksIndexItem extends Component {
               {/* <button className='notebook-item-delete-button' onClick={deleteNotebook(notebook)}>Delete</button> */}
             </span>
           </div>
-        </li>
           <ul className='notebook-item-notes-detail'>
             {noteItems}
           </ul>
+        </li>
         
         
       </>

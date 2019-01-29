@@ -20,3 +20,14 @@ export const requestSingleNote = (noteId) => {
       });
   }
 }
+
+export const updateNote = (note) => {
+  return (dispatch) => {
+    return NoteAPIUtil.updateNote(note).then((note) => {
+      return dispatch(receiveSingleNote(note));
+    // },
+    //   (err) => {
+    //     return dispatch(receiveNotebookErrors(err.responseJSON));
+      });
+  }
+}
