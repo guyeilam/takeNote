@@ -13,7 +13,7 @@ const notesReducer = (state = {}, action) => {
       notes = action.payload.notes;
       return merge({}, notes);
     case RECEIVE_SINGLE_NOTE:
-      return action.payload.notes;
+      return merge({}, state, action.payload.notes);
     default:
       return state;
   }

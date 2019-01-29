@@ -39,7 +39,7 @@ class NotebookDetail extends Component {
   }
 
   saveNote() {
-    const note = Object.assign({}, { content: this.state.content });
+    const note = Object.assign({}, { id: this.state.noteId, content: this.state.content });
     this.props.updateNote(note);
   }
 
@@ -65,7 +65,7 @@ class NotebookDetail extends Component {
               <ReactQuill value={this.state.content}
                 onChange={this.handleChange} />
             </div>
-            {/* <div className='note-edit-save-button'><button onClick={() => this.saveNote()}>Save</button></div> */}
+            <div className='note-edit-save-button'><button onClick={() => this.saveNote()}>Save</button></div>
           </div>
         </div>
       </section>
