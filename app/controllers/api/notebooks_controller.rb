@@ -37,9 +37,12 @@ class Api::NotebooksController < ApplicationController
 
   def destroy
     @notebook = current_user.notebooks.find_by(id: params[:id])
-    @notebook.destroy
-
-    render :show
+    if @notebook
+      @notebook.destroy
+      render :show
+    else
+      render json: ['Notebook does not exist'], status: 500
+    end
   end
 
   private

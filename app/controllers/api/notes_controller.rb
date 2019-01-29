@@ -2,7 +2,16 @@ class Api::NotesController < ApplicationController
   before_action :require_signed_in
   
   def index
-    @notes = Notebook.find_by(id: params[:notebook_id]).notes
+    @notes = Note.all
+  end
+
+  def show
+    @note = Note.find_by(id: params[:id])
+    if @note
+      render :show
+    else
+      render json: ['Note does not exist.']
+    end
   end
 
   private

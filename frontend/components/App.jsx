@@ -11,7 +11,7 @@ import { Route, Switch } from 'react-router-dom';
 const App = () => (
   <div className='main'>
     {/* <Modal /> */}
-    <Route exact path="/" component={SplashContainer} />
+    <AuthRoute exact path="/" component={SplashContainer} />
     <ProtectedRoute exact path="/client" component={NotebooksIndexContainer} />
     <AuthRoute path="/login" component={LoginFormContainer} />
     <AuthRoute path="/signup" component={SignupFormContainer} />

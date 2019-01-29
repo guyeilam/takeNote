@@ -3,6 +3,8 @@ import NotebooksIndexItem from './notebook_index_item';
 import NotebookDetailContainer from './notebook_detail_container';
 import { Route } from 'react-router-dom';
 import Modal from '../modal/modal';
+import NavModal from '../modal/nav_modal';
+import LeftNavBar from '../left_nav_bar/left_nav_bar';
 
 class NotebooksIndex extends Component {
   constructor(props) {
@@ -12,15 +14,14 @@ class NotebooksIndex extends Component {
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSort = this.handleSort.bind(this);
+    this.handleModalClick = this.handleModalClick.bind(this);
   }
   
   componentDidMount() {
     this.props.requestAllNotebooks();
-    // this.props.sortToggle(true);
   }
 
   handleDelete(notebook) {
-    // e.preventDefault();
     return (e) => {
       this.props.deleteNotebook(notebook);
     }
@@ -29,16 +30,28 @@ class NotebooksIndex extends Component {
   handleSort(sortOption) {
     return (e) => {
       this.setState({ sorted: sortOption });
-      // this.props.sortToggle(sortOption);
+    }
+  }
+
+  handleModalClick(navModalId) {
+    return (e) => {
+      e.preventDefault();
+      this.props.openNavModal('notebook-actions-nav', navModalId);
     }
   }
 
   render() {
     const sortOption = this.state.sorted ? 'sorted-reverse' : 'sorted-normal';
+    
     return (
       <>
         <Modal />
         <section className='notebooks'>
+          <div className='left-navbar'>
+            <LeftNavBar currentUser={this.props.currentUser}/>
+          </div>
+          <div className='left-navbar-spacer'></div>
+
           <div className='notebooks-list-container'>
             <div className='notebooks-list-header'>Notebooks</div>
             <div className='notebooks-list-menubar'>
@@ -55,7 +68,7 @@ class NotebooksIndex extends Component {
             </ul>
             <div className='notebooks-list-content'>
               <ul className={`notebooks-list-content-ul ${sortOption}`}>
-                {this.props.notebooks.map(notebook => <NotebooksIndexItem key={notebook.id} notebook={notebook} deleteNotebook={this.handleDelete}/>)}
+                {this.props.notebooks.map((notebook, idx) => <NotebooksIndexItem key={idx} notebook={notebook} deleteNotebook={this.handleDelete} openActionsModal={(navModalId) => this.handleModalClick(navModalId)}/>)}
               </ul>
             </div>
           </div>

@@ -89,6 +89,17 @@ export const deleteNotebook = (notebook) => {
   }
 }
 
+export const deleteNotebookById = (notebookId) => {
+  return (dispatch) => {
+    return NotebookAPIUtil.deleteNotebook(notebookId).then(() => {
+      return dispatch(removeNotebook(notebookId));
+    },
+      (err) => {
+        return dispatch(receiveNotebookErrors(err.responseJSON));
+      });
+  }
+}
+
 export const sortToggle = (sortOption) => {
   return ({
     type: SORT_NOTEBOOKS_TOGGLE,
