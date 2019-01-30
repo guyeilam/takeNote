@@ -10,7 +10,9 @@ class LeftNavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentViewNotebooks: ''
+      currentViewNotebooks: '',
+      currentViewNotes: '',
+      currentViewTags: ''
     }
     this.handleModalClick = this.handleModalClick.bind(this);
     this.changeCurrentView = this.changeCurrentView.bind(this);
@@ -25,10 +27,13 @@ class LeftNavBar extends Component {
 
   changeCurrentView(newView) {
     return (e) => {
+      this.setState({ currentViewNotebooks: '', currentViewNotes: '', currentViewTags: '' });
       if (newView === 'notebooks') {
-        this.setState({currentViewNotebooks: 'current-view'});
-      } else {
-        this.setState({currentViewNotebooks: ''});
+        this.setState({ currentViewNotebooks: 'current-view' });
+      } else if (newView === 'notes') {
+        this.setState({ currentViewNotes: 'current-view' });
+      } else if (newView === 'tags') {
+        this.setState({ currentViewTags: 'current-view' });
       }
     }
   }
@@ -55,14 +60,16 @@ class LeftNavBar extends Component {
         </div>
         </div>
       <div className='left-nav-buttons-container'>
-        <div className='left-nav-all-notes'>
+          <Link to='/client' onClick={this.changeCurrentView('notes')}>
+          <div className={`left-nav-all-notes ${this.state.currentViewNotes}`}>
             <div className='left-nav-all-notes-icon'>
               <i className="far fa-sticky-note"></i>
             </div>
             <div className='left-nav-all-notes-text'>
               All notes
             </div>
-        </div>
+          </div>
+        </Link>
         
         <Link to='/client' onClick={this.changeCurrentView('notebooks')}>
           <div className={`left-nav-notebooks ${this.state.currentViewNotebooks}`}>
@@ -75,7 +82,8 @@ class LeftNavBar extends Component {
           </div>
         </Link>
 
-          <div className='left-nav-tags'>
+          <Link to='/client' onClick={this.changeCurrentView('tags')}>
+          <div className={`left-nav-tags ${this.state.currentViewTags}`}>
             <div className='left-nav-tags-icon'>
               <i className="fas fa-tag"></i>
             </div>
@@ -83,6 +91,7 @@ class LeftNavBar extends Component {
               Tags
             </div>
           </div>
+          </Link>
 
       </div>
       </>
