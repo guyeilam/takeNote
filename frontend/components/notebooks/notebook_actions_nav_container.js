@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
-import { openNavModal, closeNavModal } from '../../actions/modal_actions';
-import { deleteNotebookById } from '../../actions/notebook_actions';
+import { closeNavModal } from '../../actions/modal_actions';
+import { openModal } from '../../actions/modal_actions';
+import { deleteNotebookById, updateNotebook } from '../../actions/notebook_actions';
 import NotebookActionsNav from './notebook_actions_nav';
 
 const mapStateToProps = (state, ownProps) => {
@@ -13,7 +14,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     closeNavModal: () => dispatch(closeNavModal()),
-    deleteNotebookById: (notebookId) => dispatch(deleteNotebookById(notebookId))
+    openModal: (modal, notebookId) => dispatch(openModal(modal, notebookId)),
+    deleteNotebookById: (notebookId) => dispatch(deleteNotebookById(notebookId)),
+    updateNotebook: (notebook) => dispatch(updateNotebook(notebook))
   };
 };
 

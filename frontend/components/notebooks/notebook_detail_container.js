@@ -7,10 +7,15 @@ import { selectSingleNotebook, selectNotebookNotes } from '../../reducers/select
 const mapStateToProps = (state, ownProps) => {
   const currentId = state.session.id;
   const currentUser = state.entities.users[currentId] || null;
+  const showAllNotes = false;
+  if (ownProps.allNotebooks === 'all') {
+    showAllNotes = true;
+  }
   return ({
     notebooks: state.entities.notebooks,
     notes: Object.values(state.entities.notes),
-    currentUser
+    currentUser,
+    showAllNotes
   });
 }
 

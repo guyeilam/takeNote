@@ -29,9 +29,8 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: transparent;
   z-index: 10;
-  transition: 5s;
 }
 
 .navbar-user-actions {
@@ -48,6 +47,10 @@
   color: #666;
   font-size: 12px;
   z-index: 11;
+}
+
+.navbar-user-actions button:hover {
+  text-decoration: underline;
 }
 
 .navbar-user-actions-child {
@@ -166,13 +169,17 @@
   margin-right: 5px;
 }
 
-.notebooks-index-item {
+.notebooks-list-content-ul {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: #313131;
   line-height: 35px;
 }
+
+/* .notebooks-index-item {
+  
+} */
 
 .notebook-item-notes-detail {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -199,11 +206,15 @@
   background-color: #eeeeee;
 }
 
-.notebooks-index-item-hover span:nth-child(3) { flex-basis: 40%; }
+.notebook-item-notes-detail-title-hover:hover {
+  background-color: #eeeeee;
+}
+
+/* .notebooks-index-item-hover span:nth-child(3) { flex-basis: 40%; }
 .notebooks-index-item-hover span:nth-child(4) { flex-basis: 15%; }
 .notebooks-index-item-hover span:nth-child(5) { flex-basis: 20%; }
 .notebooks-index-item-hover span:nth-child(6) { flex-basis: 15%; }
-.notebooks-index-item-hover span:nth-child(7) { flex-basis: 10%; }
+.notebooks-index-item-hover span:nth-child(7) { flex-basis: 10%; } */
 
 .notebook-item-title:hover {
   text-decoration: underline;
@@ -219,42 +230,25 @@
   flex-direction: column-reverse;
 }
 
-.notebooks-list-content-ul li:nth-child(even){
+.odd-row {
   background-color: #f8f8f8;
 }
 
-.notebooks-list-table-header:hover {
-  background-color: #eeeeee;
+.even-row {
+  background-color: white;
 }
 
-.notebooks-list-table-header li:hover {
-  text-decoration: underline;
-}
+.row-identifier:hover { background-color: #eeeeee; }
+/* .notebook-item-notes-detail-title li:nth-of-type(2n+1) { background-color: #f8f8f8; } */
+/* .notebook-item-notes-detail-title-hover li:nth-of-type(2n+1) { background-color: #f8f8f8; } */
 
-.notebooks-list-table-header li:nth-child(1){
-  /* background-color: red; */
-  flex-basis: 40%;
-}
-
-.notebooks-list-table-header li:nth-child(2){
-  /* background-color: blue; */
-  flex-basis: 15%
-}
-
-.notebooks-list-table-header li:nth-child(3){
-  /* background-color: green; */
-  flex-basis: 15%;
-}
-
-.notebooks-list-table-header li:nth-child(4){
-  /* background-color: purple; */
-  flex-basis: 20%;
-}
-
-.notebooks-list-table-header li:nth-child(5){
-  /* background-color: rgb(24, 158, 199); */
-  flex-basis: 10%;
-}
+/* .notebooks-list-table-header:hover { background-color: #eeeeee; } */
+/* .notebooks-list-table-header li:hover { text-decoration: underline; } */
+/* .notebooks-list-table-header li:nth-child(1) { flex-basis: 40%; }
+.notebooks-list-table-header li:nth-child(2) { flex-basis: 15%; }
+.notebooks-list-table-header li:nth-child(3) { flex-basis: 15%; }
+.notebooks-list-table-header li:nth-child(4) { flex-basis: 20%; }
+.notebooks-list-table-header li:nth-child(5) { flex-basis: 10%; } */
 
 .notebooks-list-table-header {
   background-color: #f8f8f8;
@@ -262,10 +256,6 @@
   border-top: 2px solid #5b6b70;
   color: #bcbcbc;
   display: flex;
-}
-
-.notebooks-list-table-header li {
-  margin-left: 5px;
   text-transform: uppercase;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-size: 12px;
@@ -273,10 +263,16 @@
   line-height: 3em;
 }
 
-.notebooks-index-item span {
-  margin-right: 10px;
+.col1 { flex-basis: 40%; }
+.col2 { flex-basis: 15%; }
+.col3 { flex-basis: 15%; }
+.col4 { flex-basis: 20%; }
+.col5 { flex-basis: 10%; }
+
+/* .notebooks-index-item span {
+  margin-right: 10px; */
   /* margin-left: 10px; */
-}
+/* } */
 
 /* .notebook-item-icon {
   
@@ -377,7 +373,7 @@
   color: black;
 }
 
-.new-notebbook-form-text {
+.new-notebook-form-text {
   margin: 10px 0 20px 0;
   font-size: 12px;
   color: #777;
@@ -417,6 +413,7 @@
   padding-top: 5px;
   /* padding: 10px 25px 0 0; */
   border-top: 1px solid #ededed;
+  /* transition: all 1s ease-out; */
 }
 /* 
 .test-input {
@@ -449,13 +446,14 @@
 
 .notebook-detail-notes {
   width: 300px;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
   border-right: 1px solid #e6e6e6;
   background: #f8f8f8;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, san-serif;
   color: #4d4d4d;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .notebook-detail-notes-list li {
@@ -466,9 +464,9 @@
   border-bottom: 1px solid #e6e6e6;
 }
 
-.notebook-detail-notes-list li:nth-child(1) {
+/* .notebook-detail-notes-list li:nth-child(1) {
   border-top: 1px solid #e6e6e6;
-}
+} */
 
 .notebook-detail-notes-list li:hover {
   padding: 20px;
@@ -491,6 +489,13 @@
   color: rgb(36, 159, 36);
 }
 
+.left-nav-new-note-button-icon {
+  transition: all .1s ease-in-out; 
+}
+
+.left-nav-new-note-button-icon:hover {
+  transform: scale(1.3);
+}
 
 .left-nav-new-note-button {
   padding-top: 20px;
@@ -503,8 +508,9 @@
 }
 
 .left-nav-new-note-button-text {
-  font-size: 12px;
+  font-size: 14px;
   padding-left: 10px;
+  font-weight: 500;
 }
 
 .left-nav-buttons-container {
@@ -551,10 +557,25 @@
   margin-right: 10px;
 }
 
-.notebook-item-notes-detail-title-icon {
+.notebook-item-expand, .notebook-item-icon, .notebook-item-notes-detail-title-icon {
   padding-right: 10px;
-  padding-left: 20px;
+  /* padding-left: 20px; */
 }
+
+.notebook-item-notes-detail-title-icon-note {
+  padding-left: 40px;
+  padding-right: 10px;
+}
+
+.notebook-item-notes-detail-title-text {
+  overflow: hidden;
+}
+
+/* .notebooks-index-item-notes {
+  padding-left: 30px;
+} */
+
+
 
 .notebook-detail-note-title {
   font-size: 12px;
@@ -576,4 +597,28 @@
 .notebook-actions-nav-text {
   text-decoration: none;
   font-size: 14px;
+}
+
+.note-edit-save-button {
+  padding-left: 50px;
+}
+
+/* .notebooks-item-col1 { flex-basis: 40%; }
+.notebooks-item-col2 { flex-basis: 15%; }
+.notebooks-item-col3 { flex-basis: 15%; }
+.notebooks-item-col4 { flex-basis: 20%; }
+.notebooks-item-col5 { flex-basis: 10%; }  */
+
+.notebooks-item-col1 {
+  display: flex;
+  padding-left: 10px;
+}
+
+.row-identifier {
+  display: flex;
+  width: 100%;
+}
+
+.current-view {
+  background-color: #404040;
 }

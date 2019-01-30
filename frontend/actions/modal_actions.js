@@ -3,10 +3,11 @@ export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const OPEN_NAV_MODAL = 'OPEN_NAV_MODAL';
 export const CLOSE_NAV_MODAL = 'CLOSE_NAV_MODAL';
 
-export const openModal = modal => {
+export const openModal = (modal, modalNotebookId) => {
   return {
     type: OPEN_MODAL,
-    modal
+    modal,
+    navModalId: modalNotebookId
   };
 };
 

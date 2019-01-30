@@ -5,6 +5,7 @@
 #   end
 # end
 
+
 @notebooks.each do |notebook|
   json.set! notebook.id do
     json.partial! 'notebook', notebook: notebook
@@ -12,9 +13,10 @@
     json.note_titles do
       notebook.notes.each do |note|
         json.set! note.id do
-          json.extract! note, :id, :title
+          json.extract! note, :id, :title, :updated_at
         end
       end
     end
   end
 end
+

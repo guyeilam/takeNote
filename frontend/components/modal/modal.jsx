@@ -2,8 +2,10 @@ import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import NewNotebookFormContainer from '../notebooks/new_notebook_form_container';
+import RenameNotebookFormContainer from '../notebooks/rename_notebook_form_container';
 
-function Modal({ modal, closeModal }) {
+
+function Modal({ modal, notebookId, closeModal }) {
   if (!modal) {
     return null;
   }
@@ -11,6 +13,9 @@ function Modal({ modal, closeModal }) {
   switch (modal) {
     case 'new-notebook':
       component = <NewNotebookFormContainer />;
+      break;
+    case 'rename-notebook':
+      component = <RenameNotebookFormContainer notebookId={notebookId}/>;
       break;
     default:
       return null;
@@ -24,9 +29,10 @@ function Modal({ modal, closeModal }) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    modal: state.ui.modal
+    modal: state.ui.modal,
+    notebookId: state.ui.navModalId
   };
 };
 

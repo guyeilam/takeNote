@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import NotebooksIndexItem from './notebook_index_item';
-import NotebookDetailContainer from './notebook_detail_container';
-import { Route } from 'react-router-dom';
 import Modal from '../modal/modal';
-import NavModal from '../modal/nav_modal';
 import LeftNavBar from '../left_nav_bar/left_nav_bar';
 
 class NotebooksIndex extends Component {
@@ -16,7 +13,7 @@ class NotebooksIndex extends Component {
     this.handleSort = this.handleSort.bind(this);
     this.handleModalClick = this.handleModalClick.bind(this);
   }
-  
+
   componentDidMount() {
     this.props.requestAllNotebooks();
   }
@@ -41,15 +38,21 @@ class NotebooksIndex extends Component {
   }
 
   render() {
+    if (!this.props.notebooks) { return null; }
+    if (this.props.notebooks.id) { return null; }
+
     const sortOption = this.state.sorted ? 'sorted-reverse' : 'sorted-normal';
-    
+    const notebooks = Object.values(this.props.notebooks);
     return (
       <>
         <Modal />
+
         <section className='notebooks'>
+          
           <div className='left-navbar'>
-            <LeftNavBar currentUser={this.props.currentUser}/>
+            <LeftNavBar currentUser={this.props.currentUser} />
           </div>
+          
           <div className='left-navbar-spacer'></div>
 
           <div className='notebooks-list-container'>
@@ -57,20 +60,21 @@ class NotebooksIndex extends Component {
             <div className='notebooks-list-menubar'>
               <div className='notebooks-list-menubar-header'>My notebook list</div>
               <div className='notebooks-list-menubar-new-notebook-button button'><i className="fas fa-user-plus" /><button onClick={() => this.props.openModal('new-notebook')}>New Notebook</button></div>
-              <div className='notebooks-list-menubar-sort-button'><button onClick={this.handleSort(!this.state.sorted)}><i className="fas fa-sort-amount-down"/></button></div>
+              <div className='notebooks-list-menubar-sort-button'><button onClick={this.handleSort(!this.state.sorted)}><i className="fas fa-sort-amount-down" /></button></div>
             </div>
-            <ul className='notebooks-list-table-header'>
-              <li><button onClick={this.handleSort(!this.state.sorted)}>Title</button></li>
-              <li>Created By</li>
-              <li>Updated</li>
-              <li>Shared With</li>
-              <li>Actions</li>
-            </ul>
-            <div className='notebooks-list-content'>
-              <ul className={`notebooks-list-content-ul ${sortOption}`}>
-                {this.props.notebooks.map((notebook, idx) => <NotebooksIndexItem key={idx} notebook={notebook} deleteNotebook={this.handleDelete} openActionsModal={(navModalId) => this.handleModalClick(navModalId)}/>)}
-              </ul>
+
+            <div className='notebooks-list-table-header'>
+              <div className='col1'>Title</div>
+              <div className='col2'>Created By</div>
+              <div className='col3'>Updated</div>
+              <div className='col4'>Shared With</div>
+              <div className='col5'>Actions</div>
             </div>
+
+            <div className={`notebooks-list-content-ul ${sortOption}`}>
+              {notebooks.map((notebook, idx) => <NotebooksIndexItem key={idx} idx={idx} notebook={notebook} deleteNotebook={this.handleDelete} openActionsModal={(navModalId) => this.handleModalClick(navModalId)} />)}
+            </div>
+
           </div>
         </section>
       </>

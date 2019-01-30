@@ -9,13 +9,27 @@ import { logout } from '../../actions/session_actions';
 class LeftNavBar extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      currentViewNotebooks: ''
+    }
     this.handleModalClick = this.handleModalClick.bind(this);
+    this.changeCurrentView = this.changeCurrentView.bind(this);
   }
 
   handleModalClick() {
     return (e) => {
       e.preventDefault();
       this.props.openNavModal('notebook-actions-nav');
+    }
+  }
+
+  changeCurrentView(newView) {
+    return (e) => {
+      if (newView === 'notebooks') {
+        this.setState({currentViewNotebooks: 'current-view'});
+      } else {
+        this.setState({currentViewNotebooks: ''});
+      }
     }
   }
 
@@ -28,7 +42,7 @@ class LeftNavBar extends Component {
           <div className='left-navbar-user-photo'></div>
             <div className='left-navbar-current-user-email'><button onClick={() => this.props.logout()}>Logout {this.props.currentUser.email}</button></div>
         </div>
-        {/* <NavModal /> */}
+
         <div className='left-nav-new-note-button'>
           <button onClick={() => this.props.openModal('new-notebook')}>
             <div className='left-nav-new-note-button-container'>
@@ -50,8 +64,8 @@ class LeftNavBar extends Component {
             </div>
         </div>
         
-        <Link to='/client'>
-          <div className='left-nav-notebooks'>
+        <Link to='/client' onClick={this.changeCurrentView('notebooks')}>
+          <div className={`left-nav-notebooks ${this.state.currentViewNotebooks}`}>
             <div className='left-nav-notebooks-icon'>
                 <i className="fas fa-book"></i>
             </div>

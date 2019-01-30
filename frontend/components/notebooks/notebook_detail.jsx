@@ -63,7 +63,10 @@ class NotebookDetail extends Component {
             {/* <NoteEditContainer note={noteId}/> */}
             <div className='note-edit-container'>
               <ReactQuill value={this.state.content}
-                onChange={this.handleChange} />
+                onChange={this.handleChange} 
+                modules={this.modules}
+                formats={this.formats}>
+                </ReactQuill>
             </div>
             <div className='note-edit-save-button'><button onClick={() => this.saveNote()}>Save</button></div>
           </div>

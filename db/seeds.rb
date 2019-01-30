@@ -125,14 +125,14 @@ User.create!(
 # Note.create!(title: 'Note 6', content: 'Content of note 6', user_id: User.first.id, notebook_id: Notebook.first.id)
 # Note.create!(title: 'Note 7', content: 'Content of note 7', user_id: User.first.id, notebook_id: Notebook.first.id)
 
-7.times do
+70.times do
   Notebook.create!(
     title: Faker::Lorem.sentence(word_count = 4, supplemental = false, random_words_to_add = 0)[0...-1],
     user_id: User.first.id
   )
 end
 
-100.times do
+200.times do
     Note.create!(
       title: Faker::Lorem.sentence(word_count = 10, supplemental = false, random_words_to_add = 0)[0...-1],
       content: Faker::Lorem.paragraph(sentence_count = 100, supplemental = false, random_sentences_to_add = 0),

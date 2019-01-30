@@ -6,8 +6,8 @@ class NewNotebookForm extends React.Component {
     super(props);
     this.state = {
       title: '',
-      user_id: '',
-      note_ids: [],
+      // user_id: '',
+      // note_ids: [],
       disabled: true
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,7 +25,13 @@ class NewNotebookForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const notebook = Object.assign({}, this.state);
+    let notebook;
+    if (this.props.formType === 'new-notebook') {
+      notebook = Object.assign({}, {title: this.state.title});
+    } else {
+      notebook = Object.assign({}, {id: this.props.notebookId, title: this.state.title});
+    }
+    
     this.props.processForm(notebook).then(this.props.closeModal);
   }
 
@@ -42,17 +48,32 @@ class NewNotebookForm extends React.Component {
   }
 
   render() {
+    
+    let headerText;
+    let subHeaderText;
+    let formTitleText;
+    
+    if (this.props.formType === 'new-notebook') {
+      headerText = 'Create new notebook';
+      subHeaderText = (<div className='new-notebook-form-text'>Notebooks are useful for grouping notes around a common topic. They can be private or shared.</div>);
+      formTitleText = 'Title';
+    } else {
+      headerText = 'Rename notebook';
+      subHeaderText = '';
+      formTitleText = 'Name';
+    }
+
     return (
       <div className="new-notebook-form-container">
         <form onSubmit={this.handleSubmit} className="new-notebook-form">
           <div className='new-notebook-form-header'>
-            <div className='new-notebook-form-header-text'>Create new notebook</div>
+            <div className='new-notebook-form-header-text'>{headerText}</div>
             <div onClick={this.props.closeModal} className="close-x">X</div>
           </div>
-          <div className='new-notebbook-form-text'>Notebooks are useful for grouping notes around a common topic. They can be private or shared.</div>
+          {subHeaderText}
           <div className="new-notebook-form-content">
             <div className='new-notebook-form-errors'>{this.renderErrors()}</div>
-            <label><div className='new-notebook-form-title-label'>Title:</div>
+            <label><div className='new-notebook-form-title-label'>{formTitleText}</div>
               <div className='new-notebook-form-title-input'>
                 <input required id='new-notebook-title' type="text"
                   value={this.state.title}

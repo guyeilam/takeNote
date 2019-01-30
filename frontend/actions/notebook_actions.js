@@ -5,6 +5,7 @@ export const RECEIVE_SINGLE_NOTEBOOK = 'RECEIVE_SINGLE_NOTEBOOK';
 export const REMOVE_NOTEBOOK = 'REMOVE_NOTEBOOK';
 export const RECEIVE_NOTEBOOK_ERRORS = 'RECEIVE_NOTEBOOK_ERRORS';
 export const SORT_NOTEBOOKS_TOGGLE = 'SORT_NOTEBOOKS_TOGGLE';
+export const RECEIVE_UPDATED_NOTEBOOK = 'RECEIVE_UPDATED_NOTEBOOK';
 
 export const receiveAllNotebooks = (notebooks) => {
   return ({
@@ -16,6 +17,13 @@ export const receiveAllNotebooks = (notebooks) => {
 export const receiveSingleNotebook = (payload) => {
   return ({
     type: RECEIVE_SINGLE_NOTEBOOK,
+    payload
+  });
+}
+
+export const receiveUpdatedNotebook = (payload) => {
+  return ({
+    type: RECEIVE_UPDATED_NOTEBOOK,
     payload
   });
 }
@@ -59,7 +67,7 @@ export const requestSingleNotebook = (notebookId) => {
 export const updateNotebook = (notebook) => {
   return (dispatch) => {
     return NotebookAPIUtil.updateNotebook(notebook).then((notebook) => {
-      return dispatch(receiveSingleNotebook(notebook));
+      return dispatch(receiveUpdatedNotebook(notebook));
     },
       (err) => {
         return dispatch(receiveNotebookErrors(err.responseJSON));
@@ -70,7 +78,7 @@ export const updateNotebook = (notebook) => {
 export const createNotebook = (notebook) => {
   return (dispatch) => {
     return NotebookAPIUtil.createNotebook(notebook).then((notebook) => {
-      return dispatch(receiveSingleNotebook(notebook));
+      return dispatch(receiveUpdatedNotebook(notebook));
     },
       (err) => {
         return dispatch(receiveNotebookErrors(err.responseJSON));

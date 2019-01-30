@@ -36,13 +36,14 @@ class NavModal extends Component {
     
     if (this.state.modalId === navModalId) {
       return (
-        // <div className='navbar-modal-background' onClick={closeNavModal}>
-        <div className={parentClass} onClick={closeNavModal}>
-          <div className={childClass} onClick={e => e.stopPropagation()}>
-            {component}
+        <>
+          <div className={parentClass} onClick={closeNavModal}>
+            <div className={childClass} onClick={e => e.stopPropagation()}>
+              {component}
+            </div>
           </div>
-        </div>
-        // </div>
+          <div className='navbar-modal-background' onClick={closeNavModal}></div>
+      </>
     ); } else {
       return null;
     }

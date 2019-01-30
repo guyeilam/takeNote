@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-
+import { withRouter } from 'react-router-dom';
 import { openModal } from '../../actions/modal_actions';
 import { openNavModal, closeNavModal } from '../../actions/modal_actions';
 import NotebooksIndex from './notebooks_index';
@@ -9,8 +9,9 @@ import { selectAllNotebooks } from '../../reducers/selectors';
 const mapStateToProps = (state) => {
   const currentId = state.session.id;
   const currentUser = state.entities.users[currentId] || null;
+  
   return ({
-    notebooks: selectAllNotebooks(state),
+    notebooks: state.entities.notebooks,
     sorted: state.sort,
     currentUser
   });
@@ -27,4 +28,4 @@ const mapDispatchToProps = (dispatch) => {
   });
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotebooksIndex);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NotebooksIndex));

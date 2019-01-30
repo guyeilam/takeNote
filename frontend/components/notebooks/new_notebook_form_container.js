@@ -6,7 +6,8 @@ import NewNotebookForm from './new_notebook_form';
 
 const mapStateToProps = ({ errors }) => {
   return {
-    errors: errors.session
+    errors: errors.session,
+    formType: 'new-notebook'
   };
 };
 
