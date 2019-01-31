@@ -18,6 +18,12 @@ class LeftNavBar extends Component {
     this.changeCurrentView = this.changeCurrentView.bind(this);
   }
 
+  // componentDidMount() {
+  //   if (this.props.match.path === '/notes/all') {
+  //     console.log();
+  //   }
+  // }
+
   handleModalClick() {
     return (e) => {
       e.preventDefault();
@@ -60,7 +66,7 @@ class LeftNavBar extends Component {
         </div>
         </div>
       <div className='left-nav-buttons-container'>
-          <Link to='/client' onClick={this.changeCurrentView('notes')}>
+          <Link to='/notes/all' onClick={this.changeCurrentView('notes')}>
           <div className={`left-nav-all-notes ${this.state.currentViewNotes}`}>
             <div className='left-nav-all-notes-icon'>
               <i className="far fa-sticky-note"></i>
@@ -102,6 +108,7 @@ class LeftNavBar extends Component {
 const mapStateToProps = state => {
   const currentId = state.session.id;
   const currentUser = state.entities.users[currentId] || null;
+
   return({
     currentUser
   });

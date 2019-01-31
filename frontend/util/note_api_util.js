@@ -5,6 +5,13 @@ export const fetchSingleNote = (id) => {
   });
 }
 
+export const fetchAllNotes = () => {
+  return $.ajax({
+    method: 'get',
+    url: `/api/notes`
+  });
+}
+
 export const createNote = (note) => {
   return $.ajax({
     method: 'post',
