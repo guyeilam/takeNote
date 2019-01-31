@@ -458,7 +458,7 @@
 
 .notebook-detail-notes-list li {
   padding: 20px;
-  height: 80px;
+  /* height: 80px; */
   font-size: 14px;
   border: 1px solid rgba(0, 0, 0, 0);
   border-bottom: 1px solid #e6e6e6;
@@ -530,27 +530,17 @@
   font-weight: 400;
 }
 
-.left-nav-all-notes {
+.left-nav-all-notes, .left-nav-notebooks, .left-nav-tags {
   display: flex;
-  padding: 10px 0px 10px 20px;
+  padding: 5px 0px 5px 20px;
 }
 
 .left-nav-all-notes-icon {
   margin-right: 10px;
 }
 
-.left-nav-notebooks {
-  display: flex;
-  padding: 10px 0px 10px 20px;
-}
-
 .left-nav-notebooks-icon {
   margin-right: 10px;
-}
-
-.left-nav-tags {
-  display: flex;
-  padding: 10px 0px 10px 20px;
 }
 
 .left-nav-tags-icon {
