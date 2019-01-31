@@ -1,35 +1,54 @@
 import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router-dom';
-import LeftNavBar from '../left_nav_bar/left_nav_bar';
-import NoteEditContainer from '../notes/note_edit_container';
+import { withRouter } from 'react-router-dom';
 import NotebookDetailNoteItem from './notebook_detail_note_item';
 import ReactQuill from 'react-quill';
 
 class NotebookDetail extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       noteId: null,
       title: '',
       content: '',
-      notebookId: this.props.match.params.notebookId,
+      notebookId: this.props.notebookId,
       userId: this.props.currentUser.id
     }
     this.handleChange = this.handleChange.bind(this);
+    this.handleQChange = this.handleQChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleNoteClick = this.handleNoteClick.bind(this);
     this.saveNote = this.saveNote.bind(this);
   }
   
-  componentDidMount() {
+   componentDidMount() {
+
     if (this.props.showAllNotes === true) {
       this.props.requestAllNotes();
     } else {
-      this.props.requestSingleNotebook(this.props.match.params.notebookId);
+      this.props.requestSingleNotebook(this.props.notebookId);
     }
   }
   
-  handleChange(value) {
-    this.setState({ content: value })
+  componentDidUpdate(prevProps) {
+    if ((!prevProps.currentNote && this.props.currentNote) || (this.props.currentNote && prevProps.currentNote && (this.props.currentNote.id !== prevProps.currentNote.id))) {
+      this.setState({
+        noteId: this.props.currentNote.id,
+        title: this.props.currentNote.title,
+        content: this.props.currentNote.content,
+        userId: this.props.currentUser.id
+      });
+    }
+  }
+    
+  handleChange(field) {
+    return (e) => {
+      return this.setState({ [field]: e.currentTarget.value });
+    }
+  }
+
+  handleQChange(value) {
+    this.setState({ content: value });
   }
 
   handleNoteClick(note) {
@@ -45,6 +64,17 @@ class NotebookDetail extends Component {
   saveNote() {
     const note = Object.assign({}, { id: this.state.noteId, content: this.state.content });
     this.props.updateNote(note);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.noteId) {
+      const note = Object.assign({}, { id: this.state.noteId, title: this.state.title, content: this.state.content });
+      this.props.updateNote(note);
+    } else {
+      const note = Object.assign({}, { title: this.state.title, content: this.state.content });
+      this.props.createNote(note);
+    }
   }
 
   render() {
@@ -79,10 +109,6 @@ class NotebookDetail extends Component {
 
     return (
       <section className='notebook-detail'>
-        <div className='left-navbar'>
-          <LeftNavBar currentUser={this.props.currentUser} />
-        </div>
-        <div className='left-navbar-spacer'></div>
         <div className='notebook-detail-notes-container'>
           <div className='notebook-detail-notes'>
             <div className='notebook-detail-notebook-title'>{notebookTitle}</div>
@@ -92,14 +118,27 @@ class NotebookDetail extends Component {
             </ul>
           </div>
           <div className='note-edit'>
-            {/* <NoteEditContainer note={noteId}/> */}
             <div className='note-edit-container'>
-              <ReactQuill value={this.state.content}
-                onChange={this.handleChange} 
-                modules={{toolbar}}>
+              <div className='note-edit-buttons-container'>
+                {/* <div className='note-edit-save-button'><button onClick={() => this.saveNote()}>Save</button></div> */}
+              </div>
+              <div className='note-form'>
+                <form className='note-edit-form' onSubmit={(e) => this.handleSubmit(e)}>
+                  <div className='edit-submit-button'>
+                    <input className='form-button' type='submit' value='Save' />
+                  </div>
+                  <input className='edit-form-title-input' required id='noteTitle' placeholder='Title' type='text' value={this.state.title} onChange={this.handleChange('title')} />
+                </form>
+              
+              <div className='quill-container'>
+                <ReactQuill value={this.state.content}
+                  onChange={this.handleQChange} 
+                  modules={{toolbar}}>
                 </ReactQuill>
+              </div>
+              </div>
             </div>
-            <div className='note-edit-save-button'><button onClick={() => this.saveNote()}>Save</button></div>
+            
           </div>
         </div>
       </section>

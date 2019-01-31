@@ -6,7 +6,7 @@ const NotebookNoteListItem = (props) => {
     <div className={`notebooks-index-item-hover ${props.rowSelector(props.idx+1)}`}>
       <div className='notebooks-item-col1 col1'>
         <div className='notebook-item-notes-detail-title-icon-note'><i className="far fa-address-book"></i></div>
-        <div className='notebook-item-notes-detail-title-text'>{props.note.title}</div>
+        <button onClick={props.requestNotes(props.note)}><div className='notebook-item-notes-detail-title-text'>{props.note.title}</div></button>
       </div>
 
       <div className='notebooks-item-col2 col2'>

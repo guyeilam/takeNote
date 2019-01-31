@@ -438,7 +438,6 @@
   font-weight: 600;
 }
 
-
 .notebook-detail-notes-container {
   width: 100%;
   display: flex;
@@ -453,7 +452,8 @@
   background: #f8f8f8;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, san-serif;
   color: #4d4d4d;
-  min-height: 100vh;
+  /* height: 100vh; */
+  overflow: scroll;
 }
 
 .notebook-detail-notes-list li {
@@ -464,9 +464,9 @@
   border-bottom: 1px solid #e6e6e6;
 }
 
-/* .notebook-detail-notes-list li:nth-child(1) {
+.notebook-detail-notes-list li:nth-of-type(1) {
   border-top: 1px solid #e6e6e6;
-} */
+}
 
 .notebook-detail-notes-list li:hover {
   padding: 20px;
@@ -582,6 +582,9 @@
   max-width: 600px;
   padding: 40px;
   width: 100%;
+  height: 100vh;
+  padding: 20px;
+  /* overflow: scroll; */
 }
 
 .notebook-actions-nav-text {
@@ -611,4 +614,39 @@
 
 .current-view {
   background-color: #404040;
+}
+
+.note-edit-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 0 10px 0;
+}
+
+.edit-form-title-input {
+      /* display: block; */
+    font-size: 24px;
+    width: 100%;
+    margin-bottom: 10px;
+    /* padding: 8px 40px 4px; */
+    padding-left: 10px;
+    outline: none;
+    z-index: 1;
+    cursor: text;
+    font-weight: 300;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+}
+
+.note-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-submit-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.ql-container.ql-snow, .ql-toolbar.ql-snow {
+  border: none;
 }

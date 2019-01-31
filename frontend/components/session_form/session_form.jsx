@@ -7,11 +7,12 @@ class SessionForm extends React.Component {
     this.state = {
       email: '',
       password: '',
+      hidePasswordInput: '',
       formType: props.formType
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
-    // this.renderErrors = this.renderErrors.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
   }
 
   componentWillUnmount() {
@@ -19,9 +20,19 @@ class SessionForm extends React.Component {
   }
 
   update(field) {
-    return (e) => this.setState({
-      [field]: e.target.value
-    })
+    if (field === 'email') {
+      return (e) => {
+        if (e.currentTarget.value.length > 0) {
+          return this.setState({ [field]: e.currentTarget.value, ['hidePasswordInput']: 'loaded form-input' });
+        } else {
+          return this.setState({ [field]: e.currentTarget.value, ['hidePasswordInput']: '' });
+        }
+      }
+    } else {
+      return (e) => {
+        return this.setState({ [field]: e.currentTarget.value });
+      }
+    }
   }
 
   handleSubmit(e) {
@@ -53,11 +64,13 @@ class SessionForm extends React.Component {
     let formSwitchText;
     let formSwitchLink;
     let formDemoButton;
+    let passwordInputTransition;
 
     if (this.state.formType === 'login') {
       formButton = (<input className='form-button' type='submit' value='Login' />);
       formSwitchText = 'Don\'t have an account?';
       formSwitchLink = (<Link to='/signup'>Create account</Link>);
+      passwordInputTransition = 'password-input-transition';
       formDemoButton = (
         <button className='form-button' onClick={(e) => this.demoLogin(e)}>Demo Login</button>
       );
@@ -80,7 +93,7 @@ class SessionForm extends React.Component {
           <div className='form-content'>
             <form className='signup-form' onSubmit={(e) => this.handleSubmit(e)}>
               <input className='form-input' required id='email' placeholder='Email' type='text' value={this.state.email} onChange={this.update('email')} />
-              <input className='form-input' required id='password' placeholder='Password' type='password' value={this.state.password} onChange={this.update('password')} />
+              <input className={`${passwordInputTransition} ${this.state.hidePasswordInput}`} required id='password' placeholder='Password' type='password' value={this.state.password} onChange={this.update('password')} />
               <>
                 {formButton}
               </>

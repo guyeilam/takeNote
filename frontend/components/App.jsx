@@ -2,30 +2,19 @@ import React from 'react';
 import SplashContainer from './splash/splash_container';
 import LoginFormContainer from '../components/session_form/login_form_container';
 import SignupFormContainer from '../components/session_form/signup_form_container';
-import NotebooksIndexContainer from '../components/notebooks/notebooks_index_container';
-import NotebookDetailContainer from '../components/notebooks/notebook_detail_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
-import { Route, Switch } from 'react-router-dom';
-// import Modal from './modal/modal';
+import ClientContainer from '../components/notebooks/client';
 
 const App = () => (
   <div className='main'>
-    {/* <Modal /> */}
     <AuthRoute exact path="/" component={SplashContainer} />
-    <ProtectedRoute exact path="/client" component={NotebooksIndexContainer} />
+    <ProtectedRoute exact path="/client" component={ClientContainer} />
+    <ProtectedRoute exact path="/notes/all" component={ClientContainer} />
+    <ProtectedRoute exact path="/notebooks/:notebookId" component={ClientContainer} />
     <AuthRoute path="/login" component={LoginFormContainer} />
     <AuthRoute path="/signup" component={SignupFormContainer} />
-
-    <ProtectedRoute
-      path="/notebooks/:notebookId"
-      component={NotebookDetailContainer}
-    />
-
-    <ProtectedRoute exact
-      path="/notes/all"
-      component={NotebookDetailContainer}
-      showAllNotes={true}
-    />
+ 
+ 
   </div>
 );
 

@@ -136,3 +136,23 @@
   color: red;
   margin: 10px 0 10px 0;
 }
+
+.password-input-transition {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  font-size: 16px;
+  transform: scale(0);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.loaded {
+  opacity: 1;
+  max-height: 100px;
+  padding: 10px 20px;
+  transform: scale(2);
+  background-color: white;
+  overflow: visible;
+  transition: opacity 1s ease, transform 1s ease;
+}
+

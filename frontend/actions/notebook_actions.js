@@ -4,7 +4,6 @@ export const RECEIVE_ALL_NOTEBOOKS = 'RECEIVE_ALL_NOTEBOOKS';
 export const RECEIVE_SINGLE_NOTEBOOK = 'RECEIVE_SINGLE_NOTEBOOK';
 export const REMOVE_NOTEBOOK = 'REMOVE_NOTEBOOK';
 export const RECEIVE_NOTEBOOK_ERRORS = 'RECEIVE_NOTEBOOK_ERRORS';
-export const SORT_NOTEBOOKS_TOGGLE = 'SORT_NOTEBOOKS_TOGGLE';
 export const RECEIVE_UPDATED_NOTEBOOK = 'RECEIVE_UPDATED_NOTEBOOK';
 
 export const receiveAllNotebooks = (notebooks) => {
@@ -108,9 +107,3 @@ export const deleteNotebookById = (notebookId) => {
   }
 }
 
-export const sortToggle = (sortOption) => {
-  return ({
-    type: SORT_NOTEBOOKS_TOGGLE,
-    sort: sortOption
-  })
-}

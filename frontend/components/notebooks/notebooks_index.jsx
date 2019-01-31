@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import NotebooksIndexItem from './notebook_index_item';
-import Modal from '../modal/modal';
-import LeftNavBar from '../left_nav_bar/left_nav_bar';
 
 class NotebooksIndex extends Component {
   constructor(props) {
@@ -45,16 +43,6 @@ class NotebooksIndex extends Component {
     const notebooks = Object.values(this.props.notebooks);
     return (
       <>
-        <Modal />
-
-        <section className='notebooks'>
-          
-          <div className='left-navbar'>
-            <LeftNavBar currentUser={this.props.currentUser} />
-          </div>
-          
-          <div className='left-navbar-spacer'></div>
-
           <div className='notebooks-list-container'>
             <div className='notebooks-list-header'>Notebooks</div>
             <div className='notebooks-list-menubar'>
@@ -74,11 +62,9 @@ class NotebooksIndex extends Component {
             <div className={`notebooks-list-content-ul ${sortOption}`}>
               {notebooks.map((notebook, idx) => <NotebooksIndexItem key={idx} idx={idx} notebook={notebook} deleteNotebook={this.handleDelete} openActionsModal={(navModalId) => this.handleModalClick(navModalId)} />)}
             </div>
-
           </div>
-        </section>
       </>
-    )
+    );
   }
 }
 

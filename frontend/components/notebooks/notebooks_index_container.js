@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { openModal } from '../../actions/modal_actions';
 import { openNavModal, closeNavModal } from '../../actions/modal_actions';
 import NotebooksIndex from './notebooks_index';
-import { requestAllNotebooks, deleteNotebook, sortToggle } from '../../actions/notebook_actions';
+import { requestAllNotebooks, deleteNotebook } from '../../actions/notebook_actions';
 import { selectAllNotebooks } from '../../reducers/selectors';
 
 const mapStateToProps = (state) => {

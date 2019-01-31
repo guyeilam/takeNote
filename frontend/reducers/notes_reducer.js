@@ -1,7 +1,7 @@
 import merge from 'lodash/merge';
 
 import { RECEIVE_SINGLE_NOTEBOOK } from '../actions/notebook_actions';
-import { RECEIVE_SINGLE_NOTE, RECEIVE_ALL_NOTES } from '../actions/note_actions';
+import { RECEIVE_SINGLE_NOTE, RECEIVE_ALL_NOTES, SET_CURRENT_NOTE } from '../actions/note_actions';
 
 const notesReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -16,6 +16,8 @@ const notesReducer = (state = {}, action) => {
       return merge({}, state, action.payload.notes);
     case RECEIVE_ALL_NOTES:
       return action.notes;
+    case SET_CURRENT_NOTE:
+      return action.payload.notes;
     default:
       return state;
   }

@@ -6,8 +6,6 @@ class NewNotebookForm extends React.Component {
     super(props);
     this.state = {
       title: '',
-      // user_id: '',
-      // note_ids: [],
       disabled: true
     };
     this.handleSubmit = this.handleSubmit.bind(this);

@@ -4,6 +4,7 @@ import { Link, Route, withRouter } from 'react-router-dom';
 import NavModal from '../modal/nav_modal';
 import NotebookNoteListItem from './notebook_note_list_item';
 import { formatDateTime } from '../../util/datetime_util';
+import { requestNotes } from '../../actions/note_actions';
 
 class NotebooksIndexItem extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class NotebooksIndexItem extends Component {
       showNotes: false
     }
     this.rowSelector = this.rowSelector.bind(this);
+    this.requestSpecificNote = this.requestSpecificNote.bind(this);
   }
 
   rowSelector(idx) {
@@ -22,6 +24,12 @@ class NotebooksIndexItem extends Component {
     }
   }
 
+  requestSpecificNote(note) {
+    return (e) => {
+      this.props.requestNotes(note).then(this.props.history.push('/notes/all'));
+    }
+  }
+
   render() {
     
     const { notebook, deleteNotebook, openActionsModal } = this.props;
@@ -29,7 +37,7 @@ class NotebooksIndexItem extends Component {
     const noteTitles = notebook.note_titles ? Object.values(notebook.note_titles) : [];
     const noteItems = this.state.showNotes ? noteTitles.map((note, idx) => {
       return (
-        <NotebookNoteListItem key={idx} idx={idx} note={note} rowSelector={this.rowSelector} />
+        <NotebookNoteListItem key={idx} idx={idx} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} />
       ); }) : null;
     
     return (
@@ -57,7 +65,6 @@ class NotebooksIndexItem extends Component {
             <div className='notebook-item-actions'>
               <NavModal modalId={notebook.id}/>
               <button className='notebook-item-delete-button' onClick={openActionsModal(notebook.id)}>Actions</button>
-              {/* <button className='notebook-item-delete-button' onClick={deleteNotebook(notebook)}>Delete</button> */}
             </div>
           </div>
         </div>
@@ -73,7 +80,6 @@ const mapStateToProps = (state, ownProps) => {
 
   return ({
     notebook: ownProps.notebook,
-    // notebook: Object.values(state.entities.notebooks),
     deleteNotebook: ownProps.deleteNotebook,
     openActionsModal: ownProps.openActionsModal
   });
@@ -81,7 +87,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-
+    requestNotes: currentNote => dispatch(requestNotes(currentNote))
   });
 }
 

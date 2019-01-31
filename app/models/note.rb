@@ -12,7 +12,7 @@
 #
 
 class Note < ApplicationRecord
-  validates :title, :user_id, :notebook_id, presence: true
+  validates :user_id, :notebook_id, presence: true
 
   belongs_to :user
   belongs_to :notebook

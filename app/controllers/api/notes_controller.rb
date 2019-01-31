@@ -17,7 +17,7 @@ class Api::NotesController < ApplicationController
 def create
     @note = Note.new(note_params)
     @note.user_id = current_user.id
-    @note.notebook_id = params[:notebook_id]
+    @note.notebook_id = current_user.notebooks.sample.id
 
     if @note.save
       render :show
@@ -29,7 +29,7 @@ def create
   def update
     @note = Note.find_by(id: params[:id])
 
-    if @note.update_attributes(note_params)
+    if @note.update(note_params)
       render :show
     else
       render json: @note.errors.full_messages, status: 422
