@@ -119,9 +119,6 @@ class NotebookDetail extends Component {
           </div>
           <div className='note-edit'>
             <div className='note-edit-container'>
-              <div className='note-edit-buttons-container'>
-                {/* <div className='note-edit-save-button'><button onClick={() => this.saveNote()}>Save</button></div> */}
-              </div>
               <div className='note-form'>
                 <form className='note-edit-form' onSubmit={(e) => this.handleSubmit(e)}>
                   <div className='edit-submit-button'>
@@ -130,12 +127,16 @@ class NotebookDetail extends Component {
                   <input className='edit-form-title-input' required id='noteTitle' placeholder='Title' type='text' value={this.state.title} onChange={this.handleChange('title')} />
                 </form>
               
-              <div className='quill-container'>
-                <ReactQuill value={this.state.content}
-                  onChange={this.handleQChange} 
-                  modules={{toolbar}}>
-                </ReactQuill>
-              </div>
+                <div className='quill-container'>
+                  <ReactQuill value={this.state.content}
+                    onChange={this.handleQChange} 
+                    modules={{toolbar}}>
+                  </ReactQuill>
+                </div>
+                {/* <div className='note-edit-buttons-container'>
+                  <div className='note-edit-delete-button'><button onClick={() => this.props.deleteNote(this.state.noteId)}>Delete note</button></div>
+                </div> */}
+              
               </div>
             </div>
             

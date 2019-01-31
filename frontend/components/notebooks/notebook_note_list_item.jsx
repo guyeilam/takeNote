@@ -22,7 +22,9 @@ const NotebookNoteListItem = (props) => {
       </div>
 
       <div className='notebooks-item-col5 col5'>
-        <div className='notebook-item-actions'>- </div>
+        <div className='notebook-item-actions'>
+          <button onClick={() => props.deleteNote(props.note.id)}>Delete note</button>
+        </div>
       </div>
     </div>
   );

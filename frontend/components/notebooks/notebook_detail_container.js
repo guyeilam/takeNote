@@ -4,7 +4,7 @@ import { requestSingleNotebook } from '../../actions/notebook_actions';
 import { updateNote } from '../../actions/note_actions';
 import { requestAllNotes } from '../../actions/note_actions';
 import { withRouter } from 'react-router-dom';
-import { createNote } from '../../actions/note_actions';
+import { createNote, deleteNote } from '../../actions/note_actions';
 
 const mapStateToProps = (state, ownProps) => {
   const currentId = state.session.id;
@@ -31,7 +31,8 @@ const mapDispatchToProps = (dispatch) => {
     requestSingleNotebook: (id) => dispatch(requestSingleNotebook(id)),
     requestAllNotes: () => dispatch(requestAllNotes()),
     updateNote: (note) => dispatch(updateNote(note)),
-    createNote: note => dispatch(createNote(note))
+    createNote: note => dispatch(createNote(note)),
+    deleteNote: noteId => dispatch(deleteNote(noteId))
   });
 }
 

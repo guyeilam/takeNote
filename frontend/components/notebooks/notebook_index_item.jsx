@@ -4,7 +4,7 @@ import { Link, Route, withRouter } from 'react-router-dom';
 import NavModal from '../modal/nav_modal';
 import NotebookNoteListItem from './notebook_note_list_item';
 import { formatDateTime } from '../../util/datetime_util';
-import { requestNotes } from '../../actions/note_actions';
+import { requestNotes, deleteNote } from '../../actions/note_actions';
 
 class NotebooksIndexItem extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class NotebooksIndexItem extends Component {
     const noteTitles = notebook.note_titles ? Object.values(notebook.note_titles) : [];
     const noteItems = this.state.showNotes ? noteTitles.map((note, idx) => {
       return (
-        <NotebookNoteListItem key={idx} idx={idx} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} />
+        <NotebookNoteListItem key={idx} idx={idx} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} deleteNote={this.props.deleteNote}/>
       ); }) : null;
     
     return (
@@ -87,7 +87,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    requestNotes: currentNote => dispatch(requestNotes(currentNote))
+    requestNotes: currentNote => dispatch(requestNotes(currentNote)),
+    deleteNote: noteId => dispatch(deleteNote(noteId))
   });
 }
 

@@ -3,12 +3,20 @@ import * as NoteAPIUtil from '../util/note_api_util';
 export const RECEIVE_SINGLE_NOTE = 'RECEIVE_SINGLE_NOTE';
 export const RECEIVE_ALL_NOTES = 'RECEIVE_ALL_NOTES';
 export const RECEIVE_NOTE_ERRORS = 'RECEIVE_NOTE_ERRORS';
+export const REMOVE_NOTE = 'REMOVE_NOTE';
 export const SET_CURRENT_NOTE = 'SET_CURRENT_NOTE';
 
 export const receiveSingleNote = (payload) => {
   return ({
     type: RECEIVE_SINGLE_NOTE,
     payload
+  });
+}
+
+export const removeNote = (noteId) => {
+  return ({
+    type: REMOVE_NOTE,
+    noteId
   });
 }
 
@@ -87,4 +95,15 @@ export const setCurrentNote = (notes, currentNote) => {
     payload: notes,
     currentNote
   })
+}
+
+export const deleteNote = (noteId) => {
+  return (dispatch) => {
+    return NoteAPIUtil.deleteNote(noteId).then(() => {
+      return dispatch(removeNote(noteId));
+    },
+      (err) => {
+        return dispatch(receiveNoteErrors(err.responseJSON));
+      });
+  }
 }
