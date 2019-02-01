@@ -95,7 +95,7 @@
 }
 
 .left-navbar-user-photo {
-  background-image: url(https://www.evernote.com/shard/s312/user/42738811/photo?size=56);
+  background-image: url('https://cdn3.iconfinder.com/data/icons/complete-set-icons/512/tumblr512x512.png');
   width: 28px;
   height: 28px;
   border-radius: 28px;
@@ -672,3 +672,9 @@
   display: flex;
   justify-items: flex-end;
 }
+
+.search-input {
+  background-color: #333;
+  border-radius: 3px;
+}
+
