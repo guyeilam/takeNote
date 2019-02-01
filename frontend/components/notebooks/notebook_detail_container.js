@@ -5,13 +5,14 @@ import { updateNote } from '../../actions/note_actions';
 import { requestAllNotes } from '../../actions/note_actions';
 import { withRouter } from 'react-router-dom';
 import { createNote, deleteNote } from '../../actions/note_actions';
+import { getNotebookTitles } from '../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
   const currentId = state.session.id;
   const currentUser = state.entities.users[currentId] || null;
   let showAllNotes = false;
   const notebookId = ownProps.match.params.notebookId;
-
+  
   if (ownProps.match.path === '/notes/all') {
     showAllNotes = true;
   }

@@ -11,3 +11,7 @@ export const selectNotebookNotes = (state, notebook) => {
 export const selectNotebookNote = (state, id) => {
   return state.entities.notes[id];
 };
+
+export const getNotebookTitles = (notebooks) => {
+  return notebooks.map(notebook => notebook.title);
+}

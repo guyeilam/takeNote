@@ -4,11 +4,12 @@ import { openModal } from '../../actions/modal_actions';
 import { openNavModal, closeNavModal } from '../../actions/modal_actions';
 import NotebooksIndex from './notebooks_index';
 import { requestAllNotebooks, deleteNotebook } from '../../actions/notebook_actions';
-import { selectAllNotebooks } from '../../reducers/selectors';
 
 const mapStateToProps = (state) => {
   const currentId = state.session.id;
   const currentUser = state.entities.users[currentId] || null;
+  // const notebooks = Object.values(state.entities.notebooks);
+  // const notebookTitles = getNotebookTitles(notebooks);
   
   return ({
     notebooks: state.entities.notebooks,
@@ -23,8 +24,7 @@ const mapDispatchToProps = (dispatch) => {
     deleteNotebook: notebook => dispatch(deleteNotebook(notebook)),
     openModal: modal => dispatch(openModal(modal)),
     openNavModal: (navModal, navModalId) => dispatch(openNavModal(navModal, navModalId)),
-    closeNavModal: () => dispatch(closeNavModal()),
-    sortToggle: (sortOption) => dispatch(sortToggle(sortOption))
+    closeNavModal: () => dispatch(closeNavModal())
   });
 }
 

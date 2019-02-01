@@ -73,6 +73,7 @@
   flex-direction: column;
   position: fixed;
   min-width: 200px;
+  max-width: 200px;
 }
 
 .left-navbar-spacer {
@@ -497,14 +498,10 @@
   transform: scale(1.3);
 }
 
-.left-nav-new-note-button {
-  padding-top: 20px;
-}
-
 .left-nav-new-note-button-container {
   display: flex;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .left-nav-new-note-button-text {
@@ -649,4 +646,29 @@
 
 .ql-container.ql-snow, .ql-toolbar.ql-snow {
   border: none;
+}
+
+.search-notebooks {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.search-submit-button {
+  background-color: #00a82d;
+  border-radius: 1px;
+  color: white;
+  border-color: #00a82d;
+  padding: 1px 2px;
+  /* margin: 2px; */
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  text-align: center;
+  font-size: 12px;
+  margin-right: 4px;
+  /* line-height: 1.1875; */
+}
+
+.search-form-submit-container {
+  display: flex;
+  justify-items: flex-end;
 }
