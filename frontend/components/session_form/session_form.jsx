@@ -78,6 +78,7 @@ class SessionForm extends React.Component {
         formButton = (<input className='form-button' type='submit' value='Continue' />);
         formSwitchText = 'Already have an account?';
         formSwitchLink = (<Link to='/login'>Sign in</Link>);
+        passwordInputTransition = 'form-input';
     }
     
     return (
