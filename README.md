@@ -1,24 +1,25 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# takeNote
+Welcome to takeNote. takeNote is a single-page clone of Evernote, a web application designed for note taking and organizing notes and notebooks. takeNote allows users to create and edit notes in Rich Text Format (RTF). Notes can be saved into a notebook, edited, and searched. 
 
-Things you may want to cover:
+[takeNote Live](https://takenoteapp.herokuapp.com)
 
-* Ruby version
+## Technologies
+takeNote is built using Ruby on Rails (backend data management), SQL database, HTML/CSS, JavaScript, and React/Redux (frontend).
 
-* System dependencies
+## Key Features
+User Authentication
+Users can create an account by providing an email address and password. Users can then log in and access their notes and notebooks.
 
-* Configuration
+![Login feature](app/assets/images/login.png)
 
-* Database creation
+## Rich-text Editing
+Users can create, edit, and save notes with full rich text.
 
-* Database initialization
+## Notebooks
+Users can organize notes into notebooks and sort notebooks by date updated.
 
-* How to run the test suite
+## Search Notebooks
+Users can search for specific notebooks by title.
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
