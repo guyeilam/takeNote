@@ -11,7 +11,7 @@ takeNote is built using Ruby on Rails (backend data management), SQL database, H
 User Authentication
 Users can create an account by providing an email address and password. Users can then log in and access their notes and notebooks.
 
-<img src='https://github.com/ge2016/takeNote/raw/master/app/assets/images/login.png' width='75%'>
+<center><img src='https://github.com/ge2016/takeNote/raw/master/app/assets/images/login.png' width='50%'></center>
 
 ## Rich-text Editing
 Users can create, edit, and save notes with full rich text.
