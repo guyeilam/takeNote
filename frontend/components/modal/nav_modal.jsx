@@ -50,10 +50,6 @@ class NavModal extends Component {
   }
 }
 
-// function NavModal({ navModal, closeNavModal, navModalId, idx }) {
-  
-// }
-
 const mapStateToProps = (state, ownProps) => {
   return {
     navModal: state.ui.navModal,
