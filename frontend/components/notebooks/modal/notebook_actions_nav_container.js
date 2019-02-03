@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { closeNavModal } from '../../actions/modal_actions';
-import { openModal } from '../../actions/modal_actions';
-import { deleteNotebookById, updateNotebook } from '../../actions/notebook_actions';
+import { closeNavModal } from '../../../actions/modal_actions';
+import { openModal } from '../../../actions/modal_actions';
+import { deleteNotebookById, updateNotebook } from '../../../actions/notebook_actions';
 import NotebookActionsNav from './notebook_actions_nav';
 
 const mapStateToProps = (state, ownProps) => {

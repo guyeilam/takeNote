@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { closeNavModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
-import NoteBookActionsNavContainer from '../notebooks/notebook_actions_nav_container';
+import NoteBookActionsNavContainer from '../notebooks/modal/notebook_actions_nav_container';
 
 class NavModal extends Component {
   constructor(props) {

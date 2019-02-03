@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { updateNotebook } from '../../actions/notebook_actions';
-import { closeModal } from '../../actions/modal_actions';
+import { updateNotebook } from '../../../actions/notebook_actions';
+import { closeModal } from '../../../actions/modal_actions';
 import NewNotebookForm from './new_notebook_form';
 
 const mapStateToProps = (state, ownProps) => {

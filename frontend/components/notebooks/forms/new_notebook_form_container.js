@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
-import React from 'react';
-import { createNotebook } from '../../actions/notebook_actions';
-import { openModal, closeModal } from '../../actions/modal_actions';
+import { createNotebook } from '../../../actions/notebook_actions';
+import { closeModal } from '../../../actions/modal_actions';
 import NewNotebookForm from './new_notebook_form';
 
 const mapStateToProps = ({ errors }) => {

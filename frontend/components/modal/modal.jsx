@@ -1,8 +1,8 @@
 import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
-import NewNotebookFormContainer from '../notebooks/new_notebook_form_container';
-import RenameNotebookFormContainer from '../notebooks/rename_notebook_form_container';
+import NewNotebookFormContainer from '../notebooks/forms/new_notebook_form_container';
+import RenameNotebookFormContainer from '../notebooks/forms/rename_notebook_form_container';
 
 
 function Modal({ modal, notebookId, closeModal }) {
