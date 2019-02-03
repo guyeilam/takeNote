@@ -133,9 +133,6 @@ class NotebookDetail extends Component {
                     modules={{toolbar}}>
                   </ReactQuill>
                 </div>
-                {/* <div className='note-edit-buttons-container'>
-                  <div className='note-edit-delete-button'><button onClick={() => this.props.deleteNote(this.state.noteId)}>Delete note</button></div>
-                </div> */}
               
               </div>
             </div>

@@ -6,6 +6,32 @@ export const RECEIVE_NOTE_ERRORS = 'RECEIVE_NOTE_ERRORS';
 export const REMOVE_NOTE = 'REMOVE_NOTE';
 export const SET_CURRENT_NOTE = 'SET_CURRENT_NOTE';
 
+export const receiveAllNotes = (payload) => {
+  return ({
+    type: RECEIVE_ALL_NOTES,
+    payload
+  });
+}
+
+export const requestAllNotes = () => {
+  return (dispatch) => {
+    return NoteAPIUtil.fetchAllNotes().then((payload) => {
+      return dispatch(receiveAllNotes(payload));
+      },
+        (err) => {
+          return dispatch(receiveNoteErrors(err.responseJSON));
+    });
+  }
+}
+
+
+
+
+
+
+
+
+
 export const receiveSingleNote = (payload) => {
   return ({
     type: RECEIVE_SINGLE_NOTE,
@@ -20,12 +46,7 @@ export const removeNote = (noteId) => {
   });
 }
 
-export const receiveAllNotes = (notes) => {
-  return ({
-    type: RECEIVE_ALL_NOTES,
-    notes: notes.notes
-  });
-}
+
 
 export const receiveNoteErrors = (errors) => {
   return ({
@@ -34,16 +55,7 @@ export const receiveNoteErrors = (errors) => {
   });
 }
 
-export const requestAllNotes = () => {
-  return (dispatch) => {
-    return NoteAPIUtil.fetchAllNotes().then((notes) => {
-      return dispatch(receiveAllNotes(notes));
-      },
-        (err) => {
-          return dispatch(receiveNoteErrors(err.responseJSON));
-    });
-  }
-}
+
 
 export const requestSingleNote = (noteId) => {
   return (dispatch) => {

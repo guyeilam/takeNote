@@ -6,12 +6,26 @@ export const REMOVE_NOTEBOOK = 'REMOVE_NOTEBOOK';
 export const RECEIVE_NOTEBOOK_ERRORS = 'RECEIVE_NOTEBOOK_ERRORS';
 export const RECEIVE_UPDATED_NOTEBOOK = 'RECEIVE_UPDATED_NOTEBOOK';
 
-export const receiveAllNotebooks = (notebooks) => {
+export const receiveAllNotebooks = (payload) => {
   return ({
     type: RECEIVE_ALL_NOTEBOOKS,
-    notebooks
+    payload
   });
 }
+
+export const requestAllNotebooks = () => {
+  return (dispatch) => {
+    return NotebookAPIUtil.fetchAllNotebooks().then( (payload) => {
+      return dispatch(receiveAllNotebooks(payload));
+    },
+      (err) => {
+        return dispatch(receiveNotebookErrors(err.responseJSON));
+      });
+  }
+}
+
+
+
 
 export const receiveSingleNotebook = (payload) => {
   return ({
@@ -41,16 +55,7 @@ export const receiveNotebookErrors = (errors) => {
   });
 }
 
-export const requestAllNotebooks = () => {
-  return (dispatch) => {
-    return NotebookAPIUtil.fetchAllNotebooks().then( (notebooks) => {
-      return dispatch(receiveAllNotebooks(notebooks));
-    },
-      (err) => {
-        return dispatch(receiveNotebookErrors(err.responseJSON));
-      });
-  }
-}
+
 
 export const requestSingleNotebook = (notebookId) => {
   return (dispatch) => {

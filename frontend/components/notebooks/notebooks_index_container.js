@@ -8,12 +8,9 @@ import { requestAllNotebooks, deleteNotebook } from '../../actions/notebook_acti
 const mapStateToProps = (state) => {
   const currentId = state.session.id;
   const currentUser = state.entities.users[currentId] || null;
-  // const notebooks = Object.values(state.entities.notebooks);
-  // const notebookTitles = getNotebookTitles(notebooks);
   
   return ({
     notebooks: state.entities.notebooks,
-    sorted: state.sort,
     currentUser
   });
 }

@@ -5,6 +5,7 @@ import NavModal from '../modal/nav_modal';
 import NotebookNoteListItem from './notebook_note_list_item';
 import { formatDateTime } from '../../util/datetime_util';
 import { requestNotes, deleteNote } from '../../actions/note_actions';
+import { selectNotebookNotes } from '../../reducers/selectors';
 
 class NotebooksIndexItem extends Component {
   constructor(props) {
@@ -33,8 +34,8 @@ class NotebooksIndexItem extends Component {
   render() {
     
     const { notebook, deleteNotebook, openActionsModal } = this.props;
-
-    const noteTitles = notebook.note_titles ? Object.values(notebook.note_titles) : [];
+    
+    const noteTitles = notebook.noteIds.map(id => this.props.notes[id]);
     const noteItems = this.state.showNotes ? noteTitles.map((note, idx) => {
       return (
         <NotebookNoteListItem key={idx} idx={idx} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} deleteNote={this.props.deleteNote}/>
@@ -46,7 +47,7 @@ class NotebooksIndexItem extends Component {
           <div className='notebooks-item-col1 col1'>
             <div className='notebook-item-expand'><button onClick={() => this.setState({ showNotes: !this.state.showNotes })}><i className="fas fa-caret-right" /></button></div>
             <div className='notebook-item-icon'><i className="fas fa-book" /></div>
-            <div className='notebook-item-title'><Link to={`/notebooks/${notebook.id}`}>{notebook.title} ({noteTitles.length})</Link></div>
+            <div className='notebook-item-title'><Link to={`/notebooks/${notebook.id}`}>{notebook.title} ({notebook.noteIds.length})</Link></div>
           </div>
           
           <div className='notebooks-item-col2 col2'>
@@ -78,8 +79,12 @@ class NotebooksIndexItem extends Component {
 
 const mapStateToProps = (state, ownProps) => {
 
+  const notebook = ownProps.notebook;
+  const notes = state.entities.notes;
+
   return ({
-    notebook: ownProps.notebook,
+    notebook,
+    notes,
     deleteNotebook: ownProps.deleteNotebook,
     openActionsModal: ownProps.openActionsModal
   });

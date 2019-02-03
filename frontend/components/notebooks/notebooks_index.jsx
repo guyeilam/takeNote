@@ -5,13 +5,11 @@ class NotebooksIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sorted: this.props.sort
+      sorted: false
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSort = this.handleSort.bind(this);
     this.handleModalClick = this.handleModalClick.bind(this);
-
-
   }
 
   componentDidMount() {
@@ -37,25 +35,12 @@ class NotebooksIndex extends Component {
     }
   }
 
- 
-
-
-
-
-
-
-
-
-
   render() {
     if (!this.props.notebooks) { return null; }
     if (this.props.notebooks.id) { return null; }
 
     const sortOption = this.state.sorted ? 'sorted-reverse' : 'sorted-normal';
     const notebooks = Object.values(this.props.notebooks);
-    // const notebookTitles = getNotebookTitles(notebooks);
-    
-   
 
     return (
       <>
