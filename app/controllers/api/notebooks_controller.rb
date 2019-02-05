@@ -12,6 +12,7 @@ class Api::NotebooksController < ApplicationController
 
   def show
     @notebook = current_user.notebooks.find_by(id: params[:id])
+    @notes = @notebook.notes
     if @notebook
       render :show
     else

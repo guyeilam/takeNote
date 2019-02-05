@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Route, withRouter } from 'react-router-dom';
 import NavModal from '../modal/nav_modal';
-import NotebookNoteListItem from './notebook_note_list_item';
+import NotebookIndexNote from './notebook_index_note';
 import { formatDateTime } from '../../util/datetime_util';
 import { requestNotes, deleteNote } from '../../actions/note_actions';
-import { selectNotebookNotes } from '../../reducers/selectors';
 
 class NotebooksIndexItem extends Component {
   constructor(props) {
@@ -38,7 +37,7 @@ class NotebooksIndexItem extends Component {
     const noteTitles = notebook.noteIds.map(id => this.props.notes[id]);
     const noteItems = this.state.showNotes ? noteTitles.map((note, idx) => {
       return (
-        <NotebookNoteListItem key={idx} idx={idx} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} deleteNote={this.props.deleteNote}/>
+        <NotebookIndexNote key={idx} idx={idx} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} deleteNote={this.props.deleteNote}/>
       ); }) : null;
     
     return (

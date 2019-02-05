@@ -24,15 +24,25 @@ export const requestAllNotebooks = () => {
   }
 }
 
-
-
-
 export const receiveSingleNotebook = (payload) => {
   return ({
     type: RECEIVE_SINGLE_NOTEBOOK,
     payload
   });
 }
+
+
+export const requestSingleNotebook = (notebookId) => {
+  return (dispatch) => {
+    return NotebookAPIUtil.fetchSingleNotebook(notebookId).then((payload) => {
+        dispatch(receiveSingleNotebook(payload));
+    },
+      (err) => {
+        return dispatch(receiveNotebookErrors(err.responseJSON));
+      });
+  }
+}
+
 
 export const receiveUpdatedNotebook = (payload) => {
   return ({
@@ -57,16 +67,6 @@ export const receiveNotebookErrors = (errors) => {
 
 
 
-export const requestSingleNotebook = (notebookId) => {
-  return (dispatch) => {
-    return NotebookAPIUtil.fetchSingleNotebook(notebookId).then((payload) => {
-      return dispatch(receiveSingleNotebook(payload));
-    },
-      (err) => {
-        return dispatch(receiveNotebookErrors(err.responseJSON));
-      });
-  }
-}
 
 export const updateNotebook = (notebook) => {
   return (dispatch) => {

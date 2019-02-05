@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Modal from '../modal/modal';
 import LeftNavBar from '../left_nav_bar/left_nav_bar';
 import NotebooksIndexContainer from './notebooks_index_container';
-import NotebookDetailContainer from './notebook_detail_container';
+import ViewNotebookContainer from './view_notebook_container';
 import { withRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 
@@ -27,12 +27,12 @@ class Client extends Component {
           />
           <Route exact
             path="/notebooks/:notebookId"
-            component={NotebookDetailContainer}
+            component={ViewNotebookContainer}
           />
           <Route exact
             path="/notes/all"
-            component={NotebookDetailContainer}
-            showAllNotes={true}
+            component={ViewNotebookContainer}
+            // showAllNotes={true}
           />
           
         </section>

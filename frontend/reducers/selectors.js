@@ -5,7 +5,7 @@ export const selectAllNotebooks = state => Object.values(state.entities.notebook
 // }
 
 export const selectNotebookNotes = (state, notebook) => {
-  return notebook ? notebook.noteIds.map(id => state.entities.notes[id]) : [];
+  return (notebook && (notebook.noteIds.length > 0)) ? notebook.noteIds.map(id => state.entities.notes[id]) : [];
 };
 
 export const selectNotebookNote = (state, id) => {

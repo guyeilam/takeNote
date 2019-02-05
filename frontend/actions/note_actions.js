@@ -24,6 +24,23 @@ export const requestAllNotes = () => {
   }
 }
 
+export const removeNote = (noteId) => {
+  return ({
+    type: REMOVE_NOTE,
+    noteId
+  });
+}
+
+export const deleteNote = (noteId) => {
+  return (dispatch) => {
+    return NoteAPIUtil.deleteNote(noteId).then(() => {
+      return dispatch(removeNote(noteId));
+    },
+      (err) => {
+        return dispatch(receiveNoteErrors(err.responseJSON));
+      });
+  }
+}
 
 
 
@@ -39,23 +56,12 @@ export const receiveSingleNote = (payload) => {
   });
 }
 
-export const removeNote = (noteId) => {
-  return ({
-    type: REMOVE_NOTE,
-    noteId
-  });
-}
-
-
-
 export const receiveNoteErrors = (errors) => {
   return ({
     type: RECEIVE_NOTE_ERRORS,
     errors
   });
 }
-
-
 
 export const requestSingleNote = (noteId) => {
   return (dispatch) => {
@@ -101,21 +107,10 @@ export const requestNotes = (currentNote) => {
   }
 }
 
-export const setCurrentNote = (notes, currentNote) => {
+export const setCurrentNote = (noteId) => {
   return ({
     type: SET_CURRENT_NOTE,
-    payload: notes,
-    currentNote
+    noteId
   })
 }
 
-export const deleteNote = (noteId) => {
-  return (dispatch) => {
-    return NoteAPIUtil.deleteNote(noteId).then(() => {
-      return dispatch(removeNote(noteId));
-    },
-      (err) => {
-        return dispatch(receiveNoteErrors(err.responseJSON));
-      });
-  }
-}

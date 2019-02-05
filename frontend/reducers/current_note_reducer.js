@@ -6,21 +6,22 @@ export default function currentNoteReducer(state = null, action) {
 
   switch (action.type) {
     case SET_CURRENT_NOTE:
-      return action.payload.notes[action.currentNote.id];
-    case RECEIVE_SINGLE_NOTE:
-      return Object.values(action.payload.notes)[0];
-    case RECEIVE_ALL_NOTES:
-      if (!state) {
-        return Object.values(action.notes)[0];
-      } else {
-        return state;
-      }
-    case RECEIVE_SINGLE_NOTEBOOK:
-      if (action.payload.notes) {  
-        return Object.values(action.payload.notes)[0];
-      } else {
-        return state;
-      }
+      return action.noteId;
+    // return action.payload.notes[action.currentNote.id];
+    // case RECEIVE_SINGLE_NOTE:
+    //   return Object.values(action.payload.notes)[0];
+    // case RECEIVE_ALL_NOTES:
+    //   if (!state) {
+    //     return Object.values(action.notes)[0];
+    //   } else {
+    //     return state;
+    //   }
+    // case RECEIVE_SINGLE_NOTEBOOK:
+    //   if (action.payload.notes) {  
+    //     return Object.values(action.payload.notes)[0];
+    //   } else {
+    //     return state;
+    //   }
     default:
       return state;
   }

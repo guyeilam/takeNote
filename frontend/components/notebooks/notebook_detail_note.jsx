@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NotebookDetailNoteItem = (props) => {
+const NotebookDetailNote = (props) => {
   return (
     <li className='notebook-detail-note'>
       <button onClick={props.handleNoteClick(props.note)}>
@@ -11,4 +11,4 @@ const NotebookDetailNoteItem = (props) => {
   );
 }
 
-export default NotebookDetailNoteItem;
+export default NotebookDetailNote;
