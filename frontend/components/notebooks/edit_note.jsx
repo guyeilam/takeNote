@@ -11,7 +11,7 @@ class EditNote extends Component {
       noteId: null,
       title: '',
       content: '',
-      notebookId: this.props.notebookId,
+      // notebookId: this.props.notebookId,
       // userId: this.props.currentUser.id
     }
     this.handleChange = this.handleChange.bind(this);
@@ -20,20 +20,15 @@ class EditNote extends Component {
     this.saveNote = this.saveNote.bind(this);
   }
 
-  componentDidMount() {
-    // if (this.props.notebookId) {
-    //   this.setState({ notebookId: this.props.notebookId });
-    // }
-    // this.props.requestAllNotebooks();
-  }
-
   componentDidUpdate(prevProps) {
-    if (!this.state.noteId && this.props.notes) {
-      this.setState({
-        noteId: this.props.notes.id,
-        title: this.props.notes.title,
-        content: this.props.notes.content
-      });
+    if (this.props.notes) {
+      if (!prevProps.notes || (prevProps.notes.id !== this.props.notes.id)) {
+        this.setState({
+          noteId: this.props.notes.id,
+          title: this.props.notes.title,
+          content: this.props.notes.content
+        });
+      }
     }
   }
 
