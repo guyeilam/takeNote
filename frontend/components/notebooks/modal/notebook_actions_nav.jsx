@@ -9,7 +9,8 @@ class NotebookActionsNav extends React.Component {
 
   handleDelete(notebookId) {
     return (e) => {
-      this.props.closeNavModal().then(this.props.deleteNotebookById(notebookId));
+      this.props.closeNavModal();
+      this.props.deleteNotebookById(notebookId);
     }
   }
   

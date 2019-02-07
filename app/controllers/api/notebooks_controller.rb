@@ -1,9 +1,5 @@
 class Api::NotebooksController < ApplicationController
   before_action :require_signed_in
-  
-  # def index
-  #   @notebooks = current_user.notebooks
-  # end
 
   def index
     @notebooks = current_user.notebooks
@@ -55,4 +51,5 @@ class Api::NotebooksController < ApplicationController
   def notebook_params
     params.require(:notebook).permit(:title)
   end
+
 end

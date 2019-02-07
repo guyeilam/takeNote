@@ -88,7 +88,8 @@ export const updateNote = (note) => {
 export const createNote = (note) => {
   return (dispatch) => {
     return NoteAPIUtil.createNote(note).then((note) => {
-      return dispatch(receiveSingleNote(note));
+      dispatch(receiveSingleNote(note));
+      return note;
     },
       (err) => {
         return dispatch(receiveNoteErrors(err.responseJSON));

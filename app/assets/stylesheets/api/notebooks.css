@@ -399,27 +399,34 @@
   overflow: scroll;
 }
 
+.notebook-detail-notes-list {
+  display: flex;
+  flex-direction: column;
+}
+
 .notebook-detail-notes-list li {
   padding: 20px;
   font-size: 14px;
   border: 1px solid rgba(0, 0, 0, 0);
   border-bottom: 1px solid #e6e6e6;
-}
-
-.notebook-detail-notes-list li:nth-of-type(1) {
-  border-top: 1px solid #e6e6e6;
+  cursor: pointer;
 }
 
 .notebook-detail-notes-list li:hover {
   padding: 20px;
-  background-color: rgb(229, 238, 238);
+  background-color: #f2f2f2;
+}
+
+.notes-list-clicked {
+  background-color: #f2f2f2;
 }
 
 .notebook-detail-notes-count {
-  margin-left: 20px;
+  padding-left: 20px;
   font-size: 12px;
   font-weight: 300;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e6e6e6;
 }
 
 .left-nav-new-note-button {

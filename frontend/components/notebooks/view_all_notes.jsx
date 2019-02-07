@@ -19,7 +19,8 @@ class NotesList extends Component {
     if (!this.props.currentNote) {
       if (this.props.notes) {
         if ((Object.values(this.props.notes).length > 0) && (prevProps.currentNote !== Object.values(this.props.notes)[0].id)) {
-          this.props.setCurrentNote(Object.values(this.props.notes)[0].id);
+          const noteId = Object.values(this.props.notes)[Object.values(this.props.notes).length - 1].id;
+          this.props.setCurrentNote(noteId);
         }
       }
     }

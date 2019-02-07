@@ -17,9 +17,10 @@ class NotesList extends Component {
 
   componentDidUpdate(prevProps) {
     if (!this.props.currentNote) {
-      if (this.props.notebook) {
-        if ((this.props.notebook.noteIds.length > 0) && (prevProps.currentNote !== this.props.notebook.noteIds[0])) {
-          this.props.setCurrentNote(this.props.notebook.noteIds[0]);
+      if (this.props.notes) {
+        if ((Object.values(this.props.notes).length > 0) && (prevProps.currentNote !== Object.values(this.props.notes)[0].id)) {
+          const noteId = Object.values(this.props.notes)[Object.values(this.props.notes).length - 1].id;
+          this.props.setCurrentNote(noteId);
         }
       }
     }
@@ -39,12 +40,12 @@ class NotesList extends Component {
   render() {
     if ((!this.props.notebook) || (Object.values(this.props.notebook).length === 0)) return null;
 
-    const notebookId = this.props.notebookId;
+    // const notebookId = this.props.notebookId;
 
-    const notesArray = Object.values(this.props.notes);
-    const noteItems = (notesArray.length > 0) ? notesArray.map((note) => {
+    const notesArray = this.props.notebook.noteIds;
+    const noteItems = (notesArray.length > 0) ? notesArray.map((noteId) => {
       return (
-        <NotebookDetailNote key={note.id} note={note} handleNoteClick={this.handleNoteClick} />
+        <NotebookDetailNote key={noteId} note={this.props.notes[noteId]} handleNoteClick={this.handleNoteClick} />
       );
     }) : null;
 

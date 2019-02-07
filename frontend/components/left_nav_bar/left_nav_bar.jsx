@@ -45,8 +45,10 @@ class LeftNavBar extends Component {
 
   createNewNote() {
     return (e) => {
-      const note = Object.assign({}, { title: '', content: '' });
-      this.props.createNote(note).then(this.props.history.push('/notes/all'));
+      const note = Object.assign({}, { title: '', content: '', plain_text: '' });
+      this.props.createNote(note).then(payload => {
+        this.props.setCurrentNote(Object.values(payload.notes)[0].id);
+      });
     }
   }
 

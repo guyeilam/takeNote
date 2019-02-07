@@ -14,18 +14,10 @@ class ViewNotebook extends Component {
     if (this.props.notebookId) {
       this.setState({ notebookId: this.props.notebookId });
     }
-    // this.props.requestAllNotebooks();
   }
 
 
   render() {
-    // if ((!this.props.notebooks) || (Object.values(this.props.notebooks).length === 0)) return null;
-    
-    // const notebookTitle = this.props.notebookId ? this.props.notebooks.title : 'All Notes';
-    // const notebookId = this.props.notebookId;
-    
-    // const notesArray = Object.values(this.props.notes);
-
     return (
       <section className='notebook-detail'>
         <div className='notebook-detail-notes-container'>
