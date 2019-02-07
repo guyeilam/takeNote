@@ -8,58 +8,30 @@ import { setCurrentNote } from '../../actions/note_actions';
 class NotesList extends Component {
   constructor(props) {
     super(props);
-
-    // this.state = {
-      // noteId: null,
-      // title: '',
-      // content: '',
-      // notebookId: this.props.notebookId,
-      // userId: this.props.currentUser.id
-    // }
-
     this.handleNoteClick = this.handleNoteClick.bind(this);
   }
 
   componentDidMount() {
-    // if (this.props.notebookId) {
-    //   this.setState({ notebookId: this.props.notebookId });
-    // }
     this.props.requestSingleNotebook(this.props.notebookId);
   }
 
   componentDidUpdate(prevProps) {
     if (!this.props.currentNote) {
       if (this.props.notebook) {
-        if ((this.props.notebook.noteIds.length > 0) && (this.props.currentNote !== this.props.notebook.noteIds[0])) {
-        // this.setState({ 
-        //   noteId: this.props.notebook.noteIds[0],
-        //   title: this.props.notes[this.props.notebook.noteIds[0]].title,
-        //   content: this.props.notes[this.props.notebook.noteIds[0]].content
-        // });
+        if ((this.props.notebook.noteIds.length > 0) && (prevProps.currentNote !== this.props.notebook.noteIds[0])) {
           this.props.setCurrentNote(this.props.notebook.noteIds[0]);
         }
       }
     }
-    // if ((!prevProps.currentNote && this.props.currentNote) || (this.props.currentNote && prevProps.currentNote && (this.props.currentNote.id !== prevProps.currentNote.id))) {
-    
-    // if ((!prevProps.currentNote && this.props.currentNote) || (this.props.currentNote && prevProps.currentNote && (this.props.currentNote !== prevProps.currentNote))) {
-    //   this.setState({
-    //     noteId: this.props.currentNote,
-    //     title: this.props.notes[this.props.currentNote].title,
-    //     content: this.props.notes[this.props.currentNote].content,
-    //     userId: this.props.currentUser.id
-    //   });
-    // }
   }
-
-  // handleChange(field) {
-  //   return (e) => {
-  //     return this.setState({ [field]: e.currentTarget.value });
-  //   }
-  // }
+  
+  componentWillUnmount() {
+    this.props.setCurrentNote(null);
+  }
 
   handleNoteClick(note) {
     return () => {
+      this.props.setCurrentNote(null);
       this.props.setCurrentNote(note.id);
     }
   }
@@ -90,7 +62,7 @@ class NotesList extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return ({
-    notebook: Object.values(state.entities.notebooks)[0],
+    notebook: state.entities.notebooks[ownProps.match.params.notebookId],
     notes: state.entities.notes,
     notebookId: ownProps.match.params.notebookId,
     currentNote: state.ui.currentNote

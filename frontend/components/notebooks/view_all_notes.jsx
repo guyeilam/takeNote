@@ -3,71 +3,43 @@ import { withRouter } from 'react-router-dom';
 import NotebookDetailNote from './notebook_detail_note';
 import { connect } from 'react-redux';
 import { requestAllNotebooks } from '../../actions/notebook_actions';
+import { setCurrentNote } from '../../actions/note_actions';
 
 class NotesList extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      noteId: null,
-      title: '',
-      content: '',
-      // notebookId: this.props.notebookId,
-      // userId: this.props.currentUser.id
-    }
-
     this.handleNoteClick = this.handleNoteClick.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.notebookId) {
-      this.setState({ notebookId: this.props.notebookId });
-    }
     this.props.requestAllNotebooks();
   }
 
   componentDidUpdate(prevProps) {
-    // if ((!prevProps.currentNote && this.props.currentNote) || (this.props.currentNote && prevProps.currentNote && (this.props.currentNote.id !== prevProps.currentNote.id))) {
-
-    // if ((!prevProps.currentNote && this.props.currentNote) || (this.props.currentNote && prevProps.currentNote && (this.props.currentNote !== prevProps.currentNote))) {
-    //   this.setState({
-    //     noteId: this.props.currentNote,
-    //     title: this.props.notes[this.props.currentNote].title,
-    //     content: this.props.notes[this.props.currentNote].content,
-    //     userId: this.props.currentUser.id
-    //   });
-    // }
-  }
-
-  handleChange(field) {
-    return (e) => {
-      return this.setState({ [field]: e.currentTarget.value });
+    if (!this.props.currentNote) {
+      if (this.props.notes) {
+        if ((Object.values(this.props.notes).length > 0) && (prevProps.currentNote !== Object.values(this.props.notes)[0].id)) {
+          this.props.setCurrentNote(Object.values(this.props.notes)[0].id);
+        }
+      }
     }
   }
   
+  componentWillUnmount() {
+    this.props.setCurrentNote(null);
+  }
+
   handleNoteClick(note) {
-    return () => this.setState({
-      noteId: note.id,
-      title: note.title,
-      content: note.content,
-      notebookId: note.notebook_id,
-      userId: note.user_id
-    })
+    return () => {
+      this.props.setCurrentNote(null);
+      this.props.setCurrentNote(note.id);
+    }
   }
 
   render() {
-    // if ((!this.props.notebooks) || (Object.values(this.props.notebooks).length === 0)) return null;
+    if ((!this.props.notes) || (Object.values(this.props.notes).length === 0)) return null;
 
-
-
-    // if () {
-    //   notebookTitle = 'All Notes';
-    // }
-
-    const notebookTitle = this.props.notebookId ? this.props.notebooks.title : 'All Notes';
-    // let notebook;
-    // let notebookNotes;
-    const notebookId = this.props.notebookId;
+    const notebookTitle = 'All Notes';
 
     const notesArray = Object.values(this.props.notes);
     const noteItems = (notesArray.length > 0) ? notesArray.map((note) => {
@@ -75,15 +47,6 @@ class NotesList extends Component {
         <NotebookDetailNote key={note.id} note={note} handleNoteClick={this.handleNoteClick} />
       );
     }) : null;
-
-    // notebookId = this.props.notebookId;
-    // notebook = this.props.notebooks[notebookId];
-
-    // if (notebook.noteIds) {
-    //   notes = notebook.noteIds.map(id => this.state.entities.notes[id]);
-    //   notebookTitle = this.props.notebooks.title;
-    // }
-
 
     return (
       <div className='notebook-detail-notes'>
@@ -99,13 +62,15 @@ class NotesList extends Component {
 
 const mapStateToProps = state => {
   return ({
-    notes: state.entities.notes
+    notes: state.entities.notes,
+    currentNote: state.ui.currentNote
   });
 }
 
 const mapDispatchToProps = dispatch => {
   return ({
-    requestAllNotebooks: () => dispatch(requestAllNotebooks())
+    requestAllNotebooks: () => dispatch(requestAllNotebooks()),
+    setCurrentNote: (noteId) => dispatch(setCurrentNote(noteId))
   });
 }
 
