@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux';
-import { setCurrentNote } from '../../actions/note_actions';
+import { setCurrentNote, updateNote, createNote } from '../../actions/note_actions';
 
 class EditNote extends Component {
   constructor(props) {
@@ -11,11 +11,12 @@ class EditNote extends Component {
       noteId: null,
       title: '',
       content: '',
+      plain_text: ''
       // notebookId: this.props.notebookId,
       // userId: this.props.currentUser.id
     }
     this.handleChange = this.handleChange.bind(this);
-    this.handleQChange = this.handleQChange.bind(this);
+    this.handleEditorChange = this.handleEditorChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.saveNote = this.saveNote.bind(this);
   }
@@ -26,7 +27,8 @@ class EditNote extends Component {
         this.setState({
           noteId: this.props.notes.id,
           title: this.props.notes.title,
-          content: this.props.notes.content
+          content: this.props.notes.content,
+          plain_text: this.props.notes.plain_text
         });
       }
     }
@@ -42,22 +44,29 @@ class EditNote extends Component {
     }
   }
 
-  handleQChange(value) {
-    this.setState({ content: value });
+  handleEditorChange(content, delta, source, editor) {
+    this.setState({
+      content: content,
+      plain_text: editor.getText().trim()
+    });
   }
 
+  // handleQChange(value) {
+  //   this.setState({ content: value });
+  // }
+
   saveNote() {
-    const note = Object.assign({}, { id: this.state.noteId, content: this.state.content });
+    const note = Object.assign({}, { id: this.state.noteId, content: this.state.content, plain_text: this.state.plain_text });
     this.props.updateNote(note);
   }
 
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.noteId) {
-      const note = Object.assign({}, { id: this.state.noteId, title: this.state.title, content: this.state.content });
+      const note = Object.assign({}, { id: this.state.noteId, title: this.state.title, content: this.state.content, plain_text: this.state.plain_text });
       this.props.updateNote(note);
     } else {
-      const note = Object.assign({}, { title: this.state.title, content: this.state.content });
+      const note = Object.assign({}, { title: this.state.title, content: this.state.content, plain_text: this.state.plain_text });
       this.props.createNote(note);
     }
   }
@@ -96,7 +105,7 @@ class EditNote extends Component {
 
             <div className='quill-container'>
               <ReactQuill value={this.state.content}
-                onChange={this.handleQChange}
+                onChange={this.handleEditorChange}
                 modules={{ toolbar }}>
               </ReactQuill>
             </div>
@@ -116,7 +125,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return ({
-    setCurrentNote: (noteId) => dispatch(setCurrentNote(noteId))
+    setCurrentNote: noteId => dispatch(setCurrentNote(noteId)),
+    updateNote: note => dispatch(updateNote(note)),
+    createNote: note => dispatch(createNote(note))
   });
 }
 

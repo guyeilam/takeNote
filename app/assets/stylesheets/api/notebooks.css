@@ -72,12 +72,12 @@
   display: flex;
   flex-direction: column;
   position: fixed;
-  min-width: 200px;
-  max-width: 200px;
+  min-width: 220px;
+  max-width: 220px;
 }
 
 .left-navbar-spacer {
-  min-width: 200px;
+  min-width: 220px;
 }
 
 .left-navbar-container {
@@ -197,6 +197,7 @@
 
 .notebooks-index-item-hover {
   display: flex;
+  padding: 2px 0 2px 0;
 }
 
 .notebooks-index-item-hover:hover {
@@ -210,12 +211,6 @@
 .notebook-item-notes-detail-title-hover:hover {
   background-color: #eeeeee;
 }
-
-/* .notebooks-index-item-hover span:nth-child(3) { flex-basis: 40%; }
-.notebooks-index-item-hover span:nth-child(4) { flex-basis: 15%; }
-.notebooks-index-item-hover span:nth-child(5) { flex-basis: 20%; }
-.notebooks-index-item-hover span:nth-child(6) { flex-basis: 15%; }
-.notebooks-index-item-hover span:nth-child(7) { flex-basis: 10%; } */
 
 .notebook-item-title:hover {
   text-decoration: underline;
@@ -240,16 +235,6 @@
 }
 
 .row-identifier:hover { background-color: #eeeeee; }
-/* .notebook-item-notes-detail-title li:nth-of-type(2n+1) { background-color: #f8f8f8; } */
-/* .notebook-item-notes-detail-title-hover li:nth-of-type(2n+1) { background-color: #f8f8f8; } */
-
-/* .notebooks-list-table-header:hover { background-color: #eeeeee; } */
-/* .notebooks-list-table-header li:hover { text-decoration: underline; } */
-/* .notebooks-list-table-header li:nth-child(1) { flex-basis: 40%; }
-.notebooks-list-table-header li:nth-child(2) { flex-basis: 15%; }
-.notebooks-list-table-header li:nth-child(3) { flex-basis: 15%; }
-.notebooks-list-table-header li:nth-child(4) { flex-basis: 20%; }
-.notebooks-list-table-header li:nth-child(5) { flex-basis: 10%; } */
 
 .notebooks-list-table-header {
   background-color: #f8f8f8;
@@ -269,35 +254,6 @@
 .col3 { flex-basis: 15%; }
 .col4 { flex-basis: 20%; }
 .col5 { flex-basis: 10%; }
-
-/* .notebooks-index-item span {
-  margin-right: 10px; */
-  /* margin-left: 10px; */
-/* } */
-
-/* .notebook-item-icon {
-  
-}
-
-.notebook-item-title {
-  
-}
-
-.notebook-item-created-by {
-  
-}
-
-.notebook-item-updated {
-  
-}
-
-.notebook-item-shared-with {
-  
-}
-
-.notebook-item-actions {
-  padding: 5px;
-} */
 
 .new-notebook-form-container {
   background: white;
@@ -412,22 +368,9 @@
   justify-content: flex-end;
   margin-top: 10px;
   padding-top: 5px;
-  /* padding: 10px 25px 0 0; */
   border-top: 1px solid #ededed;
-  /* transition: all 1s ease-out; */
 }
-/* 
-.test-input {
-  position: relative;
-    overflow: hidden;
-    border: 1px solid #e1e1e1;
-    border-radius: 5px;
-    height: 40px;
-    background: rgba(255, 255, 255, .7);
-    width: 95%;
-    padding: 0 8px;
-    cursor: text;
-} */
+
 
 .new-notebook-form-title-input {
   margin-top: 10px;
@@ -453,13 +396,11 @@
   background: #f8f8f8;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, san-serif;
   color: #4d4d4d;
-  /* height: 100vh; */
   overflow: scroll;
 }
 
 .notebook-detail-notes-list li {
   padding: 20px;
-  /* height: 80px; */
   font-size: 14px;
   border: 1px solid rgba(0, 0, 0, 0);
   border-bottom: 1px solid #e6e6e6;
@@ -524,7 +465,8 @@
 .left-nav-buttons-container {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, san-serif;
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 500;
+  line-height: 1.5em;
 }
 
 .left-nav-all-notes, .left-nav-notebooks, .left-nav-tags {
@@ -546,7 +488,6 @@
 
 .notebook-item-expand, .notebook-item-icon, .notebook-item-notes-detail-title-icon {
   padding-right: 10px;
-  /* padding-left: 20px; */
 }
 
 .notebook-item-notes-detail-title-icon-note {
@@ -557,12 +498,6 @@
 .notebook-item-notes-detail-title-text {
   overflow: hidden;
 }
-
-/* .notebooks-index-item-notes {
-  padding-left: 30px;
-} */
-
-
 
 .notebook-detail-note-title {
   font-size: 12px;
@@ -581,7 +516,6 @@
   width: 100%;
   height: 100vh;
   padding: 20px;
-  /* overflow: scroll; */
 }
 
 .notebook-actions-nav-text {
@@ -592,12 +526,6 @@
 .note-edit-save-button {
   padding-left: 50px;
 }
-
-/* .notebooks-item-col1 { flex-basis: 40%; }
-.notebooks-item-col2 { flex-basis: 15%; }
-.notebooks-item-col3 { flex-basis: 15%; }
-.notebooks-item-col4 { flex-basis: 20%; }
-.notebooks-item-col5 { flex-basis: 10%; }  */
 
 .notebooks-item-col1 {
   display: flex;
