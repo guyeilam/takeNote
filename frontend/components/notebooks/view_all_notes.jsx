@@ -47,7 +47,7 @@ class NotesList extends Component {
       return (
         <NotebookDetailNote key={note.id} note={note} handleNoteClick={this.handleNoteClick} />
       );
-    }) : null;
+    }) : <div>New note</div>;
 
     return (
       <div className='notebook-detail-notes'>
@@ -62,8 +62,19 @@ class NotesList extends Component {
 }
 
 const mapStateToProps = state => {
+
+  let sorted_notes = () => {
+    let notes = Object.keys(state.entities.notes).map(id => state.entities.notes[id]);
+
+    return notes.sort(function (a, b) {
+      a = new Date(a.updated_at);
+      b = new Date(b.updated_at);
+      return a > b ? -1 : a < b ? 1 : 0;
+    });
+  }
+  
   return ({
-    notes: state.entities.notes,
+    notes: sorted_notes(),
     currentNote: state.ui.currentNote
   });
 }

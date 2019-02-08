@@ -5,8 +5,12 @@ import { deleteNotebookById, updateNotebook } from '../../../actions/notebook_ac
 import NotebookActionsNav from './notebook_actions_nav';
 
 const mapStateToProps = (state, ownProps) => {
+  const currentId = state.session.id;
+  const currentUser = state.entities.users[currentId] || null;
+
   return {
     errors: state.errors.session,
+    defaultNotebookId: currentUser.default_notebook,
     notebookId: ownProps.notebookId
   };
 };

@@ -22,10 +22,12 @@ class NotebookActionsNav extends React.Component {
   }
 
   render() {
+    const activeDeleteButton = (this.props.notebookId !== this.props.defaultNotebookId) ? <div className='notebook-actions-nav-delete'><button className='notebook-item-delete-button' onClick={this.handleDelete(this.props.notebookId)}>Delete notebook</button></div> : '';
+
     return (
       <>
         <div className='notebook-actions-nav-text'>
-          <div className='notebook-actions-nav-delete'><button className='notebook-item-delete-button' onClick={this.handleDelete(this.props.notebookId)}>Delete notebook</button></div>
+          {activeDeleteButton}          
           <div className='notebook-actions-nav-rename'><button onClick={this.handleRenameNotebook()}>Rename notebook...</button></div>
           <div className='notebook-actions-move-to'>Move to...</div>
         </div>

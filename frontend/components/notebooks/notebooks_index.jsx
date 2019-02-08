@@ -5,7 +5,7 @@ class NotebooksIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sorted: true
+      sorted: false
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSort = this.handleSort.bind(this);

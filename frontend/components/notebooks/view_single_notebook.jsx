@@ -40,8 +40,6 @@ class NotesList extends Component {
   render() {
     if ((!this.props.notebook) || (Object.values(this.props.notebook).length === 0)) return null;
 
-    // const notebookId = this.props.notebookId;
-
     const notesArray = this.props.notebook.noteIds;
     const noteItems = (notesArray.length > 0) ? notesArray.map((noteId) => {
       return (
@@ -62,9 +60,20 @@ class NotesList extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  
+  let sorted_notes = () => {
+    let notes = Object.keys(state.entities.notes).map(id => state.entities.notes[id]);
+
+    return notes.sort(function (a, b) {
+      a = new Date(a.updated_at);
+      b = new Date(b.updated_at);
+      return a > b ? -1 : a < b ? 1 : 0;
+    });
+  }
+
   return ({
     notebook: state.entities.notebooks[ownProps.match.params.notebookId],
-    notes: state.entities.notes,
+    notes: sorted_notes(),
     notebookId: ownProps.match.params.notebookId,
     currentNote: state.ui.currentNote
   });

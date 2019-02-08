@@ -13,7 +13,8 @@ const notebooksReducer = (oldState = {}, action) => {
   let newNotebook;
   switch (action.type) {
     case RECEIVE_ALL_NOTEBOOKS:  
-      return action.payload.notebooks;
+      newState = action.payload.notebooks;
+      return merge({}, oldState, newState);
     case RECEIVE_SINGLE_NOTEBOOK:  
       return action.payload.notebooks;
     case RECEIVE_UPDATED_NOTEBOOK:
