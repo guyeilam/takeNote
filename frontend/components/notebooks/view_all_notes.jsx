@@ -18,9 +18,8 @@ class NotesList extends Component {
   componentDidUpdate(prevProps) {
     if (!this.props.currentNote) {
       if (this.props.notes) {
-        if ((Object.values(this.props.notes).length > 0) && (prevProps.currentNote !== Object.values(this.props.notes)[0].id)) {
-          const noteId = Object.values(this.props.notes)[Object.values(this.props.notes).length - 1].id;
-          this.props.setCurrentNote(noteId);
+        if ((this.props.notes.length > 0) && (prevProps.currentNote !== this.props.notes[0].id)) {
+          this.props.setCurrentNote(this.props.notes[0].id);
         }
       }
     }
@@ -38,12 +37,11 @@ class NotesList extends Component {
   }
 
   render() {
-    if ((!this.props.notes) || (Object.values(this.props.notes).length === 0)) return null;
+    if (!this.props.notes) { return null }
 
     const notebookTitle = 'All Notes';
 
-    const notesArray = Object.values(this.props.notes);
-    const noteItems = (notesArray.length > 0) ? notesArray.map((note) => {
+    const noteItems = (this.props.notes.length > 0) ? this.props.notes.map((note) => {
       return (
         <NotebookDetailNote key={note.id} note={note} handleNoteClick={this.handleNoteClick} />
       );
@@ -52,7 +50,7 @@ class NotesList extends Component {
     return (
       <div className='notebook-detail-notes'>
         <div className='notebook-detail-notebook-title'>{notebookTitle}</div>
-        <div className='notebook-detail-notes-count'><p>{notesArray.length} notes</p></div>
+        <div className='notebook-detail-notes-count'><p>{this.props.notes.length} notes</p></div>
         <ul className='notebook-detail-notes-list'>
           {noteItems}
         </ul>

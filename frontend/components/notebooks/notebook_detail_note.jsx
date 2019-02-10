@@ -7,7 +7,8 @@ class NotebookDetailNote extends Component {
   }
 
   render() {
-
+    if (!this.props.note) { return null }
+    
     const clickedClass = (this.props.currentNote === this.props.note.id) ? 'notes-list-clicked' : '';
 
     return (

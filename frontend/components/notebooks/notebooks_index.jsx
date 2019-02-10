@@ -37,7 +37,6 @@ class NotebooksIndex extends Component {
 
   render() {
     if (!this.props.notebooks) { return null; }
-    if (this.props.notebooks.id) { return null; }
 
     const sortOption = this.state.sorted ? 'sorted-reverse' : 'sorted-normal';
     const notebooks = Object.values(this.props.notebooks);
