@@ -1,6 +1,10 @@
 class Api::TaggingsController < ApplicationController
   def show
-    @taggings = Tagging.all
+    
+  end
+
+  def index
+    @taggings = Tag.find_by(id: params[:tag_id]).taggings
   end
 
   def destroy
