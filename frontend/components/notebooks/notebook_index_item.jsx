@@ -49,7 +49,7 @@ class NotebooksIndexItem extends Component {
           </div>
           
           <div className='notebooks-item-col2 col2'>
-            <div className='notebook-item-created-by'>- </div>
+            <div className='notebook-item-created-by'>{this.props.currentUserEmail}</div>
           </div>
           
           <div className='notebooks-item-col3 col3'>
@@ -77,12 +77,15 @@ class NotebooksIndexItem extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   
+  const currentId = state.session.id;
+  const currentUser = state.entities.users[currentId] || null;
   const notebook = ownProps.notebook ? state.entities.notebooks[ownProps.notebook.id] : null;
   const notes = notebook ? notebook.noteIds.map(noteId => state.entities.notes[noteId]) : null;
 
   return ({
     notebook,
     notes,
+    currentUserEmail: currentUser.email,
     deleteNotebook: ownProps.deleteNotebook,
     openActionsModal: ownProps.openActionsModal
   });

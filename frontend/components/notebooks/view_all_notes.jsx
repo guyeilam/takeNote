@@ -45,7 +45,10 @@ class NotesList extends Component {
       return (
         <NotebookDetailNote key={note.id} note={note} handleNoteClick={this.handleNoteClick} />
       );
-    }) : <div className='empty-notes-message'>Create your first note! Click the + New Note button in the sidebar to get started.</div>;
+    }) : <div className='empty-notes-message'>
+      <div className='empty-notes-subheader'>Create your first note!</div>
+      <div className='empty-notes-text'>Click the + New Note button in the sidebar to get started.</div>
+      </div>;
 
     return (
       <div className='notebook-detail-notes'>

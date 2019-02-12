@@ -51,6 +51,7 @@
 
 .navbar-user-actions button:hover {
   text-decoration: underline;
+  transition: all 0.1s ease-out;
 }
 
 .navbar-user-actions-child {
@@ -202,18 +203,22 @@
 
 .notebooks-index-item-hover:hover {
   background-color: #eeeeee;
+  transition: all 0.1s ease-out;
 }
 
 .notebook-item-notes-detail-title:hover {
   background-color: #eeeeee;
+  transition: all 0.1s ease-out;
 }
 
 .notebook-item-notes-detail-title-hover:hover {
   background-color: #eeeeee;
+  transition: all 0.1s ease-out;
 }
 
 .notebook-item-title:hover {
   text-decoration: underline;
+  transition: all 0.1s ease-out;
 }
 
 .sorted-normal {
@@ -234,7 +239,10 @@
   background-color: white;
 }
 
-.row-identifier:hover { background-color: #eeeeee; }
+.row-identifier:hover { 
+  background-color: #eeeeee;
+  transition: all 0.1s ease-out;
+}
 
 .notebooks-list-table-header {
   background-color: #f8f8f8;
@@ -616,4 +624,27 @@
 .notebook-detail-note-updated-at {
   font-size: 10px;
   margin-top: 10px;
+}
+
+.empty-notes-message {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  text-align: center;
+}
+
+.empty-notes-subheader {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.empty-notes-text {
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
 }
