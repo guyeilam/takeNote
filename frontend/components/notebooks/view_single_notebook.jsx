@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import NotebookDetailNote from './notebook_detail_note';
 import { connect } from 'react-redux';
+import NotebookDetailNote from './notebook_detail_note';
 import { requestSingleNotebook } from '../../actions/notebook_actions';
 import { setCurrentNote } from '../../actions/note_actions';
 

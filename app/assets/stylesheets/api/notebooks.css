@@ -111,7 +111,7 @@
   color: #ccc;
 }
 
-.notebooks-list-container {
+.notebooks-list-container, .tags-list-container {
   width: 100%;
   min-width: 900px;
   margin: 10px;
@@ -120,7 +120,7 @@
   padding-right: 20px;
 }
 
-.notebooks-list-header {
+.notebooks-list-header, .tags-list-header {
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
   font-size: 18px;
   line-height: 40px;
@@ -467,7 +467,6 @@
 }
 
 .left-nav-buttons-container {
-  margin-top: 20px;
   font-size: 14px;
   color: #ccc;
 }
@@ -647,4 +646,9 @@
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 14px;
+}
+
+.tags-list-content {
+  border-top: 2px solid #5b6b70;
+  padding: 25px 0;
 }

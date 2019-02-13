@@ -1,0 +1,63 @@
+.tag-item-button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 24px;
+  padding-left: 5px;
+  width: 100px;
+  display: flex;
+}
+
+.tag-item-button:hover {
+  background-color: #f0f1f1;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.tag-item-button-label {
+  margin-left: 5px;
+  margin-bottom: 2px;
+  /* padding-top: 1px; */
+  /* padding-bottom: 1px; */
+}
+
+.tag-item-button-arrow {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.arrow-facing-down {
+    stroke: #a6a6a6;
+}
+
+.tags-list-header-new-tag-button {
+  color: #00a82d;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  height: 40px;
+  font-size: 14px;
+  line-height: 37px;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: .5px;
+  padding: 0 10px;
+}
+
+.tags-list-header-new-tag-button:hover {
+  color: #14CC45;
+  transition: .3s color ease-in-out;
+  cursor: pointer;
+}
+
+.tags-list-header-container {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.tags-list-header-new-tag-button {
+  display: flex;
+}
+
+.tags-list-header-new-tag-label {
+  margin-left: 2px;
+}

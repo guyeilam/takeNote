@@ -16,7 +16,6 @@ class ViewNotebook extends Component {
     }
   }
 
-
   render() {
     return (
       <section className='notebook-detail'>

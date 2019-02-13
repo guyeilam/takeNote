@@ -51,10 +51,6 @@ class EditNote extends Component {
     });
   }
 
-  // handleQChange(value) {
-  //   this.setState({ content: value });
-  // }
-
   saveNote() {
     const note = Object.assign({}, { id: this.state.noteId, content: this.state.content, plain_text: this.state.plain_text, notebook_id: this.props.defaultNotebook });
     this.props.updateNote(note);
@@ -62,13 +58,8 @@ class EditNote extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (this.state.noteId) {
-      const note = Object.assign({}, { id: this.state.noteId, title: this.state.title, content: this.state.content, plain_text: this.state.plain_text, notebook_id: this.props.defaultNotebook });
-      this.props.updateNote(note);
-    } else {
-      const note = Object.assign({}, { title: this.state.title, content: this.state.content, plain_text: this.state.plain_text, notebook_id: this.props.defaultNotebook });
-      this.props.createNote(note);
-    }
+    const note = Object.assign({}, { id: this.props.currentNote, title: this.state.title, content: this.state.content, plain_text: this.state.plain_text, notebook_id: this.props.defaultNotebook });
+    this.props.updateNote(note);
   }
 
   render() {
@@ -120,9 +111,11 @@ class EditNote extends Component {
 const mapStateToProps = state => {
   const currentId = state.session.id;
   const currentUser = state.entities.users[currentId] || null;
+  
   return ({
     notes: state.entities.notes[state.ui.currentNote],
-    defaultNotebook: currentUser.default_notebook
+    defaultNotebook: currentUser.default_notebook,
+    currentNote: state.ui.currentNote
   });
 }
 

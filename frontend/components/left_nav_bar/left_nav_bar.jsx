@@ -168,7 +168,7 @@ class LeftNavBar extends Component {
             </div>
           </Link>
 
-          <Link to='/client'>
+          <Link to='/tags'>
             <div className={`left-nav-tags ${this.state.currentViewTags}`}>
               <div className='left-nav-tags-icon'><i className="fas fa-tag"></i></div>
               <div className='left-nav-tags-text'>Tags</div>

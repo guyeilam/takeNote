@@ -6,6 +6,7 @@ import NotebooksIndexContainer from './notebooks_index_container';
 import ViewNotebookContainer from './view_notebook_container';
 import { withRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
+import TagsList from '../tags/tags_index';
 
 class Client extends Component {
   render () {
@@ -32,9 +33,12 @@ class Client extends Component {
           <Route exact
             path="/notes/all"
             component={ViewNotebookContainer}
-            // showAllNotes={true}
           />
-          
+          <Route exact
+            path="/tags"
+            component={TagsList}
+          />
+
         </section>
       </>
     );
