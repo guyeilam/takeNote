@@ -1,4 +1,5 @@
 import React from 'react';
+import NavModal from '../modal/nav_modal';
 
 const TagItem = (props) => {
 
@@ -15,14 +16,17 @@ const TagItem = (props) => {
     }
 
     return (
-      <div className='tag-item-button'>
+      <>
+      <div className={`tag-item-button tag${props.tag.id}`}>
         <div className='tag-item-button-label'>
           {tagLabel}
         </div>
-        <div className='tag-item-button-arrow'>
+        <div className='tag-item-button-arrow' onClick={() => props.openNavModal(props.tag.id)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" className="arrow-facing-down"><path fill="none" d="M7 2L4 5 1 2"></path></svg>
         </div>
+          <NavModal modalId={props.tag.id} />
       </div>
+      </>
     );
   }
 }

@@ -63,9 +63,9 @@ export const updateTag = (tag) => {
   }
 }
 
-export const removeTag = (tagId) => {
+export const deleteTag = (tagId) => {
   return (dispatch) => {
-    return TagAPIUtil.removeTag(tagId).then(() => {
+    return TagAPIUtil.deleteTag(tagId).then(() => {
       return dispatch(removeTag(tagId));
     },
       (err) => {
@@ -78,5 +78,12 @@ export const receiveTagErrors = (errors) => {
   return ({
     type: RECEIVE_TAG_ERRORS,
     errors
+  });
+}
+
+export const removeTag = (tagId) => {
+  return ({
+    type: REMOVE_TAG,
+    tagId
   });
 }

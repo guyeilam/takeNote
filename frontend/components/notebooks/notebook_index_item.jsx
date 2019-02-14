@@ -38,17 +38,18 @@ class NotebooksIndexItem extends Component {
     }
   }
 
-  handleExpandNotes() {
-    return (e) => {
+  // handleExpandNotes() {
+  //   return (e) => {
       
-    }
-  }
+  //   }
+  // }
 
   render() {
     const { notebook, deleteNotebook, openActionsModal } = this.props;
 
-    const arrowIconRight = <svg width="6" height="9" viewBox="2 240 6 9" xmlns="http://www.w3.org/2000/svg" id="qa-SPACE_VIEW_EXPAND_ICON"><path fill="#9B9B9B" fillRule="evenodd" d="M2 240l6 4.5-6 4.5z"></path></svg>
-    const arrowIconDown = <svg width="6" height="9" viewBox="2 240 6 9" xmlns="http://www.w3.org/2000/svg" id="qa-SPACE_VIEW_EXPAND_ICON"><path fill="#9B9B9B" fillRule="evenodd" d="M2 240l6 4.5-6 4.5z"></path></svg>;
+    const arrowIconRight = <svg width="6" height="9" viewBox="2 240 6 9" xmlns="http://www.w3.org/2000/svg" id="notebook-arrow-icon"><path fill="#9B9B9B" fillRule="evenodd" d="M2 240l6 4.5-6 4.5z"></path></svg>
+    // const arrowIconDown = <svg width="6" height="9" viewBox="2 240 6 9" xmlns="http://www.w3.org/2000/svg" id="qa-SPACE_VIEW_EXPAND_ICON"><path fill="#9B9B9B" fillRule="evenodd" d="M2 240l6 4.5-6 4.5z"></path></svg>;
+    const arrowIconClass = this.state.showNotes ? 'rotated-90-degrees' : '';
     
     // const noteTitles = notebook.noteIds.map(id => this.props.notes[id]);
     const noteItems = this.state.showNotes ? this.props.notes.map((note, idx) => {
@@ -60,7 +61,7 @@ class NotebooksIndexItem extends Component {
       <>
         <div className={`notebooks-index-item-hover ${this.rowSelector(this.props.idx)}`}>
           <div className='notebooks-item-col1 col1'>
-            <div className='notebook-item-expand'><button onClick={() => this.setState({ showNotes: !this.state.showNotes })}>{arrowIconRight}</button></div>
+            <div className={`notebook-item-expand ${arrowIconClass}`}><button onClick={() => this.setState({ showNotes: !this.state.showNotes })}>{arrowIconRight}</button></div>
             <div className='notebook-item-icon'><svg className='notebook-icon-svg' id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs></defs><path className="cls-1" d="M16 8.33c0-.18-.22-.33-.5-.33h-4c-.28 0-.5.15-.5.33v1.34c0 .18.22.33.5.33h4c.28 0 .5-.15.5-.33zM18 6v11a2 2 0 0 1-2 2H9V4h7a2 2 0 0 1 2 2zM6 4h2v15H6z"></path></svg></div>
             <div className='notebook-item-title'><Link to={`/notebooks/${notebook.id}`}>{notebook.title} ({this.props.notes ? notebook.noteIds.length : '0'})</Link></div>
           </div>
@@ -80,7 +81,9 @@ class NotebooksIndexItem extends Component {
           <div className='notebooks-item-col5 col5'>
             <div className='notebook-item-actions'>
               <NavModal modalId={notebook.id}/>
-              <button className='notebook-item-delete-button' onClick={openActionsModal(notebook.id)}>Actions</button>
+              <button className='notebook-item-delete-button' onClick={openActionsModal(notebook.id)}>
+                <svg width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M25 19a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm-9 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm-9 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" fill="#000" fillRule="evenodd"></path></svg>
+              </button>
             </div>
           </div>
         </div>

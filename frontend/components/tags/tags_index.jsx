@@ -4,14 +4,23 @@ import { connect } from 'react-redux';
 import { requestAllTags } from '../../actions/tag_actions';
 import { openModal } from '../../actions/modal_actions';
 import TagItem from './tag_item';
+import { openNavModal, closeNavModal } from '../../actions/modal_actions';
 
 class TagsList extends Component {
   constructor(props) {
     super(props);
+    this.handleModalClick = this.handleModalClick.bind(this);
   }
 
   componentDidMount() {
     this.props.requestAllTags();
+  }
+
+  handleModalClick(navModalId) {
+    // return (e) => {
+      // e.preventDefault();
+      this.props.openNavModal('tag-actions-nav', navModalId);
+    // }
   }
 
   render() {
@@ -20,7 +29,7 @@ class TagsList extends Component {
 
     const tags = (Object.values(this.props.tags).length > 0) ? Object.values(this.props.tags).map(tag => {
       return (
-        <TagItem key={tag.id} tag={tag} />
+        <TagItem key={tag.id} tag={tag} openNavModal={this.handleModalClick}/>
         // <div className='tag-item-button' key={tag.id}>
         //   <div className='tag-item-button-label'>
         //     {`${tag.label.substring(0,12)} ...`}
@@ -60,7 +69,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return ({
     requestAllTags: tags => dispatch(requestAllTags(tags)),
-    openModal: modal => dispatch(openModal(modal))
+    openModal: modal => dispatch(openModal(modal)),
+    openNavModal: (navModal, navModalId) => dispatch(openNavModal(navModal, navModalId)),
+    closeNavModal: () => dispatch(closeNavModal())
   });
 }
 

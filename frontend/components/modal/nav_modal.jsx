@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { closeNavModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import NoteBookActionsNavContainer from '../notebooks/modal/notebook_actions_nav_container';
+import TagActions from '../notebooks/modal/tag_actions';
 
 class NavModal extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class NavModal extends Component {
     if (!navModal) {
       return null;
     }
+
     let component;
     let parentClass;
     let childClass;
@@ -29,6 +31,11 @@ class NavModal extends Component {
         component = <NoteBookActionsNavContainer notebookId={this.state.modalId}/>;
         parentClass = 'navbar-user-actions';
         childClass = 'navbar-user-actions-child';
+        break;
+      case 'tag-actions-nav':
+        component = <TagActions tagId={this.state.modalId} />;
+        parentClass = 'tag-actions';
+        childClass = 'tag-actions-child';
         break;
       default:
         return null;

@@ -1,3 +1,29 @@
+
+.tag-actions {
+  position: absolute;
+  background: #fff;
+  height: 200px;
+  width: 200px;
+  top: 120px;
+  box-shadow: 0 0 0 1px rgba(99, 114, 130, .16), 0 4px 12px rgba(27, 39, 51, .08);
+  padding: 12px;
+  text-align: left;
+  list-style: none;
+  border-radius: 3px;
+  color: #666;
+  font-size: 12px;
+  z-index: 15;
+}
+
+.tag-actions button:hover {
+  text-decoration: underline;
+  transition: all 0.1s ease-out;
+}
+
+.tag-actions-child {
+  position: absolute;
+}
+
 .tag-item-button {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;

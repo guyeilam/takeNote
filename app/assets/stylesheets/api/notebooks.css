@@ -38,7 +38,7 @@
   background: #fff;
   height: 200px;
   width: 200px;
-  right: 120px;
+  right: 60px;
   box-shadow: 0 0 0 1px rgba(99, 114, 130, .16), 0 4px 12px rgba(27, 39, 51, .08);
   padding: 12px;
   text-align: left;
@@ -498,14 +498,17 @@
 }
 
 .left-nav-all-notes-icon {
+  display: flex;
   margin-right: 10px;
 }
 
 .left-nav-notebooks-icon {
+  display: flex;
   margin-right: 10px;
 }
 
 .left-nav-tags-icon {
+  display: flex;
   margin-right: 10px;
 }
 
@@ -517,7 +520,9 @@
 
 .notebook-item-notes-detail-title-icon-note {
   padding-left: 40px;
-  padding-right: 10px;
+  padding-right: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .notebook-item-notes-detail-title-text {
@@ -555,6 +560,12 @@
 .notebooks-item-col1 {
   display: flex;
   padding-left: 10px;
+}
+
+.notebooks-item-col5, .col5 {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
 }
 
 .row-identifier {
@@ -662,4 +673,24 @@
 .tags-list-content {
   border-top: 2px solid #5b6b70;
   padding: 25px 0;
+}
+
+.rotated-90-degrees {
+  transform: rotate(90deg);
+  transform-origin: 0px 0px 0px 0px 0px;
+}
+
+.left-nav-notebooks-button-container, .left-nav-tags-button-container, .left-nav-notes-button-container {
+  display: flex;
+  align-items: center;
+}
+
+.notebook-item-delete-button {
+  display: flex;
+}
+
+
+
+.notebook-item-actions {
+  display: flex;
 }
