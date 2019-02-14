@@ -4,3 +4,10 @@ json.notes do
     json.updated_at @note.updated_at.strftime "%Y-%m-%d %H:%M:%S"
   end
 end
+
+# json.notebooks do
+#   json.set! @notebook.id do
+#     json.extract! @notebook, :id, :title, :user_id, :updated_at
+#     json.noteIds @notebook.notes.pluck(:id)
+#   end
+# end

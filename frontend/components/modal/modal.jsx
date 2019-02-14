@@ -3,6 +3,8 @@ import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import NewNotebookFormContainer from '../notebooks/forms/new_notebook_form_container';
 import RenameNotebookFormContainer from '../notebooks/forms/rename_notebook_form_container';
+import NewTagForm from '../notebooks/forms/new_tag_container';
+import RenameTagForm from '../notebooks/forms/rename_tag_container';
 
 
 function Modal({ modal, notebookId, closeModal }) {
@@ -16,6 +18,12 @@ function Modal({ modal, notebookId, closeModal }) {
       break;
     case 'rename-notebook':
       component = <RenameNotebookFormContainer notebookId={notebookId}/>;
+      break;
+    case 'new-tag':
+      component = <NewTagForm />;
+      break;
+    case 'rename-tag':
+      component = <RenameTagForm />;
       break;
     default:
       return null;
@@ -31,8 +39,8 @@ function Modal({ modal, notebookId, closeModal }) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    modal: state.ui.modal,
-    notebookId: state.ui.navModalId
+    modal: state.ui.modal
+    // notebookId: state.ui.navModalId
   };
 };
 

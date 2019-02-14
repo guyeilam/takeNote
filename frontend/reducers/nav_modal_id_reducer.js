@@ -11,7 +11,7 @@ export default function navModalIdReducer(state = null, action) {
       // return merge({}, state, newState);
       return state;
     case OPEN_MODAL:
-      if (action.modal === 'new-notebook') {
+      if ((action.modal === 'new-notebook') || (action.modal === 'new-tag')) {
         newState = state;
       } else {
         newState = action.navModalId;

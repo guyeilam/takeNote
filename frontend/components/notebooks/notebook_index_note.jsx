@@ -26,7 +26,7 @@ const NotebookIndexNote = (props) => {
 
         <div className='notebooks-item-col5 col5'>
           <div className='notebook-item-actions'>
-            <button onClick={() => props.deleteNote(props.note.id)}>Delete note</button>
+            <button onClick={props.deleteNote(props.note.id)}>Delete note</button>
           </div>
         </div>
       </div>

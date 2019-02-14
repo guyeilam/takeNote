@@ -37,6 +37,7 @@ def create
 
   def destroy
     @note = Note.find_by(id: params[:id])
+
     if @note
       @note.destroy
       render :show

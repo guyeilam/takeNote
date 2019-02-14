@@ -6,6 +6,7 @@ import {
   REMOVE_NOTEBOOK,
   RECEIVE_UPDATED_NOTEBOOK,
 } from '../actions/notebook_actions';
+import { REMOVE_NOTE } from '../actions/note_actions';
 
 const notebooksReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
@@ -14,7 +15,7 @@ const notebooksReducer = (oldState = {}, action) => {
   switch (action.type) {
     case RECEIVE_ALL_NOTEBOOKS:  
       newState = action.payload.notebooks;
-      return merge({}, oldState, newState);
+      return newState;
     case RECEIVE_SINGLE_NOTEBOOK:  
       return action.payload.notebooks;
     case RECEIVE_UPDATED_NOTEBOOK:

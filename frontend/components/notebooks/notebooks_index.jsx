@@ -8,7 +8,7 @@ class NotebooksIndex extends Component {
       sorted: false
     };
     this.handleDelete = this.handleDelete.bind(this);
-    this.handleSort = this.handleSort.bind(this);
+    // this.handleSort = this.handleSort.bind(this);
     this.handleModalClick = this.handleModalClick.bind(this);
   }
 
@@ -22,11 +22,11 @@ class NotebooksIndex extends Component {
     }
   }
 
-  handleSort(sortOption) {
-    return (e) => {
-      this.setState({ sorted: sortOption });
-    }
-  }
+  // handleSort(sortOption) {
+  //   return (e) => {
+  //     this.setState({ sorted: sortOption });
+  //   }
+  // }
 
   handleModalClick(navModalId) {
     return (e) => {
@@ -48,7 +48,7 @@ class NotebooksIndex extends Component {
             <div className='notebooks-list-menubar'>
               <div className='notebooks-list-menubar-header'>My notebook list</div>
               <div className='notebooks-list-menubar-new-notebook-button button'><i className="fas fa-user-plus" /><button onClick={() => this.props.openModal('new-notebook')}>New Notebook</button></div>
-              <div className='notebooks-list-menubar-sort-button'><button onClick={this.handleSort(!this.state.sorted)}><i className="fas fa-sort-amount-down" /></button></div>
+              <div className='notebooks-list-menubar-sort-button'><button><i className="fas fa-sort-amount-down" /></button></div>
             </div>
 
             <div className='notebooks-list-table-header'>

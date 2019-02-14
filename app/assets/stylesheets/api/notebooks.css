@@ -11,7 +11,7 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(42, 51, 60, .4);
   z-index: 10;
   transition: 5s;
 }
@@ -283,20 +283,20 @@
 
 .white-cancel-button {
   cursor: pointer;
-    background: none;
-    background-color: white;
-    color: #b3b3b3;
-    border: 1px solid #ededed;
-    align-items: center;
-    vertical-align: middle;
-    border-radius: 4px;
-    padding: 10px 15px;
-    margin: 0;
-    font-weight: 400;
-    font-size: 14px;
-    text-align: center;
-    line-height: 1;
-    letter-spacing: 0;
+  background: none;
+  background-color: white;
+  color: #b3b3b3;
+  border: 1px solid #ededed;
+  align-items: center;
+  vertical-align: middle;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin-right: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 .white-cancel-button:hover {
@@ -310,7 +310,7 @@
   cursor: default;
     border: none;
     color: #fff;
-    background-color: green;
+    background-color: #00a82d;
     align-items: center;
     vertical-align: middle;
     border-radius: 4px;
@@ -325,6 +325,15 @@
 
 .white-new-notebook-continue-button:disabled {
   background-color: gray;
+}
+
+.white-new-notebook-continue-button:disabled:hover {
+    background-color: gray;
+}
+
+.white-new-notebook-continue-button:hover {
+  background-color: #0e753d;
+  transition: all 0.1s ease-out;
 }
 
 .new-notebook-form-header {
@@ -501,7 +510,9 @@
 }
 
 .notebook-item-expand, .notebook-item-icon, .notebook-item-notes-detail-title-icon {
-  padding-right: 10px;
+  padding-right: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .notebook-item-notes-detail-title-icon-note {

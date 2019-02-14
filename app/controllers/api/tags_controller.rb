@@ -34,6 +34,15 @@ class Api::TagsController < ApplicationController
     end
   end
 
+  def show
+    @tag = Tag.find_by(id: params[:id])
+    if @tag
+      render :show
+    else
+      render json: ['Tag does not exist.']
+    end
+  end
+
   private
   def tag_params
     params.require(:tag).permit(:label)
