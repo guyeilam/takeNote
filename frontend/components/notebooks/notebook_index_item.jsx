@@ -20,9 +20,9 @@ class NotebooksIndexItem extends Component {
 
   rowSelector(idx) {
     if (idx % 2 === 0) {
-      return 'even-row';
-    } else {
       return 'odd-row';
+    } else {
+      return 'even-row';
     }
   }
 

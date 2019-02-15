@@ -63,10 +63,10 @@ export const updateTag = (tag) => {
   }
 }
 
-export const deleteTag = (tagId) => {
+export const deleteTag = (tag) => {
   return (dispatch) => {
-    return TagAPIUtil.deleteTag(tagId).then(() => {
-      return dispatch(removeTag(tagId));
+    return TagAPIUtil.deleteTag(tag.id).then(() => {
+      return dispatch(removeTag(tag));
     },
       (err) => {
         return dispatch(receiveTagErrors(err.responseJSON));
@@ -81,10 +81,10 @@ export const receiveTagErrors = (errors) => {
   });
 }
 
-export const removeTag = (tagId) => {
+export const removeTag = (tag) => {
   return ({
     type: REMOVE_TAG,
-    tagId
+    tag
   });
 }
 

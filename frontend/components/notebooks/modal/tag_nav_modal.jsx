@@ -11,10 +11,10 @@ class TagActions extends Component {
     this.handleRename = this.handleRename.bind(this);
   }
 
-  handleDelete(tagId) {
+  handleDelete(tag) {
     return (e) => {
       this.props.closeNavModal();
-      this.props.deleteTag(tagId);
+      this.props.deleteTag(tag);
     }
   }
 
@@ -29,7 +29,7 @@ class TagActions extends Component {
     return (
       <>
         <div className='tag-actions-nav-text'>
-          <div className='tag-actions-nav-delete' onClick={this.handleDelete(this.props.tagId)}><div className='tag-actions-nav-button-text'>Delete tag...</div></div>
+          <div className='tag-actions-nav-delete' onClick={this.handleDelete(this.props.tag)}><div className='tag-actions-nav-button-text'>Delete tag...</div></div>
           <div className='tag-actions-nav-rename' onClick={this.handleRename()}><div className='tag-actions-nav-button-text'>Rename Tag...</div></div>
         </div>
       </>
@@ -40,7 +40,8 @@ class TagActions extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     errors: state.errors.session,
-    tagId: ownProps.tagId
+    tagId: ownProps.tagId,
+    tag: state.entities.tags[ownProps.tagId]
   };
 };
 
@@ -48,7 +49,7 @@ const mapDispatchToProps = dispatch => {
   return {
     closeNavModal: () => dispatch(closeNavModal()),
     openModal: (modal, tagId) => dispatch(openModal(modal, tagId)),
-    deleteTag: (tagId) => dispatch(deleteTag(tagId)),
+    deleteTag: (tag) => dispatch(deleteTag(tag)),
     updateTag: (tag) => dispatch(updateTag(tag))
   };
 };

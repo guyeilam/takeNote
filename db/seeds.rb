@@ -45,13 +45,13 @@ plain_text = 'Placeat ipsum sed. Ut in ullam. Qui magnam consectetur. Ut provide
 content = 'Placeat ipsum sed. Ut in ullam. Qui magnam consectetur. Ut provident adipisci. Repellat quia itaque. Qui facilis minima. Laudantium ea eveniet. Sed voluptatem autem. Quam non maiores. Voluptatem voluptatum eos. Cum maiores quod. Iste porro est. Placeat nisi illo. Fugiat sit voluptatem. Inventore vel ea. Commodi impedit earum. Quibusdam non omnis. Nostrum reiciendis id. Voluptatum eum fugiat. Deserunt aut sed. Et perspiciatis aut. Reiciendis consequatur voluptatem. Veniam provident ipsam. Nihil rerum iste. Veniam sunt aut. Sint fugit error. Facere quia neque. Optio labore quis. Sequi enim autem. Est veritatis sed. Reprehenderit qui optio. Voluptas veritatis ullam. Ad dignissimos sit. Minus et atque. Quis voluptatem tenetur. Sapiente fugiat est. Soluta placeat nihil. Qui ut dolorum. Molestias odit aspernatur. Corrupti consectetur itaque. Eaque veritatis consequatur. Deserunt et omnis. Repellat quisquam beatae. Officiis debitis id. Magnam est molestiae. Officia atque et. Nihil laudantium blanditiis. Dolorem voluptas dicta. Molestiae molestiae cupiditate. Debitis rerum ducimus. Ut soluta vel. Omnis perferendis ea. Molestiae molestiae earum. Aut corporis nihil. Ab ea aliquid. Iusto tenetur numquam. Similique distinctio expedita. Quas sed numquam. Animi nobis aliquam. Qui quis itaque. Qui quo voluptatibus. Aut nemo fuga. Enim ea necessitatibus. Impedit repellendus dolores. Ut incidunt fugiat. Rerum minima illo. Dolore odit in. Sunt facilis quae. Et quasi sit. Sit illo voluptatem. Ratione eveniet sed. Aspernatur a consectetur. Sunt eligendi aliquid. Voluptates et quasi. Optio quis quod. Molestias ea molestiae. Magni et fugiat. Enim animi voluptatum. Voluptas unde ea. Id hic enim. Nihil ea eligendi. Incidunt fuga id. Accusamus non qui. In dolor dignissimos. Nostrum dolor porro. Exercitationem voluptas tempora. Est vero aut. Sed ab aperiam. Nulla facilis ea. Numquam beatae quisquam. Qui accusamus asperiores. Blanditiis quaerat distinctio. Ut sint voluptatem. Eum aspernatur laboriosam. Laborum aut amet. Dolore qui et. Voluptas expedita non. Repellat pariatur occaecati. Natus doloribus autem. Fugiat dicta consectetur.'
 Note.create!(title: title, content: content, plain_text: plain_text, user_id: User.first.id, notebook_id: Notebook.all.sample.id)
 
-label = 'Tag1'
+label = 'A tag1'
 Tag.create!(label: label, user_id: User.first.id)
-label = 'Tag2'
+label = 'B tag2'
 Tag.create!(label: label, user_id: User.first.id)
-label = 'Tag3'
+label = 'C tag3'
 Tag.create!(label: label, user_id: User.first.id)
-label = 'Tag4'
+label = 'Z tag4'
 Tag.create!(label: label, user_id: User.first.id)
 
 5.times do

@@ -5,6 +5,7 @@ import { requestAllTags } from '../../actions/tag_actions';
 import { openModal } from '../../actions/modal_actions';
 import TagItem from './tag_item';
 import { openNavModal, closeNavModal } from '../../actions/modal_actions';
+import merge from 'lodash/merge';
 
 class TagsList extends Component {
   constructor(props) {
@@ -64,20 +65,19 @@ const mapStateToProps = state => {
 
   let sorted_tags = () => {
 
-
     let tags = Object.keys(state.entities.tags).map(id => state.entities.tags[id]);
 
     let sortedTags = {};
 
     tags.forEach(tag => {
-      sortedTags[tag.label.substring(0,1)].push(tag);
+      sortedTags = merge(sortedTags, {[tag.label.substring(0,1)]: {[tag.id]: tag }});
     });
-
+    
     return sortedTags;
   }
-
+  
   return ({
-    tags: state.entities.tags
+    tags: sorted_tags()
   });
 }
 
