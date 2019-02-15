@@ -2,17 +2,23 @@
 .tag-actions {
   position: absolute;
   background: #fff;
-  height: 200px;
-  width: 200px;
-  top: 120px;
+  height: 80px;
+  width: 140px;
   box-shadow: 0 0 0 1px rgba(99, 114, 130, .16), 0 4px 12px rgba(27, 39, 51, .08);
-  padding: 12px;
+  /* padding: 12px; */
   text-align: left;
   list-style: none;
   border-radius: 3px;
   color: #666;
   font-size: 12px;
   z-index: 15;
+  /* margin-left: 20px; */
+  /* margin-top: 20px; */
+  margin-top: -10px;
+}
+
+.tag-actions-child {
+  width: 140px;
 }
 
 .tag-actions button:hover {
@@ -37,6 +43,14 @@
   background-color: #f0f1f1;
   border-radius: 12px;
   cursor: pointer;
+}
+
+.tag-item-button div svg {
+  opacity: 0;
+}
+
+.tag-item-button:hover div svg {
+  opacity: 1;
 }
 
 .tag-item-button-label {
@@ -95,4 +109,40 @@
 
 .notebook-icon-svg {
   height: 20px;
+}
+
+.tag-actions-nav-text {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  color: #666;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  line-height: 30px;
+}
+
+.tag-actions-nav-delete, .tag-actions-nav-rename {
+  /* padding: 3px 20px 3px 10px; */
+  /* margin: 10px; */
+  transition-property: color, background-color;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in-out;
+  width: 100%;
+}
+
+.tag-actions-nav-delete:hover {
+  color: #555;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.tag-actions-nav-rename:hover {
+  color: #555;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.tag-actions-nav-button-text {
+  margin-left: 10px;
+  margin-right: 10px;
 }

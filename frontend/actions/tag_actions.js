@@ -5,10 +5,10 @@ export const RECEIVE_SINGLE_TAG = 'RECEIVE_SINGLE_TAG';
 export const REMOVE_TAG = 'REMOVE_TAG';
 export const RECEIVE_TAG_ERRORS = 'RECEIVE_TAG_ERRORS';
 
-export const receiveAllTags = (tags) => {
+export const receiveAllTags = (payload) => {
   return ({
     type: RECEIVE_ALL_TAGS,
-    tags
+    payload
   })
 }
 
@@ -23,17 +23,17 @@ export const requestAllTags = () => {
   }
 }
 
-export const receiveSingleTag = tag => {
+export const receiveSingleTag = payload => {
   return ({
     type: RECEIVE_SINGLE_TAG,
-    tag
+    payload
   });
 }
 
 export const requestSingleTag = (tagId) => {
   return (dispatch) => {
-    return TagAPIUtil.fetchSingleTag(tagId).then((tag) => {
-      return dispatch(receiveSingleTag(tag));
+    return TagAPIUtil.fetchSingleTag(tagId).then((payload) => {
+      return dispatch(receiveSingleTag(payload));
     },
       (err) => {
         return dispatch(receiveTagErrors(err.responseJSON));
@@ -55,7 +55,7 @@ export const createTag = (tag) => {
 export const updateTag = (tag) => {
   return (dispatch) => {
     return TagAPIUtil.updateTag(tag).then((tag) => {
-      return dispatch(receiveSingleTag(tag.id));
+      return dispatch(receiveSingleTag(tag));
     },
       (err) => {
         return dispatch(receiveTagErrors(err.responseJSON));
@@ -87,3 +87,14 @@ export const removeTag = (tagId) => {
     tagId
   });
 }
+
+// export const requestTaggings = (tagId) => {
+//   return (dispatch) => {
+//     return TagAPIUtil.fetchTaggings(tagId).then((tags) => {
+//       return dispatch(receiveAllTags(tags));
+//     },
+//       (err) => {
+//         return dispatch(receiveTagErrors(err.responseJSON));
+//       });
+//   }
+// }

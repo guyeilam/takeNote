@@ -8,7 +8,7 @@ export const fetchAllTags = () => {
 export const fetchSingleTag = (id) => {
   return $.ajax({
     method: 'get',
-    url: `/api/notes/${id}`
+    url: `/api/tags/${id}`
   });
 }
 
@@ -34,3 +34,10 @@ export const updateTag = (tag) => {
     data: { tag }
   });
 }
+
+// export const fetchTaggings = (tagId) => {
+//   return $.ajax({
+//     method: 'get',
+//     url: `/api/tags/${tagId}/taggings`
+//   });
+// }

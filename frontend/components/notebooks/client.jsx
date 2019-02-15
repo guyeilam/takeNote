@@ -35,6 +35,10 @@ class Client extends Component {
             component={ViewNotebookContainer}
           />
           <Route exact
+            path="/tags/:tagId"
+            component={ViewNotebookContainer}
+          />
+          <Route exact
             path="/tags"
             component={TagsList}
           />

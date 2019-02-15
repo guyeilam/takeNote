@@ -5,7 +5,7 @@ import TagForm from './tag_form';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    // notebookId: state.ui.navModalId,
+    tagId: state.ui.navModalId,
     errors: state.errors.session,
     formType: 'rename-tag'
   };

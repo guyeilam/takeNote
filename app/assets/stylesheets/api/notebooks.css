@@ -38,9 +38,10 @@
   background: #fff;
   height: 200px;
   width: 200px;
-  right: 60px;
+  margin-left: -210px;
+  margin-top: 10px;
   box-shadow: 0 0 0 1px rgba(99, 114, 130, .16), 0 4px 12px rgba(27, 39, 51, .08);
-  padding: 12px;
+  /* padding: 12px; */
   text-align: left;
   list-style: none;
   border-radius: 3px;
@@ -50,12 +51,15 @@
 }
 
 .navbar-user-actions button:hover {
-  text-decoration: underline;
+  color: #555;
+  background-color: #f5f5f5;
+  cursor: pointer;
   transition: all 0.1s ease-out;
 }
 
 .navbar-user-actions-child {
   position: absolute;
+  width: 200px;
 }
 
 .notebooks {
@@ -147,6 +151,7 @@
 .notebooks-list-menubar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .notebooks-list-menubar-header {
@@ -157,14 +162,11 @@
   margin: 10px 0px;
 }
 
-.notebooks-list-menubar-new-notebook-button {
-  margin-left: auto;
-  padding-right: 10px;
-}
-
 .notebooks-list-menubar-sort-button {
-  padding-right: 10px;
+  /* padding-right: 10px; */
   color: #b0b0b0;
+  display: flex;
+  align-items: center;
 }
 
 .notebook-item-icon {
@@ -178,10 +180,6 @@
   color: #313131;
   line-height: 35px;
 }
-
-/* .notebooks-index-item {
-  
-} */
 
 .notebook-item-notes-detail {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -550,7 +548,9 @@
 
 .notebook-actions-nav-text {
   text-decoration: none;
-  font-size: 14px;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .note-edit-save-button {
@@ -685,12 +685,55 @@
   align-items: center;
 }
 
-.notebook-item-delete-button {
+.notebook-item-actions {
   display: flex;
 }
 
+.notebook-actions-nav-default-notebook, .notebook-actions-nav-rename, .notebook-actions-nav-delete {
+  width: 100%;
+}
 
+.notebook-item-delete, .notebook-item-rename, .notebook-item-default {
+  margin-left: 10px;
+  margin-right: 10px;
+}
 
-.notebook-item-actions {
+.notebook-actions-nav-default-notebook:hover, .notebook-item-delete:hover, .notebook-actions-nav-rename:hover, .notebook-actions-nav-delete:hover {
+  cursor: pointer;
+  color: #555;
+  background-color: #f5f5f5;
+  transition-property: color, background-color;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in-out;
+}
+
+.new-notebook-button-icon {
   display: flex;
+  align-items: center;
+}
+
+.new-notebook-notebooks-index-header {
+  display: flex;
+}
+
+.notebooks-list-menubar-new-notebook-button {
+  display: flex;
+    color: #00a82d;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  height: 40px;
+  font-size: 14px;
+  line-height: 37px;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: .5px;
+}
+.notebooks-list-menubar-new-notebook-button:hover {
+  color: #14CC45;
+  transition: .1s color ease-in-out;
+  cursor: pointer;
+}
+
+.new-notebook-button-icon:hover {
+  fill: #14CC45;
 }

@@ -28,6 +28,10 @@ class ViewNotebook extends Component {
             path="/notes/all"
             component={ViewAllNotes}
           />
+          <Route exact
+            path="/tags/:tagId"
+            component={ViewAllNotes}
+          />
           <EditNote />
         </div>
       </section>

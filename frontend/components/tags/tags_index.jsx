@@ -17,30 +17,30 @@ class TagsList extends Component {
   }
 
   handleModalClick(navModalId) {
-    // return (e) => {
-      // e.preventDefault();
       this.props.openNavModal('tag-actions-nav', navModalId);
-    // }
   }
 
   render() {
 
     if (this.props.tags === {}) { return null; }
-
-    const tags = (Object.values(this.props.tags).length > 0) ? Object.values(this.props.tags).map(tag => {
+    
+    // const tags = (Object.values(this.props.tags).length > 0) ? Object.values(this.props.tags).map(tag => {
+    //   return (
+    //     <TagItem key={tag.id} tag={tag} openNavModal={this.handleModalClick}/>
+    //   );
+    // }) : null;
+    
+    
+    const tags = (Object.keys(this.props.tags).length > 0) ? Object.keys(this.props.tags).map(tagLetter => {
       return (
-        <TagItem key={tag.id} tag={tag} openNavModal={this.handleModalClick}/>
-        // <div className='tag-item-button' key={tag.id}>
-        //   <div className='tag-item-button-label'>
-        //     {`${tag.label.substring(0,12)} ...`}
-        //   </div>
-        //   <div className='tag-item-button-arrow'>
-        //     <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" className="arrow-facing-down"><path fill="none" d="M7 2L4 5 1 2"></path></svg>
-        //   </div>
-        // </div>
+        Object.values(this.props.tags[tagLetter]).map((tag,idx) => {
+          return (
+            <TagItem key={tag.id} idx={idx} tag={tag} openNavModal={this.handleModalClick} />
+          );
+        })
       );
     }) : null;
-    
+
     return (
       <>
         <div className='tags-list-container'>
@@ -61,6 +61,21 @@ class TagsList extends Component {
 }
 
 const mapStateToProps = state => {
+
+  let sorted_tags = () => {
+
+
+    let tags = Object.keys(state.entities.tags).map(id => state.entities.tags[id]);
+
+    let sortedTags = {};
+
+    tags.forEach(tag => {
+      sortedTags[tag.label.substring(0,1)].push(tag);
+    });
+
+    return sortedTags;
+  }
+
   return ({
     tags: state.entities.tags
   });

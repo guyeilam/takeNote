@@ -130,9 +130,9 @@ class LeftNavBar extends Component {
           <div className='search-notebooks'>
             <form className='search-form' onSubmit={(e) => this.handleSearch(e, this.state.inputVal)}>
               <input className='search-input' onChange={this.handleInput} value={this.state.inputVal} placeholder='Search...' />
-              <div className='search-form-submit-container'>
-                <input className='search-submit-button' type='submit' value='search'></input>
-              </div>
+              {/* <div className='search-form-submit-container'> */}
+                <input className='search-submit-button' type='submit' value='search' hidden></input>
+              {/* </div> */}
             <ul>
               {results}
             </ul>

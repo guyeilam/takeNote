@@ -7,7 +7,7 @@ import NewTagForm from '../notebooks/forms/new_tag_container';
 import RenameTagForm from '../notebooks/forms/rename_tag_container';
 
 
-function Modal({ modal, notebookId, closeModal }) {
+function Modal({ modal, modalId, closeModal }) {
   if (!modal) {
     return null;
   }
@@ -17,13 +17,13 @@ function Modal({ modal, notebookId, closeModal }) {
       component = <NewNotebookFormContainer />;
       break;
     case 'rename-notebook':
-      component = <RenameNotebookFormContainer notebookId={notebookId}/>;
+      component = <RenameNotebookFormContainer notebookId={modalId}/>;
       break;
     case 'new-tag':
       component = <NewTagForm />;
       break;
     case 'rename-tag':
-      component = <RenameTagForm />;
+      component = <RenameTagForm tagId={modalId}/>;
       break;
     default:
       return null;
@@ -39,8 +39,8 @@ function Modal({ modal, notebookId, closeModal }) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    modal: state.ui.modal
-    // notebookId: state.ui.navModalId
+    modal: state.ui.modal,
+    modalId: state.ui.navModalId
   };
 };
 

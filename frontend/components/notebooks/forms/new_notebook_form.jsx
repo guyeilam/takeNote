@@ -82,7 +82,7 @@ class NewNotebookForm extends React.Component {
                 </div>
             </label>
             <div className='new-notebook-form-buttons'>
-              <button onClick={this.props.closeModal} className='white-cancel-button'>Cancel</button>
+              <div onClick={this.props.closeModal} className='white-cancel-button'>Cancel</div>
               <input className="white-new-notebook-continue-button" type="submit" value='Continue' disabled={this.state.disabled}/>
             </div>
           </div>

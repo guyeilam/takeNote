@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { closeNavModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import NoteBookActionsNavContainer from '../notebooks/modal/notebook_actions_nav_container';
-import TagActions from '../notebooks/modal/tag_actions';
+import TagActions from '../notebooks/modal/tag_nav_modal';
 
 class NavModal extends Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class NavModal extends Component {
       default:
         return null;
     }
-    
+
     if (this.state.modalId === navModalId) {
       return (
         <>

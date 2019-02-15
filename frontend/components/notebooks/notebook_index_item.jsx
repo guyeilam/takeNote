@@ -38,12 +38,6 @@ class NotebooksIndexItem extends Component {
     }
   }
 
-  // handleExpandNotes() {
-  //   return (e) => {
-      
-  //   }
-  // }
-
   render() {
     const { notebook, deleteNotebook, openActionsModal } = this.props;
 

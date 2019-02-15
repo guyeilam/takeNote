@@ -12,6 +12,7 @@ const App = () => (
     <ProtectedRoute exact path="/notes/all" component={ClientContainer} />
     <ProtectedRoute exact path="/notebooks/:notebookId" component={ClientContainer} />
     <ProtectedRoute exact path="/tags" component={ClientContainer} />
+    <ProtectedRoute exact path="/tags/:tagId" component={ClientContainer} />
     <AuthRoute path="/login" component={LoginFormContainer} />
     <AuthRoute path="/signup" component={SignupFormContainer} />
  

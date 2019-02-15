@@ -4,6 +4,7 @@ import NotebookDetailNote from './notebook_detail_note';
 import { connect } from 'react-redux';
 import { requestAllNotebooks } from '../../actions/notebook_actions';
 import { setCurrentNote } from '../../actions/note_actions';
+import { requestSingleTag } from '../../actions/tag_actions';
 
 class NotesList extends Component {
   constructor(props) {
@@ -12,7 +13,11 @@ class NotesList extends Component {
   }
 
   componentDidMount() {
-    this.props.requestAllNotebooks();
+    if (this.props.match.params.tagId) {
+      this.props.requestSingleTag(this.props.match.params.tagId);
+    } else {
+      this.props.requestAllNotebooks();
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -76,6 +81,7 @@ const mapStateToProps = state => {
   
   return ({
     notes: sorted_notes(),
+    tags: state.entities.tags,
     currentNote: state.ui.currentNote
   });
 }
@@ -83,7 +89,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return ({
     requestAllNotebooks: () => dispatch(requestAllNotebooks()),
-    setCurrentNote: (noteId) => dispatch(setCurrentNote(noteId))
+    setCurrentNote: (noteId) => dispatch(setCurrentNote(noteId)),
+    requestSingleTag: (tagId) => dispatch(requestSingleTag(tagId))
   });
 }
 
