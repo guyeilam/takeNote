@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { requestAllTags } from '../../actions/tag_actions';
+import { requestAllTags, createTag, createTagging } from '../../actions/tag_actions';
 
 class NewTagging extends Component {
   constructor(props) {
@@ -10,6 +10,9 @@ class NewTagging extends Component {
       disabled: true
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.update = this.update.bind(this);
+    this.selectTag = this.selectTag.bind(this);
   }
 
   componentDidMount() {
@@ -29,29 +32,34 @@ class NewTagging extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let tag;
-    if (this.props.formType === 'new-tag') {
-      tag = Object.assign({}, { label: this.state.label });
+    let searchResult;
+    searchResult = this.handleSearch(this.state.label);
+    if (searchResult) {
+      this.props.createTagging(searchResult, this.props.currentNote);
     } else {
-      tag = Object.assign({}, { id: this.props.tagId, label: this.state.label });
+      tag = Object.assign({}, { label: this.state.label });
+      this.props.createTag(tag).then(response => {
+        this.props.createTagging(Object.keys(response.payload.tags)[0], this.props.currentNote).then(() => this.props.requestAllTags());
+      });
     }
 
-    this.props.processForm(tag).then(this.props.closeModal);
+    // this.props.processForm(tag).then(this.props.closeModal);
   }
 
   // BEGIN AUTOCOMPLETE
 
-  handleSearch(e, searchTitle) {
-    e.preventDefault();
-    let notebookId;
-    let notebookArray = Object.values(this.props.notebooks);
-    notebookArray.forEach(notebook => {
+  handleSearch(searchTitle) {
+    // e.preventDefault();
+    let tagId = null;
+    let tagsArray = Object.values(this.props.tags);
+    tagsArray.forEach(tag => {
 
-      if (notebook.title === searchTitle) {
-        notebookId = notebook.id;
+      if (tag.label === searchTitle) {
+        tagId = tag.id;
       }
     });
 
-    this.props.history.push(`/notebooks/${notebookId}`);
+    return tagId;
   }
 
   matches() {
@@ -60,16 +68,16 @@ class NewTagging extends Component {
       return null;
     }
 
-    this.props.tags.forEach(label => {
-      const sub = label.slice(0, this.state.label.length);
-      if (sub.toLowerCase() === this.state.label.toLowerCase()) {
-        matches.push(label);
+    Object.values(this.props.tags).forEach(tag => {
+      const sub = tag.label.slice(0, this.state.label.length);
+      if ((sub.toLowerCase() === this.state.label.toLowerCase()) && (!this.props.notes.tagIds.includes(tag.id))) {
+        matches.push(tag.label);
       }
     });
 
-    if (matches.length === 0) {
-      matches.push('No matches');
-    }
+    // if (matches.length === 0) {
+      // matches.push('No matches');
+    // }
 
     return matches;
   }
@@ -77,6 +85,7 @@ class NewTagging extends Component {
   selectTag(event) {
     const label = event.currentTarget.innerText;
     this.setState({ label: label });
+    this.handleSubmit(event);
   }
 
   // END AUTOCOMPLETE
@@ -135,6 +144,10 @@ class NewTagging extends Component {
           </form>
         </div>
 
+        <div className='tag-search-results'>
+          {results}
+        </div>
+
       </div>
     );
   }
@@ -155,7 +168,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return ({
-    requestAllTags: () => dispatch(requestAllTags())
+    requestAllTags: () => dispatch(requestAllTags()),
+    createTag: (tag) => dispatch(createTag(tag)),
+    createTagging: (tagId, noteId) => dispatch(createTagging(tagId, noteId))
   });
 }
 

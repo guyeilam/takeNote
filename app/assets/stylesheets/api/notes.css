@@ -60,3 +60,7 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+.show-taggings-container {
+  display: flex;
+}

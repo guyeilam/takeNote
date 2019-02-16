@@ -1,9 +1,9 @@
 json.tags do
-    # json.set! tag.label[0] do
+    # json.set! @tag.label[0] do
       json.set! @tag.id do
         json.extract! @tag, :id, :label, :user_id
-        json.noteIds @tag.taggings.pluck(:note_id)
-  end
+    end
+  # end
 end
 
 json.notes do

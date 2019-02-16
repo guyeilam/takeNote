@@ -41,3 +41,11 @@ export const updateTag = (tag) => {
 //     url: `/api/tags/${tagId}/taggings`
 //   });
 // }
+
+export const createTagging = (tagId, noteId) => {
+  return $.ajax({
+    method: 'post',
+    url: '/api/taggings',
+    data: { tagging: { tag_id: tagId, note_id: noteId } }
+  });
+}

@@ -2,6 +2,7 @@ import * as TagAPIUtil from '../util/tag_api_util';
 
 export const RECEIVE_ALL_TAGS = 'RECEIVE_ALL_TAGS';
 export const RECEIVE_SINGLE_TAG = 'RECEIVE_SINGLE_TAG';
+export const RECEIVE_NEW_TAG = 'RECEIVE_NEW_TAG';
 export const RECEIVE_UPDATED_TAG = 'RECEIVE_UPDATED_TAG';
 export const REMOVE_TAG = 'REMOVE_TAG';
 export const RECEIVE_TAG_ERRORS = 'RECEIVE_TAG_ERRORS';
@@ -9,6 +10,13 @@ export const RECEIVE_TAG_ERRORS = 'RECEIVE_TAG_ERRORS';
 export const receiveAllTags = (payload) => {
   return ({
     type: RECEIVE_ALL_TAGS,
+    payload
+  })
+}
+
+export const receiveNewTag = (payload) => {
+  return ({
+    type: RECEIVE_NEW_TAG,
     payload
   })
 }
@@ -52,7 +60,7 @@ export const requestSingleTag = (tagId) => {
 export const createTag = (tag) => {
   return (dispatch) => {
     return TagAPIUtil.createTag(tag).then((tag) => {
-      return dispatch(receiveSingleTag(tag));
+      return dispatch(receiveNewTag(tag));
     },
       (err) => {
         return dispatch(receiveTagErrors(err.responseJSON));
@@ -106,3 +114,14 @@ export const removeTag = (tag) => {
 //       });
 //   }
 // }
+
+export const createTagging = (tagId, noteId) => {
+  return (dispatch) => {
+    return TagAPIUtil.createTagging(tagId, noteId).then((tag) => {
+      return dispatch(receiveUpdatedTag(tag));
+    },
+      (err) => {
+        return dispatch(receiveTagErrors(err.responseJSON));
+      });
+  }
+}

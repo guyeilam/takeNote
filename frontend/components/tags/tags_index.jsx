@@ -65,7 +65,11 @@ const mapStateToProps = state => {
 
   let sorted_tags = () => {
 
-    let tags = Object.keys(state.entities.tags).map(id => state.entities.tags[id]);
+    let tags = Object.keys(state.entities.tags).map(id => state.entities.tags[id]).sort(function (a, b) {
+      a = a.label.substring(0, 1).toLowerCase();
+      b = b.label.substring(0, 1).toLowerCase();
+      return a > b ? 1 : a < b ? -1 : 0;
+    });
 
     let sortedTags = {};
 

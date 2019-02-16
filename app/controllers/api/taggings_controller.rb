@@ -2,6 +2,7 @@ class Api::TaggingsController < ApplicationController
   def create
     @tagging = Tagging.new(tagging_params)
     if @tagging.save
+      @tag = Tag.find_by(id: @tagging.tag_id)
       render :show
     else
       render json: @tagging.errors.full_messages, status: 422
@@ -20,6 +21,6 @@ class Api::TaggingsController < ApplicationController
 
   private
   def tagging_params
-    params.require(:tagging).permit(:note_id, :tag_id)
+    params.require(:tagging).permit(:tag_id, :note_id)
   end
 end
