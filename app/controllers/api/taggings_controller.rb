@@ -1,10 +1,17 @@
 class Api::TaggingsController < ApplicationController
-  def show
+  def create
+    @tagging = Tagging.new(tagging_params)
+    if @tagging.save
+      render :show
+    else
+      render json: @tagging.errors.full_messages, status: 422
+    end
+
     
   end
 
   def index
-    @taggings = Tag.find_by(id: params[:tag_id]).taggings
+    @taggings = current_user.taggings.all
   end
 
   def destroy
@@ -13,6 +20,6 @@ class Api::TaggingsController < ApplicationController
 
   private
   def tagging_params
-    params.require(:tagging).permit(:note_id)
+    params.require(:tagging).permit(:note_id, :tag_id)
   end
 end

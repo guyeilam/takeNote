@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux';
 import { setCurrentNote, updateNote, createNote } from '../../actions/note_actions';
+import NewTagging from './new_tagging';
 
 class EditNote extends Component {
   constructor(props) {
@@ -12,8 +13,6 @@ class EditNote extends Component {
       title: '',
       content: '',
       plain_text: ''
-      // notebookId: this.props.notebookId,
-      // userId: this.props.currentUser.id
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
@@ -103,6 +102,9 @@ class EditNote extends Component {
 
           </div>
         </div>
+        
+        <NewTagging />
+
       </div>
     );
   }

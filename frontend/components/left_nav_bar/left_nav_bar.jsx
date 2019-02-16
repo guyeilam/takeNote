@@ -53,52 +53,52 @@ class LeftNavBar extends Component {
     }
   }
 
-  // BEGIN SEARCH
+  // // BEGIN SEARCH
 
-  handleSearch(e, searchTitle) {
-      e.preventDefault();
-      let notebookId;
-      let notebookArray = Object.values(this.props.notebooks);
-      notebookArray.forEach(notebook => {
+  // handleSearch(e, searchTitle) {
+  //     e.preventDefault();
+  //     let notebookId;
+  //     let notebookArray = Object.values(this.props.notebooks);
+  //     notebookArray.forEach(notebook => {
 
-        if (notebook.title === searchTitle) {
-          notebookId = notebook.id;
-        }
-      });
+  //       if (notebook.title === searchTitle) {
+  //         notebookId = notebook.id;
+  //       }
+  //     });
       
-    this.props.history.push(`/notebooks/${notebookId}`);
-  }
+  //   this.props.history.push(`/notebooks/${notebookId}`);
+  // }
 
-  handleInput(event) {
-    this.setState({ inputVal: event.currentTarget.value });
-  }
+  // handleInput(event) {
+  //   this.setState({ inputVal: event.currentTarget.value });
+  // }
 
-  matches() {
-    const matches = [];
-    if (this.state.inputVal.length === 0) {
-      return null;
-    }
+  // matches() {
+  //   const matches = [];
+  //   if (this.state.inputVal.length === 0) {
+  //     return null;
+  //   }
 
-    this.props.notebookTitles.forEach(title => {
-      const sub = title.slice(0, this.state.inputVal.length);
-      if (sub.toLowerCase() === this.state.inputVal.toLowerCase()) {
-        matches.push(title);
-      }
-    });
+  //   this.props.notebookTitles.forEach(title => {
+  //     const sub = title.slice(0, this.state.inputVal.length);
+  //     if (sub.toLowerCase() === this.state.inputVal.toLowerCase()) {
+  //       matches.push(title);
+  //     }
+  //   });
 
-    if (matches.length === 0) {
-      matches.push('No matches');
-    }
+  //   if (matches.length === 0) {
+  //     matches.push('No matches');
+  //   }
 
-    return matches;
-  }
+  //   return matches;
+  // }
 
-  selectTitle(event) {
-    const title = event.currentTarget.innerText;
-    this.setState({ inputVal: title });
-  }
+  // selectTitle(event) {
+  //   const title = event.currentTarget.innerText;
+  //   this.setState({ inputVal: title });
+  // }
 
-  // END AUTOCOMPLETE
+  // // END AUTOCOMPLETE
 
   render() {
 
