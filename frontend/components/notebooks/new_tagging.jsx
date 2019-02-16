@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { requestAllTags } from '../../actions/tag_actions';
 
 class NewTagging extends Component {
   constructor(props) {
@@ -9,6 +10,10 @@ class NewTagging extends Component {
       disabled: true
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.requestAllTags();
   }
 
   update(field) {
@@ -49,20 +54,16 @@ class NewTagging extends Component {
     this.props.history.push(`/notebooks/${notebookId}`);
   }
 
-  handleInput(event) {
-    this.setState({ inputVal: event.currentTarget.value });
-  }
-
   matches() {
     const matches = [];
-    if (this.state.inputVal.length === 0) {
+    if (this.state.label.length === 0) {
       return null;
     }
 
-    this.props.notebookTitles.forEach(title => {
-      const sub = title.slice(0, this.state.inputVal.length);
-      if (sub.toLowerCase() === this.state.inputVal.toLowerCase()) {
-        matches.push(title);
+    this.props.tags.forEach(label => {
+      const sub = label.slice(0, this.state.label.length);
+      if (sub.toLowerCase() === this.state.label.toLowerCase()) {
+        matches.push(label);
       }
     });
 
@@ -73,14 +74,42 @@ class NewTagging extends Component {
     return matches;
   }
 
-  selectTitle(event) {
-    const title = event.currentTarget.innerText;
-    this.setState({ inputVal: title });
+  selectTag(event) {
+    const label = event.currentTarget.innerText;
+    this.setState({ label: label });
   }
 
   // END AUTOCOMPLETE
 
   render() {
+
+    // BEGIN RENDER SEARCH
+
+    let results;
+    let matches = this.matches();
+
+    if (matches) {
+      results = this.matches().map((result, i) => {
+        return (
+          <li key={i} onClick={this.selectTag}>{result}</li>
+        );
+      });
+    }
+
+    // END RENDER SEARCH
+
+    const tags = (this.props.notes && (Object.values(this.props.tags).length > 0)) ? this.props.notes.tagIds.map(tagId => {
+      return (
+        this.props.tags[tagId]
+      );
+    }) : null;
+
+    const taggings = tags ? tags.map(tag => {
+      return (
+        <div key={tag.id} className='tag-label'>{tag.label}</div>
+      );
+    }) : null;
+
     return (
       <div className='note-tags-container'>
         <div className='note-tags-new-tag-button'>
@@ -90,7 +119,7 @@ class NewTagging extends Component {
         </div>
 
         <div className='show-taggings-container'>
-          Taggings go here
+          {taggings}
         </div>
 
         <div className='new-tagging-form-container'>
@@ -119,13 +148,14 @@ const mapStateToProps = state => {
   return ({
     notes: state.entities.notes[state.ui.currentNote],
     defaultNotebook: currentUser.default_notebook,
-    currentNote: state.ui.currentNote
+    currentNote: state.ui.currentNote,
+    tags: state.entities.tags
   });
 }
 
 const mapDispatchToProps = dispatch => {
   return ({
-
+    requestAllTags: () => dispatch(requestAllTags())
   });
 }
 

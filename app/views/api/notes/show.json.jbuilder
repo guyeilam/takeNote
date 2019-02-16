@@ -1,7 +1,15 @@
 json.notes do
   json.set! @note.id do
     json.extract! @note, :id, :title, :content, :plain_text, :updated_at
-    json.updated_at @note.updated_at.strftime "%Y-%m-%d %H:%M:%S"
+    json.updated_at @note.updated_at.strftime "%b %d %l:%M %P"
+  end
+end
+
+json.tags do
+  @note.tags.each do |tag|
+    json.set! tag.id do
+      json.extract! tag, :id, :label
+    end
   end
 end
 

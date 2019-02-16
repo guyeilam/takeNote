@@ -16,14 +16,14 @@ class LeftNavBar extends Component {
       currentViewNotebooks: '',
       currentViewNotes: '',
       currentViewTags: '',
-      inputVal: '',
-      disableSearch: false
+      // inputVal: '',
+      // disableSearch: false
     }
     this.handleModalClick = this.handleModalClick.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
+    // this.handleSearch = this.handleSearch.bind(this);
     this.createNewNote = this.createNewNote.bind(this);
-    this.selectTitle = this.selectTitle.bind(this);
-    this.handleInput = this.handleInput.bind(this);
+    // this.selectTitle = this.selectTitle.bind(this);
+    // this.handleInput = this.handleInput.bind(this);
   }
 
   componentDidMount() {
@@ -102,20 +102,20 @@ class LeftNavBar extends Component {
 
   render() {
 
-    // BEGIN SEARCH
+    // // BEGIN SEARCH
 
-    let results;
-    let matches = this.matches();
+    // let results;
+    // let matches = this.matches();
 
-    if (matches) {
-      results = this.matches().map((result, i) => {
-        return (
-          <li key={i} onClick={this.selectTitle}>{result}</li>
-        );
-      });
-    }
+    // if (matches) {
+    //   results = this.matches().map((result, i) => {
+    //     return (
+    //       <li key={i} onClick={this.selectTitle}>{result}</li>
+    //     );
+    //   });
+    // }
 
-    // END SEARCH
+    // // END SEARCH
 
     return (
       <>
@@ -127,17 +127,17 @@ class LeftNavBar extends Component {
             <div className='left-navbar-user-photo'></div>
             <div className='left-navbar-current-user-email'><button onClick={() => this.props.logout()}>Logout {this.props.currentUser.email}</button></div>
           </div>
-          <div className='search-notebooks'>
+          {/* <div className='search-notebooks'>
             <form className='search-form' onSubmit={(e) => this.handleSearch(e, this.state.inputVal)}>
               <input className='search-input' onChange={this.handleInput} value={this.state.inputVal} placeholder='Search...' />
-              {/* <div className='search-form-submit-container'> */}
+
                 <input className='search-submit-button' type='submit' value='search' hidden></input>
-              {/* </div> */}
+
             <ul>
               {results}
             </ul>
             </form>
-          </div>
+          </div> */}
           <div className='left-nav-new-note-button'>
             <button onClick={this.createNewNote()}>
               <div className='left-nav-new-note-button-container'>

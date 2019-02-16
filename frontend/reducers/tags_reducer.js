@@ -1,6 +1,7 @@
 import merge from 'lodash/merge';
 
 import { RECEIVE_SINGLE_TAG, RECEIVE_ALL_TAGS, REMOVE_TAG, RECEIVE_UPDATED_TAG } from '../actions/tag_actions';
+import { RECEIVE_SINGLE_NOTE } from '../actions/note_actions';
 
 const tagsReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -20,6 +21,9 @@ const tagsReducer = (state = {}, action) => {
     case RECEIVE_UPDATED_TAG:
       newState = action.payload.tags;
       return merge({}, state, newState);
+    // case RECEIVE_SINGLE_NOTE:
+    //   newState = action.payload.tags;
+    //   return newState;
     default:
       return state;
   }
