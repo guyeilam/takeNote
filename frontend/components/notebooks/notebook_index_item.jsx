@@ -20,9 +20,9 @@ class NotebooksIndexItem extends Component {
 
   rowSelector(idx) {
     if (idx % 2 === 0) {
-      return 'odd-row';
-    } else {
       return 'even-row';
+    } else {
+      return 'odd-row';
     }
   }
 
@@ -48,7 +48,7 @@ class NotebooksIndexItem extends Component {
     // const noteTitles = notebook.noteIds.map(id => this.props.notes[id]);
     const noteItems = this.state.showNotes ? this.props.notes.map((note, idx) => {
       return (
-        <NotebookIndexNote key={idx} idx={idx} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} deleteNote={this.handleDeleteNote}/>
+        <NotebookIndexNote key={idx} idx={this.props.idx+idx+1} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} deleteNote={this.handleDeleteNote}/>
       ); }) : null;
     
     return (

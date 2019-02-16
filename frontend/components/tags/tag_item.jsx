@@ -18,11 +18,11 @@ const TagItem = (props) => {
     }
 
     if (props.idx === 0) {
-      printLetter = <div>{props.tag.label.substring(0,1)}</div>;
+      printLetter = <div className='tag-header-letter'>{props.tag.label.substring(0,1)}</div>;
     }
     
     return (
-      <>
+      <div className='tag-item-container'>
         {printLetter}
         <div className={`tag-item-button tag${props.tag.id}`}>
           <div className='tag-item-button-label'>
@@ -33,7 +33,7 @@ const TagItem = (props) => {
           </div>
         </div>
           <NavModal modalId={props.tag.id} />
-      </>
+      </div>
     );
   }
 }

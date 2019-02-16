@@ -2,6 +2,7 @@ import * as TagAPIUtil from '../util/tag_api_util';
 
 export const RECEIVE_ALL_TAGS = 'RECEIVE_ALL_TAGS';
 export const RECEIVE_SINGLE_TAG = 'RECEIVE_SINGLE_TAG';
+export const RECEIVE_UPDATED_TAG = 'RECEIVE_UPDATED_TAG';
 export const REMOVE_TAG = 'REMOVE_TAG';
 export const RECEIVE_TAG_ERRORS = 'RECEIVE_TAG_ERRORS';
 
@@ -26,6 +27,13 @@ export const requestAllTags = () => {
 export const receiveSingleTag = payload => {
   return ({
     type: RECEIVE_SINGLE_TAG,
+    payload
+  });
+}
+
+export const receiveUpdatedTag = payload => {
+  return ({
+    type: RECEIVE_UPDATED_TAG,
     payload
   });
 }
@@ -55,7 +63,7 @@ export const createTag = (tag) => {
 export const updateTag = (tag) => {
   return (dispatch) => {
     return TagAPIUtil.updateTag(tag).then((tag) => {
-      return dispatch(receiveSingleTag(tag));
+      return dispatch(receiveUpdatedTag(tag));
     },
       (err) => {
         return dispatch(receiveTagErrors(err.responseJSON));
