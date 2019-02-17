@@ -159,3 +159,50 @@
   display: flex;
   align-items: center;
 }
+
+.note-tags-new-tag-button {
+  margin-right: 5px;
+}
+
+.note-tags-new-tag-button:hover {
+  cursor: pointer;
+}
+
+.tagging-search-result {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  color: #666;
+  font-size: 12px;
+  margin-top: -1px;
+  /* margin-bottom: 10px; */
+  line-height: 30px;
+  height: 30px;
+  background: white;
+
+}
+
+.tagging-search-result:hover {
+  cursor: pointer;
+  color: #555;
+  background-color: #f5f5f5;
+  transition: all 0.1s ease-out;
+}
+
+.tag-label {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  padding: 0 12px;
+  max-width: none;
+  height: 28px;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.67;
+  margin-right: 5px;
+  border-radius: 1em;
+  color: #666;
+  background: #f0f1f1;
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+}

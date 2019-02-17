@@ -7,13 +7,19 @@ class TagSearchModal extends Component {
   }
 
   render() {
-    if ((!this.props.searchResults) || (this.props.searchResults.length ===0)) { return null; }
+    if ((!this.props.searchResults) || (this.props.searchResults.length === 0)) { return null; }
     
+    const searchResults = (this.props.searchResults.length > 0) ? this.props.searchResults.map((result, idx) => {
+      return (
+        <div className='tagging-search-result' key={idx}>{result}</div>
+      );
+    }) : null;
+
     return (
       <>
         <div className='taggings-search-modal'>
           <div className='taggings-search-modal-child'>
-            {this.props.searchResults}
+            {searchResults}
           </div>
         </div>
       </>
