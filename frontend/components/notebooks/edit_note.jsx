@@ -12,12 +12,23 @@ class EditNote extends Component {
       noteId: null,
       title: '',
       content: '',
-      plain_text: ''
+      plain_text: '',
+      theme: 'snow',
+      toolbarVisibility: 'hidden'
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.saveNote = this.saveNote.bind(this);
+    this.showToolbar = this.showToolbar.bind(this);
+  }
+
+  showToolbar() {
+    if (this.state.toolbarVisibility == 'hidden') {
+      this.setState({ toolbarVisibility: 'visible' });
+    } else {
+      this.setState({ toolbarVisibility: 'hidden' });
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -62,6 +73,12 @@ class EditNote extends Component {
   }
 
   render() {
+    let saveButtonDisabled = true;
+
+    if (this.props.currentNote) {
+      saveButtonDisabled = false;
+    }
+
     const toolbar = [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
       ['blockquote', 'code-block'],
@@ -74,6 +91,7 @@ class EditNote extends Component {
 
       [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      ['link', 'image', 'video', 'formula'],
 
       [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
       [{ 'font': [] }],
@@ -88,18 +106,22 @@ class EditNote extends Component {
           <div className='note-form'>
             <form className='note-edit-form' onSubmit={(e) => this.handleSubmit(e)}>
               <div className='edit-submit-button'>
-                <input className='form-button' type='submit' value='Save' />
+                <input className='form-button' type='submit' value='Save' disabled={saveButtonDisabled}/>
               </div>
               <input className='edit-form-title-input' required id='noteTitle' placeholder='Title' type='text' value={this.state.title} onChange={this.handleChange('title')} />
             </form>
-
+          <div className='app'>
             <div className='quill-container'>
               <ReactQuill value={this.state.content}
                 onChange={this.handleEditorChange}
-                modules={{ toolbar }}>
+                onFocus={this.showToolbar}
+                theme={this.state.theme}
+                modules={{ toolbar }}
+                bounds={'.app'}
+                placeholder={'New note...'}>
               </ReactQuill>
             </div>
-
+            </div>
           </div>
         </div>
         

@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 class TagItem extends Component {
   render() {
     
-    const tags = (this.props.notes && (Object.values(this.props.tags).length > 0)) ? this.props.notes.tagIds.map(tagId => {
+    if (!this.props.notes) { return null; }
+    if (!this.props.tags) { return null; }
+
+    const tags = (this.props.notes.tagIds && (this.props.notes.tagIds.length > 0) && (Object.values(this.props.tags).length > 0)) ? this.props.notes.tagIds.map(tagId => {
       return (
         this.props.tags[tagId]
       );

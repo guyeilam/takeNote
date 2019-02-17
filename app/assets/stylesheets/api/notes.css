@@ -1,3 +1,7 @@
+@import url('https://unpkg.com/react-quill@1.0.0/dist/quill.snow.css');
+@import url('https://unpkg.com/react-quill@1.0.0/dist/quill.core.css');
+@import url('https://unpkg.com/react-quill@1.0.0/dist/quill.bubble.css');
+
 .note-edit {
   margin: 20px 20px 0 20px;
   display: flex;
@@ -67,4 +71,54 @@
 
 .tag-label {
   padding: 5px;
+}
+
+
+.taggings-search-modal {
+  position: relative;
+  background: #fff;
+  height: 40px;
+  width: 140px;
+  box-shadow: 0 0 0 1px rgba(99, 114, 130, .16), 0 4px 12px rgba(27, 39, 51, .08);
+  text-align: left;
+  list-style: none;
+  border-radius: 3px;
+  color: #666;
+  font-size: 12px;
+  z-index: 15;
+  margin-top: -50px;
+  margin-left: -100px;
+}
+
+.taggings-search-modal-child {
+  width: 140px;
+  position: absolute;
+}
+
+.app {
+  /* margin: 1rem 4rem; */
+}
+
+.app .ql-container {
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  background: #fefcfc;
+}
+
+/* Snow Theme */
+.app .ql-snow.ql-toolbar {
+  display: block;
+  background: #eaecec;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+}
+
+/* Bubble Theme */
+.app .ql-bubble .ql-editor {
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+}
+
+.app .ql-editor {
+  min-height: 18em;
 }

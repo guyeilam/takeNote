@@ -5,20 +5,18 @@
   height: 80px;
   width: 140px;
   box-shadow: 0 0 0 1px rgba(99, 114, 130, .16), 0 4px 12px rgba(27, 39, 51, .08);
-  /* padding: 12px; */
   text-align: left;
   list-style: none;
   border-radius: 3px;
   color: #666;
   font-size: 12px;
   z-index: 15;
-  /* margin-left: 20px; */
-  /* margin-top: 20px; */
   margin-top: -10px;
 }
 
 .tag-actions-child {
   width: 140px;
+  position: absolute;
 }
 
 .tag-actions button:hover {
@@ -26,9 +24,6 @@
   transition: all 0.1s ease-out;
 }
 
-.tag-actions-child {
-  position: absolute;
-}
 
 .tag-item-button {
   font-family: Arial, Helvetica, sans-serif;
@@ -160,3 +155,7 @@
   margin-left: 10px;
 }
 
+.tags-list-header-new-tag-icon {
+  display: flex;
+  align-items: center;
+}

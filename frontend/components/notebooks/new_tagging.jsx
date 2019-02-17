@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { requestAllTags, createTag, createTagging } from '../../actions/tag_actions';
 import { requestSingleNote } from '../../actions/note_actions';
 import Taggings from './tag_item';
+import TagSearchModal from '../modal/tag_search_modal';
 
 class NewTagging extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class NewTagging extends Component {
     let tag;
     let searchResult;
     let label = this.state.label;
+    
     this.setState({
       label: ''
     });
@@ -93,8 +95,10 @@ class NewTagging extends Component {
 
   selectTag(event) {
     const label = event.currentTarget.innerText;
-    this.setState({ label: label });
-    this.handleSubmit(event);
+    this.setState({ label: '' });
+    // this.handleSubmit(event);
+    let searchResult = this.handleSearch(label);
+    this.props.createTagging(searchResult, this.props.currentNote).then(() => this.props.requestSingleNote(this.props.currentNote));
   }
 
   // END AUTOCOMPLETE
@@ -115,8 +119,11 @@ class NewTagging extends Component {
     }
 
     // END RENDER SEARCH
-
-    const tags = (this.props.notes && (Object.values(this.props.tags).length > 0)) ? this.props.notes.tagIds.map(tagId => {
+    
+    if (!this.props.notes) { return null; }
+    if (!this.props.tags) { return null; }
+    
+    const tags = (this.props.notes.tagIds && (this.props.notes.tagIds.length > 0) && (Object.values(this.props.tags).length > 0)) ? this.props.notes.tagIds.map(tagId => {
       return (
         this.props.tags[tagId]
       );
@@ -154,7 +161,7 @@ class NewTagging extends Component {
         </div>
 
         <div className='tag-search-results'>
-          {results}
+          <TagSearchModal searchResults={results} />
         </div>
 
       </div>
