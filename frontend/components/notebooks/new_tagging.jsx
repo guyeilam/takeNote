@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { requestAllTags, createTag, createTagging } from '../../actions/tag_actions';
+import { requestSingleNote } from '../../actions/note_actions';
+import Taggings from './tag_item';
 
 class NewTagging extends Component {
   constructor(props) {
@@ -33,17 +35,24 @@ class NewTagging extends Component {
     e.preventDefault();
     let tag;
     let searchResult;
-    searchResult = this.handleSearch(this.state.label);
+    let label = this.state.label;
+    this.setState({
+      label: ''
+    });
+    searchResult = this.handleSearch(label);
+
+    if (this.props.notes.tagIds.includes(searchResult)) {
+      return null;
+    }
+    
     if (searchResult) {
-      this.props.createTagging(searchResult, this.props.currentNote);
+      this.props.createTagging(searchResult, this.props.currentNote).then(() => this.props.requestSingleNote(this.props.currentNote));
     } else {
-      tag = Object.assign({}, { label: this.state.label });
+      tag = Object.assign({}, { label: label });
       this.props.createTag(tag).then(response => {
-        this.props.createTagging(Object.keys(response.payload.tags)[0], this.props.currentNote).then(() => this.props.requestAllTags());
+        this.props.createTagging(Object.keys(response.payload.tags)[0], this.props.currentNote).then(() => this.props.requestSingleNote(this.props.currentNote));
       });
     }
-
-    // this.props.processForm(tag).then(this.props.closeModal);
   }
 
   // BEGIN AUTOCOMPLETE
@@ -115,7 +124,7 @@ class NewTagging extends Component {
 
     const taggings = tags ? tags.map(tag => {
       return (
-        <div key={tag.id} className='tag-label'>{tag.label}</div>
+        <div key={tag.id} >{tag.label}</div>
       );
     }) : null;
 
@@ -128,7 +137,7 @@ class NewTagging extends Component {
         </div>
 
         <div className='show-taggings-container'>
-          {taggings}
+          <Taggings />
         </div>
 
         <div className='new-tagging-form-container'>
@@ -170,7 +179,8 @@ const mapDispatchToProps = dispatch => {
   return ({
     requestAllTags: () => dispatch(requestAllTags()),
     createTag: (tag) => dispatch(createTag(tag)),
-    createTagging: (tagId, noteId) => dispatch(createTagging(tagId, noteId))
+    createTagging: (tagId, noteId) => dispatch(createTagging(tagId, noteId)),
+    requestSingleNote: noteId => dispatch(requestSingleNote(noteId))
   });
 }
 
