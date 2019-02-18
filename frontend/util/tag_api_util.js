@@ -49,3 +49,11 @@ export const createTagging = (tagId, noteId) => {
     data: { tagging: { tag_id: tagId, note_id: noteId } }
   });
 }
+
+export const deleteTagging = (tagId, noteId) => {
+  return $.ajax({
+    method: 'delete',
+    url: '/api/remove_tagging',
+    data: { tagging: { tag_id: tagId, note_id: noteId } }
+  });
+}

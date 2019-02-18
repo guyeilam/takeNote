@@ -29,17 +29,19 @@ class NavModal extends Component {
 
     switch (navModal) {
       case 'notebook-actions-nav':
-        component = <NoteBookActionsNavContainer notebookId={this.state.modalId}/>;
+        component = <NoteBookActionsNavContainer notebookId={this.props.navModalId}/>;
+        // component = <NoteBookActionsNavContainer notebookId={this.state.modalId} />;
         parentClass = 'navbar-user-actions';
         childClass = 'navbar-user-actions-child';
         break;
       case 'tag-actions-nav':
-        component = <TagActions tagId={this.state.modalId} />;
+        // component = <TagActions tagId={this.state.modalId} />;
+        component = <TagActions tagId={this.props.navModalId} />;
         parentClass = 'tag-actions';
         childClass = 'tag-actions-child';
         break;
       case 'tagging-nav':
-        component = <TaggingModal tagId={this.state.tagId} />;
+        component = <TaggingModal tagId={this.props.navModalId} />;
         parentClass = 'tagging-nav-menu';
         childClass = 'tagging-nav-menu-child';
         break;

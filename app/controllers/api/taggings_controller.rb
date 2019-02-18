@@ -7,8 +7,6 @@ class Api::TaggingsController < ApplicationController
     else
       render json: @tagging.errors.full_messages, status: 422
     end
-
-    
   end
 
   def index
@@ -16,7 +14,13 @@ class Api::TaggingsController < ApplicationController
   end
 
   def destroy
-
+    @tagging = Tagging.find_by(note_id: tagging_params[:note_id], tag_id: tagging_params[:tag_id])
+    if @tagging.destroy
+      @tag = Tag.find_by(id: @tagging.tag_id)
+      render :show
+    else
+      render json: @tagging.errors.full_messages, status: 422
+    end
   end
 
   private

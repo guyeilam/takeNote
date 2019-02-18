@@ -5,11 +5,13 @@ import { connect } from 'react-redux';
 import { requestAllNotebooks } from '../../actions/notebook_actions';
 import { setCurrentNote } from '../../actions/note_actions';
 import { requestSingleTag } from '../../actions/tag_actions';
+import AllNotesTagLabel from './all_notes_tag_label';
 
 class NotesList extends Component {
   constructor(props) {
     super(props);
     this.handleNoteClick = this.handleNoteClick.bind(this);
+    this.closeTag = this.closeTag.bind(this);
   }
 
   componentDidMount() {
@@ -41,8 +43,18 @@ class NotesList extends Component {
     }
   }
 
+  closeTag() {
+    this.props.history.push('/notes/all');
+  }
+
   render() {
+    let tagLabel = null;
+    let tagId = this.props.match.params.tagId;
+    
     if (!this.props.notes) { return null }
+    
+    tagLabel = (tagId && this.props.tags[tagId]) ? <AllNotesTagLabel label={this.props.tags[tagId].label} closeTag={() => this.closeTag()}/> : null;
+    
 
     const notebookTitle = 'All Notes';
 
@@ -59,6 +71,10 @@ class NotesList extends Component {
       <div className='notebook-detail-notes'>
         <div className='notebook-detail-notebook-title'>{notebookTitle}</div>
         <div className='notebook-detail-notes-count'><p>{this.props.notes.length} notes</p></div>
+        <div className='view-tag-label'>
+          {tagLabel}
+        </div>
+        
         <ul className='notebook-detail-notes-list'>
           {noteItems}
         </ul>

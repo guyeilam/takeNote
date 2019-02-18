@@ -13,7 +13,7 @@ class TagItem extends Component {
     if (!this.props.notes) { return null; }
     if (!this.props.tags) { return null; }
 
-    const tags = (this.props.notes.tagIds && (this.props.notes.tagIds.length > 0) && (Object.values(this.props.tags).length > 0)) ? this.props.notes.tagIds.map(tagId => {
+    const tags = (this.props.notes.tagIds && (this.props.notes.tagIds.length > 0) && (Object.values(this.props.tags).length >= this.props.notes.tagIds.length)) ? this.props.notes.tagIds.map(tagId => {
       return (
         this.props.tags[tagId]
       );

@@ -26,8 +26,8 @@ const notesReducer = (state = {}, action) => {
       delete newState[action.noteId];
       return newState;
     case RECEIVE_SINGLE_TAG:
-      newState = action.payload.notes;
-      return newState;
+      notes = action.payload.notes;
+      return merge({}, notes);
     case RECEIVE_UPDATED_TAG:
       return merge({}, state, action.payload.notes);
     default:

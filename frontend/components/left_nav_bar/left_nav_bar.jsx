@@ -53,69 +53,7 @@ class LeftNavBar extends Component {
     }
   }
 
-  // // BEGIN SEARCH
-
-  // handleSearch(e, searchTitle) {
-  //     e.preventDefault();
-  //     let notebookId;
-  //     let notebookArray = Object.values(this.props.notebooks);
-  //     notebookArray.forEach(notebook => {
-
-  //       if (notebook.title === searchTitle) {
-  //         notebookId = notebook.id;
-  //       }
-  //     });
-      
-  //   this.props.history.push(`/notebooks/${notebookId}`);
-  // }
-
-  // handleInput(event) {
-  //   this.setState({ inputVal: event.currentTarget.value });
-  // }
-
-  // matches() {
-  //   const matches = [];
-  //   if (this.state.inputVal.length === 0) {
-  //     return null;
-  //   }
-
-  //   this.props.notebookTitles.forEach(title => {
-  //     const sub = title.slice(0, this.state.inputVal.length);
-  //     if (sub.toLowerCase() === this.state.inputVal.toLowerCase()) {
-  //       matches.push(title);
-  //     }
-  //   });
-
-  //   if (matches.length === 0) {
-  //     matches.push('No matches');
-  //   }
-
-  //   return matches;
-  // }
-
-  // selectTitle(event) {
-  //   const title = event.currentTarget.innerText;
-  //   this.setState({ inputVal: title });
-  // }
-
-  // // END AUTOCOMPLETE
-
   render() {
-
-    // // BEGIN SEARCH
-
-    // let results;
-    // let matches = this.matches();
-
-    // if (matches) {
-    //   results = this.matches().map((result, i) => {
-    //     return (
-    //       <li key={i} onClick={this.selectTitle}>{result}</li>
-    //     );
-    //   });
-    // }
-
-    // // END SEARCH
 
     return (
       <>
@@ -127,17 +65,7 @@ class LeftNavBar extends Component {
             <div className='left-navbar-user-photo'></div>
             <div className='left-navbar-current-user-email'><button onClick={() => this.props.logout()}>Logout {this.props.currentUser.email}</button></div>
           </div>
-          {/* <div className='search-notebooks'>
-            <form className='search-form' onSubmit={(e) => this.handleSearch(e, this.state.inputVal)}>
-              <input className='search-input' onChange={this.handleInput} value={this.state.inputVal} placeholder='Search...' />
 
-                <input className='search-submit-button' type='submit' value='search' hidden></input>
-
-            <ul>
-              {results}
-            </ul>
-            </form>
-          </div> */}
           <div className='left-nav-new-note-button'>
             <button onClick={this.createNewNote()}>
               <div className='left-nav-new-note-button-container'>

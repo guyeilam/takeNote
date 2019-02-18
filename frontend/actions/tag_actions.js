@@ -125,3 +125,14 @@ export const createTagging = (tagId, noteId) => {
       });
   }
 }
+
+export const deleteTagging = (tagId, noteId) => {
+  return (dispatch) => {
+    return TagAPIUtil.deleteTagging(tagId, noteId).then((tag) => {
+      return dispatch(receiveUpdatedTag(tag));
+    },
+      (err) => {
+        return dispatch(receiveTagErrors(err.responseJSON));
+      });
+  }
+}

@@ -417,6 +417,7 @@
 .notebook-detail-notes-list {
   display: flex;
   flex-direction: column;
+  border-top: 1px solid #e6e6e6;
 }
 
 .notebook-detail-notes-list li {
@@ -441,7 +442,7 @@
   font-size: 12px;
   font-weight: 300;
   padding-bottom: 10px;
-  border-bottom: 1px solid #e6e6e6;
+  /* border-bottom: 1px solid #e6e6e6; */
 }
 
 .left-nav-new-note-button {
@@ -683,4 +684,25 @@
 
 .new-notebook-button-icon:hover {
   fill: #14CC45;
+}
+
+.view-tag-label {
+  margin: 5px 0px 10px 20px;
+  background-color: #00a82d;
+  border-radius: 1em;
+  padding: 0 5px 0 10px;
+  color: #fff;
+  font-size: 12px;
+  width: 60px;
+  display: flex;
+}
+
+.view-tag-label-close {
+  margin-left: 5px;
+}
+
+.view-tag-label-close svg {
+  fill: white;
+  height: 7px;
+  width: 7px;
 }
