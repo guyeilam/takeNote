@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { closeNavModal } from '../../actions/modal_actions';
 import { deleteTagging, requestSingleTag } from '../../actions/tag_actions';
+import { requestSingleNote, requestAllNotes } from '../../actions/note_actions';
 
 class TaggingModal extends Component {
   constructor(props) {
@@ -26,7 +27,12 @@ class TaggingModal extends Component {
     let noteId = this.props.currentNote;
     this.props.closeNavModal();
     this.props.deleteTagging(tagId, noteId).then(() => {
-      this.props.requestSingleTag(tagId);
+      if (this.props.match.params.tagId) {
+        this.props.requestSingleTag(tagId);
+      } else {
+        // this.props.requestSingleNote(this.props.currentNote);
+        this.props.requestAllNotes();
+      }
     });
   }
 
@@ -36,8 +42,8 @@ class TaggingModal extends Component {
         <div className='tag-actions-nav-text'>
           <div className='tagging-filter-by-tag'><div className='taggings-modal-button-text' onClick={() => this.filterByTag()}>Filter by Tag</div></div>
           <div className='tagging-remove'><div className='taggings-modal-button-text' onClick={() => this.handleRemoveTagging()}>Remove</div></div>
-          <div className='tagging-hr'></div>
-          <div className='tagging-remove-from-all'><div className='taggings-modal-button-text'>Delete from All Notes</div></div>
+          {/* <div className='tagging-hr'></div> */}
+          {/* <div className='tagging-remove-from-all'><div className='taggings-modal-button-text'>Delete from All Notes</div></div> */}
         </div>
       </>
     );
@@ -56,7 +62,9 @@ const mapDispatchToProps = dispatch => {
   return {
     closeNavModal: () => dispatch(closeNavModal()),
     deleteTagging: (tagId, noteId) => dispatch(deleteTagging(tagId, noteId)),
-    requestSingleTag: tagId => dispatch(requestSingleTag(tagId))
+    requestSingleTag: tagId => dispatch(requestSingleTag(tagId)),
+    requestSingleNote: noteId => dispatch(requestSingleNote(noteId)),
+    requestAllNotes: () => dispatch(requestAllNotes())
   };
 };
 

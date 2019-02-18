@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { logout } from '../../actions/session_actions';
 import { withRouter } from 'react-router-dom';
 import { createNote, setCurrentNote } from '../../actions/note_actions';
+import { createTagging } from '../../actions/tag_actions';
 import { getNotebookTitles } from '../../reducers/selectors';
 import { findNotebookByTitle } from '../../util/search_util';
 
@@ -43,9 +44,25 @@ class LeftNavBar extends Component {
     }
   }
 
+  // createNewNote() {
+  //   return (e) => {
+  //     const note = Object.assign({}, { title: '', content: '', plain_text: '', notebook_id: this.props.defaultNotebook });
+  //     this.props.createNote(note).then(payload => {
+  //       this.props.setCurrentNote(Object.values(payload.notes)[0].id);
+  //       this.props.history.push(`/notebooks/${this.props.defaultNotebook}`);
+  //     });
+  //   }
+  // }
+
   createNewNote() {
-    return (e) => {
-      const note = Object.assign({}, { title: '', content: '', plain_text: '', notebook_id: this.props.defaultNotebook });
+    const note = Object.assign({}, { title: '', content: '', plain_text: '', notebook_id: this.props.defaultNotebook });
+    const tagId = parseInt(this.props.match.params.tagId);
+    
+    if (tagId) {
+      this.props.createNote(note).then(payload => {
+        this.props.createTagging(tagId, Object.values(payload.notes)[0].id).then(() => this.props.history.push(`/tags/${tagId}`));
+      });
+    } else {
       this.props.createNote(note).then(payload => {
         this.props.setCurrentNote(Object.values(payload.notes)[0].id);
         this.props.history.push(`/notebooks/${this.props.defaultNotebook}`);
@@ -67,7 +84,7 @@ class LeftNavBar extends Component {
           </div>
 
           <div className='left-nav-new-note-button'>
-            <button onClick={this.createNewNote()}>
+            <button onClick={() => this.createNewNote()}>
               <div className='left-nav-new-note-button-container'>
                 <div className='left-nav-new-note-button-icon'>
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" data-event-off="click"><g fill="none" fillRule="evenodd"><path d="M0 0h30v30H0z"></path><circle cx="15" cy="15" r="14" fill="#00A82D"></circle><rect width="14" height="2" x="8" y="14" fill="#FFF" rx="1"></rect><rect width="2" height="14" x="14" y="8" fill="#FFF" rx="1"></rect></g></svg>
@@ -144,7 +161,8 @@ const mapDispatchToProps = dispatch => {
     closeNavModal: () => dispatch(closeNavModal()),
     createNote: note => dispatch(createNote(note)),
     setCurrentNote: noteId => dispatch(setCurrentNote(noteId)),
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    createTagging: (tagId, noteId) => dispatch(createTagging(tagId, noteId))
   });
 }
 

@@ -20,7 +20,8 @@ const notesReducer = (state = {}, action) => {
     case RECEIVE_SINGLE_NOTE:
       return merge({}, state, action.payload.notes);
     case RECEIVE_ALL_NOTES:
-      return action.notes;
+      notes = action.payload.notes;
+      return merge({}, notes);
     case REMOVE_NOTE:
       newState = merge({}, state);
       delete newState[action.noteId];

@@ -27,7 +27,7 @@
 .tagging-nav-menu {
   position: absolute;
   background: #fff;
-  height: 115px;
+  height: 80px;
   width: 140px;
   box-shadow: 0 0 0 1px rgba(99, 114, 130, .16), 0 4px 12px rgba(27, 39, 51, .08);
   text-align: left;
@@ -247,3 +247,8 @@
   margin-left: 4px;
 }
 
+.new-tagging-input-label {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+}
