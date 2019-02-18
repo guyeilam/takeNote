@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { requestAllTags, createTag, createTagging } from '../../actions/tag_actions';
 import { requestSingleNote } from '../../actions/note_actions';
-import Taggings from './tag_item';
+import Taggings from './taggings';
 import TagSearchModal from '../modal/tag_search_modal';
 
 class NewTagging extends Component {
@@ -128,7 +128,7 @@ class NewTagging extends Component {
         this.props.tags[tagId]
       );
     }) : null;
-
+    
     const taggings = tags ? tags.map(tag => {
       return (
         <div key={tag.id} >{tag.label}</div>
