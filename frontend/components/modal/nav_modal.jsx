@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import NoteBookActionsNavContainer from '../notebooks/modal/notebook_actions_nav_container';
 import TagActions from '../notebooks/modal/tag_nav_modal';
 import TaggingModal from './tagging_modal';
+import NoteHeaderModal from './note_header_modal';
 
 class NavModal extends Component {
   constructor(props) {
@@ -44,6 +45,11 @@ class NavModal extends Component {
         component = <TaggingModal tagId={this.props.navModalId} />;
         parentClass = 'tagging-nav-menu';
         childClass = 'tagging-nav-menu-child';
+        break;
+      case 'note-header-nav':
+        component = <NoteHeaderModal noteId={this.props.navModalId} />;
+        parentClass = 'note-header-nav';
+        childClass = 'note-header-nav-child';
         break;
       default:
         return null;

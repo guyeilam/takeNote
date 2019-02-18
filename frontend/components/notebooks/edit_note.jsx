@@ -4,6 +4,7 @@ import ReactQuill from 'react-quill';
 import { connect } from 'react-redux';
 import { setCurrentNote, updateNote, createNote } from '../../actions/note_actions';
 import NewTagging from './new_tagging';
+import NoteHeader from './note_header';
 
 class EditNote extends Component {
   constructor(props) {
@@ -102,6 +103,9 @@ class EditNote extends Component {
 
     return (
       <div className='note-edit'>
+
+      <NoteHeader />
+
         <div className='note-edit-container'>
           <div className='note-form'>
             <form className='note-edit-form' onSubmit={(e) => this.handleSubmit(e)}>
