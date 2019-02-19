@@ -36,7 +36,7 @@
 .navbar-user-actions {
   position: absolute;
   background: #fff;
-  height: 200px;
+  height: 130px;
   width: 200px;
   margin-left: -210px;
   margin-top: 10px;
@@ -403,15 +403,19 @@
 }
 
 .notebook-detail-notes {
+  position: fixed;
+  left: 220px;
+  top: 0px;
   width: 300px;
   min-width: 300px;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #e6e6e6;
+  /* border-right: 1px solid #e6e6e6; */
   background: #f8f8f8;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, san-serif;
   color: #4d4d4d;
   overflow: auto;
+  height: 100%;
 }
 
 .notebook-detail-notes-list {
@@ -705,4 +709,12 @@
   fill: white;
   height: 7px;
   width: 7px;
+}
+
+.notebook-detail-notes-spacer {
+  min-width: 300px;
+  width: 300px;
+  height: 100vh;
+  background: #f8f8f8;
+  border-right: 1px solid #e6e6e6;
 }

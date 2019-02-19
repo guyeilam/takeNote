@@ -129,7 +129,9 @@ class EditNote extends Component {
           </div>
         </div>
         
-        <NewTagging />
+        <div className='note-taggings'>
+          <NewTagging />
+        </div>
 
       </div>
     );

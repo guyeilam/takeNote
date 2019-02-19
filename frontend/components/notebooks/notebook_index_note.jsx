@@ -19,7 +19,7 @@ const NotebookIndexNote = (props) => {
         </div>
 
         <div className='notebooks-item-col3 col3'>
-          <div className='notebook-item-updated'>{formatDateTime(props.note.updated_at)}</div>
+          <div className='notebook-item-updated'>{formatDateTime(props.note)}</div>
         </div>
 
         <div className='notebooks-item-col4 col4'>

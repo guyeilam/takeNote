@@ -65,7 +65,7 @@ class NotebooksIndexItem extends Component {
           </div>
           
           <div className='notebooks-item-col3 col3'>
-            <div className='notebook-item-updated'>{formatDateTime(notebook.updated_at)}</div>
+            <div className='notebook-item-updated'>{formatDateTime(notebook)}</div>
           </div>
           
           <div className='notebooks-item-col4 col4'>

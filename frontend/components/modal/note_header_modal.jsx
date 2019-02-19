@@ -15,7 +15,7 @@ class NoteHeaderModal extends Component {
       <>
         <div className='note-header-nav-text'>
           <div className='notes-nav-button'>
-            <div className='notes-nav-button-text'>Button text</div>
+            <div className='notes-nav-button-text'>Coming soon...</div>
           </div>
         </div>
       </>

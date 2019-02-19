@@ -19,6 +19,8 @@ class ViewNotebook extends Component {
   render() {
     return (
       <section className='notebook-detail'>
+        <div className='notebook-detail-notes-spacer'></div>
+
         <div className='notebook-detail-notes-container'>
           <Route exact
             path="/notebooks/:notebookId"
@@ -34,6 +36,7 @@ class ViewNotebook extends Component {
           />
           <EditNote />
         </div>
+        
       </section>
     );
   }
