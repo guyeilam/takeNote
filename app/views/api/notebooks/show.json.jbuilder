@@ -13,7 +13,7 @@ json.notebooks do
   json.set! @notebook.id do
     json.extract! @notebook, :id, :title, :user_id, :updated_at
     json.noteIds @notebook.notes.sort_by { |note| note.updated_at }.reverse.pluck(:id)
-    json.updated_at @notebook.updated_at.strftime "%b %d %l:%M %P"
+    json.updated_at @notebook.updated_at.strftime "%b %d %l:%M:%S %P"
   end
 end
 
@@ -24,7 +24,7 @@ json.notes do
   @notebook.notes.each do |note|
     json.set! note.id do
       json.extract! note, :id, :title, :content, :plain_text, :updated_at
-      json.updated_at note.updated_at.strftime "%b %d %l:%M %P"
+      json.updated_at note.updated_at.strftime "%b %d %l:%M:%S %P"
       json.tagIds note.taggings.pluck(:tag_id)
     end
   end
