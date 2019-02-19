@@ -442,10 +442,10 @@
 }
 
 .notebook-detail-notes-count {
-  padding-left: 20px;
+  margin-left: 20px;
   font-size: 12px;
   font-weight: 300;
-  padding-bottom: 10px;
+  /* margin-bottom: 10px; */
   /* border-bottom: 1px solid #e6e6e6; */
 }
 
@@ -718,3 +718,61 @@
   background: #f8f8f8;
   border-right: 1px solid #e6e6e6;
 }
+
+
+/* BEGIN NOTEBOOKS SORT MODAL */
+
+.notebooks-sort-nav {
+  position: fixed;
+  background: #fff;
+  height: 230px;
+  width: 240px;
+  box-shadow: 0 0 0 1px rgba(99, 114, 130, .16), 0 4px 12px rgba(27, 39, 51, .08);
+  text-align: left;
+  list-style: none;
+  border-radius: 3px;
+  color: #666;
+  font-size: 12px;
+  z-index: 15;
+  margin-left: -120px;
+  margin-top: -50px;
+}
+
+.notebooks-sort-nav-child {
+  width: 240px;
+  position: absolute;
+  background: #fff;
+}
+
+.notebooks-sort-modal-text {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  color: #666;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  line-height: 30px;
+}
+
+.notebooks-sort-modal-button-text {
+  margin: 0px 5px 0px 5px;
+}
+.notebooks-sort-modal-button {
+  width: 100%;
+}
+.notebooks-sort-modal-button:hover {
+  color: #555;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.notebooks-sort-modal-button-text {
+  margin: 0px 5px 0px 5px;
+}
+
+.sort-by-text {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* END NOTEBOOKS SORT MODAL */

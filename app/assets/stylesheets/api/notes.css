@@ -214,3 +214,12 @@
 .ql-stroke {
   stroke-width: 1;
 }
+
+.notes-subheader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.notes-sort-button-icon {
+  margin-right: 10px;
+}

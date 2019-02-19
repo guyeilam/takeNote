@@ -4,23 +4,17 @@ import { openModal } from '../../actions/modal_actions';
 import { openNavModal, closeNavModal } from '../../actions/modal_actions';
 import NotebooksIndex from './notebooks_index';
 import { requestAllNotebooks, deleteNotebook } from '../../actions/notebook_actions';
+import { sortedItems } from '../../reducers/selectors';
 
 const mapStateToProps = (state) => {
   const currentId = state.session.id;
   const currentUser = state.entities.users[currentId] || null;
 
-  let sorted_notes = () => {
-    let notes = Object.keys(state.entities.notes).map(id => state.entities.notes[id]);
-
-    return notes.sort(function (a, b) {
-      a = new Date(a.updated_at);
-      b = new Date(b.updated_at);
-      return a > b ? -1 : a < b ? 1 : 0;
-    });
-  }
+  let sortMethod = state.ui.sort ? state.ui.sort : null;
+  let sorted_notebooks = state.entities.notebooks ? sortedItems(state.entities.notebooks, state.ui.sort) : null;
 
   return ({
-    notebooks: state.entities.notebooks,
+    notebooks: sorted_notebooks,
     notes: state.entities.notes,
     currentUser
   });

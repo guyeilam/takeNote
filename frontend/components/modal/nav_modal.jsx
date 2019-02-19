@@ -5,6 +5,7 @@ import NoteBookActionsNavContainer from '../notebooks/modal/notebook_actions_nav
 import TagActions from '../notebooks/modal/tag_nav_modal';
 import TaggingModal from './tagging_modal';
 import NoteHeaderModal from './note_header_modal';
+import NotebooksSortModal from './notebooks_sort_modal';
 
 class NavModal extends Component {
   constructor(props) {
@@ -50,6 +51,11 @@ class NavModal extends Component {
         component = <NoteHeaderModal noteId={this.props.navModalId} />;
         parentClass = 'note-header-nav';
         childClass = 'note-header-nav-child';
+        break;
+      case 'notebooks-sort':
+        component = <NotebooksSortModal modalId={null} />;
+        parentClass = 'notebooks-sort-nav';
+        childClass = 'notebooks-sort-nav-child';
         break;
       default:
         return null;
