@@ -24,7 +24,7 @@ class ViewNotebook extends Component {
         <div className='notebook-detail-notes-container'>
           <Route exact
             path="/notebooks/:notebookId"
-            component={ViewSingleNotebook}
+            component={ViewAllNotes}
           />
           <Route exact
             path="/notes/all"

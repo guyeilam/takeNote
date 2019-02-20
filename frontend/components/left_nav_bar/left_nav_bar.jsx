@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { logout } from '../../actions/session_actions';
 import { withRouter } from 'react-router-dom';
 import { createNote, setCurrentNote } from '../../actions/note_actions';
+import { requestSingleNotebook } from '../../actions/notebook_actions';
 import { createTagging } from '../../actions/tag_actions';
 import { getNotebookTitles } from '../../reducers/selectors';
 import { findNotebookByTitle } from '../../util/search_util';
@@ -55,17 +56,24 @@ class LeftNavBar extends Component {
   // }
 
   createNewNote() {
-    const note = Object.assign({}, { title: '', content: '', plain_text: '', notebook_id: this.props.defaultNotebook });
+    let notebookId = this.props.match.params.notebookId ? parseInt(this.props.match.params.notebookId) : this.props.defaultNotebook;
+    const note = Object.assign({}, { title: '', content: '', plain_text: '', notebook_id: notebookId });
     const tagId = parseInt(this.props.match.params.tagId);
     
     if (tagId) {
       this.props.createNote(note).then(payload => {
         this.props.createTagging(tagId, Object.values(payload.notes)[0].id).then(() => this.props.history.push(`/tags/${tagId}`));
+        this.props.setCurrentNote(Object.values(payload.notes)[0].id);
       });
     } else {
       this.props.createNote(note).then(payload => {
-        this.props.setCurrentNote(Object.values(payload.notes)[0].id);
-        this.props.history.push(`/notebooks/${this.props.defaultNotebook}`);
+        // this.props.setCurrentNote(Object.values(payload.notes)[0].id);
+        if (this.props.match.params.notebookId) {
+            this.props.requestSingleNotebook(parseInt(notebookId)).then(() => this.props.setCurrentNote(Object.values(payload.notes)[0].id));
+          } else {
+            this.props.history.push(`/notebooks/${notebookId}`);
+            this.props.setCurrentNote(Object.values(payload.notes)[0].id);
+          }
       });
     }
   }
@@ -162,7 +170,8 @@ const mapDispatchToProps = dispatch => {
     createNote: note => dispatch(createNote(note)),
     setCurrentNote: noteId => dispatch(setCurrentNote(noteId)),
     logout: () => dispatch(logout()),
-    createTagging: (tagId, noteId) => dispatch(createTagging(tagId, noteId))
+    createTagging: (tagId, noteId) => dispatch(createTagging(tagId, noteId)),
+    requestSingleNotebook: notebookId => dispatch(requestSingleNotebook(notebookId))
   });
 }
 

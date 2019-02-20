@@ -69,7 +69,8 @@ class EditNote extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const note = Object.assign({}, { id: this.props.currentNote, title: this.state.title, content: this.state.content, plain_text: this.state.plain_text, notebook_id: this.props.defaultNotebook });
+    // const notebookId = this.props.notes[this.props.currentNote].notebook_id;
+    const note = Object.assign({}, { id: this.props.currentNote, title: this.state.title, content: this.state.content, plain_text: this.state.plain_text });
     this.props.updateNote(note);
   }
 
