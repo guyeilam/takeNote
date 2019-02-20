@@ -16,7 +16,7 @@ class NoteHeader extends Component {
   }
 
   render() {
-    if (!this.props.currentNote) { return null; }
+    if (!this.props.currentNote || !this.props.notes || !this.props.notebooks || (Object.values(this.props.notes).length === 0)) { return null; }
     
     const noteNotebook = (this.props.notes && this.props.notebooks && this.props.currentNote) ? this.props.notebooks[this.props.notes[this.props.currentNote].notebook_id] : null;
 
