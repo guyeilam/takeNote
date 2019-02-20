@@ -6,6 +6,7 @@ import NotebookIndexNote from './notebook_index_note';
 import { formatDateTime } from '../../util/datetime_util';
 import { requestNotes, deleteNote } from '../../actions/note_actions';
 import { requestAllNotebooks } from '../../actions/notebook_actions';
+import { openNavModal, closeNavModal } from '../../actions/modal_actions';
 
 class NotebooksIndexItem extends Component {
   constructor(props) {
@@ -75,7 +76,8 @@ class NotebooksIndexItem extends Component {
           <div className='notebooks-item-col5 col5'>
             <div className='notebook-item-actions'>
               <NavModal modalId={notebook.id}/>
-              <button className='notebook-item-delete-button' onClick={openActionsModal(notebook.id)}>
+              {/* <button className='notebook-item-delete-button' onClick={openActionsModal(notebook.id)}> */}
+              <button className='notebook-item-delete-button' onClick={() => this.props.openNavModal('notebook-actions-nav', notebook.id)}>
                 <svg width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M25 19a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm-9 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm-9 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" fill="#000" fillRule="evenodd"></path></svg>
               </button>
             </div>
@@ -110,7 +112,8 @@ const mapStateToProps = (state, ownProps) => {
     notes: sorted_notes(),
     currentUserEmail: currentUser.email,
     deleteNotebook: ownProps.deleteNotebook,
-    openActionsModal: ownProps.openActionsModal
+    idx: ownProps.idx
+    // openActionsModal: ownProps.openActionsModal
   });
 }
 
@@ -118,7 +121,8 @@ const mapDispatchToProps = (dispatch) => {
   return ({
     requestNotes: currentNote => dispatch(requestNotes(currentNote)),
     deleteNote: noteId => dispatch(deleteNote(noteId)),
-    requestAllNotebooks: () => dispatch(requestAllNotebooks())
+    requestAllNotebooks: () => dispatch(requestAllNotebooks()),
+    openNavModal: (navModal, navModalId) => dispatch(openNavModal(navModal, navModalId))
   });
 }
 
