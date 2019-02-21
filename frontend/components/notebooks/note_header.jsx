@@ -12,8 +12,8 @@ class NoteHeader extends Component {
     this.openModal = this.openModal.bind(this);
   }
 
-  openModal() {
-    this.props.openNavModal('note-header-nav', this.props.currentNote);
+  openModal(noteId) {
+    this.props.openNavModal('note-header-nav', noteId);
   }
 
   render() {
@@ -74,8 +74,8 @@ class NoteHeader extends Component {
         </div>
 
         <div className='note-actions-menu'>
-          <NavModal modalId={this.props.currentNote}/>
-          <div className='note-actions-icon' onClick={() => this.openModal()}><svg width="18px" height="18px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg></div>
+          {/* <NavModal modalId={this.props.currentNote}/> */}
+          {/* <div className='note-actions-icon' onClick={() => this.openModal(this.props.currentNote)}><svg width="18px" height="18px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg></div> */}
         </div>
       </div>
     );

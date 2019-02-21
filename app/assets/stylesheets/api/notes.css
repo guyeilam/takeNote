@@ -223,3 +223,25 @@
 .notes-sort-button-icon {
   margin-right: 10px;
 }
+
+.notes-sort-nav {
+  position: fixed;
+  background: #fff;
+  height: 230px;
+  width: 240px;
+  box-shadow: 0 0 0 1px rgba(99, 114, 130, .16), 0 4px 12px rgba(27, 39, 51, .08);
+  text-align: left;
+  list-style: none;
+  border-radius: 3px;
+  color: #666;
+  font-size: 12px;
+  z-index: 15;
+  margin-left: -240px;
+  margin-top: -50px;
+}
+
+.notes-sort-nav-child {
+  width: 240px;
+  position: absolute;
+  background: #fff;
+}

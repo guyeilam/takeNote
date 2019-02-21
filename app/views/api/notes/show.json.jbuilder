@@ -15,6 +15,14 @@ json.tags do
   end
 end
 
+# json.notebook do
+#   json.set! @notebook.id do
+#     json.extract! @notebook, :id, :title, :user_id, :updated_at, :created_at
+#     json.noteIds @notebook.notes.pluck(:id)
+#     json.updated_at @notebook.updated_at.strftime "%b %d %l:%M:%S %P"
+#   end
+# end
+
 # json.notebooks do
 #   json.set! @notebook.id do
 #     json.extract! @notebook, :id, :title, :user_id, :updated_at

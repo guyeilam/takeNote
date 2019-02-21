@@ -5,6 +5,7 @@ export const RECEIVE_SINGLE_NOTEBOOK = 'RECEIVE_SINGLE_NOTEBOOK';
 export const REMOVE_NOTEBOOK = 'REMOVE_NOTEBOOK';
 export const RECEIVE_NOTEBOOK_ERRORS = 'RECEIVE_NOTEBOOK_ERRORS';
 export const RECEIVE_UPDATED_NOTEBOOK = 'RECEIVE_UPDATED_NOTEBOOK';
+export const REMOVE_NOTE_FROM_NOTEBOOK = 'REMOVE_NOTE_FROM_NOTEBOOK';
 
 export const receiveAllNotebooks = (payload) => {
   return ({
@@ -65,6 +66,12 @@ export const receiveNotebookErrors = (errors) => {
   });
 }
 
+export const removeNoteFromNotebook = (noteId) => {
+  return ({
+    type: REMOVE_NOTE_FROM_NOTEBOOK,
+    noteId
+  });
+}
 
 
 

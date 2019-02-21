@@ -53,7 +53,7 @@ class NotesList extends Component {
   }
 
   render() {
-    
+
     if (!(this.props.notes || this.props.notebook)) { return null }
     
     let pageTitle;
@@ -75,7 +75,7 @@ class NotesList extends Component {
     }
     noteCount = this.props.notes.length;
 
-    const noteItems = (this.props.notes.length > 0) ? this.props.notes.map((note) => {
+    const noteItems = ((this.props.notes.length > 0) && this.props.notes !== []) ? this.props.notes.map((note) => {
       return (
         <NotebookDetailNote key={note.id} note={note} handleNoteClick={this.handleNoteClick} />
       );
@@ -91,7 +91,7 @@ class NotesList extends Component {
           <div className='notebook-detail-notes-count'>{noteCount} notes</div>
           <div className='notes-sort-button'>
             <NavModal modalId={null} />
-            <div className='notes-sort-button-icon' onClick={() => this.props.openNavModal('notebooks-sort', null)}>
+            <div className='notes-sort-button-icon' onClick={() => this.props.openNavModal('notes-sort', null)}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8 16.793l-2.146-2.147-.708.708L8.5 18.707l3.354-3.353-.708-.708L9 16.793V5H8v11.793zM12 5h9v1h-9V5zm0 3h7v1h-7V8zm0 3h5v1h-5v-1z"></path></svg>
             </div>
           </div>

@@ -57,6 +57,11 @@ class NavModal extends Component {
         parentClass = 'notebooks-sort-nav';
         childClass = 'notebooks-sort-nav-child';
         break;
+      case 'notes-sort':
+        component = <NotebooksSortModal modalId={null} />;
+        parentClass = 'notes-sort-nav';
+        childClass = 'notes-sort-nav-child';
+        break;
       default:
         return null;
     }

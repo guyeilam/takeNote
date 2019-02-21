@@ -102,6 +102,12 @@
   cursor: pointer;
 }
 
+/* .tags-list-header-new-tag-button svg:hover {
+  fill: #14CC45;
+  transition: .3s color ease-in-out;
+  cursor: pointer;
+} */
+
 .tags-list-header-container {
   display: flex;
   align-items: baseline;

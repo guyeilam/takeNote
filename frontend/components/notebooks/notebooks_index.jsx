@@ -39,7 +39,6 @@ class NotebooksIndex extends Component {
   render() {
     if (!this.props.notebooks) { return null; }
 
-    // const sortOption = this.state.sorted ? 'sorted-reverse' : 'sorted-normal';
     const notebooks = this.props.notebooks;
 
     return (
@@ -70,7 +69,6 @@ class NotebooksIndex extends Component {
               <div className='col5'>Actions</div>
             </div>
 
-            {/* <div className={`notebooks-list-content-ul ${sortOption}`}> */}
           <div className='notebooks-list-content-ul'>
               {notebooks.map((notebook, idx) => <NotebooksIndexItem key={notebook.id} idx={idx} notebook={notebook} deleteNotebook={this.handleDelete} openActionsModal={(navModalId) => this.handleModalClick(navModalId)} />)}
             </div>

@@ -39,6 +39,7 @@ def create
     @note = Note.find_by(id: params[:id])
 
     if @note
+      @notebook = @note.notebook
       @note.destroy
       render :show
     else
