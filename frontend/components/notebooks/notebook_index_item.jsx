@@ -7,6 +7,8 @@ import { formatDateTime } from '../../util/datetime_util';
 import { requestNotes, deleteNote } from '../../actions/note_actions';
 import { requestAllNotebooks } from '../../actions/notebook_actions';
 import { openNavModal, closeNavModal } from '../../actions/modal_actions';
+import { setCurrentNote } from '../../actions/note_actions';
+import { sortedItems } from '../../reducers/selectors';
 
 class NotebooksIndexItem extends Component {
   constructor(props) {
@@ -29,7 +31,10 @@ class NotebooksIndexItem extends Component {
 
   requestSpecificNote(note) {
     return (e) => {
-      this.props.requestNotes(note).then(this.props.history.push('/notes/all'));
+      // this.props.requestNotes(note).then(this.props.history.push('/notes/all'));
+      this.props.setCurrentNote(note.id);
+      this.props.history.push('/notes/all');
+      
     }
   }
 
@@ -97,19 +102,23 @@ const mapStateToProps = (state, ownProps) => {
   const notebook = ownProps.notebook ? state.entities.notebooks[ownProps.notebook.id] : null;
   // const notes = notebook.noteIds ? notebook.noteIds.map(noteId => state.entities.notes[noteId]) : null;
   
-  let sorted_notes = () => {
-    let notes = notebook.noteIds ? notebook.noteIds.map(noteId => state.entities.notes[noteId]) : null;
+  // let sorted_notes = () => {
+  //   let notes = notebook.noteIds ? notebook.noteIds.map(noteId => state.entities.notes[noteId]) : null;
 
-    return notes.sort(function (a, b) {
-      a = new Date(a.updated_at);
-      b = new Date(b.updated_at);
-      return a > b ? -1 : a < b ? 1 : 0;
-    });
-  }
+  //   return notes.sort(function (a, b) {
+  //     a = new Date(a.updated_at);
+  //     b = new Date(b.updated_at);
+  //     return a > b ? -1 : a < b ? 1 : 0;
+  //   });
+  // }
+  let notes = notebook.noteIds ? notebook.noteIds.map(noteId => state.entities.notes[noteId]) : null;
+
+  let sorted_notes = notes ? sortedItems(notes, state.ui.sort) : null;
+
 
   return ({
     notebook,
-    notes: sorted_notes(),
+    notes: sorted_notes,
     currentUserEmail: currentUser.email,
     deleteNotebook: ownProps.deleteNotebook,
     idx: ownProps.idx
@@ -122,7 +131,8 @@ const mapDispatchToProps = (dispatch) => {
     requestNotes: currentNote => dispatch(requestNotes(currentNote)),
     deleteNote: noteId => dispatch(deleteNote(noteId)),
     requestAllNotebooks: () => dispatch(requestAllNotebooks()),
-    openNavModal: (navModal, navModalId) => dispatch(openNavModal(navModal, navModalId))
+    openNavModal: (navModal, navModalId) => dispatch(openNavModal(navModal, navModalId)),
+    setCurrentNote: (noteId) => dispatch(setCurrentNote(noteId))
   });
 }
 
