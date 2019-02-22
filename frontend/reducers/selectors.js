@@ -22,7 +22,14 @@ export const sortedItems = (items, sortMethod, notebook) => {
   
   let sortFunction;
   if (notebook) {
-    itemsArr = notebook.noteIds.map(id => items[id]);
+    // itemsArr = notebook.noteIds.map(id => items[id]);
+    itemsArr = [];
+    let notesArray = Object.keys(items).map(id => items[id]);
+    notesArray.forEach(note => {
+      if (notebook.noteIds.includes(note.id)) {
+        itemsArr.push(note);
+      }
+    });
   } else {
     itemsArr = Object.keys(items).map(id => items[id]);
   }

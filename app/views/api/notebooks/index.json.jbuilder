@@ -15,7 +15,7 @@ json.notes do
       json.tagIds note.taggings.pluck(:tag_id)
       # json.updated_at note.updated_at.strftime "%Y-%m-%d %H:%M:%S"
       json.updated_at note.updated_at.strftime "%b %d %l:%M:%S %P"
-      # json.notebookTitle note.notebook.title
+      json.notebookTitle note.notebook.title
     end
   end
 end

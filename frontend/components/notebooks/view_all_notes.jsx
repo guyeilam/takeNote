@@ -28,7 +28,6 @@ class NotesList extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    
     if (!this.props.currentNote) {
       if (this.props.notes) {
         if ((this.props.notes.length > 0) && (prevProps.currentNote !== this.props.notes[0].id)) {

@@ -34,7 +34,7 @@ class EditNote extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.notes) {
-      if (!prevProps.notes || (prevProps.notes.id !== this.props.notes.id)) {
+      if (!prevProps.notes || (prevProps.notes.id !== this.props.notes.id) || (this.state.noteId !== this.props.currentNote)) {
         this.setState({
           noteId: this.props.notes.id,
           title: this.props.notes.title,
@@ -75,6 +75,12 @@ class EditNote extends Component {
   }
 
   render() {
+    if ((!this.props.notes) || (Object.values(this.props.notes).length === 0)) {
+      return (
+        <div className='note-edit'></div>
+      );
+    }
+
     let saveButtonDisabled = true;
 
     if (this.props.currentNote) {

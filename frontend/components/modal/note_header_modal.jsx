@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { closeNavModal } from '../../actions/modal_actions';
 import { deleteTagging, requestSingleTag } from '../../actions/tag_actions';
-import { requestSingleNote, requestAllNotes, deleteNote } from '../../actions/note_actions';
+import { requestSingleNote, requestAllNotes, deleteNote, setCurrentNote } from '../../actions/note_actions';
 import { removeNoteFromNotebook } from '../../actions/notebook_actions';
 import { request } from 'http';
 
@@ -15,7 +15,7 @@ class NoteHeaderModal extends Component {
 
   handleDeleteNote(noteId) {
     // return (e) => {
-    this.props.deleteNote(noteId).then(() => this.props.removeNoteFromNotebook(noteId));
+    this.props.deleteNote(noteId).then(() => this.props.setCurrentNote(null));
     // }
   }
 
@@ -44,7 +44,8 @@ const mapDispatchToProps = dispatch => {
     closeNavModal: () => dispatch(closeNavModal()),
     deleteNote: (noteId) => dispatch(deleteNote(noteId)),
     requestAllNotebooks: () => dispatch(requestAllNotebooks()),
-    removeNoteFromNotebook: noteId => dispatch(removeNoteFromNotebook(noteId))
+    removeNoteFromNotebook: noteId => dispatch(removeNoteFromNotebook(noteId)),
+    setCurrentNote: (noteId) => dispatch(setCurrentNote(noteId))
   };
 };
 
