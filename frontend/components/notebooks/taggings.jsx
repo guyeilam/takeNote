@@ -13,11 +13,6 @@ class TagItem extends Component {
     if (!this.props.notes) { return null; }
     if (!this.props.tags) { return null; }
     if (!this.props.currentNote) { return null; }
-    // const tags = (this.props.notes.tagIds && (this.props.notes.tagIds.length > 0) && (Object.values(this.props.tags).length >= this.props.notes.tagIds.length)) ? this.props.notes.tagIds.map(tagId => {
-    //   return (
-    //     this.props.tags[tagId]
-    //   );
-    // }) : null;
     
     const tags = (this.props.notes.tagIds && (this.props.notes.tagIds.length > 0) && (Object.values(this.props.tags).length >= this.props.notes.tagIds.length)) ? this.props.notes.tagIds.map(tagId => {
       return (
@@ -49,11 +44,6 @@ const mapStateToProps = state => {
   
   let currentNote = state.entities.notes[state.ui.currentNote];
   let tags = state.entities.tags;
-  // let currentTaggings;
-
-  // if (currentNote.tagIds) {
-  //   currentTaggings = currentNote.tagIds.map(id => tags[id]);
-  // }
 
   return ({
     notes: currentNote,

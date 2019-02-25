@@ -10,7 +10,7 @@ end
 json.notes do
   @notes.each do |note|
     json.set! note.id do
-      json.extract! note, :id, :title, :updated_at, :notebook_id, :created_at
+      json.extract! note, :id, :title, :updated_at, :notebook_id, :created_at, :plain_text
       json.updated_at note.updated_at.strftime "%b %d %l:%M:%S %P"
     end
   end

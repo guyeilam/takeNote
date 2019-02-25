@@ -5,12 +5,13 @@ import { closeNavModal } from '../../actions/modal_actions';
 import { deleteTagging, requestSingleTag } from '../../actions/tag_actions';
 import { requestSingleNote, requestAllNotes, deleteNote, setCurrentNote } from '../../actions/note_actions';
 import { removeNoteFromNotebook } from '../../actions/notebook_actions';
-import { request } from 'http';
+import { openModal } from '../../actions/modal_actions';
 
 class NoteHeaderModal extends Component {
   constructor(props) {
     super(props);
     this.handleDeleteNote = this.handleDeleteNote.bind(this);
+    this.moveNoteModal = this.moveNoteModal.bind(this);
   }
 
   handleDeleteNote(noteId) {
@@ -19,13 +20,17 @@ class NoteHeaderModal extends Component {
     // }
   }
 
+  moveNoteModal() {
+    this.props.closeNavModal();
+    this.props.openModal('move-note', this.props.navModalId);
+  }
+
   render() {
     return (
       <>
         <div className='note-header-nav-text'>
-          <div className='notes-nav-button'>
-            <div className='notes-nav-button-text' onClick={() => this.handleDeleteNote(this.props.currentNote)}>Delete note...</div>
-          </div>
+          <div className='notes-nav-delete-note notes-nav-button'><div className='notes-nav-button-text' onClick={() => this.handleDeleteNote(this.props.currentNote)}>Delete note...</div></div>
+          <div className='notes-nav-move-note notes-nav-button'><div className='notes-nav-button-text' onClick={() => this.moveNoteModal()}>Move note</div></div>
         </div>
       </>
     );
@@ -45,7 +50,8 @@ const mapDispatchToProps = dispatch => {
     deleteNote: (noteId) => dispatch(deleteNote(noteId)),
     requestAllNotebooks: () => dispatch(requestAllNotebooks()),
     removeNoteFromNotebook: noteId => dispatch(removeNoteFromNotebook(noteId)),
-    setCurrentNote: (noteId) => dispatch(setCurrentNote(noteId))
+    setCurrentNote: (noteId) => dispatch(setCurrentNote(noteId)),
+    openModal: (modal, noteId) => dispatch(openModal(modal, noteId)),
   };
 };
 

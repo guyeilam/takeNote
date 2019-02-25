@@ -5,6 +5,7 @@ import NewNotebookFormContainer from '../notebooks/forms/new_notebook_form_conta
 import RenameNotebookFormContainer from '../notebooks/forms/rename_notebook_form_container';
 import NewTagForm from '../notebooks/forms/new_tag_container';
 import RenameTagForm from '../notebooks/forms/rename_tag_container';
+import MoveNoteContainer from '../notes/move_note_container';
 
 
 function Modal({ modal, modalId, closeModal }) {
@@ -24,6 +25,9 @@ function Modal({ modal, modalId, closeModal }) {
       break;
     case 'rename-tag':
       component = <RenameTagForm tagId={modalId}/>;
+      break;
+    case 'move-note':
+      component = <MoveNoteContainer noteId={modalId} />;
       break;
     default:
       return null;

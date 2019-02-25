@@ -28,14 +28,6 @@ class TaggingModal extends Component {
     this.props.closeNavModal();
     this.props.deleteTagging(tagId, noteId);
     this.props.setCurrentNote(null);
-    // .then(() => {
-      // if (this.props.match.params.tagId) {
-      //   this.props.requestSingleTag(tagId);
-      // } else {
-      //   this.props.requestSingleNote(this.props.currentNote);
-      //   // this.props.requestAllNotes();
-      // }
-    // });
   }
 
   render() {
@@ -44,8 +36,6 @@ class TaggingModal extends Component {
         <div className='tag-actions-nav-text'>
           <div className='tagging-filter-by-tag'><div className='taggings-modal-button-text' onClick={() => this.filterByTag()}>Filter by Tag</div></div>
           <div className='tagging-remove'><div className='taggings-modal-button-text' onClick={() => this.handleRemoveTagging()}>Remove</div></div>
-          {/* <div className='tagging-hr'></div> */}
-          {/* <div className='tagging-remove-from-all'><div className='taggings-modal-button-text'>Delete from All Notes</div></div> */}
         </div>
       </>
     );

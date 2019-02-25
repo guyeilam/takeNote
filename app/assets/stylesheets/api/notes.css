@@ -149,7 +149,7 @@
 .note-header-nav {
   position: absolute;
   background: #fff;
-  height: 50px;
+  height: 120px;
   width: 140px;
   box-shadow: 0 0 0 1px rgba(99, 114, 130, .16), 0 4px 12px rgba(27, 39, 51, .08);
   text-align: left;
@@ -245,3 +245,53 @@
   position: absolute;
   background: #fff;
 }
+
+/* move note modal */
+
+.move-note-container {
+  background: white;
+  min-width: 500px;
+  height: 530px;
+  padding: 20px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .08), 0 2px 15px rgba(0, 0, 0, .2);
+  border-radius: 4px;
+  z-index: 5;
+  text-align: left;
+  line-height: 1.1875;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, san-serif;
+}
+
+.move-note-header-text {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.new-notebook-form-header {
+  margin-bottom: 30px;
+}
+
+.new-notebook-form-content {
+  border-top: 1px solid #ededed;
+}
+
+.move-note-notebook-item {
+  display: flex;
+}
+
+
+.move-note-notebooks-list {
+  margin: 20px 0px 20px 0px;
+}
+
+.move-note-checkbox { flex-basis: 5%; }
+.move-note-notebook-icon { flex-basis: 10%; }
+.move-note-notebook-title { flex-basis: 85%; }
+
+.move-note-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+/* end move note modal */
