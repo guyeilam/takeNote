@@ -18,16 +18,17 @@ class NotesList extends Component {
   }
 
   componentDidMount() {
-    if (this.props.match.params.tagId) {
-      this.props.requestSingleTag(parseInt(this.props.match.params.tagId));
-    } else if (this.props.match.params.notebookId) {
-      this.props.requestSingleNotebook(parseInt(this.props.match.params.notebookId));
-    } else {
-      this.props.requestAllNotebooks();
+    if (this.props.notebookId) {
+      this.props.requestSingleNotebook(this.props.notebookId);
+    } else if (this.props.tagId) {
+      this.props.requestSingleTag(this.props.tagId);
+    } else if (this.props.match.path === '/notes/all') {
+      this.props.requestAllNotes();
     }
   }
 
   componentDidUpdate(prevProps) {
+    
     if (!this.props.currentNote) {
       if (this.props.notes) {
         if ((this.props.notes.length > 0) && (prevProps.currentNote !== this.props.notes[0].id)) {
@@ -35,6 +36,12 @@ class NotesList extends Component {
         }
       }
     }
+
+    // else {
+    //   if (this.props.currentNote !== this.props.notes[0].id) {
+    //     this.props.setCurrentNote(this.props.notes[0].id);
+    //   }
+    // }
   }
   
   componentWillUnmount() {
@@ -43,7 +50,7 @@ class NotesList extends Component {
 
   handleNoteClick(note) {
     return () => {
-      this.props.setCurrentNote(null);
+      // this.props.setCurrentNote(null);
       this.props.setCurrentNote(note.id);
     }
   }
@@ -61,13 +68,13 @@ class NotesList extends Component {
     
     // Set variables for tag label if viewing a tag
     let tagLabel = null;
-    let tagId = this.props.match.params.tagId;
+    let tagId = this.props.tagId;
     
-    tagLabel = (tagId && this.props.tags[tagId]) ? <AllNotesTagLabel label={this.props.tags[tagId].label} closeTag={() => this.closeTag()}/> : null;
+    tagLabel = (tagId && this.props.tag) ? <AllNotesTagLabel label={this.props.tag.label} closeTag={() => this.closeTag()}/> : null;
     
 
     // Set variables for notebook if viewing a notebook
-    let notebookId = this.props.match.params.notebookId;
+    let notebookId = this.props.notebookId;
     if (notebookId && this.props.notebook) {
       pageTitle = this.props.notebook.title;
     } else {
@@ -109,31 +116,4 @@ class NotesList extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-
-  let notebookId = parseInt(ownProps.match.params.notebookId);
-  let notebook = state.entities.notebooks[notebookId];
-  let notes = state.entities.notes;
-
-  let sorted_notes = state.entities.notes ? sortedItems(state.entities.notes, state.ui.sort, notebook) : null;
-  
-  return ({
-    notebook: notebook,
-    notes: sorted_notes,
-    tags: state.entities.tags,
-    currentNote: state.ui.currentNote
-  });
-}
-
-const mapDispatchToProps = dispatch => {
-  return ({
-    requestAllNotebooks: () => dispatch(requestAllNotebooks()),
-    requestSingleNotebook: (notebookId) => dispatch(requestSingleNotebook(notebookId)),
-    setCurrentNote: (noteId) => dispatch(setCurrentNote(noteId)),
-    requestSingleTag: (tagId) => dispatch(requestSingleTag(tagId)),
-    openNavModal: (navModal, navModalId) => dispatch(openNavModal(navModal, navModalId)),
-    closeNavModal: () => dispatch(closeNavModal())
-  });
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NotesList));
+export default withRouter(NotesList);

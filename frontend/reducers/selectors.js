@@ -16,23 +16,12 @@ export const getNotebookTitles = (notebooks) => {
   return notebooks.map(notebook => notebook.title);
 }
 
-export const sortedItems = (items, sortMethod, notebook) => {
+export const sortedItems = (items, sortMethod) => {
   let sortBy = sortMethod;
   let itemsArr;
   
-  let sortFunction;
-  if (notebook) {
-    // itemsArr = notebook.noteIds.map(id => items[id]);
-    itemsArr = [];
-    let notesArray = Object.keys(items).map(id => items[id]);
-    notesArray.forEach(note => {
-      if (notebook.noteIds.includes(note.id)) {
-        itemsArr.push(note);
-      }
-    });
-  } else {
-    itemsArr = Object.keys(items).map(id => items[id]);
-  }
+  itemsArr = Object.keys(items).map(id => items[id]);
+    
   switch (sortBy) {
     case 'title_ascending':
       return itemsArr.sort(function (a, b) {

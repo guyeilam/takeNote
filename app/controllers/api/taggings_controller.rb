@@ -3,6 +3,7 @@ class Api::TaggingsController < ApplicationController
     @tagging = Tagging.new(tagging_params)
     if @tagging.save
       @tag = Tag.find_by(id: @tagging.tag_id)
+      @note = Note.find_by(id: @tagging.note_id)
       render :show
     else
       render json: @tagging.errors.full_messages, status: 422
@@ -15,8 +16,9 @@ class Api::TaggingsController < ApplicationController
 
   def destroy
     @tagging = Tagging.find_by(note_id: tagging_params[:note_id], tag_id: tagging_params[:tag_id])
+    @tag = Tag.find_by(id: @tagging.tag_id)
+    @note = Note.find_by(id: @tagging.note_id)
     if @tagging.destroy
-      @tag = Tag.find_by(id: @tagging.tag_id)
       render :show
     else
       render json: @tagging.errors.full_messages, status: 422

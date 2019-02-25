@@ -7,13 +7,14 @@ json.notes do
   end
 end
 
-json.tags do
-  @note.tags.each do |tag|
-    json.set! tag.id do
-      json.extract! tag, :id, :label
-    end
-  end
-end
+
+# json.tags do
+#   @note.tags.each do |tag|
+#     json.set! tag.id do
+#       json.extract! tag, :id, :label
+#     end
+#   end
+# end
 
 # json.notebook do
 #   json.set! @notebook.id do

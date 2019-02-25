@@ -4,6 +4,7 @@ export const RECEIVE_ALL_TAGS = 'RECEIVE_ALL_TAGS';
 export const RECEIVE_SINGLE_TAG = 'RECEIVE_SINGLE_TAG';
 export const RECEIVE_NEW_TAG = 'RECEIVE_NEW_TAG';
 export const RECEIVE_UPDATED_TAG = 'RECEIVE_UPDATED_TAG';
+export const RECEIVE_UPDATED_TAGGING = 'RECEIVE_UPDATED_TAGGING';
 export const REMOVE_TAG = 'REMOVE_TAG';
 export const RECEIVE_TAG_ERRORS = 'RECEIVE_TAG_ERRORS';
 
@@ -42,6 +43,13 @@ export const receiveSingleTag = payload => {
 export const receiveUpdatedTag = payload => {
   return ({
     type: RECEIVE_UPDATED_TAG,
+    payload
+  });
+}
+
+export const receiveUpdatedTagging = payload => {
+  return ({
+    type: RECEIVE_UPDATED_TAGGING,
     payload
   });
 }
@@ -117,8 +125,8 @@ export const removeTag = (tag) => {
 
 export const createTagging = (tagId, noteId) => {
   return (dispatch) => {
-    return TagAPIUtil.createTagging(tagId, noteId).then((tag) => {
-      return dispatch(receiveUpdatedTag(tag));
+    return TagAPIUtil.createTagging(tagId, noteId).then((payload) => {
+      return dispatch(receiveUpdatedTagging(payload));
     },
       (err) => {
         return dispatch(receiveTagErrors(err.responseJSON));
@@ -128,8 +136,8 @@ export const createTagging = (tagId, noteId) => {
 
 export const deleteTagging = (tagId, noteId) => {
   return (dispatch) => {
-    return TagAPIUtil.deleteTagging(tagId, noteId).then((tag) => {
-      return dispatch(receiveUpdatedTag(tag));
+    return TagAPIUtil.deleteTagging(tagId, noteId).then((payload) => {
+      return dispatch(receiveUpdatedTagging(payload));
     },
       (err) => {
         return dispatch(receiveTagErrors(err.responseJSON));

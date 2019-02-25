@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import ViewAllNotes from './view_all_notes';
-import ViewSingleNotebook from './view_single_notebook';
-import EditNote from './edit_note';
 import { Route } from 'react-router-dom';
+import ViewAllNotes from './view_all_notes';
+import SingleNotebookContainer from './single_notebook_container';
+import AllNotesContainer from './all_notes_container';
+import FilterTagContainer from './filter_tag_container';
+import EditNote from './edit_note';
 
 class ViewNotebook extends Component {
   constructor(props) {
     super(props);
-  }
-  
-   componentDidMount() {
-    if (this.props.notebookId) {
-      this.setState({ notebookId: this.props.notebookId });
-    }
   }
 
   render() {
@@ -24,15 +20,19 @@ class ViewNotebook extends Component {
         <div className='notebook-detail-notes-container'>
           <Route exact
             path="/notebooks/:notebookId"
-            component={ViewAllNotes}
+            component={SingleNotebookContainer}
           />
           <Route exact
             path="/notes/all"
-            component={ViewAllNotes}
+            component={AllNotesContainer}
           />
+          {/* <Route exact
+            path="/notes/:noteId"
+            component={ViewAllNotes}
+          /> */}
           <Route exact
             path="/tags/:tagId"
-            component={ViewAllNotes}
+            component={FilterTagContainer}
           />
           <EditNote />
         </div>

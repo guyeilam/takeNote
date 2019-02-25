@@ -12,7 +12,13 @@ class TagItem extends Component {
     
     if (!this.props.notes) { return null; }
     if (!this.props.tags) { return null; }
-
+    if (!this.props.currentNote) { return null; }
+    // const tags = (this.props.notes.tagIds && (this.props.notes.tagIds.length > 0) && (Object.values(this.props.tags).length >= this.props.notes.tagIds.length)) ? this.props.notes.tagIds.map(tagId => {
+    //   return (
+    //     this.props.tags[tagId]
+    //   );
+    // }) : null;
+    
     const tags = (this.props.notes.tagIds && (this.props.notes.tagIds.length > 0) && (Object.values(this.props.tags).length >= this.props.notes.tagIds.length)) ? this.props.notes.tagIds.map(tagId => {
       return (
         this.props.tags[tagId]
@@ -28,7 +34,7 @@ class TagItem extends Component {
         </div>
       );
     }) : null;
-    
+
     return (
       <>
         {taggings}
@@ -40,12 +46,20 @@ class TagItem extends Component {
 const mapStateToProps = state => {
   const currentId = state.session.id;
   const currentUser = state.entities.users[currentId] || null;
+  
+  let currentNote = state.entities.notes[state.ui.currentNote];
+  let tags = state.entities.tags;
+  // let currentTaggings;
+
+  // if (currentNote.tagIds) {
+  //   currentTaggings = currentNote.tagIds.map(id => tags[id]);
+  // }
 
   return ({
-    notes: state.entities.notes[state.ui.currentNote],
+    notes: currentNote,
     defaultNotebook: currentUser.default_notebook,
     currentNote: state.ui.currentNote,
-    tags: state.entities.tags
+    tags
   });
 }
 

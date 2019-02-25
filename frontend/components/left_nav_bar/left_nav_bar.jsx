@@ -62,8 +62,7 @@ class LeftNavBar extends Component {
     
     if (tagId) {
       this.props.createNote(note).then(payload => {
-        this.props.createTagging(tagId, Object.values(payload.notes)[0].id).then(() => this.props.history.push(`/tags/${tagId}`));
-        this.props.setCurrentNote(Object.values(payload.notes)[0].id);
+        this.props.createTagging(tagId, Object.values(payload.notes)[0].id).then(() => this.props.setCurrentNote(Object.values(payload.notes)[0].id));
       });
     } else {
       this.props.createNote(note).then(payload => {

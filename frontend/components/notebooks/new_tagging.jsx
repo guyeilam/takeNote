@@ -32,6 +32,12 @@ class NewTagging extends Component {
     }
   }
 
+  alreadyTagged() {
+    const tags = this.props.tags ? Object.keys(this.props.tags).map(id => this.props.tags[id]) : null;
+
+    
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     let tag;
@@ -48,11 +54,13 @@ class NewTagging extends Component {
     }
     
     if (searchResult) {
-      this.props.createTagging(searchResult, this.props.currentNote).then(() => this.props.requestSingleNote(this.props.currentNote));
+      // this.props.createTagging(searchResult, this.props.currentNote).then(() => this.props.requestSingleNote(this.props.currentNote));
+      this.props.createTagging(searchResult, this.props.currentNote);
     } else {
       tag = Object.assign({}, { label: label });
       this.props.createTag(tag).then(response => {
-        this.props.createTagging(Object.keys(response.payload.tags)[0], this.props.currentNote).then(() => this.props.requestSingleNote(this.props.currentNote));
+        // this.props.createTagging(Object.keys(response.payload.tags)[0], this.props.currentNote).then(() => this.props.requestSingleNote(this.props.currentNote));
+        this.props.createTagging(Object.keys(response.payload.tags)[0], this.props.currentNote);
       });
     }
   }
@@ -98,7 +106,8 @@ class NewTagging extends Component {
     this.setState({ label: '' });
     // this.handleSubmit(event);
     let searchResult = this.handleSearch(label);
-    this.props.createTagging(searchResult, this.props.currentNote).then(() => this.props.requestSingleNote(this.props.currentNote));
+    // this.props.createTagging(searchResult, this.props.currentNote).then(() => this.props.requestSingleNote(this.props.currentNote));
+    this.props.createTagging(searchResult, this.props.currentNote);
   }
 
   // END AUTOCOMPLETE

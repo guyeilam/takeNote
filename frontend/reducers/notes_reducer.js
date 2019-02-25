@@ -2,7 +2,7 @@ import merge from 'lodash/merge';
 
 import { RECEIVE_SINGLE_NOTEBOOK, RECEIVE_ALL_NOTEBOOKS } from '../actions/notebook_actions';
 import { RECEIVE_SINGLE_NOTE, RECEIVE_ALL_NOTES, SET_CURRENT_NOTE, REMOVE_NOTE } from '../actions/note_actions';
-import { RECEIVE_SINGLE_TAG, RECEIVE_UPDATED_TAG } from '../actions/tag_actions';
+import { RECEIVE_SINGLE_TAG, RECEIVE_UPDATED_TAGGING } from '../actions/tag_actions';
 
 const notesReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -29,8 +29,11 @@ const notesReducer = (state = {}, action) => {
     case RECEIVE_SINGLE_TAG:
       notes = action.payload.notes;
       return merge({}, notes);
-    case RECEIVE_UPDATED_TAG:
-      return merge({}, state, action.payload.notes);
+    case RECEIVE_UPDATED_TAGGING:
+      newState = merge({}, state);
+      let updatedNote = Object.values(action.payload.notes)[0];
+      delete newState[updatedNote.id];
+      return merge({}, newState, action.payload.notes);
     default:
       return state;
   }

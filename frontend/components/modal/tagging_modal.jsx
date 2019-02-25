@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { closeNavModal } from '../../actions/modal_actions';
 import { deleteTagging, requestSingleTag } from '../../actions/tag_actions';
-import { requestSingleNote, requestAllNotes } from '../../actions/note_actions';
+import { requestSingleNote, requestAllNotes, setCurrentNote } from '../../actions/note_actions';
 
 class TaggingModal extends Component {
   constructor(props) {
@@ -26,14 +26,16 @@ class TaggingModal extends Component {
     let tagId = this.props.navModalId;
     let noteId = this.props.currentNote;
     this.props.closeNavModal();
-    this.props.deleteTagging(tagId, noteId).then(() => {
-      if (this.props.match.params.tagId) {
-        this.props.requestSingleTag(tagId);
-      } else {
-        // this.props.requestSingleNote(this.props.currentNote);
-        this.props.requestAllNotes();
-      }
-    });
+    this.props.deleteTagging(tagId, noteId);
+    this.props.setCurrentNote(null);
+    // .then(() => {
+      // if (this.props.match.params.tagId) {
+      //   this.props.requestSingleTag(tagId);
+      // } else {
+      //   this.props.requestSingleNote(this.props.currentNote);
+      //   // this.props.requestAllNotes();
+      // }
+    // });
   }
 
   render() {
@@ -64,7 +66,8 @@ const mapDispatchToProps = dispatch => {
     deleteTagging: (tagId, noteId) => dispatch(deleteTagging(tagId, noteId)),
     requestSingleTag: tagId => dispatch(requestSingleTag(tagId)),
     requestSingleNote: noteId => dispatch(requestSingleNote(noteId)),
-    requestAllNotes: () => dispatch(requestAllNotes())
+    requestAllNotes: () => dispatch(requestAllNotes()),
+    setCurrentNote: (noteId) => dispatch(setCurrentNote(noteId))
   };
 };
 

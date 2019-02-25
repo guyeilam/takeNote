@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux';
-import { setCurrentNote, updateNote, createNote } from '../../actions/note_actions';
+import { setCurrentNote, updateNote, createNote, requestSingleNote } from '../../actions/note_actions';
 import NewTagging from './new_tagging';
 import NoteHeader from './note_header';
 
@@ -35,11 +35,14 @@ class EditNote extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.notes) {
       if (!prevProps.notes || (prevProps.notes.id !== this.props.notes.id) || (this.state.noteId !== this.props.currentNote)) {
-        this.setState({
-          noteId: this.props.notes.id,
-          title: this.props.notes.title,
-          content: this.props.notes.content,
-          plain_text: this.props.notes.plain_text
+
+        this.props.requestSingleNote(this.props.currentNote).then(() => {
+          this.setState({
+            noteId: this.props.notes.id,
+            title: this.props.notes.title,
+            content: this.props.notes.content,
+            plain_text: this.props.notes.plain_text
+          });
         });
       }
     }
@@ -55,9 +58,9 @@ class EditNote extends Component {
     }
   }
 
-  handleEditorChange(content, delta, source, editor) {
+  handleEditorChange(html, delta, source, editor) {
     this.setState({
-      content: content,
+      content: html,
       plain_text: editor.getText().trim()
     });
   }
@@ -69,7 +72,6 @@ class EditNote extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // const notebookId = this.props.notes[this.props.currentNote].notebook_id;
     const note = Object.assign({}, { id: this.props.currentNote, title: this.state.title, content: this.state.content, plain_text: this.state.plain_text });
     this.props.updateNote(note);
   }
@@ -111,7 +113,7 @@ class EditNote extends Component {
     return (
       <div className='note-edit'>
 
-      <NoteHeader />
+      <NoteHeader note={this.props.notes}/>
 
         <div className='note-edit-container'>
           <div className='note-form'>
@@ -148,7 +150,7 @@ class EditNote extends Component {
 const mapStateToProps = state => {
   const currentId = state.session.id;
   const currentUser = state.entities.users[currentId] || null;
-  
+
   return ({
     notes: state.entities.notes[state.ui.currentNote],
     defaultNotebook: currentUser.default_notebook,
@@ -158,6 +160,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return ({
+    requestSingleNote: noteId => dispatch(requestSingleNote(noteId)),
     setCurrentNote: noteId => dispatch(setCurrentNote(noteId)),
     updateNote: note => dispatch(updateNote(note)),
     createNote: note => dispatch(createNote(note))

@@ -10,9 +10,6 @@ import NotebooksSortModal from './notebooks_sort_modal';
 class NavModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      modalId: this.props.idx
-    };
   }
 
   render() {
@@ -66,7 +63,7 @@ class NavModal extends Component {
         return null;
     }
 
-    if (this.state.modalId === navModalId) {
+    if (idx === navModalId) {
       return (
         <>
           <div className={parentClass} onClick={closeNavModal}>
