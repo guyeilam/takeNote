@@ -776,3 +776,12 @@
 }
 
 /* END NOTEBOOKS SORT MODAL */
+
+
+/* LEFT NAV NOTEBOOKS SUBMENU */
+
+.left-nav-notebooks-list {
+  display: flex;
+}
+
+/* END LEFT NAV NOTEBOOKS SUBMENU */

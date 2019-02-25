@@ -62,12 +62,12 @@ class MoveNote extends Component {
       <div className='move-note-container'>
         <form onSubmit={this.handleSubmit} className="move-note-form">
           <div className='form-header-and-content'>
-                <div className='new-notebook-form-header'>
+                <div className='move-note-form-header'>
                   <div className='move-note-header-text'>Move note to...</div>
                   <div onClick={this.props.closeModal} className="close-x">X</div>
                 </div>
 
-                <div className="new-notebook-form-content">
+                <div className="move-note-form-content">
                   <div className='move-note-notebooks-list'>
                     {notebookItems}
                   </div>

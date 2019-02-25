@@ -163,6 +163,7 @@ class NewTagging extends Component {
                 value={this.state.label}
                 onChange={this.update('label')}
                 className="new-tagging-input-label"
+                placeholder='Add tag'
               />
             </div>
             <input className="new-tagging-submit-button" type="submit" value='New Tag' hidden disabled={this.state.disabled} />

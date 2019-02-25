@@ -9,7 +9,7 @@ import { createNote, setCurrentNote } from '../../actions/note_actions';
 import { requestSingleNotebook } from '../../actions/notebook_actions';
 import { createTagging } from '../../actions/tag_actions';
 import { getNotebookTitles } from '../../reducers/selectors';
-import { findNotebookByTitle } from '../../util/search_util';
+import LeftNavNotebooks from '../notebooks/left_nav_notebooks';
 
 class LeftNavBar extends Component {
   constructor(props) {
@@ -18,14 +18,10 @@ class LeftNavBar extends Component {
       currentViewNotebooks: '',
       currentViewNotes: '',
       currentViewTags: '',
-      // inputVal: '',
-      // disableSearch: false
+      showNotebooks: false
     }
     this.handleModalClick = this.handleModalClick.bind(this);
-    // this.handleSearch = this.handleSearch.bind(this);
     this.createNewNote = this.createNewNote.bind(this);
-    // this.selectTitle = this.selectTitle.bind(this);
-    // this.handleInput = this.handleInput.bind(this);
   }
 
   componentDidMount() {
@@ -44,16 +40,6 @@ class LeftNavBar extends Component {
       this.props.openNavModal('notebook-actions-nav');
     }
   }
-
-  // createNewNote() {
-  //   return (e) => {
-  //     const note = Object.assign({}, { title: '', content: '', plain_text: '', notebook_id: this.props.defaultNotebook });
-  //     this.props.createNote(note).then(payload => {
-  //       this.props.setCurrentNote(Object.values(payload.notes)[0].id);
-  //       this.props.history.push(`/notebooks/${this.props.defaultNotebook}`);
-  //     });
-  //   }
-  // }
 
   createNewNote() {
     let notebookId = this.props.match.params.notebookId ? parseInt(this.props.match.params.notebookId) : this.props.defaultNotebook;
@@ -78,6 +64,8 @@ class LeftNavBar extends Component {
   }
 
   render() {
+    const arrowIconRight = <svg width="6" height="9" viewBox="2 240 6 9" xmlns="http://www.w3.org/2000/svg" id="notebook-arrow-icon"><path fill="#9B9B9B" fillRule="evenodd" d="M2 240l6 4.5-6 4.5z"></path></svg>
+    const arrowIconClass = this.state.showNotebooks ? 'rotated-90-degrees' : '';
 
     return (
       <>
@@ -114,17 +102,23 @@ class LeftNavBar extends Component {
               </div>
             </div>
           </Link>
-        
-          <Link to='/client'>
-            <div className={`left-nav-notebooks ${this.state.currentViewNotebooks}`}>
-              <div className='left-nav-notebooks-button-container'>
-                <div className='left-nav-notebooks-icon'>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ccc" fillRule="evenodd" d="M9 4h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9V4zM6 4h2v15H6V4zm5.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-4z"></path></svg>
-                </div>
-                <div className='left-nav-notebooks-text'>Notebooks</div>
-              </div>
+
+          <div className='left-nav-notebooks-list'>
+            <div className='left-nav-notebooks-list-icon'>
+              <div className={`notebook-item-expand ${arrowIconClass}`} onClick={() => this.setState({ showNotebooks: !this.state.showNotebooks })}>{arrowIconRight}</div>
             </div>
-          </Link>
+            <Link to='/client'>
+              <div className={`left-nav-notebooks ${this.state.currentViewNotebooks}`}>
+                <div className='left-nav-notebooks-button-container'>
+                  <div className='left-nav-notebooks-icon'>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ccc" fillRule="evenodd" d="M9 4h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9V4zM6 4h2v15H6V4zm5.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-4z"></path></svg>
+                  </div>
+                  <div className='left-nav-notebooks-text'>Notebooks</div>
+                </div>
+              </div>
+            </Link>
+            <LeftNavNotebooks showNotebooks={this.state.showNotebooks}/>
+          </div>
 
           <Link to='/tags'>
             <div className={`left-nav-tags ${this.state.currentViewTags}`}>

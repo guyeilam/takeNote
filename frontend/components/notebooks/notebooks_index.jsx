@@ -7,6 +7,8 @@ class NotebooksIndex extends Component {
     super(props);
   }
 
+  
+
   componentDidMount() {
     this.props.requestAllNotebooks();
   }
