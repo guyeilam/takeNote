@@ -15,10 +15,18 @@ const mapStateToProps = (state, ownProps) => {
 
   let sorted_notes = notes ? sortedItems(notes, state.ui.sort) : null;
 
+  let notebookNotes = [];
+  
+  (sorted_notes.length > 0) ? sorted_notes.forEach(note => {
+    if (note.notebook_id === notebookId) {
+      notebookNotes.push(note);
+    }
+  }) : null;
+
   return ({
     notebookId,
     notebook,
-    notes: sorted_notes,
+    notes: notebookNotes,
     currentNote: state.ui.currentNote
   });
 }
