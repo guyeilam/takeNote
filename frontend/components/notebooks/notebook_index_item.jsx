@@ -9,6 +9,7 @@ import { requestAllNotebooks, deleteNotebook } from '../../actions/notebook_acti
 import { openNavModal, closeNavModal } from '../../actions/modal_actions';
 import { setCurrentNote } from '../../actions/note_actions';
 import { sortedItems } from '../../reducers/selectors';
+import { truncateStr } from '../../util/string_util';
 
 class NotebooksIndexItem extends Component {
   constructor(props) {
@@ -65,7 +66,7 @@ class NotebooksIndexItem extends Component {
           <div className='notebooks-item-col1 col1'>
             <div className={`notebook-item-expand ${arrowIconClass}`}><button onClick={() => this.handleShowNotes()}>{arrowIconRight}</button></div>
             <div className='notebook-item-icon'><svg className='notebook-icon-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 8.33c0-.18-.22-.33-.5-.33h-4c-.28 0-.5.15-.5.33v1.34c0 .18.22.33.5.33h4c.28 0 .5-.15.5-.33zM18 6v11a2 2 0 0 1-2 2H9V4h7a2 2 0 0 1 2 2zM6 4h2v15H6z"></path></svg></div>
-            <div className='notebook-item-title'><Link to={`/notebooks/${notebookId}`}>{notebook.title} ({this.props.notes.length})</Link></div>
+            <div className='notebook-item-title'><Link to={`/notebooks/${notebookId}`}>{truncateStr(notebook.title, 30)} ({this.props.notes.length})</Link></div>
           </div>
           
           <div className='notebooks-item-col2 col2'>
