@@ -92,11 +92,37 @@ class LeftNavBar extends Component {
 
       <div className='left-nav-buttons-container'>
 
-          <Link to='/notes/all'>
+        <div className={`left-nav-notes left-nav-hover ${this.state.currentViewNotes}`} onClick={() => this.props.history.push('/notes/all')}>
+          <div className='left-nav-notes-expand'></div>
+          <div className='left-nav-notes-icon'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ccc" fillRule="evenodd" d="M16 16h2v-1h-2a.997.997 0 0 0-1 1v3h1v-3zM8 4h8a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm1.5 4a.5.5 0 0 0 0 1h5a.5.5 0 1 0 0-1h-5zm0 3a.5.5 0 1 0 0 1h5a.5.5 0 1 0 0-1h-5zm0 3a.5.5 0 1 0 0 1h3a.5.5 0 1 0 0-1h-3z"></path></svg></div>
+          <div className='left-nav-notes-text'>All notes</div>
+        </div>
+
+        <div className={`left-nav-notebooks left-nav-hover ${this.state.currentViewNotebooks}`}>
+          <div className='left-nav-notebooks-expand'><div className={`notebook-item-expand ${arrowIconClass}`} onClick={() => this.setState({ showNotebooks: !this.state.showNotebooks })}>{arrowIconRight}</div></div>
+          <div className='left-nav-notebooks-link' onClick={() => this.props.history.push('/client')}>
+            <div className='left-nav-notebooks-icon'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ccc" fillRule="evenodd" d="M9 4h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9V4zM6 4h2v15H6V4zm5.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-4z"></path></svg></div>
+            <div className='left-nav-notebooks-text'>Notebooks</div>
+          </div>
+        </div>
+
+        <div className='notebooks-expanded'>
+          <LeftNavNotebooks showNotebooks={this.state.showNotebooks} />
+        </div>
+
+        <div className={`left-nav-tags left-nav-hover ${this.state.currentViewTags}`} onClick={() => this.props.history.push('/tags')}>
+          <div className='left-nav-tags-expand'></div>
+          <div className='left-nav-tags-icon'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ccc" fillRule="evenodd" d="M10.265 9.005a2 2 0 1 0 3.47 0H18v9.5a1.5 1.5 0 0 1-1.5 1.5h-9a1.5 1.5 0 0 1-1.5-1.5v-9.5h4.265zM9.5 16a.5.5 0 1 0 0 1h5a.5.5 0 1 0 0-1h-5zm0-2a.5.5 0 1 0 0 1h5a.5.5 0 1 0 0-1h-5zm4.235-4.995H18l-4.982-4.606a1.5 1.5 0 0 0-2.036 0L6 9.005h4.265a2 2 0 0 1 3.47 0z"></path></svg></div>
+          <div className='left-nav-tags-text'>Tags</div>
+        </div>
+
+    
+
+          {/* <Link to='/notes/all'>
             <div className={`left-nav-all-notes ${this.state.currentViewNotes}`}>
               <div className='left-nav-notes-button-container'>  
                 <div className='left-nav-all-notes-icon'>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ccc" fillRule="evenodd" d="M16 16h2v-1h-2a.997.997 0 0 0-1 1v3h1v-3zM8 4h8a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm1.5 4a.5.5 0 0 0 0 1h5a.5.5 0 1 0 0-1h-5zm0 3a.5.5 0 1 0 0 1h5a.5.5 0 1 0 0-1h-5zm0 3a.5.5 0 1 0 0 1h3a.5.5 0 1 0 0-1h-3z"></path></svg>
+                  
                 </div>
                 <div className='left-nav-all-notes-text'>All notes</div>
               </div>
@@ -105,31 +131,31 @@ class LeftNavBar extends Component {
 
           <div className='left-nav-notebooks-list'>
             <div className='left-nav-notebooks-list-icon'>
-              <div className={`notebook-item-expand ${arrowIconClass}`} onClick={() => this.setState({ showNotebooks: !this.state.showNotebooks })}>{arrowIconRight}</div>
+              
             </div>
             <Link to='/client'>
               <div className={`left-nav-notebooks ${this.state.currentViewNotebooks}`}>
                 <div className='left-nav-notebooks-button-container'>
                   <div className='left-nav-notebooks-icon'>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ccc" fillRule="evenodd" d="M9 4h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9V4zM6 4h2v15H6V4zm5.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-4z"></path></svg>
+                    
                   </div>
                   <div className='left-nav-notebooks-text'>Notebooks</div>
                 </div>
               </div>
             </Link>
-            <LeftNavNotebooks showNotebooks={this.state.showNotebooks}/>
+            
           </div>
 
           <Link to='/tags'>
             <div className={`left-nav-tags ${this.state.currentViewTags}`}>
               <div className='left-nav-tags-button-container'>
                 <div className='left-nav-tags-icon'>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ccc" fillRule="evenodd" d="M10.265 9.005a2 2 0 1 0 3.47 0H18v9.5a1.5 1.5 0 0 1-1.5 1.5h-9a1.5 1.5 0 0 1-1.5-1.5v-9.5h4.265zM9.5 16a.5.5 0 1 0 0 1h5a.5.5 0 1 0 0-1h-5zm0-2a.5.5 0 1 0 0 1h5a.5.5 0 1 0 0-1h-5zm4.235-4.995H18l-4.982-4.606a1.5 1.5 0 0 0-2.036 0L6 9.005h4.265a2 2 0 0 1 3.47 0z"></path></svg>
+                  
                 </div>
                 <div className='left-nav-tags-text'>Tags</div>
               </div>
             </div>
-          </Link>
+          </Link> */}
         </div>
       </>
     );

@@ -780,7 +780,7 @@
 
 /* LEFT NAV NOTEBOOKS SUBMENU */
 
-.left-nav-all-notes, .left-nav-notebooks-list, .left-nav-tags {
+/* .left-nav-all-notes, .left-nav-notebooks-list, .left-nav-tags {
   display: flex;
 }
 
@@ -794,9 +794,9 @@
 
 .left-nav-all-notes-icon, .left-nav-tags-icon {
   width: 50px;
-}
+} */
 
-.left-nav-buttons-container {
+/* .left-nav-buttons-container {
   font-size: 14px;
   color: #ccc;
 }
@@ -806,11 +806,64 @@
   transition: .1s ease-in-out;
 }
 
+*/
+
 .left-nav-buttons-container {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, san-serif;
   font-size: 13px;
   font-weight: 500;
   line-height: 1.5em;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-nav-notes, .left-nav-notebooks, .left-nav-tags {
+  display: flex;
+  align-items: center;
+  padding: 3px 0px 3px 0px;
+}
+
+.left-nav-notes-expand, .left-nav-notebooks-expand, .left-nav-tags-expand {
+  flex-basis: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notebook-item-expand {
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+.left-nav-notes-icon, .left-nav-notebooks-icon, .left-nav-tags-icon {
+  flex-basis: 10%;
+  display: flex;
+}
+
+.left-nav-notes-text, .left-nav-notebooks-text, .left-nav-tags-text {
+  flex-basis: 80%;
+  display: flex;
+}
+
+.left-nav-hover:hover {
+  background-color: #333;
+  transition: .1s ease-in-out;
+  cursor: pointer;
+}
+
+.notebooks-expanded {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+
+.left-nav-notebooks-item {
+  display: flex;
+}
+
+.left-nav-notebooks-link {
+  display: flex;
+  align-items: center;
 }
 
 /* END LEFT NAV NOTEBOOKS SUBMENU */
