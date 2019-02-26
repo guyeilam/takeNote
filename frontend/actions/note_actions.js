@@ -1,4 +1,5 @@
 import * as NoteAPIUtil from '../util/note_api_util';
+import { startLoading } from './loading_actions';
 
 export const RECEIVE_SINGLE_NOTE = 'RECEIVE_SINGLE_NOTE';
 export const RECEIVE_ALL_NOTES = 'RECEIVE_ALL_NOTES';
@@ -15,8 +16,9 @@ export const receiveAllNotes = (payload) => {
 
 export const requestAllNotes = () => {
   return (dispatch) => {
+    dispatch(startLoading());
     return NoteAPIUtil.fetchAllNotes().then((payload) => {
-      return dispatch(receiveAllNotes(payload));
+      setTimeout(() => { return dispatch(receiveAllNotes(payload)); }, 2000);
       },
         (err) => {
           return dispatch(receiveNoteErrors(err.responseJSON));

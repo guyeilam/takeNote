@@ -5,11 +5,13 @@ import navModal from './nav_modal_reducer';
 import navModalId from './nav_modal_id_reducer';
 import currentNoteReducer from './current_note_reducer';
 import sortReducer from './sort_reducer';
+import loadingReducer from './loading_reducer';
 
 export default combineReducers({
   modal,
   navModal,
   navModalId,
   currentNote: currentNoteReducer,
-  sort: sortReducer
+  sort: sortReducer,
+  loading: loadingReducer
 });

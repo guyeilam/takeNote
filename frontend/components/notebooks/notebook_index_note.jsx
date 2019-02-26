@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import NavModal from '../modal/nav_modal';
 import { openNavModal } from '../../actions/modal_actions';
 import { formatDateTime } from '../../util/datetime_util';
+import { setCurrentNote } from '../../actions/note_actions';
+import { withRouter } from 'react-router-dom';
 
 class NotebookIndexNote extends Component {
   constructor(props) {
@@ -67,8 +69,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return ({
     openNavModal: (navModal, navModalId) => dispatch(openNavModal(navModal, navModalId)),
-    requestAllNotebooks: () => dispatch(requestAllNotebooks())
+    requestAllNotebooks: () => dispatch(requestAllNotebooks()),
+    setCurrentNote: noteId => dispatch(setCurrentNote(noteId))
   });
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotebookIndexNote);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NotebookIndexNote));
