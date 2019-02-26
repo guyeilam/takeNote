@@ -2,11 +2,12 @@ class Api::NotesController < ApplicationController
   before_action :require_signed_in
   
   def index
-    @notes = Note.all
+    @notes = current_user.notes
   end
 
   def show
-    @note = Note.find_by(id: params[:id])
+    # @note = Note.find_by(id: params[:id])
+    @note = current_used.notes.find_by(id: params[:id])
     if @note
       render :show
     else
