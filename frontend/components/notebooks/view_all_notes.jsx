@@ -19,7 +19,8 @@ class NotesList extends Component {
 
   componentDidMount() {
     if (this.props.notebookId) {
-      this.props.requestSingleNotebook(this.props.notebookId);
+      // this.props.requestSingleNotebook(this.props.notebookId);
+      // this.props.requestAllNotebooks();
     } else if (this.props.tagId) {
       this.props.requestSingleTag(this.props.tagId);
     } else if (this.props.match.path === '/notes/all') {

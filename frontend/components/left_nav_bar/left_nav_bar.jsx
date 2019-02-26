@@ -55,7 +55,8 @@ class LeftNavBar extends Component {
       this.props.createNote(note).then(payload => {
         // this.props.setCurrentNote(Object.values(payload.notes)[0].id);
         if (this.props.match.params.notebookId) {
-            this.props.requestSingleNotebook(parseInt(notebookId)).then(() => this.props.setCurrentNote(Object.values(payload.notes)[0].id));
+            // this.props.requestSingleNotebook(parseInt(notebookId)).then(() => this.props.setCurrentNote(Object.values(payload.notes)[0].id));
+            this.props.setCurrentNote(Object.values(payload.notes)[0].id);
           } else {
             this.props.history.push(`/notebooks/${notebookId}`);
             this.props.setCurrentNote(Object.values(payload.notes)[0].id);
