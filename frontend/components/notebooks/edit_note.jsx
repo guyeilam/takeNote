@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { setCurrentNote, updateNote, createNote, requestSingleNote } from '../../actions/note_actions';
 import NewTagging from './new_tagging';
 import NoteHeader from './note_header';
+import LoadingIcon from '../notebooks/all_notes_tag_label';
 
 class EditNote extends Component {
   constructor(props) {
@@ -109,9 +110,13 @@ class EditNote extends Component {
 
       ['clean']                                         // remove formatting button
     ];
+    
+    const loadingIcon = this.props.loading ? <LoadingIcon /> : null;
 
     return (
       <div className='note-edit'>
+
+      {loadingIcon}
 
       <NoteHeader note={this.props.notes}/>
 
@@ -154,7 +159,8 @@ const mapStateToProps = state => {
   return ({
     notes: state.entities.notes[state.ui.currentNote],
     defaultNotebook: currentUser.default_notebook,
-    currentNote: state.ui.currentNote
+    currentNote: state.ui.currentNote,
+    loading: state.ui.loading
   });
 }
 

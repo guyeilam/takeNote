@@ -1,23 +1,62 @@
 import React, { Component } from 'react';
 import NotebooksIndexItem from './notebook_index_item';
 import NavModal from '../modal/nav_modal';
+import NotebookIndexNote from './notebook_index_note';
 
 class NotebooksIndex extends Component {
   constructor(props) {
     super(props);
+    this.rowSelector = this.rowSelector.bind(this);
+    this.requestSpecificNote = this.requestSpecificNote.bind(this);
   }
 
-  
+  rowSelector(idx) {
+    if (idx % 2 === 0) {
+      return 'even-row';
+    } else {
+      return 'odd-row';
+    }
+  }
+
+  requestSpecificNote(note) {
+    return (e) => {
+      this.props.setCurrentNote(note.id);
+      this.props.history.push('/notes/all');
+    }
+  }
 
   componentDidMount() {
     this.props.requestAllNotebooks();
   }
 
   render() {
-    const notebooks = this.props.notebooks;
-    
-    if (!notebooks) { return null; }
+    const notebooks = Object.values(this.props.notebooks);
+    const notes = Object.values(this.props.notes);
+    let table = [];
 
+    if (!(notebooks && notes)) { return null; }
+
+
+    notebooks.forEach((notebook, idx) => {
+      let notebookRow = (
+        <NotebooksIndexItem key={notebook.id} idx={idx} notebookId={notebook.id} />
+      );
+      table.push(notebookRow);
+      
+      notes.forEach((note, idxn) => {
+        let noteRow = (
+          // <section className='notebooks-index-item-notes'>
+            <NotebookIndexNote key={idxn} idx={idxn} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} />
+          // </section>
+        );
+        if (note.notebook_id === notebook.id) {
+          table.push(noteRow);
+        }
+      });
+      
+    });
+
+    
     return (
       <>
           <div className='notebooks-list-container'>
@@ -30,9 +69,9 @@ class NotebooksIndex extends Component {
                     <div className='new-notebook-button-text'>New Notebook</div>
                   </div>
                   
-                  <NavModal modalId={0} />
+                  <NavModal modalId={null} />
                   
-                  <div className='notebooks-list-menubar-sort-button' onClick={() => this.props.openNavModal('notebooks-sort', 0)}>
+                  <div className='notebooks-list-menubar-sort-button' onClick={() => this.props.openNavModal('notebooks-sort', null)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path ill="#000" fillRule="nonzero" d="M8 16.793l-2.146-2.147-.708.708L8.5 18.707l3.354-3.353-.708-.708L9 16.793V5H8v11.793zM12 5h9v1h-9V5zm0 3h7v1h-7V8zm0 3h5v1h-5v-1z"></path></svg>
                   </div>  
                 </div>
@@ -47,7 +86,7 @@ class NotebooksIndex extends Component {
             </div>
 
             <div className='notebooks-list-content-ul'>
-              {notebooks.map((notebook, idx) => <NotebooksIndexItem key={notebook.id} idx={idx} notebookId={notebook.id} />)}
+              {table}
             </div>
 
           </div>

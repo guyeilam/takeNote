@@ -29,7 +29,7 @@ class NoteHeaderModal extends Component {
     return (
       <>
         <div className='note-header-nav-text'>
-          <div className='notes-nav-delete-note notes-nav-button'><div className='notes-nav-button-text' onClick={() => this.handleDeleteNote(this.props.currentNote)}>Delete note...</div></div>
+          <div className='notes-nav-delete-note notes-nav-button'><div className='notes-nav-button-text' onClick={() => this.handleDeleteNote(this.props.navModalId)}>Delete note...</div></div>
           <div className='notes-nav-move-note notes-nav-button'><div className='notes-nav-button-text' onClick={() => this.moveNoteModal()}>Move note</div></div>
         </div>
       </>

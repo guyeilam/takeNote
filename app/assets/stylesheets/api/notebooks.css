@@ -219,7 +219,7 @@
   transition: all 0.1s ease-out;
 }
 
-.sorted-normal {
+/* .sorted-normal {
   display: flex;
   flex-direction: column;
 }
@@ -227,15 +227,15 @@
 .sorted-reverse {
   display: flex;
   flex-direction: column-reverse;
-}
+} */
 
-.odd-row {
+/* .odd-row {
   background-color: #f8f8f8;
-}
+} */
 
-.even-row {
+/* .even-row {
   background-color: white;
-}
+} */
 
 .row-identifier:hover { 
   background-color: #eeeeee;
@@ -861,9 +861,26 @@
   display: flex;
 }
 
+.left-nav-notebooks-item:hover {
+  cursor: pointer;
+}
+
 .left-nav-notebooks-link {
   display: flex;
   align-items: center;
 }
 
 /* END LEFT NAV NOTEBOOKS SUBMENU */
+
+
+.notebooks-index-item-hover:nth-of-type(2n) {
+  background-color: #f8f8f8;
+}
+
+.even-row:hover {
+  background-color: #eeeeee;
+}
+
+.odd-row:hover {
+  background-color: #eeeeee;
+}

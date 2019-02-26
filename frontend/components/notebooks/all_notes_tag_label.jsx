@@ -1,8 +1,8 @@
 import React from 'react';
 
 const AllNotesTagLabel = (props) => {
-  if (!props) { return null; }
-
+  if (!props.label) { return null; }
+  
   let tagLabel;
 
   if (props.label.length > 8) {

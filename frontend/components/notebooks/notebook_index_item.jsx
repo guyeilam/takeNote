@@ -84,9 +84,9 @@ class NotebooksIndexItem extends Component {
             </div>
           </div>
         </div>
-        <section className='notebooks-index-item-notes'>
+        {/* <section className='notebooks-index-item-notes'>
           {noteItems}
-        </section>
+        </section> */}
       </>
     );
   }

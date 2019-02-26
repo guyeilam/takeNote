@@ -70,8 +70,9 @@ class NotesList extends Component {
     let tagLabel = null;
     let tagId = this.props.tagId;
     
-    tagLabel = (tagId && this.props.tag) ? <AllNotesTagLabel label={this.props.tag.label} closeTag={() => this.closeTag()}/> : null;
-    
+    if (this.props.match.path === '/tags/:tagId') {
+      tagLabel = (tagId && this.props.tag) ? <AllNotesTagLabel label={this.props.tag.label} closeTag={() => this.closeTag()}/> : null;
+    }
 
     // Set variables for notebook if viewing a notebook
     let notebookId = this.props.notebookId;

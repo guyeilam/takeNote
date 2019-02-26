@@ -18,7 +18,7 @@ export const requestAllNotes = () => {
   return (dispatch) => {
     dispatch(startLoading());
     return NoteAPIUtil.fetchAllNotes().then((payload) => {
-      setTimeout(() => { return dispatch(receiveAllNotes(payload)); }, 2000);
+        return dispatch(receiveAllNotes(payload));
       },
         (err) => {
           return dispatch(receiveNoteErrors(err.responseJSON));

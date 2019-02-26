@@ -7,18 +7,12 @@ import ViewNotebookContainer from './view_notebook_container';
 import { withRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import TagsList from '../tags/tags_index';
-import LoadingIcon from '../notebooks/loading_icon';
 
 class Client extends Component {
   render () {
-
-    const loadingIcon = this.props.loading ? <LoadingIcon /> : null;
-
     return (
       <>
         <Modal />
-
-        {loadingIcon}
 
         <section className='notebooks'>
 
@@ -57,7 +51,7 @@ class Client extends Component {
 
 const mapStateToProps = state => {
   return ({
-    loading: state.ui.loading
+    
   });
 }
 
