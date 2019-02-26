@@ -19,6 +19,7 @@ class NotebooksIndexItem extends Component {
     this.rowSelector = this.rowSelector.bind(this);
     this.requestSpecificNote = this.requestSpecificNote.bind(this);
     this.handleModalClick = this.handleModalClick.bind(this);
+    this.handleShowNotes = this.handleShowNotes.bind(this);
   }
 
   rowSelector(idx) {
@@ -33,7 +34,6 @@ class NotebooksIndexItem extends Component {
     return (e) => {
       this.props.setCurrentNote(note.id);
       this.props.history.push('/notes/all');
-      
     }
   }
 
@@ -44,22 +44,27 @@ class NotebooksIndexItem extends Component {
     }
   }
 
+  handleShowNotes() {
+    this.setState({ showNotes: !this.state.showNotes });
+    this.props.toggleShowNotes(this.props.notebookId);
+  }
+
   render() {
     const { notebookId, notebook } = this.props
     const arrowIconRight = <svg width="6" height="9" viewBox="2 240 6 9" xmlns="http://www.w3.org/2000/svg" id="notebook-arrow-icon"><path fill="#9B9B9B" fillRule="evenodd" d="M2 240l6 4.5-6 4.5z"></path></svg>
     const arrowIconClass = this.state.showNotes ? 'rotated-90-degrees' : '';
 
-    const noteItems = this.state.showNotes ? this.props.notes.map((note, idx) => {
-      return (
-        <NotebookIndexNote key={idx} idx={this.props.idx+idx+1} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} />
-      ); }) : null;
+    // const noteItems = this.state.showNotes ? this.props.notes.map((note, idx) => {
+    //   return (
+    //     <NotebookIndexNote key={idx} idx={this.props.idx+idx+1} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} />
+    //   ); }) : null;
     
     return (
       <>
         <div className={`notebooks-index-item-hover ${this.rowSelector(this.props.idx)}`}>
           <div className='notebooks-item-col1 col1'>
-            <div className={`notebook-item-expand ${arrowIconClass}`}><button onClick={() => this.setState({ showNotes: !this.state.showNotes })}>{arrowIconRight}</button></div>
-            <div className='notebook-item-icon'><svg className='notebook-icon-svg' id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs></defs><path className="cls-1" d="M16 8.33c0-.18-.22-.33-.5-.33h-4c-.28 0-.5.15-.5.33v1.34c0 .18.22.33.5.33h4c.28 0 .5-.15.5-.33zM18 6v11a2 2 0 0 1-2 2H9V4h7a2 2 0 0 1 2 2zM6 4h2v15H6z"></path></svg></div>
+            <div className={`notebook-item-expand ${arrowIconClass}`}><button onClick={() => this.handleShowNotes()}>{arrowIconRight}</button></div>
+            <div className='notebook-item-icon'><svg className='notebook-icon-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 8.33c0-.18-.22-.33-.5-.33h-4c-.28 0-.5.15-.5.33v1.34c0 .18.22.33.5.33h4c.28 0 .5-.15.5-.33zM18 6v11a2 2 0 0 1-2 2H9V4h7a2 2 0 0 1 2 2zM6 4h2v15H6z"></path></svg></div>
             <div className='notebook-item-title'><Link to={`/notebooks/${notebookId}`}>{notebook.title} ({this.props.notes.length})</Link></div>
           </div>
           
@@ -112,7 +117,9 @@ const mapStateToProps = (state, ownProps) => {
     notebook,
     notes: sorted_notes,
     currentUserEmail: currentUser.email,
-    idx: ownProps.idx
+    idx: ownProps.idx,
+    toggleShowNotes: ownProps.toggleShowNotes,
+    notebookId
   });
 }
 

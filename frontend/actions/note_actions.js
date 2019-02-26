@@ -1,11 +1,17 @@
 import * as NoteAPIUtil from '../util/note_api_util';
-import { startLoading } from './loading_actions';
 
 export const RECEIVE_SINGLE_NOTE = 'RECEIVE_SINGLE_NOTE';
 export const RECEIVE_ALL_NOTES = 'RECEIVE_ALL_NOTES';
 export const RECEIVE_NOTE_ERRORS = 'RECEIVE_NOTE_ERRORS';
 export const REMOVE_NOTE = 'REMOVE_NOTE';
 export const SET_CURRENT_NOTE = 'SET_CURRENT_NOTE';
+export const START_LOADING_NOTES = 'START_LOADING_NOTES';
+
+export const loadNotes = () => {
+  return ({
+    type: START_LOADING_NOTES
+  });
+}
 
 export const receiveAllNotes = (payload) => {
   return ({
@@ -16,7 +22,7 @@ export const receiveAllNotes = (payload) => {
 
 export const requestAllNotes = () => {
   return (dispatch) => {
-    dispatch(startLoading());
+    dispatch(loadNotes());
     return NoteAPIUtil.fetchAllNotes().then((payload) => {
         return dispatch(receiveAllNotes(payload));
       },
@@ -67,6 +73,7 @@ export const receiveNoteErrors = (errors) => {
 
 export const requestSingleNote = (noteId) => {
   return (dispatch) => {
+    dispatch(loadNotes());
     return NoteAPIUtil.fetchSingleNote(noteId).then((payload) => {
       return dispatch(receiveSingleNote(payload));
     },
@@ -78,6 +85,7 @@ export const requestSingleNote = (noteId) => {
 
 export const updateNote = (note) => {
   return (dispatch) => {
+    dispatch(loadNotes());
     return NoteAPIUtil.updateNote(note).then((note) => {
       return dispatch(receiveSingleNote(note));
     },
@@ -89,6 +97,7 @@ export const updateNote = (note) => {
 
 export const createNote = (note) => {
   return (dispatch) => {
+    dispatch(loadNotes());
     return NoteAPIUtil.createNote(note).then((note) => {
       dispatch(receiveSingleNote(note));
       return note;

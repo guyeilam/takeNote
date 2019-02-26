@@ -25,11 +25,12 @@ class LeftNavBar extends Component {
   }
 
   componentDidMount() {
-    if (this.props.match.path === '/client') {
+    let currentPath = this.props.match.path;
+    if ((currentPath === '/client') || (currentPath === '/notebooks/:notebookId')) {
       this.setState({ currentViewNotebooks: 'current-view' });
-    } else if (this.props.match.path === '/notes/all') {
+    } else if (currentPath === '/notes/all') {
       this.setState({ currentViewNotes: 'current-view' });
-    } else if (this.props.match.path === '/tags') {
+    } else if ((currentPath === '/tags') || (currentPath === '/tags/:tagId')) {
       this.setState({ currentViewTags: 'current-view' });
     }
   }
@@ -106,7 +107,7 @@ class LeftNavBar extends Component {
           </div>
         </div>
 
-        <div className='notebooks-expanded'>
+        <div className='notebooks-expanded-container'>
           <LeftNavNotebooks showNotebooks={this.state.showNotebooks} />
         </div>
 
@@ -116,8 +117,7 @@ class LeftNavBar extends Component {
           <div className='left-nav-tags-text'>Tags</div>
         </div>
 
-    
-
+  
           {/* <Link to='/notes/all'>
             <div className={`left-nav-all-notes ${this.state.currentViewNotes}`}>
               <div className='left-nav-notes-button-container'>  

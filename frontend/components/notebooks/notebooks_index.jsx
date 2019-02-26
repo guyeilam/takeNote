@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import merge from 'lodash/merge';
 import NotebooksIndexItem from './notebook_index_item';
 import NavModal from '../modal/nav_modal';
 import NotebookIndexNote from './notebook_index_note';
@@ -6,8 +7,13 @@ import NotebookIndexNote from './notebook_index_note';
 class NotebooksIndex extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      notesVisible: {}
+    }
     this.rowSelector = this.rowSelector.bind(this);
     this.requestSpecificNote = this.requestSpecificNote.bind(this);
+    this.toggleShowNotes = this.toggleShowNotes.bind(this);
+    this.notesVisible = this.notesVisible.bind(this);
   }
 
   rowSelector(idx) {
@@ -15,6 +21,26 @@ class NotebooksIndex extends Component {
       return 'even-row';
     } else {
       return 'odd-row';
+    }
+  }
+
+  notesVisible(notebookId) {
+    if (!this.state.notesVisible[notebookId] || (this.state.notesVisible[notebookId] === false)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  toggleShowNotes(notebookId) {
+    let newState;
+    if (!this.state.notesVisible[notebookId]) {
+      newState = merge(this.state.notesVisible, { [notebookId]: true });
+      this.setState({ notesVisible: newState });
+    } else {
+      newState = this.state.notesVisible;
+      newState[notebookId] = !newState[notebookId];
+      this.setState({ notesVisible: newState });
     }
   }
 
@@ -38,8 +64,10 @@ class NotebooksIndex extends Component {
 
 
     notebooks.forEach((notebook, idx) => {
+
+      
       let notebookRow = (
-        <NotebooksIndexItem key={notebook.id} idx={idx} notebookId={notebook.id} />
+        <NotebooksIndexItem key={notebook.id} idx={idx} notebookId={notebook.id} toggleShowNotes={this.toggleShowNotes}/>
       );
       table.push(notebookRow);
       
@@ -49,7 +77,7 @@ class NotebooksIndex extends Component {
             <NotebookIndexNote key={idxn} idx={idxn} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} />
           // </section>
         );
-        if (note.notebook_id === notebook.id) {
+        if ((note.notebook_id === notebook.id) && (this.notesVisible(notebook.id))) {
           table.push(noteRow);
         }
       });
