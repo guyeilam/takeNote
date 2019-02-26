@@ -7,7 +7,7 @@ class Api::NotesController < ApplicationController
 
   def show
     # @note = Note.find_by(id: params[:id])
-    @note = current_used.notes.find_by(id: params[:id])
+    @note = current_user.notes.find_by(id: params[:id])
     if @note
       render :show
     else
