@@ -36,7 +36,6 @@ class EditNote extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.notes) {
       if (!prevProps.notes || (prevProps.notes.id !== this.props.notes.id) || (this.state.noteId !== this.props.currentNote)) {
-
         this.props.requestSingleNote(this.props.currentNote).then(() => {
           this.setState({
             noteId: this.props.notes.id,
@@ -135,7 +134,7 @@ class EditNote extends Component {
                 onFocus={this.showToolbar}
                 theme={this.state.theme}
                 modules={{ toolbar }}
-                bounds={'.app'}
+                // bounds={'.quill-container'}
                 placeholder={'New note...'}>
               </ReactQuill>
             </div>
