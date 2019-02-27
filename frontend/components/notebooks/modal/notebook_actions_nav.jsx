@@ -30,13 +30,13 @@ class NotebookActionsNav extends React.Component {
   }
 
   render() {
-    const activeDeleteButton = (this.props.notebookId !== this.props.defaultNotebookId) ? <div className='notebook-actions-nav-delete' onClick={this.handleDelete(this.props.notebookId)}><div className='notebook-item-delete'>Delete notebook</div></div> : '';
-    const activeDefaultNotebookButton = (this.props.notebookId !== this.props.defaultNotebookId) ? <div className='notebook-actions-nav-default-notebook' onClick={this.handleUpdateDefaultNotebook(this.props.notebookId)}><div className='notebook-item-default'>Make default notebook...</div></div> : '';
+    const activeDeleteButton = (this.props.notebookId !== this.props.defaultNotebookId) ? <div className='notebook-actions-nav-delete' onClick={this.handleDelete(this.props.notebookId)}><div className='notebook-item-delete'>Delete notebook</div></div> : <div className='notebook-actions-nav-delete-deactivated'><div className='notebook-item-delete-deactivated'>Delete notebook</div></div>;
+    const activeDefaultNotebookButton = (this.props.notebookId !== this.props.defaultNotebookId) ? <div className='notebook-actions-nav-default-notebook' onClick={this.handleUpdateDefaultNotebook(this.props.notebookId)}><div className='notebook-item-default'>Make default notebook...</div></div> : <div className='notebook-actions-nav-default-notebook-deactivated'><div className='notebook-item-default-deactivated'>Make default notebook...</div></div>;
     return (
       <>
         <div className='notebook-actions-nav-text'>
-          {activeDeleteButton}          
           <div className='notebook-actions-nav-rename' onClick={this.handleRenameNotebook()}><div className='notebook-item-rename'>Rename notebook...</div></div>
+          {activeDeleteButton}          
           {activeDefaultNotebookButton}
         </div>
       </>

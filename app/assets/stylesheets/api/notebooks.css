@@ -666,6 +666,20 @@
   transition-timing-function: ease-in-out;
 }
 
+.notebook-actions-nav-delete-deactivated, .notebook-actions-nav-default-notebook-deactivated {
+  color: #bababa;
+}
+
+.notebook-actions-nav-delete-deactivated:hover, .notebook-actions-nav-default-notebook-deactivated:hover {
+  cursor: default;
+}
+
+.notebook-item-delete-deactivated, .notebook-item-default-deactivated {
+  margin-right: 10px;
+  margin-left: 10px;
+  color: #bababa;
+}
+
 .new-notebook-button-icon {
   display: flex;
   align-items: center;
