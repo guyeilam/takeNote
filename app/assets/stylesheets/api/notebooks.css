@@ -36,9 +36,9 @@
 .navbar-user-actions {
   position: absolute;
   background: #fff;
-  height: 130px;
+  height: 110px;
   width: 200px;
-  margin-left: -210px;
+  margin-left: -200px;
   margin-top: 10px;
   box-shadow: 0 0 0 1px rgba(99, 114, 130, .16), 0 4px 12px rgba(27, 39, 51, .08);
   /* padding: 12px; */
@@ -58,7 +58,7 @@
 }
 
 .navbar-user-actions-child {
-  position: absolute;
+  position: relative;
   width: 200px;
 }
 
@@ -112,7 +112,6 @@
 .left-navbar-current-user-email {
   margin-left: 10px;
   font-size: 12px;
-  color: #ccc;
 }
 
 .notebooks-list-container, .tags-list-container {
@@ -167,6 +166,10 @@
   color: #b0b0b0;
   display: flex;
   align-items: center;
+}
+
+.notebooks-list-menubar-sort-button:hover {
+  cursor: pointer;
 }
 
 .notebook-item-icon {
@@ -545,9 +548,13 @@
 
 .notebook-actions-nav-text {
   text-decoration: none;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  color: #666;
   font-size: 12px;
   margin-top: 10px;
   margin-bottom: 10px;
+  line-height: 30px;
 }
 
 .notebooks-item-col5, .col5 {

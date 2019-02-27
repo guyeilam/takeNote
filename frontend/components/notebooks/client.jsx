@@ -7,12 +7,14 @@ import ViewNotebookContainer from './view_notebook_container';
 import { withRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import TagsList from '../tags/tags_index';
+import LeftNavModal from '../left_nav_bar/left_nav_modal';
 
 class Client extends Component {
   render () {
     return (
       <>
         <Modal />
+        <LeftNavModal modalId={null} />
 
         <section className='notebooks'>
 

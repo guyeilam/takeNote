@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { openModal, openNavModal, closeNavModal, closeModal } from '../../actions/modal_actions';
 import Modal from '../modal/modal';
 import { Link } from 'react-router-dom';
-import { logout } from '../../actions/session_actions';
 import { withRouter } from 'react-router-dom';
 import { createNote, setCurrentNote } from '../../actions/note_actions';
 import { requestSingleNotebook } from '../../actions/notebook_actions';
 import { createTagging } from '../../actions/tag_actions';
 import { getNotebookTitles } from '../../reducers/selectors';
 import LeftNavNotebooks from '../notebooks/left_nav_notebooks';
+import NavModal from '../modal/nav_modal';
+import LeftNavModal from './left_nav_modal';
 
 class LeftNavBar extends Component {
   constructor(props) {
@@ -71,13 +72,21 @@ class LeftNavBar extends Component {
 
     return (
       <>
+        
         <div className='left-navbar-container'>
 
           <Modal />
-        
-          <div className='left-navbar-current-user'>
-            <div className='left-navbar-user-photo'></div>
-            <div className='left-navbar-current-user-email'><button onClick={() => this.props.logout()}>Logout {this.props.currentUser.email}</button></div>
+          
+          <div className='left-navbar-current-user' onClick={() => this.props.openNavModal('session-modal', null)}>
+            {/* <div className='left-navbar-user-photo'></div> */}
+            <div className='circle-account-icon'>D</div>
+            <div className='left-navbar-current-user-email'>
+              
+              <div className='session-actions-nav-button'>{this.props.currentUser.email}</div>
+            </div>
+            <div className='session-actions-carrot'>
+              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path fill="none" d="M7 2L4 5 1 2"></path></svg>
+            </div>
           </div>
 
           <div className='left-nav-new-note-button'>
@@ -117,46 +126,6 @@ class LeftNavBar extends Component {
           <div className='left-nav-tags-icon'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ccc" fillRule="evenodd" d="M10.265 9.005a2 2 0 1 0 3.47 0H18v9.5a1.5 1.5 0 0 1-1.5 1.5h-9a1.5 1.5 0 0 1-1.5-1.5v-9.5h4.265zM9.5 16a.5.5 0 1 0 0 1h5a.5.5 0 1 0 0-1h-5zm0-2a.5.5 0 1 0 0 1h5a.5.5 0 1 0 0-1h-5zm4.235-4.995H18l-4.982-4.606a1.5 1.5 0 0 0-2.036 0L6 9.005h4.265a2 2 0 0 1 3.47 0z"></path></svg></div>
           <div className='left-nav-tags-text'>Tags</div>
         </div>
-
-  
-          {/* <Link to='/notes/all'>
-            <div className={`left-nav-all-notes ${this.state.currentViewNotes}`}>
-              <div className='left-nav-notes-button-container'>  
-                <div className='left-nav-all-notes-icon'>
-                  
-                </div>
-                <div className='left-nav-all-notes-text'>All notes</div>
-              </div>
-            </div>
-          </Link>
-
-          <div className='left-nav-notebooks-list'>
-            <div className='left-nav-notebooks-list-icon'>
-              
-            </div>
-            <Link to='/client'>
-              <div className={`left-nav-notebooks ${this.state.currentViewNotebooks}`}>
-                <div className='left-nav-notebooks-button-container'>
-                  <div className='left-nav-notebooks-icon'>
-                    
-                  </div>
-                  <div className='left-nav-notebooks-text'>Notebooks</div>
-                </div>
-              </div>
-            </Link>
-            
-          </div>
-
-          <Link to='/tags'>
-            <div className={`left-nav-tags ${this.state.currentViewTags}`}>
-              <div className='left-nav-tags-button-container'>
-                <div className='left-nav-tags-icon'>
-                  
-                </div>
-                <div className='left-nav-tags-text'>Tags</div>
-              </div>
-            </div>
-          </Link> */}
         </div>
       </>
     );
@@ -185,7 +154,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return({
     openModal: modal => dispatch(openModal(modal)),
-    openNavModal: navModal => dispatch(openNavModal(navModal)),
+    openNavModal: (navModal, navModalId) => dispatch(openNavModal(navModal, navModalId)),
     closeNavModal: () => dispatch(closeNavModal()),
     createNote: note => dispatch(createNote(note)),
     setCurrentNote: noteId => dispatch(setCurrentNote(noteId)),
