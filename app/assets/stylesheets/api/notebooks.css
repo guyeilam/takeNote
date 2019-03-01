@@ -731,18 +731,25 @@
   padding: 0 5px 0 10px;
   color: #fff;
   font-size: 12px;
-  width: 70px;
+  width: 80px;
   display: flex;
+  align-items: center;
 }
 
 .view-tag-label-close {
   margin-left: 5px;
+  display: flex;
 }
 
 .view-tag-label-close svg {
   fill: white;
-  height: 7px;
-  width: 7px;
+  height: 6px;
+  width: 6px;
+}
+
+.view-tag-label-text {
+  font-size: 9px;
+  flex-basis: 85%;
 }
 
 .notebook-detail-notes-spacer {
