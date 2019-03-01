@@ -72,7 +72,7 @@
 
 .notebooks-list-container, .tags-list-container {
   width: 100%;
-  min-width: 900px;
+  /* min-width: 900px; */
   margin: 10px;
   padding-left: 20px;
   padding-top: 10px;
@@ -98,10 +98,10 @@
   margin-top: 25px;
   padding: 20px;
 }
-
+/* 
 .notebook-detail-notes-container {
   overflow: hidden;
-}
+} */
 
 .notebooks-list-menubar {
   display: flex;
@@ -386,7 +386,6 @@
   background: #f8f8f8;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, san-serif;
   color: #4d4d4d;
-  overflow: auto;
   height: 100%;
 }
 
@@ -394,6 +393,7 @@
   display: flex;
   flex-direction: column;
   border-top: 1px solid #e6e6e6;
+  overflow: overlay;
 }
 
 .notebook-detail-notes-list li {
@@ -503,9 +503,9 @@
   align-items: center;
 }
 
-.notebook-item-notes-detail-title-text {
-  overflow: hidden;
-}
+/* .notebook-item-notes-detail-title-text { */
+  /* overflow: hidden; */
+/* } */
 
 .notebook-detail-note-title {
   font-size: 12px;
