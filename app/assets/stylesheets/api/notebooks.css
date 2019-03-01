@@ -70,50 +70,6 @@
   display: flex;
 }
 
-.left-navbar {
-  min-height: 100vh;
-  background-color: #1a1a1a;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  min-width: 220px;
-  max-width: 220px;
-}
-
-.left-navbar-spacer {
-  min-width: 220px;
-}
-
-.left-navbar-container {
-  /* height: 100%; */
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-  /* width: 180px; */
-}
-
-.left-navbar-current-user {
-  display: flex;
-  align-items: center;
-}
-
-.left-navbar-user-photo {
-  background-image: url('https://cdn3.iconfinder.com/data/icons/complete-set-icons/512/tumblr512x512.png');
-  width: 28px;
-  height: 28px;
-  border-radius: 28px;
-  background-color: #ccc;
-  background-size: 28px 28px;
-  background-position: center center;
-}
-
-.left-navbar-current-user-email {
-  margin-left: 10px;
-  font-size: 12px;
-}
-
 .notebooks-list-container, .tags-list-container {
   width: 100%;
   min-width: 900px;
@@ -420,7 +376,7 @@
 
 .notebook-detail-notes {
   position: fixed;
-  left: 220px;
+  left: 250px;
   top: 0px;
   width: 300px;
   min-width: 300px;
@@ -476,6 +432,7 @@
 
 .left-nav-new-note-button-icon {
   transition: all .1s ease-in-out; 
+  display: flex;
 }
 
 .left-nav-new-note-button-icon:hover {
@@ -486,12 +443,14 @@
   display: flex;
   align-items: center;
   margin-top: 20px;
+  margin-left: 5px;
 }
 
 .left-nav-new-note-button-text {
   font-size: 14px;
-  padding-left: 10px;
+  /* padding-left: 10px; */
   font-weight: 500;
+  margin-left: 10px;
 }
 
 /* .left-nav-buttons-container {

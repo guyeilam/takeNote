@@ -1,3 +1,52 @@
+/* START MAIN CONTAINER AND SPACING */
+
+.left-navbar {
+  min-height: 100vh;
+  background-color: #1a1a1a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  min-width: 250px;
+  max-width: 250px;
+}
+
+.left-navbar-spacer {
+  min-width: 250px;
+}
+
+.left-navbar-container {
+  /* height: 100%; */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  /* width: 180px; */
+}
+
+.left-navbar-current-user {
+  display: flex;
+  align-items: center;
+}
+
+/* .left-navbar-user-photo {
+  background-image: url('https://cdn3.iconfinder.com/data/icons/complete-set-icons/512/tumblr512x512.png');
+  width: 28px;
+  height: 28px;
+  border-radius: 28px;
+  background-color: #ccc;
+  background-size: 28px 28px;
+  background-position: center center;
+} */
+
+.left-navbar-current-user-email {
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+/* END MAIN CONTAINER AND SPACING */
+
+
 .session-modal-nav {
   position: fixed;
   background: #fff;
@@ -60,16 +109,16 @@
 }
 
 .circle-account-icon {
-  flex-basis: 20%;
-  width: 35px;
-  height: 35px;
+  /* flex-basis: 20%; */
+  width: 38px;
+  height: 37px;
   border-radius: 50%;
-  font-size: 22px;
+  font-size: 24px;
   color: orange;
   line-height: 35px;
   text-align: center;
   background: green;
-  font-weight: 600;
+  font-weight: 800;
   text-shadow:
     -1px -1px 0 #000,
     1px -1px 0 #000,
