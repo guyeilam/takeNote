@@ -45,3 +45,7 @@ button,
 input[type="submit"] {
   cursor: pointer;
 }
+
+strong {
+  font-weight: 700;
+}

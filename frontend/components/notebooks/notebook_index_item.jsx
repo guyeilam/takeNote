@@ -59,10 +59,11 @@ class NotebooksIndexItem extends Component {
     //   return (
     //     <NotebookIndexNote key={idx} idx={this.props.idx+idx+1} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} />
     //   ); }) : null;
-    
+    let hoverOverNotebook = (this.props.hoverOverNotebook === notebookId) ? 'drag-hover' : '';
+
     return (
       <>
-        <div className={`notebooks-index-item-hover ${this.rowSelector(this.props.idx)}`}>
+        <div className={`notebooks-index-item-hover ${this.rowSelector(this.props.idx)} ${hoverOverNotebook}`} onDrop={(e) => this.props.drop(e, notebookId)} onDragOver={(e) => this.props.allowDrop(e, notebookId)} onDragLeave={(e) => this.props.leaveDropZone(e, notebookId)}>
           <div className='notebooks-item-col1 col1'>
             <div className={`notebook-item-expand ${arrowIconClass}`}><button onClick={() => this.handleShowNotes()}>{arrowIconRight}</button></div>
             <div className='notebook-item-icon'><svg className='notebook-icon-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 8.33c0-.18-.22-.33-.5-.33h-4c-.28 0-.5.15-.5.33v1.34c0 .18.22.33.5.33h4c.28 0 .5-.15.5-.33zM18 6v11a2 2 0 0 1-2 2H9V4h7a2 2 0 0 1 2 2zM6 4h2v15H6z"></path></svg></div>
@@ -120,7 +121,11 @@ const mapStateToProps = (state, ownProps) => {
     currentUserEmail: currentUser.email,
     idx: ownProps.idx,
     toggleShowNotes: ownProps.toggleShowNotes,
-    notebookId
+    notebookId,
+    drop: ownProps.drop,
+    allowDrop: ownProps.allowDrop,
+    hoverOverNotebook: ownProps.hoverOverNotebook,
+    leaveDropZone: ownProps.leaveDropZone
   });
 }
 

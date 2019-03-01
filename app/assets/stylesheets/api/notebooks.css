@@ -207,6 +207,10 @@
   transition: all 0.1s ease-out;
 }
 
+.grab {
+  cursor: grab;
+}
+
 .notebook-item-notes-detail-title:hover {
   background-color: #eeeeee;
   transition: all 0.1s ease-out;
@@ -258,9 +262,18 @@
   line-height: 3em;
 }
 
-.col1 { flex-basis: 40%; }
+.col1 { 
+  flex-basis: 40%;
+  display: flex;
+}
+
 .col2 { flex-basis: 15%; }
-.col3 { flex-basis: 15%; }
+
+.col3 {
+  flex-basis: 15%; 
+  display: flex;
+}
+
 .col4 { flex-basis: 20%; }
 .col5 { flex-basis: 10%; }
 
@@ -933,3 +946,52 @@
 .notebooks-expanded-icon-svg {
   fill: #ccc;
 }
+
+/* .drag-hover {
+  transform: scale(1.1);
+  background: gray;
+  transition: all 0.1s ease-out;
+} */
+
+
+/* START NOTEBOOKS TABLE SORT HEADER LINKS  */
+
+.notebooks-table-title-text {
+  margin-left: 4px;
+}
+
+.notebooks-table-title-text:hover, .notebooks-table-updated-text:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.notebooks-list-table-header:hover {
+   background-color: #eeeeee;
+  transition: all 0.1s ease-out;
+}
+
+.notebooks-list-title-sort-icon {
+  opacity: 0;
+  margin-left: 10px;
+}
+
+.notebooks-list-updated-sort-icon {
+  opacity: 0;
+  margin-left: 10px;
+}
+
+.flipped-arrow-icon {
+  transform: rotate(180deg);
+  /* translate(10%, 10%); */
+}
+
+.arrow-icon-visible {
+  opacity: 1;
+}
+
+.fas.fa-arrow-up svg {
+  height: 10px;
+  width: 10px;
+}
+
+/* END NOTEBOOKS TABLE SORT HEADER LINKS  */

@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { openModal } from '../../actions/modal_actions';
-import { openNavModal, closeNavModal } from '../../actions/modal_actions';
+import { updateNote } from '../../actions/note_actions';
+import { openModal, openNavModal, closeNavModal } from '../../actions/modal_actions';
 import NotebooksIndex from './notebooks_index';
 import { requestAllNotebooks } from '../../actions/notebook_actions';
 import { sortedItems } from '../../reducers/selectors';
+import { setSort } from '../../actions/ui_actions';
 
 const mapStateToProps = (state) => {
   const currentId = state.session.id;
@@ -16,7 +17,8 @@ const mapStateToProps = (state) => {
   return ({
     notebooks: sorted_notebooks,
     notes: state.entities.notes,
-    currentUser
+    currentUser,
+    sortMethod: state.ui.sort
   });
 }
 
@@ -25,7 +27,9 @@ const mapDispatchToProps = (dispatch) => {
     requestAllNotebooks: () => dispatch(requestAllNotebooks()),
     openModal: modal => dispatch(openModal(modal)),
     openNavModal: (navModal, navModalId) => dispatch(openNavModal(navModal, navModalId)),
-    closeNavModal: () => dispatch(closeNavModal())
+    closeNavModal: () => dispatch(closeNavModal()),
+    updateNote: noteId => dispatch(updateNote(noteId)),
+    setSort: sortMethod => dispatch(setSort(sortMethod)),
   });
 }
 
