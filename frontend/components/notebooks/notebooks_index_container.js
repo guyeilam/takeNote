@@ -13,10 +13,11 @@ const mapStateToProps = (state) => {
 
   let sortMethod = state.ui.sort ? state.ui.sort : null;
   let sorted_notebooks = state.entities.notebooks ? sortedItems(state.entities.notebooks, state.ui.sort) : null;
+  let sorted_notes = state.entities.notes ? sortedItems(state.entities.notes, state.ui.sort) : null;
 
   return ({
     notebooks: sorted_notebooks,
-    notes: state.entities.notes,
+    notes: sorted_notes,
     currentUser,
     sortMethod: state.ui.sort
   });
