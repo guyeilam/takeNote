@@ -831,7 +831,7 @@
 }
 
 .left-nav-notes-expand, .left-nav-notebooks-expand, .left-nav-tags-expand {
-  flex-basis: 10%;
+  flex-basis: 8%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -844,14 +844,16 @@
 }
 
 .left-nav-notes-icon, .left-nav-notebooks-icon, .left-nav-tags-icon {
-  flex-basis: 10%;
+  flex-basis: 8%;
   display: flex;
   align-items: center;
 }
 
 .left-nav-notes-text, .left-nav-notebooks-text, .left-nav-tags-text {
-  flex-basis: 80%;
   display: flex;
+  line-height: 24px;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-size: 14px;
 }
 
 .left-nav-hover:hover {

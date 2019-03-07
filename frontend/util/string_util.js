@@ -7,3 +7,9 @@ export const truncateStr = (str, numChars) => {
     return str;
   }
 }
+
+export const getFirstChar = (str) => {
+  let truncStr;
+  truncStr = str.substring(0, 1);
+  return truncStr;
+}

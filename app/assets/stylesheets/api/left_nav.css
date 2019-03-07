@@ -110,20 +110,22 @@
 
 .circle-account-icon {
   /* flex-basis: 20%; */
-  width: 38px;
-  height: 37px;
+  width: 30px;
+  height: 31px;
   border-radius: 50%;
-  font-size: 24px;
-  color: orange;
-  line-height: 35px;
+  font-size: 22px;
+  color: rgb(255, 118, 55);
+  line-height: 29px;
   text-align: center;
-  background: green;
-  font-weight: 800;
-  text-shadow:
+  background: rgb(43, 141, 95);
+  font-weight: 600;
+  /* text-shadow:
     -1px -1px 0 #000,
     1px -1px 0 #000,
     -1px 1px 0 #000,
-    1px 1px 0 #000; 
+    1px 1px 0 #000;  */
+  text-shadow: -2px 2px 0px rgb(41, 41, 41);
+  box-shadow: #666;
 }
 
 .session-modal-email {
@@ -163,3 +165,33 @@
   stroke: #a6a6a6;
   margin: 0px 5px 0px 5px;
 }
+
+/* BEGIN SEARCH */
+
+.search-container {
+  margin-top: 20px;
+}
+
+.search-form-input-container {
+  background: #333;
+  border-radius: 3px;
+  padding: 0 12px 0 12px;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  height: 30px;
+  width: 100%;
+  line-height: 30px;
+  font-size: 14px;
+  box-sizing: border-box;
+  padding: 0;
+  color: #fff;
+}
+
+.search-form-icon {
+  display: flex;
+  color: #666;
+}
+/* END SEARCH */

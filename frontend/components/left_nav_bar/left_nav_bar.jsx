@@ -11,6 +11,7 @@ import { getNotebookTitles } from '../../reducers/selectors';
 import LeftNavNotebooks from '../notebooks/left_nav_notebooks';
 import NavModal from '../modal/nav_modal';
 import LeftNavModal from './left_nav_modal';
+import { getFirstChar } from '../../util/string_util';
 
 class LeftNavBar extends Component {
   constructor(props) {
@@ -19,10 +20,13 @@ class LeftNavBar extends Component {
       currentViewNotebooks: '',
       currentViewNotes: '',
       currentViewTags: '',
-      showNotebooks: false
+      showNotebooks: false,
+      searchInput: ''
     }
     this.handleModalClick = this.handleModalClick.bind(this);
     this.createNewNote = this.createNewNote.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.update = this.update.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +70,17 @@ class LeftNavBar extends Component {
     }
   }
 
+  update(field) {
+    return e => {
+      this.setState({ [field]: e.currentTarget.value });
+    }
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.processForm(tag).then(this.props.closeModal);
+  }
+
   render() {
     const arrowIconRight = <svg width="6" height="9" viewBox="2 240 6 9" xmlns="http://www.w3.org/2000/svg" id="notebook-arrow-icon"><path fill="#9B9B9B" fillRule="evenodd" d="M2 240l6 4.5-6 4.5z"></path></svg>
     const arrowIconClass = this.state.showNotebooks ? 'rotated-90-degrees' : '';
@@ -79,7 +94,7 @@ class LeftNavBar extends Component {
           
           <div className='left-navbar-current-user' onClick={() => this.props.openNavModal('session-modal', null)}>
             {/* <div className='left-navbar-user-photo'></div> */}
-            <div className='circle-account-icon'>D</div>
+            <div className='circle-account-icon'>{getFirstChar(this.props.currentUser.email)}</div>
             <div className='left-navbar-current-user-email'>
               
               <div className='session-actions-nav-button'>{this.props.currentUser.email}</div>
@@ -87,6 +102,23 @@ class LeftNavBar extends Component {
             <div className='session-actions-carrot'>
               <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><path fill="none" d="M7 2L4 5 1 2"></path></svg>
             </div>
+          </div>
+
+          <div className='search-container'>
+            <form className='search-form' onSubmit={this.handleSubmit}>
+              <div className='search-form-input-container'>
+                <input required id='search-input' type="text"
+                  value={this.state.searchInput}
+                  onChange={this.update('searchInput')}
+                  className="search-input"
+                  placeholder='Search all notes...'
+                />
+                <div className='search-form-icon'><svg width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M23.394 23.394a.95.95 0 0 1-1.343 0l-3.52-3.519a6.352 6.352 0 0 1-3.792 1.255 6.391 6.391 0 1 1 6.391-6.39c0 1.421-.47 2.73-1.255 3.792l3.52 3.519a.95.95 0 0 1 0 1.343zM9.965 14.713a4.748 4.748 0 1 0 9.496 0 4.748 4.748 0 0 0-9.496 0z"></path></svg></div>
+              </div>
+              <div className='search-form-button'>
+                <input className="search-form-button-submit" type="submit" value='submit' hidden />
+              </div>
+            </form>
           </div>
 
           <div className='left-nav-new-note-button'>

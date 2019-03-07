@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { closeNavModal } from '../../actions/modal_actions';
 import { logout } from '../../actions/session_actions';
+import { getFirstChar } from '../../util/string_util';
 
 class SessionModal extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class SessionModal extends Component {
         <div className='session-modal-header'>
           <div className='session-modal-header-text'>Account</div>
           <div className='session-modal-account'>
-            <div className='session-modal-icon'><div className='circle-account-icon'>D</div></div>
+            <div className='session-modal-icon'><div className='circle-account-icon'>{getFirstChar(this.props.currentUser.email)}</div></div>
             <div className='session-modal-email'><div className='session-modal-email-text'>{this.props.currentUser.email}</div></div>
             <div className='session-modal-checkmark'><i className="fas fa-check"></i></div>
           </div>
