@@ -213,6 +213,10 @@
   text-decoration: underline;
 }
 
+.note-actions-menu:hover {
+  cursor: pointer;
+}
+
 .ql-stroke {
   stroke-width: 1;
 }
@@ -224,6 +228,10 @@
 
 .notes-sort-button-icon {
   margin-right: 10px;
+}
+
+.notes-sort-button-icon:hover {
+  cursor: pointer;
 }
 
 .notes-sort-nav {

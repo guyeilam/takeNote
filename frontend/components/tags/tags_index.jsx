@@ -49,7 +49,7 @@ class TagsList extends Component {
             <div className='tags-list-header'>Tags</div>
             <div className='tags-list-header-new-tag-button' onClick={() => this.props.openModal('new-tag')}>
               <div className='tags-list-header-new-tag-icon'>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clipPath="url(#222a)" fill="#00a82d"><path fillRule="evenodd" clipRule="evenodd" d="M13.018 3.399L18 8.005v6.121a4.002 4.002 0 0 0-2.873 4.879H7.5a1.5 1.5 0 0 1-1.5-1.5v-9.5l4.982-4.606a1.5 1.5 0 0 1 2.036 0zM10 9a2 2 0 1 1 0 0zm-.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM9 13.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"></path><path d="M23 17h-2v-2h-2v2h-2v2h2v2h2v-2h2v-2z"></path></g><defs><clipPath id="222a"><path fill="#fff" d="M0 0h24v24H0z"></path></clipPath></defs></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g clipPath="url(#222a)"><path fillRule="evenodd" clipRule="evenodd" d="M13.018 3.399L18 8.005v6.121a4.002 4.002 0 0 0-2.873 4.879H7.5a1.5 1.5 0 0 1-1.5-1.5v-9.5l4.982-4.606a1.5 1.5 0 0 1 2.036 0zM10 9a2 2 0 1 1 0 0zm-.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM9 13.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"></path><path d="M23 17h-2v-2h-2v2h-2v2h2v2h2v-2h2v-2z"></path></g><defs><clipPath id="222a"><path fill="#fff" d="M0 0h24v24H0z"></path></clipPath></defs></svg>
               </div>
               <div className='tags-list-header-new-tag-label'>New Tag</div>
             </div>

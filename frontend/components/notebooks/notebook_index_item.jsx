@@ -55,10 +55,6 @@ class NotebooksIndexItem extends Component {
     const arrowIconRight = <svg width="6" height="9" viewBox="2 240 6 9" xmlns="http://www.w3.org/2000/svg" id="notebook-arrow-icon"><path fill="#9B9B9B" fillRule="evenodd" d="M2 240l6 4.5-6 4.5z"></path></svg>
     const arrowIconClass = this.state.showNotes ? 'rotated-90-degrees' : '';
 
-    // const noteItems = this.state.showNotes ? this.props.notes.map((note, idx) => {
-    //   return (
-    //     <NotebookIndexNote key={idx} idx={this.props.idx+idx+1} note={note} rowSelector={this.rowSelector} requestNotes={this.requestSpecificNote} />
-    //   ); }) : null;
     let hoverOverNotebook = (this.props.hoverOverNotebook === notebookId) ? 'drag-hover' : '';
 
     return (

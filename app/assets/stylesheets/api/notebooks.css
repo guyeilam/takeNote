@@ -620,6 +620,10 @@
   display: flex;
 }
 
+.notebook-item-actions:hover {
+  cursor: pointer;
+}
+
 .notebook-actions-nav-default-notebook, .notebook-actions-nav-rename, .notebook-actions-nav-delete {
   width: 100%;
 }
@@ -655,6 +659,7 @@
 .new-notebook-button-icon {
   display: flex;
   align-items: center;
+  /* fill: #00a82d; */
 }
 
 .new-notebook-notebooks-index-header {
@@ -663,7 +668,8 @@
 
 .notebooks-list-menubar-new-notebook-button {
   display: flex;
-    color: #00a82d;
+  color: #00a82d;
+  fill: #00a82d;
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   height: 40px;
@@ -675,13 +681,14 @@
 }
 .notebooks-list-menubar-new-notebook-button:hover {
   color: #14CC45;
-  transition: .1s color ease-in-out;
+  fill: #14CC45;
+  transition: .1s all ease-in-out;
   cursor: pointer;
 }
 
-.new-notebook-button-icon:hover {
+/* .new-notebook-button-icon:hover {
   fill: #14CC45;
-}
+} */
 
 .view-tag-label {
   margin: 5px 0px 10px 20px;

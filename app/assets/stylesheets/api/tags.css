@@ -85,6 +85,7 @@
 
 .tags-list-header-new-tag-button {
   color: #00a82d;
+  fill: #00a82d;
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   height: 40px;
@@ -98,7 +99,8 @@
 
 .tags-list-header-new-tag-button:hover {
   color: #14CC45;
-  transition: .3s color ease-in-out;
+  fill: #14CC45;
+  transition: .1s all ease-in-out;
   cursor: pointer;
 }
 
