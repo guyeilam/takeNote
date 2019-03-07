@@ -21,7 +21,8 @@ class LeftNavBar extends Component {
       currentViewNotes: '',
       currentViewTags: '',
       showNotebooks: false,
-      searchInput: ''
+      searchInput: '',
+      disabled: true
     }
     this.handleModalClick = this.handleModalClick.bind(this);
     this.createNewNote = this.createNewNote.bind(this);
@@ -72,7 +73,11 @@ class LeftNavBar extends Component {
 
   update(field) {
     return e => {
-      this.setState({ [field]: e.currentTarget.value });
+      if (e.currentTarget.value.length > 0) {
+        return this.setState({ [field]: e.currentTarget.value, ['disabled']: false });
+      } else {
+        return this.setState({ [field]: e.currentTarget.value, ['disabled']: true });
+      }
     }
   }
 
@@ -85,6 +90,8 @@ class LeftNavBar extends Component {
     const arrowIconRight = <svg width="6" height="9" viewBox="2 240 6 9" xmlns="http://www.w3.org/2000/svg" id="notebook-arrow-icon"><path fill="#9B9B9B" fillRule="evenodd" d="M2 240l6 4.5-6 4.5z"></path></svg>
     const arrowIconClass = this.state.showNotebooks ? 'rotated-90-degrees' : '';
 
+    let disabledClass = (this.state.disabled) ? 'disabled-icon' : '';
+
     return (
       <>
         
@@ -93,7 +100,6 @@ class LeftNavBar extends Component {
           <Modal />
           
           <div className='left-navbar-current-user' onClick={() => this.props.openNavModal('session-modal', null)}>
-            {/* <div className='left-navbar-user-photo'></div> */}
             <div className='circle-account-icon'>{getFirstChar(this.props.currentUser.email)}</div>
             <div className='left-navbar-current-user-email'>
               
@@ -113,10 +119,10 @@ class LeftNavBar extends Component {
                   className="search-input"
                   placeholder='Search all notes...'
                 />
-                <div className='search-form-icon'><svg width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M23.394 23.394a.95.95 0 0 1-1.343 0l-3.52-3.519a6.352 6.352 0 0 1-3.792 1.255 6.391 6.391 0 1 1 6.391-6.39c0 1.421-.47 2.73-1.255 3.792l3.52 3.519a.95.95 0 0 1 0 1.343zM9.965 14.713a4.748 4.748 0 1 0 9.496 0 4.748 4.748 0 0 0-9.496 0z"></path></svg></div>
+                <div className={`search-form-icon ${disabledClass}`}><svg width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M23.394 23.394a.95.95 0 0 1-1.343 0l-3.52-3.519a6.352 6.352 0 0 1-3.792 1.255 6.391 6.391 0 1 1 6.391-6.39c0 1.421-.47 2.73-1.255 3.792l3.52 3.519a.95.95 0 0 1 0 1.343zM9.965 14.713a4.748 4.748 0 1 0 9.496 0 4.748 4.748 0 0 0-9.496 0z"></path></svg></div>
               </div>
               <div className='search-form-button'>
-                <input className="search-form-button-submit" type="submit" value='submit' hidden />
+                <input className="search-form-button-submit" type="submit" value='submit' hidden disabled={`${this.state.disabled}`}/>
               </div>
             </form>
           </div>

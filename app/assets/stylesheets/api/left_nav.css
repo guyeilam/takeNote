@@ -192,6 +192,10 @@
 
 .search-form-icon {
   display: flex;
+  color: green;
+}
+
+.disabled-icon {
   color: #666;
 }
 /* END SEARCH */
