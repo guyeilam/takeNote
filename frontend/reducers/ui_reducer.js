@@ -6,6 +6,7 @@ import navModalId from './nav_modal_id_reducer';
 import currentNoteReducer from './current_note_reducer';
 import sortReducer from './sort_reducer';
 import loadingReducer from './loading_reducer';
+import searchReducer from './search_reducer';
 
 export default combineReducers({
   modal,
@@ -13,5 +14,6 @@ export default combineReducers({
   navModalId,
   currentNote: currentNoteReducer,
   sort: sortReducer,
-  loading: loadingReducer
+  loading: loadingReducer,
+  search: searchReducer
 });

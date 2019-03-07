@@ -192,7 +192,15 @@
 
 .search-form-icon {
   display: flex;
-  color: green;
+  color: #00a82d;
+}
+
+.search-form-icon:hover {
+  color: white;
+}
+
+.disabled-icon:hover {
+  color: #666;
 }
 
 .disabled-icon {

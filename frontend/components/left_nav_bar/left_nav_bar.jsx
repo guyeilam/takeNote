@@ -12,6 +12,7 @@ import LeftNavNotebooks from '../notebooks/left_nav_notebooks';
 import NavModal from '../modal/nav_modal';
 import LeftNavModal from './left_nav_modal';
 import { getFirstChar } from '../../util/string_util';
+import { setSearchResults } from '../../actions/ui_actions';
 
 class LeftNavBar extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class LeftNavBar extends Component {
     this.createNewNote = this.createNewNote.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
+    this.clearSearchResults = this.clearSearchResults.bind(this);
   }
 
   componentDidMount() {
@@ -82,8 +84,20 @@ class LeftNavBar extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    this.props.processForm(tag).then(this.props.closeModal);
+    // e.preventDefault();
+    debugger
+    if (this.state.disabled) {
+      return null;
+    }
+    
+    let noteIds = Object.keys(this.props.notes);
+    
+    debugger
+    this.props.setSearchResults(noteIds);
+  }
+
+  clearSearchResults() {
+    this.props.setSearchResults(null);
   }
 
   render() {
@@ -111,7 +125,7 @@ class LeftNavBar extends Component {
           </div>
 
           <div className='search-container'>
-            <form className='search-form' onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className='search-form'>
               <div className='search-form-input-container'>
                 <input required id='search-input' type="text"
                   value={this.state.searchInput}
@@ -119,8 +133,9 @@ class LeftNavBar extends Component {
                   className="search-input"
                   placeholder='Search all notes...'
                 />
-                <div className={`search-form-icon ${disabledClass}`}><svg width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M23.394 23.394a.95.95 0 0 1-1.343 0l-3.52-3.519a6.352 6.352 0 0 1-3.792 1.255 6.391 6.391 0 1 1 6.391-6.39c0 1.421-.47 2.73-1.255 3.792l3.52 3.519a.95.95 0 0 1 0 1.343zM9.965 14.713a4.748 4.748 0 1 0 9.496 0 4.748 4.748 0 0 0-9.496 0z"></path></svg></div>
+                <div className={`search-form-icon ${disabledClass}`} onClick={(e) => this.handleSubmit(e)}><svg width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M23.394 23.394a.95.95 0 0 1-1.343 0l-3.52-3.519a6.352 6.352 0 0 1-3.792 1.255 6.391 6.391 0 1 1 6.391-6.39c0 1.421-.47 2.73-1.255 3.792l3.52 3.519a.95.95 0 0 1 0 1.343zM9.965 14.713a4.748 4.748 0 1 0 9.496 0 4.748 4.748 0 0 0-9.496 0z"></path></svg></div>
               </div>
+              <div onClick={() => this.clearSearchResults()}>clear</div>
               <div className='search-form-button'>
                 <input className="search-form-button-submit" type="submit" value='submit' hidden disabled={`${this.state.disabled}`}/>
               </div>
@@ -185,7 +200,8 @@ const mapStateToProps = state => {
     currentUser,
     defaultNotebook: currentUser.default_notebook,
     notebookTitles,
-    notebooks
+    notebooks,
+    notes: state.entities.notes
   });
 }
 
@@ -198,7 +214,8 @@ const mapDispatchToProps = dispatch => {
     setCurrentNote: noteId => dispatch(setCurrentNote(noteId)),
     logout: () => dispatch(logout()),
     createTagging: (tagId, noteId) => dispatch(createTagging(tagId, noteId)),
-    requestSingleNotebook: notebookId => dispatch(requestSingleNotebook(notebookId))
+    requestSingleNotebook: notebookId => dispatch(requestSingleNotebook(notebookId)),
+    setSearchResults: noteIds => dispatch(setSearchResults(noteIds))
   });
 }
 

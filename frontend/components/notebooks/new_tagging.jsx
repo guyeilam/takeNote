@@ -34,8 +34,6 @@ class NewTagging extends Component {
 
   alreadyTagged() {
     const tags = this.props.tags ? Object.keys(this.props.tags).map(id => this.props.tags[id]) : null;
-
-    
   }
 
   handleSubmit(e) {

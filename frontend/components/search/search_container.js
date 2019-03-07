@@ -1,14 +1,13 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import ViewAllNotes from './view_all_notes';
+import ViewAllNotes from '../notebooks/view_all_notes';
 import { setCurrentNote } from '../../actions/note_actions';
 import { requestSingleTag } from '../../actions/tag_actions';
 import { sortedItems } from '../../reducers/selectors';
 import { openNavModal, closeNavModal } from '../../actions/modal_actions';
+import { setSearchResults } from '../../actions/ui_actions';
 
 const mapStateToProps = (state, ownProps) => {
-  let tagId = parseInt(ownProps.match.params.tagId);
-  let tag = state.entities.tags[tagId];
   let notes = state.entities.notes;
 
   let filteredNotes = [];
@@ -33,10 +32,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return ({
-    requestSingleTag: (tagId) => dispatch(requestSingleTag(tagId)),
     setCurrentNote: (noteId) => dispatch(setCurrentNote(noteId)),
     openNavModal: (navModal, navModalId) => dispatch(openNavModal(navModal, navModalId)),
-    closeNavModal: () => dispatch(closeNavModal())
+    closeNavModal: () => dispatch(closeNavModal()),
+    setSearchResults: noteIds => dispatch(setSearchResults(noteIds))
   });
 }
 
