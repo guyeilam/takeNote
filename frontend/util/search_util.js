@@ -10,8 +10,14 @@ export const findNotes = (notes, searchTerm) => {
   let searchResults = [];
   let notesArray = Object.keys(notes).map(id => notes[id]);
 
+  let lowerCaseContent;
+  let lowerCaseTitle;
+
   notesArray.forEach(note => {
-    if (note.plain_text.includes(searchTerm) || note.title.includes(searchTerm)) {
+    lowerCaseContent = note.plain_text.toLowerCase();
+    lowerCaseTitle = note.title.toLowerCase();
+
+    if (lowerCaseContent.includes(searchTerm) || lowerCaseTitle.includes(searchTerm)) {
       searchResults.push(note);
     }
   });
