@@ -7,6 +7,7 @@ import currentNoteReducer from './current_note_reducer';
 import sortReducer from './sort_reducer';
 import loadingReducer from './loading_reducer';
 import searchReducer from './search_reducer';
+import searchTermReducer from './search_term_reducer';
 
 export default combineReducers({
   modal,
@@ -15,5 +16,6 @@ export default combineReducers({
   currentNote: currentNoteReducer,
   sort: sortReducer,
   loading: loadingReducer,
-  search: searchReducer
+  search: searchReducer,
+  searchTerm: searchTermReducer
 });

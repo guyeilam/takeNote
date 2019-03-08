@@ -47,11 +47,14 @@ class NotesList extends Component {
   
   componentWillUnmount() {
     this.props.setCurrentNote(null);
+    if (this.props.match.path === '/search') {
+      this.props.setSearchTerm(null);
+      this.props.setSearchResults(null);
+    }
   }
 
   handleNoteClick(note) {
     return () => {
-      // this.props.setCurrentNote(null);
       this.props.setCurrentNote(note.id);
     }
   }
@@ -61,7 +64,6 @@ class NotesList extends Component {
   }
 
   render() {
-
     if (!(this.props.notes || this.props.notebook)) { return null }
     
     let pageTitle;
@@ -79,9 +81,12 @@ class NotesList extends Component {
     let notebookId = this.props.notebookId;
     if (notebookId && this.props.notebook) {
       pageTitle = this.props.notebook.title;
+    } else if (this.props.match.path === '/search') {
+      pageTitle = this.props.searchTerm;
     } else {
       pageTitle = 'All Notes';
     }
+    
     noteCount = this.props.notes.length;
 
     const noteItems = ((this.props.notes.length > 0) && this.props.notes !== []) ? this.props.notes.map((note) => {

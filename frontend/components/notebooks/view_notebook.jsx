@@ -6,6 +6,7 @@ import SingleNotebookContainer from './single_notebook_container';
 import AllNotesContainer from './all_notes_container';
 import FilterTagContainer from './filter_tag_container';
 import EditNote from './edit_note';
+import SearchContainer from '../search/search_container';
 
 class ViewNotebook extends Component {
   constructor(props) {
@@ -26,10 +27,10 @@ class ViewNotebook extends Component {
             path="/notes/all"
             component={AllNotesContainer}
           />
-          {/* <Route exact
-            path="/notes/:noteId"
-            component={ViewAllNotes}
-          /> */}
+          <Route exact
+            path="/search"
+            component={SearchContainer}
+          />
           <Route exact
             path="/tags/:tagId"
             component={FilterTagContainer}

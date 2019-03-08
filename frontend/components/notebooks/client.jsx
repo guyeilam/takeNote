@@ -44,6 +44,10 @@ class Client extends Component {
             path="/tags"
             component={TagsList}
           />
+          <Route exact
+            path="/search"
+            component={ViewNotebookContainer}
+          />
 
         </section>
       </>

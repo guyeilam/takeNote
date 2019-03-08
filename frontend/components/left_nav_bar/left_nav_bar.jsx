@@ -13,6 +13,7 @@ import NavModal from '../modal/nav_modal';
 import LeftNavModal from './left_nav_modal';
 import { getFirstChar } from '../../util/string_util';
 import { setSearchResults } from '../../actions/ui_actions';
+import { setSearchTerm } from '../../actions/ui_actions';
 
 class LeftNavBar extends Component {
   constructor(props) {
@@ -61,9 +62,7 @@ class LeftNavBar extends Component {
       });
     } else {
       this.props.createNote(note).then(payload => {
-        // this.props.setCurrentNote(Object.values(payload.notes)[0].id);
         if (this.props.match.params.notebookId) {
-            // this.props.requestSingleNotebook(parseInt(notebookId)).then(() => this.props.setCurrentNote(Object.values(payload.notes)[0].id));
             this.props.setCurrentNote(Object.values(payload.notes)[0].id);
           } else {
             this.props.history.push(`/notebooks/${notebookId}`);
@@ -84,19 +83,23 @@ class LeftNavBar extends Component {
   }
 
   handleSubmit(e) {
-    // e.preventDefault();
-    debugger
+    e.preventDefault();
     if (this.state.disabled) {
       return null;
     }
     
     let noteIds = Object.keys(this.props.notes);
     
-    debugger
+    this.props.setSearchTerm(this.state.searchInput);
     this.props.setSearchResults(noteIds);
+    if (this.props.match.path !== '/search') {
+      this.props.history.push('/search');
+    }
   }
 
   clearSearchResults() {
+    this.setState({ searchInput: '', disabled: true });
+    this.props.setSearchTerm(null);
     this.props.setSearchResults(null);
   }
 
@@ -116,7 +119,6 @@ class LeftNavBar extends Component {
           <div className='left-navbar-current-user' onClick={() => this.props.openNavModal('session-modal', null)}>
             <div className='circle-account-icon'>{getFirstChar(this.props.currentUser.email)}</div>
             <div className='left-navbar-current-user-email'>
-              
               <div className='session-actions-nav-button'>{this.props.currentUser.email}</div>
             </div>
             <div className='session-actions-carrot'>
@@ -125,7 +127,9 @@ class LeftNavBar extends Component {
           </div>
 
           <div className='search-container'>
-            <form onSubmit={this.handleSubmit} className='search-form'>
+
+
+            <form onSubmit={(e) => this.handleSubmit(e)} className='search-form'>
               <div className='search-form-input-container'>
                 <input required id='search-input' type="text"
                   value={this.state.searchInput}
@@ -133,24 +137,28 @@ class LeftNavBar extends Component {
                   className="search-input"
                   placeholder='Search all notes...'
                 />
-                <div className={`search-form-icon ${disabledClass}`} onClick={(e) => this.handleSubmit(e)}><svg width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M23.394 23.394a.95.95 0 0 1-1.343 0l-3.52-3.519a6.352 6.352 0 0 1-3.792 1.255 6.391 6.391 0 1 1 6.391-6.39c0 1.421-.47 2.73-1.255 3.792l3.52 3.519a.95.95 0 0 1 0 1.343zM9.965 14.713a4.748 4.748 0 1 0 9.496 0 4.748 4.748 0 0 0-9.496 0z"></path></svg></div>
-              </div>
-              <div onClick={() => this.clearSearchResults()}>clear</div>
-              <div className='search-form-button'>
-                <input className="search-form-button-submit" type="submit" value='submit' hidden disabled={`${this.state.disabled}`}/>
-              </div>
+                <button>
+                  <div className={`search-form-icon ${disabledClass}`}><svg width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M23.394 23.394a.95.95 0 0 1-1.343 0l-3.52-3.519a6.352 6.352 0 0 1-3.792 1.255 6.391 6.391 0 1 1 6.391-6.39c0 1.421-.47 2.73-1.255 3.792l3.52 3.519a.95.95 0 0 1 0 1.343zM9.965 14.713a4.748 4.748 0 1 0 9.496 0 4.748 4.748 0 0 0-9.496 0z"></path></svg></div>
+                </button>
+              </div>    
+              {/* <div onClick={() => this.clearSearchResults()}>clear</div> */}
+              {/* <div className='search-form-button'>
+                <input className="search-form-button-submit" type="submit" value='submit' />
+              </div> */}
             </form>
+
+
           </div>
 
           <div className='left-nav-new-note-button'>
-            <button onClick={() => this.createNewNote()}>
+            <div className='create-new-note' onClick={() => this.createNewNote()}>
               <div className='left-nav-new-note-button-container'>
                 <div className='left-nav-new-note-button-icon'>
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" data-event-off="click"><g fill="none" fillRule="evenodd"><path d="M0 0h30v30H0z"></path><circle cx="15" cy="15" r="14" fill="#00A82D"></circle><rect width="14" height="2" x="8" y="14" fill="#FFF" rx="1"></rect><rect width="2" height="14" x="14" y="8" fill="#FFF" rx="1"></rect></g></svg>
                 </div>
                 <div className='left-nav-new-note-button-text'>New Note</div>
               </div>
-            </button>
+            </div>
           </div>
         </div>
 
@@ -215,7 +223,8 @@ const mapDispatchToProps = dispatch => {
     logout: () => dispatch(logout()),
     createTagging: (tagId, noteId) => dispatch(createTagging(tagId, noteId)),
     requestSingleNotebook: notebookId => dispatch(requestSingleNotebook(notebookId)),
-    setSearchResults: noteIds => dispatch(setSearchResults(noteIds))
+    setSearchResults: noteIds => dispatch(setSearchResults(noteIds)),
+    setSearchTerm: searchTerm => dispatch(setSearchTerm(searchTerm))
   });
 }
 
