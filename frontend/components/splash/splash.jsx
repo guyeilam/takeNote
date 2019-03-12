@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Footer from './footer';
 
 export default (props) => {
 
@@ -50,11 +51,7 @@ export default (props) => {
         </div>
       </div>
       <div className='splash-footer'>
-        <div className='splash-footer-container'>
-          <div className='splash-footer-text'>
-            © 2019 takeNote. All rights reserved.
-          </div>
-        </div>
+        <Footer />
       </div>
     </div>
   )

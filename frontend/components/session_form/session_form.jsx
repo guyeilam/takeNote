@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../splash/footer';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -108,6 +109,9 @@ class SessionForm extends React.Component {
             <button className='button'>{formSwitchLink}</button>
           </div>
         </div>
+
+      <Footer />
+
       </div>
     );
   }

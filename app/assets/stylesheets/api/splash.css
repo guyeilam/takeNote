@@ -10,7 +10,6 @@
   height: 130px;
   max-width: 1220px;
   margin: 0 auto;
-  /* border: 2px blue dotted; */
 }
 
 .auth-buttons {
@@ -86,8 +85,6 @@
 }
 
 .splash-content-container {
-  /* border: 2px red dotted; */
-  /* padding: 20px 80px 20px 80px; */
   display: flex;
   align-items: center;
   max-width: 1220px;
@@ -160,8 +157,6 @@
 }
 
 .splash-footer-container {
-  /* border: 2px red dotted; */
-  /* padding: 20px 80px 20px 80px; */
   display: flex;
   align-items: center;
   max-width: 1220px;
@@ -174,7 +169,34 @@
   color: gray;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-size: 10px;
-  /* line-height: 40px; */
   font-weight: 300;
-  /* letter-spacing: 1.3px; */
+}
+
+.footer {
+  height: 80px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+}
+
+.svg-inline--fa.fa-github.fa-w-16, .svg-inline--fa.fa-linkedin.fa-w-14, .svg-inline--fa.fa-angellist.fa-w-14 {
+  width: 40px;
+  height: 40px;
+}
+
+.svg-inline--fa.fa-github.fa-w-16:hover, .svg-inline--fa.fa-linkedin.fa-w-14:hover, .svg-inline--fa.fa-angellist.fa-w-14:hover {
+  transform: scale(1.1);
+  transition: transform .1s ease-in-out;
+}
+
+.footer-angellist, .footer-github, .footer-linkedin {
+  margin: 0px 5px 0px 5px;
 }
