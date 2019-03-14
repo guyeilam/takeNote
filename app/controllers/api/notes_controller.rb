@@ -6,7 +6,6 @@ class Api::NotesController < ApplicationController
   end
 
   def show
-    # @note = Note.find_by(id: params[:id])
     @note = current_user.notes.find_by(id: params[:id])
     if @note
       render :show
@@ -30,6 +29,9 @@ def create
     @note = Note.find_by(id: params[:id])
 
     if @note.update(note_params)
+      ActionCable.server.broadcast 'messages',
+        message: @note.content,
+        user: current_user.email
       render :show
     else
       render json: @note.errors.full_messages, status: 422

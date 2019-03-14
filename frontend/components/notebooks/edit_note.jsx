@@ -16,13 +16,46 @@ class EditNote extends Component {
       content: '',
       plain_text: '',
       theme: 'snow',
-      toolbarVisibility: 'hidden'
+      toolbarVisibility: 'hidden',
+      messages: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.saveNote = this.saveNote.bind(this);
+    this.handleTitleChange = this.handleTitleChange.bind(this);
     this.showToolbar = this.showToolbar.bind(this);
+    this.saveNote = this.saveNote.bind(this);
+  }
+
+  componentDidMount() {
+    App.cable.subscriptions.create(
+      { channel: "MessagesChannel" },
+      {
+        received: data => {
+          switch (data.type) {
+            case 'content':
+              this.setState({
+                messages: this.state.messages.concat(data.content),
+                content: data.content,
+                plain_text: data.plain_text
+              });
+              break;
+            case 'title':
+              this.setState({
+                title: data.title
+              });
+              break;
+          }
+          this.saveNote();
+        },
+        updateContent: function (data) {
+          return this.perform("update_content", data);
+        },
+        updateTitle: function (data) {
+          return this.perform("update_title", data);
+        }
+      }
+    );
   }
 
   showToolbar() {
@@ -58,15 +91,22 @@ class EditNote extends Component {
     }
   }
 
+  handleTitleChange() {
+    return (e) => {
+      return App.cable.subscriptions.subscriptions[0].updateTitle({ title: e.currentTarget.value });
+    }
+  }
+
   handleEditorChange(html, delta, source, editor) {
-    this.setState({
-      content: html,
-      plain_text: editor.getText().trim()
-    });
+    // this.setState({
+    //   content: html,
+    //   plain_text: editor.getText().trim()
+    // });
+    App.cable.subscriptions.subscriptions[0].updateContent({ content: html, plain_text: editor.getText().trim() });
   }
 
   saveNote() {
-    const note = Object.assign({}, { id: this.state.noteId, content: this.state.content, plain_text: this.state.plain_text, notebook_id: this.props.defaultNotebook });
+    const note = Object.assign({}, { id: this.props.currentNote, title: this.state.title, content: this.state.content, plain_text: this.state.plain_text });
     this.props.updateNote(note);
   }
 
@@ -125,7 +165,7 @@ class EditNote extends Component {
               <div className='edit-submit-button'>
                 <input className='form-button' type='submit' value='Save' disabled={saveButtonDisabled}/>
               </div>
-              <input className='edit-form-title-input' required id='noteTitle' placeholder='Title' type='text' value={this.state.title} onChange={this.handleChange('title')} />
+              <input className='edit-form-title-input' required id='noteTitle' placeholder='Title' type='text' value={this.state.title} onChange={this.handleTitleChange()} />
             </form>
           <div className='app'>
             <div className='quill-container'>
