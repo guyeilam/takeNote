@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
+// import Quill from 'quill';
 import { connect } from 'react-redux';
 import { setCurrentNote, updateNote, createNote, requestSingleNote } from '../../actions/note_actions';
 import NewTagging from './new_tagging';
@@ -25,6 +26,7 @@ class EditNote extends Component {
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.showToolbar = this.showToolbar.bind(this);
     this.saveNote = this.saveNote.bind(this);
+
   }
 
   componentDidMount() {
@@ -34,11 +36,16 @@ class EditNote extends Component {
         received: data => {
           switch (data.type) {
             case 'content':
-              this.setState({
-                messages: this.state.messages.concat(data.content),
-                content: data.content,
-                plain_text: data.plain_text
-              });
+              // const note = Object.assign({}, { id: this.props.currentNote, title: this.state.title, content: data.content, plain_text: data.plain_text });
+              // this.props.updateNote(note);
+              // if (data.userId !== this.props.currentId) {
+                // console.log(`Text entered by ${data.userId} and current user is ${this.props.currentId}`);
+                this.setState({
+                  messages: this.state.messages.concat(data.content),
+                  content: data.content,
+                  plain_text: data.plain_text
+                });
+              // }
               break;
             case 'title':
               this.setState({
@@ -46,7 +53,8 @@ class EditNote extends Component {
               });
               break;
           }
-          this.saveNote();
+          // this.saveNote();
+          this.props.requestSingleNote(this.props.currentNote);
         },
         updateContent: function (data) {
           return this.perform("update_content", data);
@@ -60,7 +68,7 @@ class EditNote extends Component {
 
   showToolbar() {
     if (this.state.toolbarVisibility == 'hidden') {
-      this.setState({ toolbarVisibility: 'visible' });
+      this.setState({ toolbarVisibility: 'visible' }); 
     } else {
       this.setState({ toolbarVisibility: 'hidden' });
     }
@@ -83,6 +91,7 @@ class EditNote extends Component {
 
   componentWillUnmount() {
     this.props.setCurrentNote(null);
+    App.cable.subscriptions.subscriptions[0].unsubscribe();
   }
 
   handleChange(field) {
@@ -98,11 +107,15 @@ class EditNote extends Component {
   }
 
   handleEditorChange(html, delta, source, editor) {
-    // this.setState({
-    //   content: html,
-    //   plain_text: editor.getText().trim()
-    // });
-    App.cable.subscriptions.subscriptions[0].updateContent({ content: html, plain_text: editor.getText().trim() });
+    if (source === 'user') {
+      this.setState({
+        content: html,
+        plain_text: editor.getText().trim()
+      });
+      App.cable.subscriptions.subscriptions[0].updateContent({ userId: this.props.currentId, noteId: this.props.currentNote, content: html, plain_text: editor.getText().trim() });
+    } else { 
+      return null;
+    }
   }
 
   saveNote() {
@@ -174,9 +187,9 @@ class EditNote extends Component {
                 onFocus={this.showToolbar}
                 theme={this.state.theme}
                 modules={{ toolbar }}
-                // bounds={'.quill-container'}
                 placeholder={'New note...'}>
               </ReactQuill>
+
             </div>
             </div>
           </div>
@@ -199,7 +212,8 @@ const mapStateToProps = state => {
     notes: state.entities.notes[state.ui.currentNote],
     defaultNotebook: currentUser.default_notebook,
     currentNote: state.ui.currentNote,
-    loading: state.ui.loading
+    loading: state.ui.loading,
+    currentId
   });
 }
 
