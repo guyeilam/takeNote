@@ -19,4 +19,8 @@ class Note < ApplicationRecord
 
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
+
+  has_many :shares, dependent: :destroy
+  has_many :shared_users, through: :shares, source: :user
+
 end

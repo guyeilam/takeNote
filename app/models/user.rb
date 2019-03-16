@@ -21,8 +21,8 @@ class User < ApplicationRecord
   has_many :notebooks
   has_many :notes
   has_many :tags
-  has_many :shares, dependent: destroy
-  has_many :shared_notes, through: :shares, source: :notes
+  has_many :shares, dependent: :destroy
+  has_many :shared_notes, through: :shares, source: :note
 
   after_initialize :ensure_session_token
 
