@@ -1,6 +1,6 @@
 class Api::TagsController < ApplicationController
   def index
-    @tags = current_user.tags.all
+    @tags = Tag.all
   end
 
   def create
@@ -35,7 +35,7 @@ class Api::TagsController < ApplicationController
   end
 
   def show
-    @tag = current_user.tags.find_by(id: params[:id])
+    @tag = Tag.find_by(id: params[:id])
     if @tag
       render :show
     else

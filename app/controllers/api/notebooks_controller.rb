@@ -2,12 +2,12 @@ class Api::NotebooksController < ApplicationController
   before_action :require_signed_in
 
   def index
-    @notebooks = current_user.notebooks
-    @notes = current_user.notes
+    @notebooks = Notebook.all
+    @notes = Note.all
   end
 
   def show
-    @notebook = current_user.notebooks.find_by(id: params[:id])
+    @notebook = Notebook.find_by(id: params[:id])
     @notes = @notebook.notes
     if @notebook
       render :show
@@ -37,7 +37,7 @@ class Api::NotebooksController < ApplicationController
   end
 
   def destroy
-    @notebook = current_user.notebooks.find_by(id: params[:id])
+    @notebook = Notebook.find_by(id: params[:id])
     if @notebook
       @notebook.destroy
       render :show
