@@ -1,14 +1,15 @@
 class MessagesChannel < ApplicationCable::Channel  
   def subscribed
-    stream_for "messages"
+    # note = Note.find_by(params[:room])
+    stream_for "note_#{params[:room]}"
   end
   
   def update_content(data)
     note = Note.find_by(id: data['noteId'])
     new_data = { content: data['content'], plain_text: data['plain_text'] }
     if note.update(new_data)
-      socket = { userId: data['userId'], content: data['content'], plain_text: data['plain_text'], type: 'content' }
-      MessagesChannel.broadcast_to('messages', socket)
+      socket = { userId: data['userId'], content: data['content'], plain_text: data['plain_text'], noteId: note.id, type: 'content' }
+      MessagesChannel.broadcast_to("note_#{note.id}", socket)
     end
   end
   

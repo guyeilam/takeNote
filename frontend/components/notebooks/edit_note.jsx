@@ -26,44 +26,7 @@ class EditNote extends Component {
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.showToolbar = this.showToolbar.bind(this);
     this.saveNote = this.saveNote.bind(this);
-
-  }
-
-  componentDidMount() {
-    App.cable.subscriptions.create(
-      { channel: "MessagesChannel" },
-      {
-        received: data => {
-          switch (data.type) {
-            case 'content':
-              // const note = Object.assign({}, { id: this.props.currentNote, title: this.state.title, content: data.content, plain_text: data.plain_text });
-              // this.props.updateNote(note);
-              // if (data.userId !== this.props.currentId) {
-                // console.log(`Text entered by ${data.userId} and current user is ${this.props.currentId}`);
-                this.setState({
-                  messages: this.state.messages.concat(data.content),
-                  content: data.content,
-                  plain_text: data.plain_text
-                });
-              // }
-              break;
-            case 'title':
-              this.setState({
-                title: data.title
-              });
-              break;
-          }
-          // this.saveNote();
-          this.props.requestSingleNote(this.props.currentNote);
-        },
-        updateContent: function (data) {
-          return this.perform("update_content", data);
-        },
-        updateTitle: function (data) {
-          return this.perform("update_title", data);
-        }
-      }
-    );
+    this.clearSubscriptions = this.clearSubscriptions.bind(this);
   }
 
   showToolbar() {
@@ -72,6 +35,12 @@ class EditNote extends Component {
     } else {
       this.setState({ toolbarVisibility: 'hidden' });
     }
+  }
+
+  clearSubscriptions() {
+    App.cable.subscriptions.subscriptions.forEach(sub => {
+      sub.unsubscribe();
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -85,13 +54,49 @@ class EditNote extends Component {
             plain_text: this.props.notes.plain_text
           });
         });
+        
+        if (this.props.currentNote) {
+          if (!prevProps.currentNote || (prevProps.currentNote !== this.props.currentNote)) {
+            this.clearSubscriptions();
+            App.cable.subscriptions.create(
+              { channel: "MessagesChannel", room: this.props.currentNote.toString() },
+              {
+                received: data => {
+                  switch (data.type) {
+                    case 'content':
+                      this.setState({
+                        messages: this.state.messages.concat(data.content),
+                        content: data.content,
+                        plain_text: data.plain_text
+                      });
+                      break;
+                    case 'title':
+                      this.setState({
+                        title: data.title
+                      });
+                      break;
+                  }
+                  this.props.requestSingleNote(this.props.currentNote);
+                },
+                updateContent: function (data) {
+                  return this.perform("update_content", data);
+                },
+                updateTitle: function (data) {
+                  return this.perform("update_title", data);
+                }
+              }
+            );
+            
+          }
+        }
+
       }
     }
   }
 
   componentWillUnmount() {
     this.props.setCurrentNote(null);
-    App.cable.subscriptions.subscriptions[0].unsubscribe();
+    // App.cable.subscriptions.subscriptions[0].unsubscribe();
   }
 
   handleChange(field) {
