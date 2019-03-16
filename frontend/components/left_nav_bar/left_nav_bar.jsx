@@ -22,6 +22,7 @@ class LeftNavBar extends Component {
       currentViewNotebooks: '',
       currentViewNotes: '',
       currentViewTags: '',
+      currentViewSharedNotes: '',
       showNotebooks: false,
       searchInput: '',
       disabled: true
@@ -41,6 +42,8 @@ class LeftNavBar extends Component {
       this.setState({ currentViewNotes: 'current-view' });
     } else if ((currentPath === '/tags') || (currentPath === '/tags/:tagId')) {
       this.setState({ currentViewTags: 'current-view' });
+    } else if (currentPath === '/shared_notes') {
+      this.setState({ currentViewSharedNotes: 'current-view' });
     }
   }
 
@@ -178,11 +181,18 @@ class LeftNavBar extends Component {
           <LeftNavNotebooks showNotebooks={this.state.showNotebooks} />
         </div>
 
+        <div className={`left-nav-notes left-nav-hover ${this.state.currentViewSharedNotes}`} onClick={() => this.props.history.push('/shared_notes')}>
+          <div className='left-nav-notes-expand'></div>
+          <div className='left-nav-notes-icon'><svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M16.787 15.446c0-.9-.261-1.12-1.914-1.656-.048-.015-.095-.03-.14-.046.198-.117.344-.224.444-.315.155-.14.1-.328-.042-.48a3.819 3.819 0 0 1-1.01-2.041c-.195-1.27.545-2.736 2.095-2.736 1.55 0 2.29 1.467 2.095 2.736a3.818 3.818 0 0 1-1.01 2.04c-.142.153-.197.342-.042.481.258.233.814.579 1.81.901 1.071.347 1.24.49 1.24 1.072v2.118a.925.925 0 0 1-.925.926h-2.601v-3z" fill="#ccc"></path><path d="M13.82 14.539c1.563.505 1.81.714 1.81 1.564v2.343H4.61a.925.925 0 0 1-.924-.926v-1.417c0-.85.246-1.059 1.809-1.564 1.453-.47 2.264-.976 2.64-1.315.227-.204.146-.479-.061-.702-.5-.537-1.246-1.508-1.472-2.977-.286-1.85.794-3.99 3.056-3.99 2.26 0 3.341 2.14 3.056 3.99-.227 1.47-.973 2.44-1.473 2.977-.207.223-.288.498-.062.702.377.34 1.188.845 2.641 1.315z" fill="#ccc" ></path></svg></div>
+          <div className='left-nav-notes-text'>Shared with Me</div>
+        </div>
+
         <div className={`left-nav-tags left-nav-hover ${this.state.currentViewTags}`} onClick={() => this.props.history.push('/tags')}>
           <div className='left-nav-tags-expand'></div>
           <div className='left-nav-tags-icon'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ccc" fillRule="evenodd" d="M10.265 9.005a2 2 0 1 0 3.47 0H18v9.5a1.5 1.5 0 0 1-1.5 1.5h-9a1.5 1.5 0 0 1-1.5-1.5v-9.5h4.265zM9.5 16a.5.5 0 1 0 0 1h5a.5.5 0 1 0 0-1h-5zm0-2a.5.5 0 1 0 0 1h5a.5.5 0 1 0 0-1h-5zm4.235-4.995H18l-4.982-4.606a1.5 1.5 0 0 0-2.036 0L6 9.005h4.265a2 2 0 0 1 3.47 0z"></path></svg></div>
           <div className='left-nav-tags-text'>Tags</div>
         </div>
+        
         </div>
       </>
     );

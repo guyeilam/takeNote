@@ -14,6 +14,7 @@ const App = () => (
     <ProtectedRoute exact path="/tags" component={ClientContainer} />
     <ProtectedRoute exact path="/tags/:tagId" component={ClientContainer} />
     <ProtectedRoute exact path="/search" component={ClientContainer} />
+    <ProtectedRoute exact path="/shared_notes" component={ClientContainer} />
     <AuthRoute path="/login" component={LoginFormContainer} />
     <AuthRoute path="/signup" component={SignupFormContainer} />
   </div>

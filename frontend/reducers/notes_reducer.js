@@ -13,7 +13,8 @@ const notesReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_ALL_NOTEBOOKS:
       newState = action.payload.notes;
-      return merge({}, state, newState);
+      // return merge({}, state, newState);
+      return merge({}, newState);
     case RECEIVE_SINGLE_NOTEBOOK:
       notes = action.payload.notes;
       return merge({}, notes);

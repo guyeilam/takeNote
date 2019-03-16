@@ -12,6 +12,13 @@ export const fetchAllNotes = () => {
   });
 }
 
+export const fetchAllSharedNotes = () => {
+  return $.ajax({
+    method: 'get',
+    url: `/api/shares`
+  });
+}
+
 export const createNote = (note) => {
   return $.ajax({
     method: 'post',

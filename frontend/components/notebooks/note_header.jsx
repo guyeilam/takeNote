@@ -28,6 +28,23 @@ class NoteHeader extends Component {
     noteNotebookId = note.notebook_id;
     title = note.notebookTitle;
 
+    if (this.props.match.path === '/shared_notes') {
+      return (
+        <div className='note-header'>
+        <div className='current-notebook'>
+          <div className='current-notebook-icon'>
+            
+          </div>
+          <div className='current-notebook-title'></div>
+        </div>
+
+        <div className='note-actions-menu'>
+          
+        </div>
+      </div>
+      );
+    }
+
     return (
       <div className='note-header'>
         <div className='current-notebook'>

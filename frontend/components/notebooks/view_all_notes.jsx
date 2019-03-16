@@ -25,6 +25,8 @@ class NotesList extends Component {
       this.props.requestSingleTag(this.props.tagId);
     } else if (this.props.match.path === '/notes/all') {
       this.props.requestAllNotes();
+    } else if (this.props.match.path === '/shared_notes') {
+      this.props.requestAllSharedNotes();
     }
   }
 

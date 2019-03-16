@@ -2,12 +2,12 @@ class Api::NotebooksController < ApplicationController
   before_action :require_signed_in
 
   def index
-    @notebooks = Notebook.all
-    @notes = Note.all
+    @notebooks = current_user.notebooks
+    @notes = current_user.notes
   end
 
   def show
-    @notebook = Notebook.find_by(id: params[:id])
+    @notebook = current_user.notebooks.find_by(id: params[:id])
     @notes = @notebook.notes
     if @notebook
       render :show

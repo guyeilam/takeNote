@@ -11,7 +11,7 @@ class Api::TaggingsController < ApplicationController
   end
 
   def index
-    @taggings = Tagging.all
+    @taggings = current_user.taggings
   end
 
   def destroy

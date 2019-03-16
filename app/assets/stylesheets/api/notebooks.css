@@ -68,6 +68,7 @@
 
 .notebook-detail {
   display: flex;
+  width: 100%;
 }
 
 .notebooks-list-container, .tags-list-container {

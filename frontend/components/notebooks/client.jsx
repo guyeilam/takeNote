@@ -48,7 +48,10 @@ class Client extends Component {
             path="/search"
             component={ViewNotebookContainer}
           />
-
+          <Route exact
+            path="/shared_notes"
+            component={ViewNotebookContainer}
+          />
         </section>
       </>
     );

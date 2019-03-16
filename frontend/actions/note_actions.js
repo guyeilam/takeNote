@@ -32,6 +32,18 @@ export const requestAllNotes = () => {
   }
 }
 
+export const requestAllSharedNotes = () => {
+  return (dispatch) => {
+    dispatch(loadNotes());
+    return NoteAPIUtil.fetchAllSharedNotes().then((payload) => {
+        return dispatch(receiveAllNotes(payload));
+      },
+        (err) => {
+          return dispatch(receiveNoteErrors(err.responseJSON));
+    });
+  }
+}
+
 export const removeNote = (noteId) => {
   return ({
     type: REMOVE_NOTE,

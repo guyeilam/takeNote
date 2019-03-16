@@ -7,6 +7,7 @@ import AllNotesContainer from './all_notes_container';
 import FilterTagContainer from './filter_tag_container';
 import EditNote from './edit_note';
 import SearchContainer from '../search/search_container';
+import SharedNotesContainer from './shared_notes_container';
 
 class ViewNotebook extends Component {
   constructor(props) {
@@ -34,6 +35,10 @@ class ViewNotebook extends Component {
           <Route exact
             path="/tags/:tagId"
             component={FilterTagContainer}
+          />
+          <Route exact
+            path="/shared_notes"
+            component={SharedNotesContainer}
           />
           <EditNote />
         </div>
