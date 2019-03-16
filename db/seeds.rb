@@ -11,6 +11,7 @@ Notebook.delete_all
 Note.delete_all
 Tag.delete_all
 Tagging.delete_all
+Share.delete_all
 
 user1 = User.create!(
   email: 'demo@demo',
