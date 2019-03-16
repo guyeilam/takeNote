@@ -14,8 +14,12 @@ class MessagesChannel < ApplicationCable::Channel
   end
   
   def update_title(data)
-    socket = { title: data['title'], type: 'title' }
-    MessagesChannel.broadcast_to('messages', socket)
+    note = Note.find_by(id: data['noteId'])
+    new_data = { title: data['title'] }
+    if note.update(new_data)
+      socket = { userId: data['userId'], title: data['title'], noteId: note.id, type: 'title' }
+      MessagesChannel.broadcast_to("note_#{note.id}", socket)
+    end
   end
 
   def unsubscribed; end

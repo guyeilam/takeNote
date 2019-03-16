@@ -96,7 +96,7 @@ class EditNote extends Component {
 
   componentWillUnmount() {
     this.props.setCurrentNote(null);
-    // App.cable.subscriptions.subscriptions[0].unsubscribe();
+    this.clearSubscriptions();
   }
 
   handleChange(field) {
@@ -107,7 +107,10 @@ class EditNote extends Component {
 
   handleTitleChange() {
     return (e) => {
-      return App.cable.subscriptions.subscriptions[0].updateTitle({ title: e.currentTarget.value });
+      this.setState({
+        title: e.currentTarget.value
+      });
+      App.cable.subscriptions.subscriptions[0].updateTitle({ userId: this.props.currentId, noteId: this.props.currentNote, title: e.currentTarget.value });
     }
   }
 
