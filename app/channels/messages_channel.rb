@@ -1,6 +1,5 @@
 class MessagesChannel < ApplicationCable::Channel  
   def subscribed
-    # note = Note.find_by(params[:room])
     stream_for "note_#{params[:room]}"
   end
   
@@ -8,7 +7,7 @@ class MessagesChannel < ApplicationCable::Channel
     note = Note.find_by(id: data['noteId'])
     new_data = { content: data['content'], plain_text: data['plain_text'] }
     if note.update(new_data)
-      socket = { userId: data['userId'], content: data['content'], plain_text: data['plain_text'], noteId: note.id, type: 'content' }
+      socket = { userId: data['userId'], noteId: note.id, note: note, updated_at: note.updated_at.strftime("%b %d %l:%M:%S %P"), created_at: note.created_at.strftime("%b %d %l:%M:%S %P"), notebookTitle: note.notebook.title, type: 'content' }
       MessagesChannel.broadcast_to("note_#{note.id}", socket)
     end
   end
@@ -17,7 +16,7 @@ class MessagesChannel < ApplicationCable::Channel
     note = Note.find_by(id: data['noteId'])
     new_data = { title: data['title'] }
     if note.update(new_data)
-      socket = { userId: data['userId'], title: data['title'], noteId: note.id, type: 'title' }
+      socket = { userId: data['userId'], noteId: note.id, note: note, updated_at: note.updated_at.strftime("%b %d %l:%M:%S %P"), created_at: note.created_at.strftime("%b %d %l:%M:%S %P"), notebookTitle: note.notebook.title, type: 'title' }
       MessagesChannel.broadcast_to("note_#{note.id}", socket)
     end
   end

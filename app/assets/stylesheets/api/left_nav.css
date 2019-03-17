@@ -109,23 +109,16 @@
 }
 
 .circle-account-icon {
-  /* flex-basis: 20%; */
   width: 30px;
   height: 31px;
   border-radius: 50%;
   font-size: 22px;
   color: rgb(255, 118, 55);
-  line-height: 29px;
+  line-height: 25px;
   text-align: center;
   background: rgb(43, 141, 95);
   font-weight: 600;
-  /* text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;  */
   text-shadow: -2px 2px 0px rgb(41, 41, 41);
-  box-shadow: #666;
 }
 
 .session-modal-email {

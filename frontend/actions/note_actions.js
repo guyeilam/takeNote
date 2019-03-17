@@ -1,6 +1,7 @@
 import * as NoteAPIUtil from '../util/note_api_util';
 
 export const RECEIVE_SINGLE_NOTE = 'RECEIVE_SINGLE_NOTE';
+export const RECEIVE_UPDATED_NOTE = 'RECEIVE_UPDATED_NOTE';
 export const RECEIVE_ALL_NOTES = 'RECEIVE_ALL_NOTES';
 export const RECEIVE_NOTE_ERRORS = 'RECEIVE_NOTE_ERRORS';
 export const REMOVE_NOTE = 'REMOVE_NOTE';
@@ -72,6 +73,13 @@ export const deleteNote = (noteId) => {
 export const receiveSingleNote = (payload) => {
   return ({
     type: RECEIVE_SINGLE_NOTE,
+    payload
+  });
+}
+
+export const receiveUpdatedNote = (payload) => {
+  return ({
+    type: RECEIVE_UPDATED_NOTE,
     payload
   });
 }

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 // import Quill from 'quill';
 import { connect } from 'react-redux';
-import { setCurrentNote, updateNote, createNote, requestSingleNote } from '../../actions/note_actions';
+import { setCurrentNote, updateNote, createNote, requestSingleNote, receiveUpdatedNote } from '../../actions/note_actions';
 import NewTagging from './new_tagging';
 import NoteHeader from './note_header';
 import LoadingIcon from '../notebooks/all_notes_tag_label';
@@ -64,19 +64,27 @@ class EditNote extends Component {
                 received: data => {
                   switch (data.type) {
                     case 'content':
+                  //     data['note']['updated_at'] = data['updated_at'];
+                  //     data['note']['created_at'] = data['created_at'];
+                  //     data['note']['notebookTitle'] = data['notebookTitle'];
                       this.setState({
-                        messages: this.state.messages.concat(data.content),
-                        content: data.content,
-                        plain_text: data.plain_text
+                        // messages: this.state.messages.concat(data.content),
+                        content: data['note'].content,
+                        plain_text: data['note'].plain_text
                       });
+                      
                       break;
                     case 'title':
                       this.setState({
-                        title: data.title
+                        title: data['note'].title
                       });
                       break;
                   }
-                  this.props.requestSingleNote(this.props.currentNote);
+                  // this.props.requestSingleNote(this.props.currentNote);
+                  data['note']['updated_at'] = data['updated_at'];
+                  data['note']['created_at'] = data['created_at'];
+                  data['note']['notebookTitle'] = data['notebookTitle'];
+                  this.props.receiveUpdatedNote(data['note']);
                 },
                 updateContent: function (data) {
                   return this.perform("update_content", data);
@@ -230,7 +238,8 @@ const mapDispatchToProps = dispatch => {
     requestSingleNote: noteId => dispatch(requestSingleNote(noteId)),
     setCurrentNote: noteId => dispatch(setCurrentNote(noteId)),
     updateNote: note => dispatch(updateNote(note)),
-    createNote: note => dispatch(createNote(note))
+    createNote: note => dispatch(createNote(note)),
+    receiveUpdatedNote: note => dispatch(receiveUpdatedNote(note))
   });
 }
 
