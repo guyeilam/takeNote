@@ -12,6 +12,7 @@ class NoteHeaderModal extends Component {
     super(props);
     this.handleDeleteNote = this.handleDeleteNote.bind(this);
     this.moveNoteModal = this.moveNoteModal.bind(this);
+    this.shareNoteModal = this.shareNoteModal.bind(this);
   }
 
   handleDeleteNote(noteId) {
@@ -25,12 +26,18 @@ class NoteHeaderModal extends Component {
     this.props.openModal('move-note', this.props.navModalId);
   }
 
+  shareNoteModal() {
+    this.props.closeNavModal();
+    this.props.openModal('share-note', this.props.navModalId);
+  }
+
   render() {
     return (
       <>
         <div className='note-header-nav-text'>
           <div className='notes-nav-delete-note notes-nav-button'><div className='notes-nav-button-text' onClick={() => this.handleDeleteNote(this.props.navModalId)}>Delete note...</div></div>
           <div className='notes-nav-move-note notes-nav-button'><div className='notes-nav-button-text' onClick={() => this.moveNoteModal()}>Move note</div></div>
+          <div className='notes-nav-move-note notes-nav-button'><div className='notes-nav-button-text' onClick={() => this.shareNoteModal()}>Share note</div></div>
         </div>
       </>
     );

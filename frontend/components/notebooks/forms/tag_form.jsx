@@ -62,7 +62,7 @@ class TagForm extends React.Component {
     }
 
     return (
-      <div className="new-notebook-form-container">
+      <div className="new-tag-form-container">
         <form onSubmit={this.handleSubmit} className="new-notebook-form">
           <div className='new-notebook-form-header'>
             <div className='new-notebook-form-header-text'>{headerText}</div>

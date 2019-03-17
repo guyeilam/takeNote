@@ -15,19 +15,27 @@ class TagItem extends Component {
     if (!this.props.currentNote) { return null; }
     
     const tags = (this.props.notes.tagIds && (this.props.notes.tagIds.length > 0) && (Object.values(this.props.tags).length >= this.props.notes.tagIds.length)) ? this.props.notes.tagIds.map(tagId => {
-      return (
-        this.props.tags[tagId]
-      );
+      if (this.props.tags[tagId]) {
+        return (
+          this.props.tags[tagId]
+        );
+      } else {
+        return null;
+      }
     }) : null;
 
     const taggings = tags ? tags.map(tag => {
-      return (
-        <div className='tag-label' key={tag.id}>
-          <NavModal modalId={tag.id}/>
-          <div className='tag-label-text'>{tag.label}</div>
-          <div className='tag-label-icon' onClick={() => this.props.openNavModal('tagging-nav', tag.id)}><svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" className="arrow-facing-down"><path fill="none" d="M7 2L4 5 1 2"></path></svg></div>
-        </div>
-      );
+      if (tag) {
+        return (
+          <div className='tag-label' key={tag.id}>
+            <NavModal modalId={tag.id}/>
+            <div className='tag-label-text'>{tag.label}</div>
+            <div className='tag-label-icon' onClick={() => this.props.openNavModal('tagging-nav', tag.id)}><svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" className="arrow-facing-down"><path fill="none" d="M7 2L4 5 1 2"></path></svg></div>
+          </div>
+        );
+      } else {
+        return null;
+      }
     }) : null;
 
     return (

@@ -7,11 +7,23 @@ import { openNavModal, closeNavModal } from '../../actions/modal_actions';
 
 const mapStateToProps = (state, ownProps) => {
   let notes = state.entities.notes;
+  const currentId = state.session.id;
+  const currentUser = state.entities.users[currentId] || null;
 
-  let sorted_notes = state.entities.notes ? sortedItems(state.entities.notes, state.ui.sort) : null;
+  let sorted_notes = notes ? sortedItems(notes, state.ui.sort) : null;
+
+  let filteredNotes = [];
+
+  if (sorted_notes && (sorted_notes.length > 0)) {
+    sorted_notes.forEach(note => {
+      if (note.user_id === currentId) {
+        filteredNotes.push(note);
+      }
+    });
+  }
 
   return ({
-    notes: sorted_notes,
+    notes: filteredNotes,
     currentNote: state.ui.currentNote
   });
 }

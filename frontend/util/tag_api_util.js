@@ -35,13 +35,6 @@ export const updateTag = (tag) => {
   });
 }
 
-// export const fetchTaggings = (tagId) => {
-//   return $.ajax({
-//     method: 'get',
-//     url: `/api/tags/${tagId}/taggings`
-//   });
-// }
-
 export const createTagging = (tagId, noteId) => {
   return $.ajax({
     method: 'post',

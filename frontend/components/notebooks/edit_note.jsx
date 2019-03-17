@@ -184,7 +184,7 @@ class EditNote extends Component {
           <div className='note-form'>
             <form className='note-edit-form' onSubmit={(e) => this.handleSubmit(e)}>
               <div className='edit-submit-button'>
-                <input className='form-button' type='submit' value='Save' disabled={saveButtonDisabled}/>
+                {/* <input className='form-button' type='submit' value='Save' disabled={saveButtonDisabled}/> */}
               </div>
               <input className='edit-form-title-input' required id='noteTitle' placeholder='Title' type='text' value={this.state.title} onChange={this.handleTitleChange()} />
             </form>

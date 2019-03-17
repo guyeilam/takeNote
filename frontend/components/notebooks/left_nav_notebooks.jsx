@@ -15,8 +15,12 @@ class LeftNavNotebooks extends Component {
   }
 
   openNotebook(notebookId) {
-    this.props.setCurrentNote(null);
-    this.props.history.push(`/notebooks/${notebookId}`);
+    if (this.props.match.params.notebookId === notebookId.toString()) {
+      return null;
+    } else {
+      this.props.setCurrentNote(null);
+      this.props.history.push(`/notebooks/${notebookId}`);
+    }
   }
 
   render() {

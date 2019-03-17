@@ -1,6 +1,11 @@
 class Api::SharesController < ApplicationController
   def create
-    @share = Share.new(share_params)
+    @user = User.find_by(email: share_params[:user_email])
+    if !@user
+      render json: ["Invalid email"], status: 401
+    end
+
+    @share = Share.new(user_id: @user.id, note_id: share_params[:note_id])
     if @share.save
       @note = Note.find_by(id: @share.note_id)
       render '/api/notes/show'
@@ -26,6 +31,6 @@ class Api::SharesController < ApplicationController
 
   private
   def share_params
-    params.require(:share).permit(:user_id, :note_id)
+    params.require(:share).permit(:user_email, :note_id)
   end
 end

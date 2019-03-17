@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { requestAllTags, createTag, createTagging } from '../../actions/tag_actions';
 import { requestSingleNote } from '../../actions/note_actions';
 import Taggings from './taggings';
@@ -52,12 +53,10 @@ class NewTagging extends Component {
     }
     
     if (searchResult) {
-      // this.props.createTagging(searchResult, this.props.currentNote).then(() => this.props.requestSingleNote(this.props.currentNote));
       this.props.createTagging(searchResult, this.props.currentNote);
     } else {
       tag = Object.assign({}, { label: label });
       this.props.createTag(tag).then(response => {
-        // this.props.createTagging(Object.keys(response.payload.tags)[0], this.props.currentNote).then(() => this.props.requestSingleNote(this.props.currentNote));
         this.props.createTagging(Object.keys(response.payload.tags)[0], this.props.currentNote);
       });
     }
@@ -66,7 +65,6 @@ class NewTagging extends Component {
   // BEGIN AUTOCOMPLETE
 
   handleSearch(searchTitle) {
-    // e.preventDefault();
     let tagId = null;
     let tagsArray = Object.values(this.props.tags);
     tagsArray.forEach(tag => {
@@ -92,19 +90,13 @@ class NewTagging extends Component {
       }
     });
 
-    // if (matches.length === 0) {
-      // matches.push('No matches');
-    // }
-
     return matches;
   }
 
   selectTag(event) {
     const label = event.currentTarget.innerText;
     this.setState({ label: '' });
-    // this.handleSubmit(event);
     let searchResult = this.handleSearch(label);
-    // this.props.createTagging(searchResult, this.props.currentNote).then(() => this.props.requestSingleNote(this.props.currentNote));
     this.props.createTagging(searchResult, this.props.currentNote);
   }
 
@@ -129,18 +121,13 @@ class NewTagging extends Component {
     
     if (!this.props.notes) { return null; }
     if (!this.props.tags) { return null; }
-    
-    // const tags = (this.props.notes.tagIds && (this.props.notes.tagIds.length > 0) && (Object.values(this.props.tags).length > 0)) ? this.props.notes.tagIds.map(tagId => {
-    //   return (
-    //     this.props.tags[tagId]
-    //   );
-    // }) : null;
-    
-    // const taggings = tags ? tags.map(tag => {
-    //   return (
-    //     <div key={tag.id} >{tag.label}</div>
-    //   );
-    // }) : null;
+
+    if (this.props.match.path === '/shared_notes') {
+      return (
+        <div className='note-tags-container'>
+        </div>
+      );
+    }
 
     return (
       <div className='note-tags-container'>
@@ -199,4 +186,4 @@ const mapDispatchToProps = dispatch => {
   });
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewTagging);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewTagging));

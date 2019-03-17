@@ -41,3 +41,11 @@ export const updateNote = (note) => {
     data: { note }
   });
 }
+
+export const createShare = (userEmail, noteId) => {
+  return $.ajax({
+    method: 'post',
+    url: '/api/shares',
+    data: { share: { user_email: userEmail, note_id: noteId } }
+  });
+}
