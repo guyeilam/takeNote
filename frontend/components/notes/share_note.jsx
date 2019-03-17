@@ -10,6 +10,7 @@ class ShareNote extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
+    this.unshareNote = this.unshareNote.bind(this);
   }
 
   handleSubmit(e) {
@@ -28,6 +29,11 @@ class ShareNote extends Component {
     }
   }
 
+  unshareNote(email, noteId) {
+    this.props.deleteShare(email, noteId)
+    this.props.closeModal();
+  }
+
   renderErrors() {
     return (
       <ul>
@@ -41,6 +47,20 @@ class ShareNote extends Component {
   }
 
   render() {
+
+    const note = (this.props.notes && this.props.noteId) ? this.props.notes[this.props.noteId] : null;
+
+    const sharedUsers = note ? note.sharedUserEmails.map((email, idx) => {
+      return (
+        <div className='share-note-user-item' key={idx}>
+          <div className='share-note-user-email'>{email}</div>
+          <div className='unshare-note-outer-icon' onClick={() => this.unshareNote(email, note.id)}>
+          <div className='unshare-note-icon'><svg width="13" height="13" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg"><path d="M7.728 6.314l4.95-4.95L11.263-.05 6.313 4.9 1.365-.05-.05 1.364l4.95 4.95-4.95 4.95 1.414 1.414 4.95-4.95 4.95 4.95 1.414-1.415-4.95-4.95z" fill="#ccc" fillRule="evenodd"></path></svg></div>
+          </div>
+        </div>
+      );
+    }) : null;
+
     return (
       <div className='share-note-form-container'>
         <form onSubmit={this.handleSubmit} className="share-note-form">
@@ -67,6 +87,13 @@ class ShareNote extends Component {
             </div>
           </div>
         </form>
+
+        <div className='shared-users'>
+          <div className='shared-users-title'>Currently Shared With</div>
+          <div className='shared-users-list'>
+            {sharedUsers}
+          </div>
+        </div>
       </div>
     );
   }

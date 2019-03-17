@@ -335,3 +335,62 @@
 }
 
 /* end move note modal */
+
+
+.current-user-typing-container {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  border: 1px solid gray;
+  background: rgba(43, 113, 192, 0.5);
+  padding: 10px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .08), 0 2px 15px rgba(0, 0, 0, .2);
+  border-radius: 4px;
+  line-height: 1.1875;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, san-serif;
+}
+
+
+
+/* begin share note form  */
+
+.share-note-user-item {
+  padding: 10px 5px 10px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.unshare-note-outer-icon:hover {
+  background-color: rgb(166, 166, 166);
+  transition: all 0.08s ease-out;
+  cursor: pointer;
+}
+
+.share-note-user-email {
+  font-size: 13px;
+}
+
+.unshare-note-icon { 
+  display: flex;
+  align-items: center;
+}
+
+.unshare-note-icon svg {
+  width: 8px;
+  height: 8px;
+}
+
+.unshare-note-outer-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f2f2f2;
+  width: 20px;
+  height: 20px;
+}
+
+/* end move note modal */
+
+/* end share note form */

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :taggings, only: [:create]
     resources :shares, only: [:index, :create]
     delete '/remove_tagging', to: 'taggings#destroy'
+    delete '/unshare_note', to: 'shares#destroy'
 
 
   end

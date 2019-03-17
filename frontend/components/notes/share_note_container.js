@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { closeModal } from '../../actions/modal_actions';
-import { setCurrentNote, createShare } from '../../actions/note_actions';
+import { setCurrentNote, createShare, deleteShare } from '../../actions/note_actions';
 import ShareNote from './share_note';
 
 const mapStateToProps = (state, ownProps) => {
@@ -16,6 +16,7 @@ const mapDispatchToProps = dispatch => {
   return {
     closeModal: () => dispatch(closeModal()),
     createShare: (userEmail, noteId) => dispatch(createShare(userEmail, noteId)),
+    deleteShare: (userEmail, noteId) => dispatch(deleteShare(userEmail, noteId)),
     setCurrentNote: (noteId) => dispatch(setCurrentNote(noteId)),
   };
 };

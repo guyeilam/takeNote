@@ -22,9 +22,9 @@ const notesReducer = (state = {}, action) => {
       return merge({}, state, action.payload.notes);
     case RECEIVE_UPDATED_NOTE:
       newState = merge({}, state);
-      updatedNote = merge({}, { [action.payload.id]: action.payload} );
-      delete newState[action.payload.id];
-      return merge({}, newState, updatedNote);
+      updatedNote = Object.values(action.payload.notes)[0];
+      delete newState[updatedNote.id];
+      return merge({}, newState, action.payload.notes);
     case RECEIVE_ALL_NOTES:
       notes = action.payload.notes;
       return merge({}, notes);

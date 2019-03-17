@@ -18,7 +18,8 @@ class EditNote extends Component {
       plain_text: '',
       theme: 'snow',
       toolbarVisibility: 'hidden',
-      messages: []
+      messages: [],
+      typing: null
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
@@ -81,10 +82,21 @@ class EditNote extends Component {
                       break;
                   }
                   // this.props.requestSingleNote(this.props.currentNote);
+
+                    this.setState({
+                      typing: data['sent_by']
+                    });
+                    setTimeout(() => {
+                      this.setState({
+                        typing: null
+                      });
+                    }, 1000);
+                  
+
                   data['note']['updated_at'] = data['updated_at'];
                   data['note']['created_at'] = data['created_at'];
                   data['note']['notebookTitle'] = data['notebookTitle'];
-                  this.props.receiveUpdatedNote(data['note']);
+                  this.props.receiveUpdatedNote({notes: { [data['noteId']]: data['note'] } });
                 },
                 updateContent: function (data) {
                   return this.perform("update_content", data);
@@ -181,8 +193,17 @@ class EditNote extends Component {
     
     const loadingIcon = this.props.loading ? <LoadingIcon /> : null;
 
+    const whoIsTyping = this.state.typing ? 
+      <div className='current-user-typing-container'>
+        <div className='current-user-typing-content'>
+          {`${this.state.typing} is typing...`}
+        </div>
+      </div>
+    : null;
+
     return (
       <div className='note-edit'>
+      {whoIsTyping}
 
       {loadingIcon}
 

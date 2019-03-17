@@ -49,3 +49,11 @@ export const createShare = (userEmail, noteId) => {
     data: { share: { user_email: userEmail, note_id: noteId } }
   });
 }
+
+export const deleteShare = (userEmail, noteId) => {
+  return $.ajax({
+    method: 'delete',
+    url: '/api/unshare_note',
+    data: { share: { user_email: userEmail, note_id: noteId } }
+  });
+}

@@ -149,7 +149,18 @@ export const setCurrentNote = (noteId) => {
 export const createShare = (userEmail, noteId) => {
   return (dispatch) => {
     return NoteAPIUtil.createShare(userEmail, noteId).then((payload) => {
-      return dispatch(receiveSingleNote(payload));
+      return dispatch(receiveUpdatedNote(payload));
+    },
+      (err) => {
+        return dispatch(receiveNoteErrors(err.responseText));
+      });
+  }
+}
+
+export const deleteShare = (userEmail, noteId) => {
+  return (dispatch) => {
+    return NoteAPIUtil.deleteShare(userEmail, noteId).then((payload) => {
+      return dispatch(receiveUpdatedNote(payload));
     },
       (err) => {
         return dispatch(receiveNoteErrors(err.responseJSON));
