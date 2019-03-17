@@ -50,7 +50,7 @@ class ShareNote extends Component {
 
     const note = (this.props.notes && this.props.noteId) ? this.props.notes[this.props.noteId] : null;
 
-    const sharedUsers = note ? note.sharedUserEmails.map((email, idx) => {
+    const sharedUsers = (note && note.sharedUserEmails) ? note.sharedUserEmails.map((email, idx) => {
       return (
         <div className='share-note-user-item' key={idx}>
           <div className='share-note-user-email'>{email}</div>
