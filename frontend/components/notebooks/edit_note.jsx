@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
-// import Quill from 'quill';
+import Quill from 'quill';
 import { connect } from 'react-redux';
 import { setCurrentNote, updateNote, createNote, requestSingleNote, receiveUpdatedNote } from '../../actions/note_actions';
 import NewTagging from './new_tagging';
@@ -28,6 +28,16 @@ class EditNote extends Component {
     this.showToolbar = this.showToolbar.bind(this);
     this.saveNote = this.saveNote.bind(this);
     this.clearSubscriptions = this.clearSubscriptions.bind(this);
+  }
+
+  componentDidMount() {
+
+    // let editor = new Quill('#editor', {
+    //   modules: {
+    //     'toolbar': { container: '#toolbar' }
+    //   },
+    //   theme: 'snow'
+    // });
   }
 
   showToolbar() {
@@ -65,15 +75,10 @@ class EditNote extends Component {
                 received: data => {
                   switch (data.type) {
                     case 'content':
-                  //     data['note']['updated_at'] = data['updated_at'];
-                  //     data['note']['created_at'] = data['created_at'];
-                  //     data['note']['notebookTitle'] = data['notebookTitle'];
                       this.setState({
-                        // messages: this.state.messages.concat(data.content),
                         content: data['note'].content,
                         plain_text: data['note'].plain_text
                       });
-                      
                       break;
                     case 'title':
                       this.setState({
@@ -81,8 +86,6 @@ class EditNote extends Component {
                       });
                       break;
                   }
-                  // this.props.requestSingleNote(this.props.currentNote);
-
                     this.setState({
                       typing: data['sent_by']
                     });
@@ -92,7 +95,6 @@ class EditNote extends Component {
                       });
                     }, 1000);
                   
-
                   data['note']['updated_at'] = data['updated_at'];
                   data['note']['created_at'] = data['created_at'];
                   data['note']['notebookTitle'] = data['notebookTitle'];
@@ -165,31 +167,37 @@ class EditNote extends Component {
     }
 
     let saveButtonDisabled = true;
-
+    
     if (this.props.currentNote) {
       saveButtonDisabled = false;
     }
 
-    const toolbar = [
-      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-      ['blockquote', 'code-block'],
+    let toolbar;
 
-      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-      [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-      [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
-      [{ 'direction': 'rtl' }],                         // text direction
-
-      [{ 'size': [] }],  // custom dropdown
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      ['link', 'image', 'video', 'formula'],
-
-      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-      [{ 'font': [] }],
-      [{ 'align': [] }],
-
-      ['clean']                                         // remove formatting button
-    ];
+    if (this.state.toolbarVisibility === 'hidden') {
+      toolbar = [];
+    } else {
+      toolbar = [
+        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['blockquote', 'code-block'],
+  
+        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+        [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+        [{ 'direction': 'rtl' }],                         // text direction
+  
+        [{ 'size': [] }],  // custom dropdown
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        ['link', 'image', 'video', 'formula'],
+  
+        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+  
+        ['clean']                                         // remove formatting button
+      ];
+    }
     
     const loadingIcon = this.props.loading ? <LoadingIcon /> : null;
 
@@ -210,7 +218,7 @@ class EditNote extends Component {
       <NoteHeader note={this.props.notes}/>
 
         <div className='note-edit-container'>
-          <div className='note-form'>
+          <div className='note-form' onMouseEnter={(e) => this.showToolbar(e)} onMouseLeave={() => this.showToolbar()}>
             <form className='note-edit-form' onSubmit={(e) => this.handleSubmit(e)}>
               <div className='edit-submit-button'>
                 {/* <input className='form-button' type='submit' value='Save' disabled={saveButtonDisabled}/> */}
@@ -221,12 +229,11 @@ class EditNote extends Component {
             <div className='quill-container'>
               <ReactQuill value={this.state.content}
                 onChange={this.handleEditorChange}
-                onFocus={this.showToolbar}
+                // onFocus={this.showToolbar}
                 theme={this.state.theme}
                 modules={{ toolbar }}
-                placeholder={'New note...'}>
-              </ReactQuill>
-
+                placeholder={'New note...'}
+                ref={ editor => { this.editor = editor; }} />
             </div>
             </div>
           </div>
