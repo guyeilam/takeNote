@@ -20,6 +20,7 @@ class EditNote extends Component {
       toolbarVisibility: 'hidden',
       noteDelta: null,
       noteDeltaChanges: [],
+      unprocDelta: [],
       typing: null
     }
     this.handleChange = this.handleChange.bind(this);
@@ -29,6 +30,7 @@ class EditNote extends Component {
     this.showToolbar = this.showToolbar.bind(this);
     this.saveNote = this.saveNote.bind(this);
     this.clearSubscriptions = this.clearSubscriptions.bind(this);
+    this.processExternalChange = this.processExternalChange.bind(this);
   }
 
   showToolbar() {
@@ -49,6 +51,7 @@ class EditNote extends Component {
     if (this.props.notes) {
       if (!prevProps.notes || (prevProps.notes.id !== this.props.notes.id) || (this.state.noteId !== this.props.currentNote)) {
         this.props.requestSingleNote(this.props.currentNote).then(() => {
+          
           this.setState({
             noteId: this.props.notes.id,
             title: this.props.notes.title,
@@ -67,14 +70,15 @@ class EditNote extends Component {
                   switch (data.type) {
                     case 'content':
                       this.setState({
-                        // content: data['note'].content,
-                        plain_text: data['note'].plain_text
+                        plain_text: data['plain_text']
                       });
                       break;
                     case 'title':
-                      this.setState({
-                        title: data['note'].title
-                      });
+                      if (data['userId'] !== this.props.currentId) {
+                        this.setState({
+                          title: data['title']
+                        });
+                      }
                       break;
                   }
                     this.setState({
@@ -85,6 +89,16 @@ class EditNote extends Component {
                         typing: null
                       });
                     }, 1000);
+
+                    let unprocDelta = this.state.unprocDelta;
+                    unprocDelta.push(data['lastDeltaChangeSet']);
+                    this.setState({
+                      unprocDelta: unprocDelta
+                    });
+
+                    if (data['userId'] !== this.props.currentId) {
+                      this.processExternalChange();
+                    }
                   
                   data['note']['updated_at'] = data['updated_at'];
                   data['note']['created_at'] = data['created_at'];
@@ -99,10 +113,8 @@ class EditNote extends Component {
                 }
               }
             );
-            
           }
         }
-
       }
     }
   }
@@ -127,20 +139,38 @@ class EditNote extends Component {
     }
   }
 
+  processExternalChange() {
+
+    if (this.state.unprocDelta.length > 0) {
+      let unprocDelta = this.state.unprocDelta;
+      let delta = unprocDelta.pop();
+      this.setState({
+        unprocDelta: unprocDelta
+      });
+      this.editor.editor.updateContents(delta);
+    } else {
+      return null;
+    }
+  }
+
   handleEditorChange(html, delta, source, editor) {
     if (source === 'user') {
+      let lastDeltaChangeSet = this.editor.lastDeltaChangeSet;
       let noteDeltaChanges = this.state.noteDeltaChanges;
-      noteDeltaChanges.push(this.editor.lastDeltaChangeSet);
-      this.editor.editor.setContents(delta);
-
-      this.setState({
-        content: html,
-        plain_text: editor.getText().trim(),
-        noteDelta: editor.getContents(),
-        noteDeltaChanges: noteDeltaChanges
-      });
-      App.cable.subscriptions.subscriptions[0].updateContent({ userId: this.props.currentId, noteId: this.props.currentNote, content: html, plain_text: this.state.plain_text });
+      noteDeltaChanges.push(lastDeltaChangeSet);
+      // this.editor.editor.setContents(delta);
+      let fullDelta = editor.getContents();
+      // this.setState({
+      //   content: html,
+      //   plain_text: editor.getText().trim(),
+      //   noteDelta: editor.getContents(),
+      //   noteDeltaChanges: noteDeltaChanges
+      // });
+      App.cable.subscriptions.subscriptions[0].updateContent({ userId: this.props.currentId, noteId: this.props.currentNote, content: html, plain_text: editor.getText().trim(), lastDeltaChangeSet: lastDeltaChangeSet });
     } else { 
+      this.setState({
+        noteDelta: editor.getContents()
+      });
       return null;
     }
   }
@@ -224,7 +254,7 @@ class EditNote extends Component {
             </form>
           <div className='app'>
             <div className='quill-container'>
-              <ReactQuill value={this.state.content}
+              <ReactQuill defaultValue={this.props.notes.content}
                 onChange={this.handleEditorChange}
                 // onFocus={this.showToolbar}
                 theme={this.state.theme}
