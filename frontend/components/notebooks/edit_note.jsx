@@ -18,7 +18,8 @@ class EditNote extends Component {
       plain_text: '',
       theme: 'snow',
       toolbarVisibility: 'hidden',
-      messages: [],
+      noteDelta: null,
+      noteDeltaChanges: [],
       typing: null
     }
     this.handleChange = this.handleChange.bind(this);
@@ -28,16 +29,6 @@ class EditNote extends Component {
     this.showToolbar = this.showToolbar.bind(this);
     this.saveNote = this.saveNote.bind(this);
     this.clearSubscriptions = this.clearSubscriptions.bind(this);
-  }
-
-  componentDidMount() {
-
-    // let editor = new Quill('#editor', {
-    //   modules: {
-    //     'toolbar': { container: '#toolbar' }
-    //   },
-    //   theme: 'snow'
-    // });
   }
 
   showToolbar() {
@@ -76,7 +67,7 @@ class EditNote extends Component {
                   switch (data.type) {
                     case 'content':
                       this.setState({
-                        content: data['note'].content,
+                        // content: data['note'].content,
                         plain_text: data['note'].plain_text
                       });
                       break;
@@ -138,11 +129,17 @@ class EditNote extends Component {
 
   handleEditorChange(html, delta, source, editor) {
     if (source === 'user') {
+      let noteDeltaChanges = this.state.noteDeltaChanges;
+      noteDeltaChanges.push(this.editor.lastDeltaChangeSet);
+      this.editor.editor.setContents(delta);
+
       this.setState({
         content: html,
-        plain_text: editor.getText().trim()
+        plain_text: editor.getText().trim(),
+        noteDelta: editor.getContents(),
+        noteDeltaChanges: noteDeltaChanges
       });
-      App.cable.subscriptions.subscriptions[0].updateContent({ userId: this.props.currentId, noteId: this.props.currentNote, content: html, plain_text: editor.getText().trim() });
+      App.cable.subscriptions.subscriptions[0].updateContent({ userId: this.props.currentId, noteId: this.props.currentNote, content: html, plain_text: this.state.plain_text });
     } else { 
       return null;
     }
