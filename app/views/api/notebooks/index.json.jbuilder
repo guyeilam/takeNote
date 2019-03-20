@@ -10,7 +10,7 @@ end
 json.notes do
   @notes.each do |note|
     json.set! note.id do
-      json.extract! note, :id, :title, :updated_at, :notebook_id, :created_at, :plain_text, :user_id
+      json.extract! note, :id, :title, :updated_at, :notebook_id, :created_at, :plain_text, :user_id, :content
       json.updated_at note.updated_at.strftime "%b %d %l:%M:%S %P"
       json.sharedUserIds note.shares.pluck(:user_id)
       json.sharedUserEmails note.shared_users.pluck(:email)

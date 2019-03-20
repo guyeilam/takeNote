@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
-// import Quill from 'quill';
+import Quill from 'quill';
 import { connect } from 'react-redux';
 import { setCurrentNote, updateNote, createNote, requestSingleNote, receiveUpdatedNote } from '../../actions/note_actions';
 import NewTagging from './new_tagging';
@@ -18,7 +18,9 @@ class EditNote extends Component {
       plain_text: '',
       theme: 'snow',
       toolbarVisibility: 'hidden',
-      messages: [],
+      noteDelta: null,
+      noteDeltaChanges: [],
+      unprocDelta: [],
       typing: null
     }
     this.handleChange = this.handleChange.bind(this);
@@ -28,6 +30,8 @@ class EditNote extends Component {
     this.showToolbar = this.showToolbar.bind(this);
     this.saveNote = this.saveNote.bind(this);
     this.clearSubscriptions = this.clearSubscriptions.bind(this);
+    this.processExternalChange = this.processExternalChange.bind(this);
+    this.updateNote = this.updateNote.bind(this);
   }
 
   showToolbar() {
@@ -48,6 +52,7 @@ class EditNote extends Component {
     if (this.props.notes) {
       if (!prevProps.notes || (prevProps.notes.id !== this.props.notes.id) || (this.state.noteId !== this.props.currentNote)) {
         this.props.requestSingleNote(this.props.currentNote).then(() => {
+          
           this.setState({
             noteId: this.props.notes.id,
             title: this.props.notes.title,
@@ -65,24 +70,20 @@ class EditNote extends Component {
                 received: data => {
                   switch (data.type) {
                     case 'content':
-                  //     data['note']['updated_at'] = data['updated_at'];
-                  //     data['note']['created_at'] = data['created_at'];
-                  //     data['note']['notebookTitle'] = data['notebookTitle'];
+                      let unprocDelta = this.state.unprocDelta;
+                      unprocDelta.push(data['lastDeltaChangeSet']);
                       this.setState({
-                        // messages: this.state.messages.concat(data.content),
-                        content: data['note'].content,
-                        plain_text: data['note'].plain_text
+                        unprocDelta: unprocDelta
                       });
-                      
                       break;
                     case 'title':
-                      this.setState({
-                        title: data['note'].title
-                      });
+                      if (data['userId'] !== this.props.currentId) {
+                        this.setState({
+                          title: data['title']
+                        });
+                      }
                       break;
                   }
-                  // this.props.requestSingleNote(this.props.currentNote);
-
                     this.setState({
                       typing: data['sent_by']
                     });
@@ -91,12 +92,14 @@ class EditNote extends Component {
                         typing: null
                       });
                     }, 1000);
-                  
 
-                  data['note']['updated_at'] = data['updated_at'];
-                  data['note']['created_at'] = data['created_at'];
-                  data['note']['notebookTitle'] = data['notebookTitle'];
-                  this.props.receiveUpdatedNote({notes: { [data['noteId']]: data['note'] } });
+                    const note = Object.assign({}, { id: data['noteId'], user_id: data['noteUserId'], title: data['title'], content: '', plain_text: '', notebookTitle: data['notebookTitle'], updated_at: data['updated_at'], created_at: data['created_at'] });
+
+                    if (data['userId'] !== this.props.currentId) {
+                      this.processExternalChange();
+                    }
+
+                    this.updateNote(note);
                 },
                 updateContent: function (data) {
                   return this.perform("update_content", data);
@@ -106,10 +109,8 @@ class EditNote extends Component {
                 }
               }
             );
-            
           }
         }
-
       }
     }
   }
@@ -134,14 +135,43 @@ class EditNote extends Component {
     }
   }
 
+  processExternalChange() {
+    if (this.state.unprocDelta.length > 0) {
+      let unprocDelta = this.state.unprocDelta;
+      let delta = unprocDelta.pop();
+      this.setState({
+        unprocDelta: unprocDelta
+      });
+      this.editor.editor.updateContents(delta);
+    } else {
+      return null;
+    }
+  }
+
+  updateNote(note) {
+    note['content'] = this.editor.getEditorContents();
+    note['plain_text'] = this.editor.editor.getText().trim();
+
+    this.props.receiveUpdatedNote({ notes: { [note['id']]: note } });
+  }
+
   handleEditorChange(html, delta, source, editor) {
     if (source === 'user') {
+      let lastDeltaChangeSet = this.editor.lastDeltaChangeSet;
+      let noteDeltaChanges = this.state.noteDeltaChanges;
+      noteDeltaChanges.push(lastDeltaChangeSet);
+      let fullDelta = editor.getContents();
       this.setState({
         content: html,
-        plain_text: editor.getText().trim()
+        plain_text: editor.getText().trim(),
+        noteDelta: editor.getContents(),
+        noteDeltaChanges: noteDeltaChanges
       });
-      App.cable.subscriptions.subscriptions[0].updateContent({ userId: this.props.currentId, noteId: this.props.currentNote, content: html, plain_text: editor.getText().trim() });
+      App.cable.subscriptions.subscriptions[0].updateContent({ userId: this.props.currentId, noteId: this.props.currentNote, content: html, plain_text: editor.getText().trim(), lastDeltaChangeSet: lastDeltaChangeSet });
     } else { 
+      this.setState({
+        noteDelta: editor.getContents()
+      });
       return null;
     }
   }
@@ -165,31 +195,37 @@ class EditNote extends Component {
     }
 
     let saveButtonDisabled = true;
-
+    
     if (this.props.currentNote) {
       saveButtonDisabled = false;
     }
 
-    const toolbar = [
-      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-      ['blockquote', 'code-block'],
+    let toolbar;
 
-      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-      [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-      [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
-      [{ 'direction': 'rtl' }],                         // text direction
-
-      [{ 'size': [] }],  // custom dropdown
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      ['link', 'image', 'video', 'formula'],
-
-      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-      [{ 'font': [] }],
-      [{ 'align': [] }],
-
-      ['clean']                                         // remove formatting button
-    ];
+    if (this.state.toolbarVisibility === 'hidden') {
+      toolbar = [];
+    } else {
+      toolbar = [
+        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['blockquote', 'code-block'],
+  
+        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+        [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+        [{ 'direction': 'rtl' }],                         // text direction
+  
+        [{ 'size': [] }],  // custom dropdown
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        ['link', 'image', 'video', 'formula'],
+  
+        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+  
+        ['clean']                                         // remove formatting button
+      ];
+    }
     
     const loadingIcon = this.props.loading ? <LoadingIcon /> : null;
 
@@ -210,7 +246,7 @@ class EditNote extends Component {
       <NoteHeader note={this.props.notes}/>
 
         <div className='note-edit-container'>
-          <div className='note-form'>
+          <div className='note-form' onMouseEnter={(e) => this.showToolbar(e)} onMouseLeave={() => this.showToolbar()}>
             <form className='note-edit-form' onSubmit={(e) => this.handleSubmit(e)}>
               <div className='edit-submit-button'>
                 {/* <input className='form-button' type='submit' value='Save' disabled={saveButtonDisabled}/> */}
@@ -219,14 +255,12 @@ class EditNote extends Component {
             </form>
           <div className='app'>
             <div className='quill-container'>
-              <ReactQuill value={this.state.content}
+              <ReactQuill defaultValue={this.props.notes.content}
                 onChange={this.handleEditorChange}
-                onFocus={this.showToolbar}
                 theme={this.state.theme}
                 modules={{ toolbar }}
-                placeholder={'New note...'}>
-              </ReactQuill>
-
+                placeholder={'New note...'}
+                ref={ editor => { this.editor = editor; }} />
             </div>
             </div>
           </div>
