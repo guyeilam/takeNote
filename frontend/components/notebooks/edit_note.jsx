@@ -237,7 +237,7 @@ class EditNote extends Component {
     : null;
 
     return (
-      <div className='note-edit'>
+      <div className='note-edit' onMouseEnter={(e) => this.showToolbar(e)} onMouseLeave={() => this.showToolbar()}>
       {whoIsTyping}
 
       {loadingIcon}
@@ -245,7 +245,7 @@ class EditNote extends Component {
       <NoteHeader note={this.props.notes}/>
 
         <div className='note-edit-container'>
-          <div className='note-form' onMouseEnter={(e) => this.showToolbar(e)} onMouseLeave={() => this.showToolbar()}>
+          <div className='note-form'>
             <form className='note-edit-form' onSubmit={(e) => this.handleSubmit(e)}>
               <div className='edit-submit-button'>
                 {/* <input className='form-button' type='submit' value='Save' disabled={saveButtonDisabled}/> */}
