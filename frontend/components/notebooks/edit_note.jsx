@@ -52,7 +52,6 @@ class EditNote extends Component {
     if (this.props.notes) {
       if (!prevProps.notes || (prevProps.notes.id !== this.props.notes.id) || (this.state.noteId !== this.props.currentNote)) {
         this.props.requestSingleNote(this.props.currentNote).then(() => {
-          
           this.setState({
             noteId: this.props.notes.id,
             title: this.props.notes.title,
@@ -93,7 +92,7 @@ class EditNote extends Component {
                       });
                     }, 1000);
 
-                    const note = Object.assign({}, { id: data['noteId'], user_id: data['noteUserId'], title: data['title'], content: '', plain_text: '', notebookTitle: data['notebookTitle'], updated_at: data['updated_at'], created_at: data['created_at'] });
+                    const note = Object.assign({}, { id: data['noteId'], user_id: data['noteUserId'], title: data['title'], content: '', plain_text: '', notebookTitle: data['notebookTitle'], updated_at: data['updated_at'], created_at: data['created_at'], tagIds: data['tagIds'], notebook_id: data['notebook_id'] });
 
                     if (data['userId'] !== this.props.currentId) {
                       this.processExternalChange();
@@ -255,7 +254,7 @@ class EditNote extends Component {
             </form>
           <div className='app'>
             <div className='quill-container'>
-              <ReactQuill defaultValue={this.props.notes.content}
+              <ReactQuill value={this.state.content}
                 onChange={this.handleEditorChange}
                 theme={this.state.theme}
                 modules={{ toolbar }}
