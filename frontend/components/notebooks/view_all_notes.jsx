@@ -39,11 +39,17 @@ class NotesList extends Component {
       }
     }
 
-    // else {
-    //   if (this.props.currentNote !== this.props.notes[0].id) {
-    //     this.props.setCurrentNote(this.props.notes[0].id);
-    //   }
-    // }
+    const visibileNoteIds = [];
+
+    if (this.props.notes && (this.props.notes.length > 0)) {
+      this.props.notes.forEach(note => {
+        visibileNoteIds.push(note.id);
+      });
+
+      if (!visibileNoteIds.includes(this.props.currentNote)) {
+        this.props.setCurrentNote(this.props.notes[0].id);
+      }
+    }
   }
   
   componentWillUnmount() {

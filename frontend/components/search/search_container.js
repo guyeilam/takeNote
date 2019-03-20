@@ -10,16 +10,27 @@ import { findNotes } from '../../util/search_util';
 
 const mapStateToProps = (state, ownProps) => {
   let notes = state.entities.notes;
+  const currentId = state.session.id;
+  const currentUser = state.entities.users[currentId] || null;
   let searchTerm = state.ui.searchTerm;
 
   let searchResults = findNotes(notes, searchTerm);
 
-  let sortedNotes = searchResults ? sortedItems(searchResults, state.ui.sort) : null;
+  let sorted_notes = searchResults ? sortedItems(searchResults, state.ui.sort) : null;
+
+  let filteredNotes = [];
+
+  if (sorted_notes && (sorted_notes.length > 0)) {
+    sorted_notes.forEach(note => {
+      if (note.user_id === currentId) {
+        filteredNotes.push(note);
+      }
+    });
+  }
 
   return ({
-    notes: sortedNotes,
-    currentNote: state.ui.currentNote,
-    searchTerm: state.ui.searchTerm
+    notes: filteredNotes,
+    currentNote: state.ui.currentNote
   });
 }
 
