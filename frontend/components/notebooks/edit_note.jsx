@@ -31,6 +31,7 @@ class EditNote extends Component {
     this.saveNote = this.saveNote.bind(this);
     this.clearSubscriptions = this.clearSubscriptions.bind(this);
     this.processExternalChange = this.processExternalChange.bind(this);
+    this.updateNote = this.updateNote.bind(this);
   }
 
   showToolbar() {
@@ -69,8 +70,10 @@ class EditNote extends Component {
                 received: data => {
                   switch (data.type) {
                     case 'content':
+                      let unprocDelta = this.state.unprocDelta;
+                      unprocDelta.push(data['lastDeltaChangeSet']);
                       this.setState({
-                        plain_text: data['plain_text']
+                        unprocDelta: unprocDelta
                       });
                       break;
                     case 'title':
@@ -90,20 +93,13 @@ class EditNote extends Component {
                       });
                     }, 1000);
 
-                    let unprocDelta = this.state.unprocDelta;
-                    unprocDelta.push(data['lastDeltaChangeSet']);
-                    this.setState({
-                      unprocDelta: unprocDelta
-                    });
+                    const note = Object.assign({}, { id: data['noteId'], user_id: data['noteUserId'], title: data['title'], content: '', plain_text: '', notebookTitle: data['notebookTitle'], updated_at: data['updated_at'], created_at: data['created_at'] });
 
                     if (data['userId'] !== this.props.currentId) {
                       this.processExternalChange();
                     }
-                  
-                  data['note']['updated_at'] = data['updated_at'];
-                  data['note']['created_at'] = data['created_at'];
-                  data['note']['notebookTitle'] = data['notebookTitle'];
-                  this.props.receiveUpdatedNote({notes: { [data['noteId']]: data['note'] } });
+
+                    this.updateNote(note);
                 },
                 updateContent: function (data) {
                   return this.perform("update_content", data);
@@ -140,7 +136,6 @@ class EditNote extends Component {
   }
 
   processExternalChange() {
-
     if (this.state.unprocDelta.length > 0) {
       let unprocDelta = this.state.unprocDelta;
       let delta = unprocDelta.pop();
@@ -153,19 +148,25 @@ class EditNote extends Component {
     }
   }
 
+  updateNote(note) {
+    note['content'] = this.editor.getEditorContents();
+    note['plain_text'] = this.editor.editor.getText().trim();
+
+    this.props.receiveUpdatedNote({ notes: { [note['id']]: note } });
+  }
+
   handleEditorChange(html, delta, source, editor) {
     if (source === 'user') {
       let lastDeltaChangeSet = this.editor.lastDeltaChangeSet;
       let noteDeltaChanges = this.state.noteDeltaChanges;
       noteDeltaChanges.push(lastDeltaChangeSet);
-      // this.editor.editor.setContents(delta);
       let fullDelta = editor.getContents();
-      // this.setState({
-      //   content: html,
-      //   plain_text: editor.getText().trim(),
-      //   noteDelta: editor.getContents(),
-      //   noteDeltaChanges: noteDeltaChanges
-      // });
+      this.setState({
+        content: html,
+        plain_text: editor.getText().trim(),
+        noteDelta: editor.getContents(),
+        noteDeltaChanges: noteDeltaChanges
+      });
       App.cable.subscriptions.subscriptions[0].updateContent({ userId: this.props.currentId, noteId: this.props.currentNote, content: html, plain_text: editor.getText().trim(), lastDeltaChangeSet: lastDeltaChangeSet });
     } else { 
       this.setState({
@@ -256,7 +257,6 @@ class EditNote extends Component {
             <div className='quill-container'>
               <ReactQuill defaultValue={this.props.notes.content}
                 onChange={this.handleEditorChange}
-                // onFocus={this.showToolbar}
                 theme={this.state.theme}
                 modules={{ toolbar }}
                 placeholder={'New note...'}
