@@ -75,6 +75,9 @@ class EditNote extends Component {
                       this.setState({
                         unprocDelta: unprocDelta
                       });
+                      if (data['userId'] !== this.props.currentId) {
+                        this.processExternalChange();
+                      }
                       break;
                     case 'title':
                       if (data['userId'] !== this.props.currentId) {
@@ -94,10 +97,6 @@ class EditNote extends Component {
                     }, 1000);
 
                     const note = Object.assign({}, { id: data['noteId'], user_id: data['noteUserId'], title: data['title'], content: '', plain_text: '', notebookTitle: data['notebookTitle'], updated_at: data['updated_at'], created_at: data['created_at'], tagIds: data['tagIds'], notebook_id: data['notebook_id'] });
-
-                    if (data['userId'] !== this.props.currentId) {
-                      this.processExternalChange();
-                    }
 
                     this.updateNote(note);
                 },
@@ -149,7 +148,8 @@ class EditNote extends Component {
   }
 
   updateNote(note) {
-    note['content'] = this.editor.getEditorContents();
+    // note['content'] = this.editor.getEditorContents();
+    note['content'] = JSON.stringify(this.editor.editor.getContents());
     note['plain_text'] = this.editor.editor.getText().trim();
 
     this.props.receiveUpdatedNote({ notes: { [note['id']]: note } });
@@ -162,7 +162,7 @@ class EditNote extends Component {
       noteDeltaChanges.push(lastDeltaChangeSet);
       let fullDelta = JSON.stringify(editor.getContents());
       this.setState({
-        content: html,
+        content: editor.getContents(),
         plain_text: editor.getText().trim(),
         noteDelta: editor.getContents(),
         noteDeltaChanges: noteDeltaChanges
