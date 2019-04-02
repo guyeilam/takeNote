@@ -55,9 +55,10 @@ class EditNote extends Component {
           this.setState({
             noteId: this.props.notes.id,
             title: this.props.notes.title,
-            content: this.props.notes.content,
+            content: JSON.parse(this.props.notes.content),
             plain_text: this.props.notes.plain_text
           });
+          this.editor.editor.setContents(this.state.content);
         });
         
         if (this.props.currentNote) {
@@ -159,14 +160,14 @@ class EditNote extends Component {
       let lastDeltaChangeSet = this.editor.lastDeltaChangeSet;
       let noteDeltaChanges = this.state.noteDeltaChanges;
       noteDeltaChanges.push(lastDeltaChangeSet);
-      let fullDelta = editor.getContents();
+      let fullDelta = JSON.stringify(editor.getContents());
       this.setState({
         content: html,
         plain_text: editor.getText().trim(),
         noteDelta: editor.getContents(),
         noteDeltaChanges: noteDeltaChanges
       });
-      App.cable.subscriptions.subscriptions[0].updateContent({ userId: this.props.currentId, noteId: this.props.currentNote, content: html, plain_text: editor.getText().trim(), lastDeltaChangeSet: lastDeltaChangeSet });
+      App.cable.subscriptions.subscriptions[0].updateContent({ userId: this.props.currentId, noteId: this.props.currentNote, content: fullDelta, plain_text: editor.getText().trim(), lastDeltaChangeSet: lastDeltaChangeSet });
     } else { 
       this.setState({
         noteDelta: editor.getContents()
@@ -254,7 +255,7 @@ class EditNote extends Component {
             </form>
           <div className='app'>
             <div className='quill-container'>
-              <ReactQuill value={this.state.content}
+              <ReactQuill defaultValue={this.state.content}
                 onChange={this.handleEditorChange}
                 theme={this.state.theme}
                 modules={{ toolbar }}
