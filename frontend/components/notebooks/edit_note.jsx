@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import Quill from 'quill';
-import { connect } from 'react-redux';
-import { setCurrentNote, updateNote, createNote, requestSingleNote, receiveUpdatedNote } from '../../actions/note_actions';
+import {connect} from 'react-redux';
+import {
+  setCurrentNote,
+  updateNote,
+  createNote,
+  requestSingleNote,
+  receiveUpdatedNote,
+} from '../../actions/note_actions';
 import NewTagging from './new_tagging';
 import NoteHeader from './note_header';
 import LoadingIcon from '../notebooks/all_notes_tag_label';
@@ -21,8 +27,8 @@ class EditNote extends Component {
       noteDelta: null,
       noteDeltaChanges: [],
       unprocDelta: [],
-      typing: null
-    }
+      typing: null,
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,9 +42,9 @@ class EditNote extends Component {
 
   showToolbar() {
     if (this.state.toolbarVisibility == 'hidden') {
-      this.setState({ toolbarVisibility: 'visible' }); 
+      this.setState({toolbarVisibility: 'visible'});
     } else {
-      this.setState({ toolbarVisibility: 'hidden' });
+      this.setState({toolbarVisibility: 'hidden'});
     }
   }
 
@@ -50,22 +56,32 @@ class EditNote extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.notes) {
-      if (!prevProps.notes || (prevProps.notes.id !== this.props.notes.id) || (this.state.noteId !== this.props.currentNote)) {
+      if (
+        !prevProps.notes ||
+        prevProps.notes.id !== this.props.notes.id ||
+        this.state.noteId !== this.props.currentNote
+      ) {
         this.props.requestSingleNote(this.props.currentNote).then(() => {
           this.setState({
             noteId: this.props.notes.id,
             title: this.props.notes.title,
-            content: JSON.parse(this.props.notes.content),
-            plain_text: this.props.notes.plain_text
+            // content: JSON.parse(this.props.notes.content),
+            plain_text: this.props.notes.plain_text,
           });
           this.editor.editor.setContents(this.state.content);
         });
-        
+
         if (this.props.currentNote) {
-          if (!prevProps.currentNote || (prevProps.currentNote !== this.props.currentNote)) {
+          if (
+            !prevProps.currentNote ||
+            prevProps.currentNote !== this.props.currentNote
+          ) {
             this.clearSubscriptions();
             App.cable.subscriptions.create(
-              { channel: "MessagesChannel", room: this.props.currentNote.toString() },
+              {
+                channel: 'MessagesChannel',
+                room: this.props.currentNote.toString(),
+              },
               {
                 received: data => {
                   switch (data.type) {
@@ -73,7 +89,7 @@ class EditNote extends Component {
                       let unprocDelta = this.state.unprocDelta;
                       unprocDelta.push(data['lastDeltaChangeSet']);
                       this.setState({
-                        unprocDelta: unprocDelta
+                        unprocDelta: unprocDelta,
                       });
                       if (data['userId'] !== this.props.currentId) {
                         this.processExternalChange();
@@ -82,31 +98,45 @@ class EditNote extends Component {
                     case 'title':
                       if (data['userId'] !== this.props.currentId) {
                         this.setState({
-                          title: data['title']
+                          title: data['title'],
                         });
                       }
                       break;
                   }
+                  this.setState({
+                    typing: data['sent_by'],
+                  });
+                  setTimeout(() => {
                     this.setState({
-                      typing: data['sent_by']
+                      typing: null,
                     });
-                    setTimeout(() => {
-                      this.setState({
-                        typing: null
-                      });
-                    }, 1000);
+                  }, 1000);
 
-                    const note = Object.assign({}, { id: data['noteId'], user_id: data['noteUserId'], title: data['title'], content: '', plain_text: '', notebookTitle: data['notebookTitle'], updated_at: data['updated_at'], created_at: data['created_at'], tagIds: data['tagIds'], notebook_id: data['notebook_id'] });
+                  const note = Object.assign(
+                    {},
+                    {
+                      id: data['noteId'],
+                      user_id: data['noteUserId'],
+                      title: data['title'],
+                      content: '',
+                      plain_text: '',
+                      notebookTitle: data['notebookTitle'],
+                      updated_at: data['updated_at'],
+                      created_at: data['created_at'],
+                      tagIds: data['tagIds'],
+                      notebook_id: data['notebook_id'],
+                    },
+                  );
 
-                    this.updateNote(note);
+                  this.updateNote(note);
                 },
-                updateContent: function (data) {
-                  return this.perform("update_content", data);
+                updateContent: function(data) {
+                  return this.perform('update_content', data);
                 },
-                updateTitle: function (data) {
-                  return this.perform("update_title", data);
-                }
-              }
+                updateTitle: function(data) {
+                  return this.perform('update_title', data);
+                },
+              },
             );
           }
         }
@@ -120,18 +150,22 @@ class EditNote extends Component {
   }
 
   handleChange(field) {
-    return (e) => {
-      return this.setState({ [field]: e.currentTarget.value });
-    }
+    return e => {
+      return this.setState({[field]: e.currentTarget.value});
+    };
   }
 
   handleTitleChange() {
-    return (e) => {
+    return e => {
       this.setState({
-        title: e.currentTarget.value
+        title: e.currentTarget.value,
       });
-      App.cable.subscriptions.subscriptions[0].updateTitle({ userId: this.props.currentId, noteId: this.props.currentNote, title: e.currentTarget.value });
-    }
+      App.cable.subscriptions.subscriptions[0].updateTitle({
+        userId: this.props.currentId,
+        noteId: this.props.currentNote,
+        title: e.currentTarget.value,
+      });
+    };
   }
 
   processExternalChange() {
@@ -139,7 +173,7 @@ class EditNote extends Component {
       let unprocDelta = this.state.unprocDelta;
       let delta = unprocDelta.pop();
       this.setState({
-        unprocDelta: unprocDelta
+        unprocDelta: unprocDelta,
       });
       this.editor.editor.updateContents(delta);
     } else {
@@ -152,7 +186,7 @@ class EditNote extends Component {
     note['content'] = JSON.stringify(this.editor.editor.getContents());
     note['plain_text'] = this.editor.editor.getText().trim();
 
-    this.props.receiveUpdatedNote({ notes: { [note['id']]: note } });
+    this.props.receiveUpdatedNote({notes: {[note['id']]: note}});
   }
 
   handleEditorChange(html, delta, source, editor) {
@@ -165,37 +199,57 @@ class EditNote extends Component {
         content: editor.getContents(),
         plain_text: editor.getText().trim(),
         noteDelta: editor.getContents(),
-        noteDeltaChanges: noteDeltaChanges
+        noteDeltaChanges: noteDeltaChanges,
       });
-      App.cable.subscriptions.subscriptions[0].updateContent({ userId: this.props.currentId, noteId: this.props.currentNote, content: fullDelta, plain_text: editor.getText().trim(), lastDeltaChangeSet: lastDeltaChangeSet });
-    } else { 
+      App.cable.subscriptions.subscriptions[0].updateContent({
+        userId: this.props.currentId,
+        noteId: this.props.currentNote,
+        content: fullDelta,
+        plain_text: editor.getText().trim(),
+        lastDeltaChangeSet: lastDeltaChangeSet,
+      });
+    } else {
       this.setState({
-        noteDelta: editor.getContents()
+        noteDelta: editor.getContents(),
       });
       return null;
     }
   }
 
   saveNote() {
-    const note = Object.assign({}, { id: this.props.currentNote, title: this.state.title, content: this.state.content, plain_text: this.state.plain_text });
+    const note = Object.assign(
+      {},
+      {
+        id: this.props.currentNote,
+        title: this.state.title,
+        content: this.state.content,
+        plain_text: this.state.plain_text,
+      },
+    );
     this.props.updateNote(note);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const note = Object.assign({}, { id: this.props.currentNote, title: this.state.title, content: this.state.content, plain_text: this.state.plain_text });
+    const note = Object.assign(
+      {},
+      {
+        id: this.props.currentNote,
+        title: this.state.title,
+        content: this.state.content,
+        plain_text: this.state.plain_text,
+      },
+    );
     this.props.updateNote(note);
   }
 
   render() {
-    if ((!this.props.notes) || (Object.values(this.props.notes).length === 0)) {
-      return (
-        <div className='note-edit'></div>
-      );
+    if (!this.props.notes || Object.values(this.props.notes).length === 0) {
+      return <div className="note-edit" />;
     }
 
     let saveButtonDisabled = true;
-    
+
     if (this.props.currentNote) {
       saveButtonDisabled = false;
     }
@@ -206,70 +260,86 @@ class EditNote extends Component {
       toolbar = [];
     } else {
       toolbar = [
-        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
         ['blockquote', 'code-block'],
-  
-        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-        [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-        [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
-        [{ 'direction': 'rtl' }],                         // text direction
-  
-        [{ 'size': [] }],  // custom dropdown
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+        [{header: 1}, {header: 2}], // custom button values
+        [{list: 'ordered'}, {list: 'bullet'}],
+        [{script: 'sub'}, {script: 'super'}], // superscript/subscript
+        [{indent: '-1'}, {indent: '+1'}], // outdent/indent
+        [{direction: 'rtl'}], // text direction
+
+        [{size: []}], // custom dropdown
+        [{header: [1, 2, 3, 4, 5, 6, false]}],
         ['link', 'formula'],
-  
-        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-        [{ 'font': [] }],
-        [{ 'align': [] }],
-  
-        ['clean']                                         // remove formatting button
+
+        [{color: []}, {background: []}], // dropdown with defaults from theme
+        [{font: []}],
+        [{align: []}],
+
+        ['clean'], // remove formatting button
       ];
     }
-    
+
     const loadingIcon = this.props.loading ? <LoadingIcon /> : null;
 
-    const whoIsTyping = this.state.typing ? 
-      <div className='current-user-typing-container'>
-        <div className='current-user-typing-content'>
+    const whoIsTyping = this.state.typing ? (
+      <div className="current-user-typing-container">
+        <div className="current-user-typing-content">
           {`${this.state.typing} is typing...`}
         </div>
       </div>
-    : null;
+    ) : null;
 
     return (
-      <div className='note-edit' onMouseEnter={(e) => this.showToolbar(e)} onMouseLeave={() => this.showToolbar()}>
-      {whoIsTyping}
+      <div
+        className="note-edit"
+        onMouseEnter={e => this.showToolbar(e)}
+        onMouseLeave={() => this.showToolbar()}>
+        {whoIsTyping}
 
-      {loadingIcon}
+        {loadingIcon}
 
-      <NoteHeader note={this.props.notes}/>
+        <NoteHeader note={this.props.notes} />
 
-        <div className='note-edit-container'>
-          <div className='note-form'>
-            <form className='note-edit-form' onSubmit={(e) => this.handleSubmit(e)}>
-              <div className='edit-submit-button'>
+        <div className="note-edit-container">
+          <div className="note-form">
+            <form
+              className="note-edit-form"
+              onSubmit={e => this.handleSubmit(e)}>
+              <div className="edit-submit-button">
                 {/* <input className='form-button' type='submit' value='Save' disabled={saveButtonDisabled}/> */}
               </div>
-              <input className='edit-form-title-input' required id='noteTitle' placeholder='Title' type='text' value={this.state.title} onChange={this.handleTitleChange()} />
+              <input
+                className="edit-form-title-input"
+                required
+                id="noteTitle"
+                placeholder="Title"
+                type="text"
+                value={this.state.title}
+                onChange={this.handleTitleChange()}
+              />
             </form>
-          <div className='app'>
-            <div className='quill-container'>
-              <ReactQuill defaultValue={this.state.content}
-                onChange={this.handleEditorChange}
-                theme={this.state.theme}
-                modules={{ toolbar }}
-                placeholder={'New note...'}
-                ref={ editor => { this.editor = editor; }} />
-            </div>
+            <div className="app">
+              <div className="quill-container">
+                <ReactQuill
+                  defaultValue={this.state.content}
+                  onChange={this.handleEditorChange}
+                  theme={this.state.theme}
+                  modules={{toolbar}}
+                  placeholder={'New note...'}
+                  ref={editor => {
+                    this.editor = editor;
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
-        
-        <div className='note-taggings'>
+
+        <div className="note-taggings">
           <NewTagging />
         </div>
-
       </div>
     );
   }
@@ -279,23 +349,28 @@ const mapStateToProps = state => {
   const currentId = state.session.id;
   const currentUser = state.entities.users[currentId] || null;
 
-  return ({
+  return {
     notes: state.entities.notes[state.ui.currentNote],
     defaultNotebook: currentUser.default_notebook,
     currentNote: state.ui.currentNote,
     loading: state.ui.loading,
-    currentId
-  });
-}
+    currentId,
+  };
+};
 
 const mapDispatchToProps = dispatch => {
-  return ({
+  return {
     requestSingleNote: noteId => dispatch(requestSingleNote(noteId)),
     setCurrentNote: noteId => dispatch(setCurrentNote(noteId)),
     updateNote: note => dispatch(updateNote(note)),
     createNote: note => dispatch(createNote(note)),
-    receiveUpdatedNote: note => dispatch(receiveUpdatedNote(note))
-  });
-}
+    receiveUpdatedNote: note => dispatch(receiveUpdatedNote(note)),
+  };
+};
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditNote));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(EditNote),
+);

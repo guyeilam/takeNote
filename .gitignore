@@ -28,3 +28,4 @@
 
 bundle.js*
 bundle.js.map
+*.swp
