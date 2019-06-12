@@ -1,9 +1,5 @@
 require 'spec_helper'
 
-# describe User do
-#   it { should validate_presence_of(:email) }
-# end
-
 RSpec.describe User, type: :model do
   describe "validations" do
     it { should validate_presence_of(:email) }
