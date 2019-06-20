@@ -65,7 +65,7 @@ class EditNote extends Component {
           this.setState({
             noteId: this.props.notes.id,
             title: this.props.notes.title,
-            // content: JSON.parse(this.props.notes.content),
+            content: JSON.parse(this.props.notes.content),
             plain_text: this.props.notes.plain_text,
           });
           this.editor.editor.setContents(this.state.content);
