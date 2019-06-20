@@ -62,10 +62,18 @@ class EditNote extends Component {
         this.state.noteId !== this.props.currentNote
       ) {
         this.props.requestSingleNote(this.props.currentNote).then(() => {
+          let noteContent;
+
+          if (!this.props.notes.content) {
+            noteContent = "";
+          } else {
+            noteContent = JSON.parse(this.props.notes.content);
+          }
+
           this.setState({
             noteId: this.props.notes.id,
             title: this.props.notes.title,
-            content: JSON.parse(this.props.notes.content),
+            content: noteContent,
             plain_text: this.props.notes.plain_text,
           });
           this.editor.editor.setContents(this.state.content);
