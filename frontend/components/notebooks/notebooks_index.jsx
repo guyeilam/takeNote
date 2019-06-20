@@ -109,13 +109,7 @@ class NotebooksIndex extends Component {
   drop(e, notebookId) {
     e.preventDefault();
     this.setState({ hoverOverNotebook: null });
-    let note;
-
-    if (this.props.notes[this.state.draggedNoteId].notebook_id === notebookId) {
-      return null;
-    }
-
-    note = Object.assign({}, { id: this.state.draggedNoteId, notebook_id: notebookId });
+    let note = Object.assign({}, { id: this.state.draggedNoteId, notebook_id: notebookId });
     this.setState({ draggedNoteId: null });
     this.props.updateNote(note);
   }
