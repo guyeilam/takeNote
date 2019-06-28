@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { truncateStr } from '../../util/string_util';
 import { setCurrentNote } from '../../actions/note_actions';
+import { requestAllNotebooks } from '../../actions/notebook_actions';
 
 class LeftNavNotebooks extends Component {
   constructor(props) {
