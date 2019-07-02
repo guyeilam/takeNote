@@ -9,17 +9,11 @@ const NoteHeader = props => {
   const dispatch = useDispatch;
 
   const note = props.note;
+  const noteId = note.id;
+  const noteNotebookId = note.notebook_id;
+  const title = note.notebookTitle;
 
-  let noteId = note.id;
-  let noteNotebookId;
-  let title;
-
-  if (!note) {
-    return null;
-  }
-
-  noteNotebookId = note.notebook_id;
-  title = note.notebookTitle;
+  if (!note) return null;
 
   if (props.match.path === "/shared_notes") {
     return (
