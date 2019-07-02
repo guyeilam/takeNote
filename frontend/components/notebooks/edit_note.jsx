@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import ReactQuill from 'react-quill';
-import Quill from 'quill';
 import {connect} from 'react-redux';
 import {
   setCurrentNote,
@@ -11,7 +10,7 @@ import {
   receiveUpdatedNote,
 } from '../../actions/note_actions';
 import NewTagging from './new_tagging';
-import NoteHeader from './note_header';
+import NoteHeader from '../notes/note_header';
 import LoadingIcon from '../notebooks/all_notes_tag_label';
 
 class EditNote extends Component {
