@@ -6,7 +6,11 @@ import NavModal from "../modal/nav_modal";
 import { openNavModal } from "../../actions/modal_actions";
 
 const NoteHeader = props => {
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
+
+  const openModal = (noteId) => {
+    return dispatch(openNavModal("note-header-nav", noteId));
+  }
 
   const note = props.note;
   const noteId = note.id;
@@ -54,7 +58,7 @@ const NoteHeader = props => {
         <NavModal modalId={noteId} />
         <div
           className="note-actions-icon"
-          onClick={() => openNavModal("note-header-nav", noteId)(dispatch)}
+          onClick={() => openModal(noteId)}
         >
           <svg
             width="18px"
