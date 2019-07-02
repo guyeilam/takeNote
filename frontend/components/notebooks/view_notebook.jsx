@@ -1,51 +1,32 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { Route } from 'react-router-dom';
-import ViewAllNotes from './view_all_notes';
-import SingleNotebookContainer from './single_notebook_container';
-import AllNotesContainer from './all_notes_container';
-import FilterTagContainer from './filter_tag_container';
-import EditNote from './edit_note';
-import SearchContainer from '../search/search_container';
-import SharedNotesContainer from './shared_notes_container';
+import React, { Component } from "react";
+import { withRouter, Route } from "react-router-dom";
 
-class ViewNotebook extends Component {
-  constructor(props) {
-    super(props);
-  }
+import SingleNotebookContainer from "./single_notebook_container";
+import AllNotesContainer from "./all_notes_container";
+import FilterTagContainer from "./filter_tag_container";
+import EditNote from "./edit_note";
+import SearchContainer from "../search/search_container";
+import SharedNotesContainer from "./shared_notes_container";
 
-  render() {
-    return (
-      <section className='notebook-detail'>
-        <div className='notebook-detail-notes-spacer'></div>
+const ViewNotebook = () => {
+  return (
+    <section className="notebook-detail">
+      <div className="notebook-detail-notes-spacer" />
 
-        <div className='notebook-detail-notes-container'>
-          <Route exact
-            path="/notebooks/:notebookId"
-            component={SingleNotebookContainer}
-          />
-          <Route exact
-            path="/notes/all"
-            component={AllNotesContainer}
-          />
-          <Route exact
-            path="/search"
-            component={SearchContainer}
-          />
-          <Route exact
-            path="/tags/:tagId"
-            component={FilterTagContainer}
-          />
-          <Route exact
-            path="/shared_notes"
-            component={SharedNotesContainer}
-          />
-          <EditNote />
-        </div>
-        
-      </section>
-    );
-  }
-}
+      <div className="notebook-detail-notes-container">
+        <Route
+          exact
+          path="/notebooks/:notebookId"
+          component={SingleNotebookContainer}
+        />
+        <Route exact path="/notes/all" component={AllNotesContainer} />
+        <Route exact path="/search" component={SearchContainer} />
+        <Route exact path="/tags/:tagId" component={FilterTagContainer} />
+        <Route exact path="/shared_notes" component={SharedNotesContainer} />
+        <EditNote />
+      </div>
+    </section>
+  );
+};
 
 export default withRouter(ViewNotebook);

@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from '../modal/modal';
 import LeftNavBar from '../left_nav_bar/left_nav_bar';
 import NotebooksIndexContainer from '../notebooks/notebooks_index_container';
-import ViewNotebookContainer from '../notebooks/view_notebook_container';
+import ViewNotebookContainer from '../notebooks/view_notebook';
 import { Route, withRouter } from 'react-router-dom';
 import TagsList from '../tags/tags_index';
 import LeftNavModal from '../left_nav_bar/left_nav_modal';
