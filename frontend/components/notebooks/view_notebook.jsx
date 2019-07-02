@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { withRouter, Route } from "react-router-dom";
 
 import SingleNotebookContainer from "./single_notebook_container";
