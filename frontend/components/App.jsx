@@ -1,5 +1,5 @@
 import React from 'react';
-import SplashContainer from './splash/splash_container';
+import Splash from './splash/splash';
 import SessionForm from '../components/session_form/session_form';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import ClientContainer from './client/client';
@@ -7,7 +7,7 @@ import ClientContainer from './client/client';
 const App = () => (
   <div className='main'>
     {/* Splash page route (user not logged in) */}
-    <AuthRoute exact path="/" component={SplashContainer} />
+    <AuthRoute exact path="/" component={Splash} />
     
     {/* Auth routes (user not logged in) */}
     <AuthRoute path="/login" component={SessionForm} />

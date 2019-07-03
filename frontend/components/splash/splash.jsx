@@ -1,13 +1,18 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Footer from './footer';
+import { logout } from '../../actions/session_actions';
 
-export default (props) => {
+const Splash = () => {
+  const dispatch = useDispatch();
+  const currentId = useSelector(state => state.session.id);
+  const currentUser = useSelector(state => state.entities.users[currentId] || null);
 
-  const authButtons = props.currentUser ? (
+  const authButtons = currentUser ? (
     <div className='auth-buttons'>
-      <h2>Welcome {props.currentUser.email}</h2>
-      <button onClick={() => props.logout()}>Logout</button>
+      <h2>Welcome {currentUser.email}</h2>
+      <button onClick={() => dispatch(logout())}>Logout</button>
     </div>
   ) : (
       <div className='auth-links'>
@@ -57,3 +62,4 @@ export default (props) => {
   )
 }
 
+export default Splash;
