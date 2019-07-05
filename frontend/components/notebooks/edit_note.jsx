@@ -255,10 +255,6 @@ class EditNote extends Component {
       return <div className="note-edit" />;
     }
 
-    // if (this.props.currentNote) {
-    //   saveButtonDisabled = false;
-    // }
-
     let toolbar;
 
     if (this.state.toolbarVisibility === 'hidden') {
@@ -312,9 +308,7 @@ class EditNote extends Component {
             <form
               className="note-edit-form"
               onSubmit={e => this.handleSubmit(e)}>
-              <div className="edit-submit-button">
-                {/* <input className='form-button' type='submit' value='Save' disabled={saveButtonDisabled}/> */}
-              </div>
+      
               <input
                 className="edit-form-title-input"
                 required
