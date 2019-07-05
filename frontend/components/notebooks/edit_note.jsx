@@ -255,8 +255,6 @@ class EditNote extends Component {
       return <div className="note-edit" />;
     }
 
-    let saveButtonDisabled = true;
-
     if (this.props.currentNote) {
       saveButtonDisabled = false;
     }

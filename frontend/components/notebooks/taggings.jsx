@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NavModal from '../modal/nav_modal';
-import { openNavModal, closeNavModal } from '../../actions/modal_actions';
+import { openNavModal } from '../../actions/modal_actions';
 
 class TagItem extends Component {
   constructor(props) {

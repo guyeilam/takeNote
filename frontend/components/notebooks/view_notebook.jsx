@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter, Route } from "react-router-dom";
-
 import SingleNotebookContainer from "./single_notebook_container";
 import AllNotesContainer from "./all_notes_container";
 import FilterTagContainer from "./filter_tag_container";

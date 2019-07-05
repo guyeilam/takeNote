@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { openModal, openNavModal, closeNavModal, closeModal } from '../../actions/modal_actions';
+import { openModal, openNavModal, closeNavModal } from '../../actions/modal_actions';
 import Modal from '../modal/modal';
-import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { createNote, setCurrentNote } from '../../actions/note_actions';
 import { requestSingleNotebook } from '../../actions/notebook_actions';
 import { createTagging } from '../../actions/tag_actions';
 import { getNotebookTitles } from '../../reducers/selectors';
 import LeftNavNotebooks from '../notebooks/left_nav_notebooks';
-import NavModal from '../modal/nav_modal';
-import LeftNavModal from './left_nav_modal';
 import { getFirstChar } from '../../util/string_util';
 import { setSearchResults } from '../../actions/ui_actions';
 import { setSearchTerm } from '../../actions/ui_actions';
