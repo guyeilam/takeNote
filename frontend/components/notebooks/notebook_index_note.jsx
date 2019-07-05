@@ -19,7 +19,7 @@ class NotebookIndexNote extends Component {
   }
 
   render() {
-    if (!this.props.note) { return null; }
+    // if (!this.props.note) { return null; }
 
     const note = this.props.note;
 
