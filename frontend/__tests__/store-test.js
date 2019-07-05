@@ -2,7 +2,7 @@
 
 jest.mock('../reducers/root_reducer', () => {
   return jest.fn((oldState, action) => ({
-    posts: { 1: { id: 1, title: "Title", body: "Body" } }
+    notes: { 1: { id: 1, title: "Title", body: "Body" } }
   }));
 });
 import RootReducer from '../reducers/root_reducer';
@@ -25,11 +25,11 @@ describe('Store', () => {
 
   it('the exported function should create a store when invoked', () => {
     expect(store.getState()).toEqual({
-      posts: { 1: { id: 1, title: "Title", body: "Body" }}
+      notes: { 1: { id: 1, title: "Title", body: "Body" }}
     });
   });
 
-  it('passes dispatched objects the the reducer', () => {
+  it('passes dispatched objects to the reducer', () => {
     store.dispatch({ type: "TEST" });
 
     // RootReducer should be called twice: when the store is configured & when

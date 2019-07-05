@@ -22,10 +22,10 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-cli": "^6.26.0",
-    "babel-jest": "^24.8.0",
+    "babel-jest": "^22.4.3",
     "enzyme": "^3.10.0",
-    "jest": "^24.8.0",
-    "jest-cli": "^24.8.0",
+    "jest": "^18.1.0",
+    "jest-cli": "^18.1.0",
     "react-mock-router": "^1.0.15",
     "react-test-renderer": "^16.8.6",
     "redux-mock-store": "^1.5.3"
