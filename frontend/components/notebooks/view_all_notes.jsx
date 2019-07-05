@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import NotebookDetailNote from './notebook_detail_note';
-import { connect } from 'react-redux';
-import { requestAllNotebooks, requestSingleNotebook } from '../../actions/notebook_actions';
-import { setCurrentNote } from '../../actions/note_actions';
-import { requestSingleTag } from '../../actions/tag_actions';
 import AllNotesTagLabel from './all_notes_tag_label';
-import { sortedItems } from '../../reducers/selectors';
-import { openNavModal, closeNavModal } from '../../actions/modal_actions';
 import NavModal from '../modal/nav_modal';
 
 class NotesList extends Component {
