@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Modal from "../modal/modal";
 import LeftNavBar from "../left_nav_bar/left_nav_bar";
 // import NotebooksIndexContainer from "../notebooks/notebooks_index_container";
@@ -7,13 +8,16 @@ import { Route, withRouter } from "react-router-dom";
 import TagsList from "../tags/tags_index";
 import LeftNavModal from "../left_nav_bar/left_nav_modal";
 import NotebooksIndex from "../notebooks/notebooks_index";
+import LoadingIcon from "../loading_icon/loading_icon";
 
 const Client = () => {
+  const loading = useSelector(state => state.ui.loading);
+
   return (
     <>
       <Modal />
       <LeftNavModal modalId={null} />
-
+      { loading ? <LoadingIcon /> : null }
       <section className="notebooks">
         <div className="left-navbar">
           <LeftNavBar />
