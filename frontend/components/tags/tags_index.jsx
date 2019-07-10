@@ -1,12 +1,10 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
 import { requestAllTags } from "../../actions/tag_actions";
 import {
   openModal,
-  openNavModal,
-  closeNavModal
+  openNavModal
 } from "../../actions/modal_actions";
 import TagItem from "./tag_item";
 import merge from "lodash/merge";
