@@ -21,17 +21,26 @@ export const receiveAllNotebooks = (payload) => {
   });
 }
 
-export const requestAllNotebooks = () => {
-  return (dispatch) => {
-    dispatch(loadNotebooks());
-    return NotebookAPIUtil.fetchAllNotebooks().then( (payload) => {
-      return dispatch(receiveAllNotebooks(payload));
-    },
-      (err) => {
-        return dispatch(receiveNotebookErrors(err.responseJSON));
-      });
-  }
+export const requestAllNotebooks = () => dispatch => {
+  dispatch(loadNotebooks());
+  return NotebookAPIUtil.fetchAllNotebooks().then(payload => (
+    dispatch(receiveAllNotebooks(payload))
+  ),
+  err => dispatch(receiveNotebookErrors(err.responseJSON))
+  )
 }
+
+// export const requestAllNotebooks = () => {
+//   return (dispatch) => {
+//     dispatch(loadNotebooks());
+//     return NotebookAPIUtil.fetchAllNotebooks().then( (payload) => {
+//       return dispatch(receiveAllNotebooks(payload));
+//     },
+//       (err) => {
+//         return dispatch(receiveNotebookErrors(err.responseJSON));
+//       });
+//   }
+// }
 
 export const receiveSingleNotebook = (payload) => {
   return ({
