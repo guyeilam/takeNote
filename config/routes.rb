@@ -8,9 +8,7 @@ Rails.application.routes.draw do
     resource :user, only: [:create, :update]
     resource :session, only: [:create, :destroy]
     resources :notes, only: [:index, :show, :update, :destroy, :create]
-    resources :notebooks, only: [:create, :index, :show, :update, :destroy] do
-      resources :notes, only: [:index, :create]
-    end
+    resources :notebooks, only: [:create, :index, :show, :update, :destroy]
     resources :tags, only: [:create, :index, :update, :destroy, :show] do
       resources :taggings, only: [:create, :update, :destroy, :show, :index]
     end
@@ -18,7 +16,5 @@ Rails.application.routes.draw do
     resources :shares, only: [:index, :create]
     delete '/remove_tagging', to: 'taggings#destroy'
     delete '/unshare_note', to: 'shares#destroy'
-
-
   end
 end
