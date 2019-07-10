@@ -11,7 +11,7 @@ import {
 } from '../../actions/note_actions';
 import NewTagging from './new_tagging';
 import NoteHeader from '../notes/note_header';
-import LoadingIcon from '../notebooks/all_notes_tag_label';
+import LoadingIcon from '../loading_icon/loading_icon';
 
 class EditNote extends Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class EditNote extends Component {
   }
 
   showToolbar() {
-    if (this.state.toolbarVisibility == 'hidden') {
+    if (this.state.toolbarVisibility === 'hidden') {
       this.setState({toolbarVisibility: 'visible'});
     } else {
       this.setState({toolbarVisibility: 'hidden'});
