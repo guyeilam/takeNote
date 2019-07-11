@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import ReactQuill from "react-quill";
-import { connect } from "react-redux";
 import {
   setCurrentNote,
   updateNote,
@@ -28,7 +28,6 @@ class EditNote extends Component {
       unprocDelta: [],
       typing: null
     };
-    this.handleChange = this.handleChange.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.showToolbar = this.showToolbar.bind(this);
@@ -152,12 +151,6 @@ class EditNote extends Component {
   componentWillUnmount() {
     this.props.setCurrentNote(null);
     this.clearSubscriptions();
-  }
-
-  handleChange(field) {
-    return e => {
-      return this.setState({ [field]: e.currentTarget.value });
-    };
   }
 
   handleTitleChange() {
