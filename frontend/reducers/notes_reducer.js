@@ -1,8 +1,19 @@
-import merge from 'lodash/merge';
+import merge from "lodash/merge";
 
-import { RECEIVE_SINGLE_NOTEBOOK, RECEIVE_ALL_NOTEBOOKS } from '../actions/notebook_actions';
-import { RECEIVE_SINGLE_NOTE, RECEIVE_ALL_NOTES, REMOVE_NOTE, RECEIVE_UPDATED_NOTE } from '../actions/note_actions';
-import { RECEIVE_SINGLE_TAG, RECEIVE_UPDATED_TAGGING } from '../actions/tag_actions';
+import {
+  RECEIVE_SINGLE_NOTEBOOK,
+  RECEIVE_ALL_NOTEBOOKS
+} from "../actions/notebook_actions";
+import {
+  RECEIVE_SINGLE_NOTE,
+  RECEIVE_ALL_NOTES,
+  REMOVE_NOTE,
+  RECEIVE_UPDATED_NOTE
+} from "../actions/note_actions";
+import {
+  RECEIVE_SINGLE_TAG,
+  RECEIVE_UPDATED_TAGGING
+} from "../actions/tag_actions";
 
 const notesReducer = (state = {}, action) => {
   Object.freeze(state);
