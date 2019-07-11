@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactQuill from 'react-quill';
 import { withRouter } from 'react-router-dom';
 
 class MoveNote extends Component {
