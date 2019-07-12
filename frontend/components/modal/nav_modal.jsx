@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { closeNavModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
-import NoteBookActionsNavContainer from '../notebooks/modal/notebook_actions_nav_container';
+import NoteBookActionsNavContainer from '../notebooks/modal/notebook_actions_nav';
 import TagActions from '../notebooks/modal/tag_nav_modal';
 import TaggingModal from './tagging_modal';
 import NoteHeaderModal from './note_header_modal';
 import NotebooksSortModal from './notebooks_sort_modal';
-import SessionModal from './session_modal';
 
 class NavModal extends Component {
   constructor(props) {
