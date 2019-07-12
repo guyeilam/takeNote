@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { closeNavModal } from '../../actions/modal_actions';
-import { connect } from 'react-redux';
-import NoteBookActionsNavContainer from '../notebooks/modal/notebook_actions_nav';
-import TagActions from '../notebooks/modal/tag_nav_modal';
-import TaggingModal from './tagging_modal';
-import NoteHeaderModal from './note_header_modal';
-import NotebooksSortModal from './notebooks_sort_modal';
+import React, { Component } from "react";
+import { closeNavModal } from "../../actions/modal_actions";
+import { connect } from "react-redux";
+import NoteBookActionsNavContainer from "../notebooks/modal/notebook_actions_nav";
+import TagActions from "../notebooks/modal/tag_nav_modal";
+import TaggingModal from "./tagging_modal";
+import NoteHeaderModal from "./note_header_modal";
+import NotebooksSortModal from "./notebooks_sort_modal";
 
 class NavModal extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class NavModal extends Component {
     const closeNavModal = this.props.closeNavModal;
     const navModalId = this.props.navModalId;
     const idx = this.props.idx;
-    
+
     if (!navModal) {
       return null;
     }
@@ -27,37 +27,37 @@ class NavModal extends Component {
     let childClass;
 
     switch (navModal) {
-      case 'notebook-actions-nav':
-        component = <NoteBookActionsNavContainer notebookId={this.props.navModalId}/>;
-        // component = <NoteBookActionsNavContainer notebookId={this.state.modalId} />;
-        parentClass = 'navbar-user-actions';
-        childClass = 'navbar-user-actions-child';
+      case "notebook-actions-nav":
+        component = (
+          <NoteBookActionsNavContainer notebookId={this.props.navModalId} />
+        );
+        parentClass = "navbar-user-actions";
+        childClass = "navbar-user-actions-child";
         break;
-      case 'tag-actions-nav':
-        // component = <TagActions tagId={this.state.modalId} />;
+      case "tag-actions-nav":
         component = <TagActions tagId={this.props.navModalId} />;
-        parentClass = 'tag-actions';
-        childClass = 'tag-actions-child';
+        parentClass = "tag-actions";
+        childClass = "tag-actions-child";
         break;
-      case 'tagging-nav':
+      case "tagging-nav":
         component = <TaggingModal tagId={this.props.navModalId} />;
-        parentClass = 'tagging-nav-menu';
-        childClass = 'tagging-nav-menu-child';
+        parentClass = "tagging-nav-menu";
+        childClass = "tagging-nav-menu-child";
         break;
-      case 'note-header-nav':
+      case "note-header-nav":
         component = <NoteHeaderModal noteId={this.props.navModalId} />;
-        parentClass = 'note-header-nav';
-        childClass = 'note-header-nav-child';
+        parentClass = "note-header-nav";
+        childClass = "note-header-nav-child";
         break;
-      case 'notebooks-sort':
+      case "notebooks-sort":
         component = <NotebooksSortModal modalId={null} />;
-        parentClass = 'notebooks-sort-nav';
-        childClass = 'notebooks-sort-nav-child';
+        parentClass = "notebooks-sort-nav";
+        childClass = "notebooks-sort-nav-child";
         break;
-      case 'notes-sort':
+      case "notes-sort":
         component = <NotebooksSortModal modalId={null} />;
-        parentClass = 'notes-sort-nav';
-        childClass = 'notes-sort-nav-child';
+        parentClass = "notes-sort-nav";
+        childClass = "notes-sort-nav-child";
         break;
       default:
         return null;
@@ -71,9 +71,10 @@ class NavModal extends Component {
               {component}
             </div>
           </div>
-          <div className='navbar-modal-background' onClick={closeNavModal}></div>
-      </>
-    ); } else {
+          <div className="navbar-modal-background" onClick={closeNavModal} />
+        </>
+      );
+    } else {
       return null;
     }
   }
@@ -93,4 +94,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavModal);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavModal);

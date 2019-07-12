@@ -33,8 +33,6 @@ const NotebooksIndex = props => {
 
   const unsortedNotes = useSelector(state => state.entities.notes) || null;
   const notes = Object.values(sortedItems(unsortedNotes, sortMethod)) || null;
-  // const sorted_notebooks = notebooks ? sortedItems(notebooks, sortMethod) : null;
-  // const sorted_notes = state.entities.notes ? sortedItems(state.entities.notes, state.ui.sort) : null;
 
   const rowSelector = idx => {
     if (idx % 2 === 0) {
