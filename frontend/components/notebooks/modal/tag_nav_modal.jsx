@@ -1,57 +1,40 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
-import { closeNavModal } from '../../../actions/modal_actions';
-import { openModal } from '../../../actions/modal_actions';
-import { deleteTag, updateTag } from '../../../actions/tag_actions';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { openModal, closeNavModal } from "../../../actions/modal_actions";
+import { deleteTag } from "../../../actions/tag_actions";
 
-class TagActions extends Component {
-  constructor(props) {
-    super(props);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleRename = this.handleRename.bind(this);
-  }
+const TagActions = props => {
+  const dispatch = useDispatch();
 
-  handleDelete(tag) {
-    return (e) => {
-      this.props.closeNavModal();
-      this.props.deleteTag(tag);
-    }
-  }
+  const tagId = props.tagId;
+  const tag = useSelector(state => state.entities.tags[tagId]);
 
-  handleRename() {
-    return (e) => {
-      this.props.closeNavModal();
-      this.props.openModal('rename-tag', this.props.tagId);
-    }
-  }
+  const handleDelete = tag => {
+    return e => {
+      dispatch(closeNavModal());
+      dispatch(deleteTag(tag));
+    };
+  };
 
-  render() {
-    return (
-      <>
-        <div className='tag-actions-nav-text'>
-          <div className='tag-actions-nav-delete' onClick={this.handleDelete(this.props.tag)}><div className='tag-actions-nav-button-text'>Delete tag...</div></div>
-          <div className='tag-actions-nav-rename' onClick={this.handleRename()}><div className='tag-actions-nav-button-text'>Rename Tag...</div></div>
+  const handleRename = () => {
+    return e => {
+      dispatch(closeNavModal());
+      dispatch(openModal("rename-tag", tagId));
+    };
+  };
+
+  return (
+    <>
+      <div className="tag-actions-nav-text">
+        <div className="tag-actions-nav-delete" onClick={handleDelete(tag)}>
+          <div className="tag-actions-nav-button-text">Delete tag...</div>
         </div>
-      </>
-    );
-  }
-}
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    errors: state.errors.session,
-    tagId: ownProps.tagId,
-    tag: state.entities.tags[ownProps.tagId]
-  };
+        <div className="tag-actions-nav-rename" onClick={handleRename()}>
+          <div className="tag-actions-nav-button-text">Rename Tag...</div>
+        </div>
+      </div>
+    </>
+  );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    closeNavModal: () => dispatch(closeNavModal()),
-    openModal: (modal, tagId) => dispatch(openModal(modal, tagId)),
-    deleteTag: (tag) => dispatch(deleteTag(tag)),
-    updateTag: (tag) => dispatch(updateTag(tag))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TagActions);
+export default TagActions;
