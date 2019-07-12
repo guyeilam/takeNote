@@ -178,6 +178,11 @@
   transition: all 0.1s ease-out;
 }
 
+.notebook-item-title {
+  display: flex;
+  align-items: center;
+}
+
 .notebook-item-title:hover {
   text-decoration: underline;
   transition: all 0.1s ease-out;
@@ -928,7 +933,7 @@
 }
 
 .notebooks-list-table-header:hover {
-   background-color: #eeeeee;
+  background-color: #eeeeee;
   transition: all 0.1s ease-out;
 }
 
@@ -957,3 +962,5 @@
 }
 
 /* END NOTEBOOKS TABLE SORT HEADER LINKS  */
+
+
