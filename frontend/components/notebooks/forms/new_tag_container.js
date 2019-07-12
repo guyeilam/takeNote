@@ -1,20 +1,23 @@
-import { connect } from 'react-redux';
-import { createTag } from '../../../actions/tag_actions';
-import { closeModal } from '../../../actions/modal_actions';
-import TagForm from './tag_form';
+import { connect } from "react-redux";
+import { createTag } from "../../../actions/tag_actions";
+import { closeModal } from "../../../actions/modal_actions";
+import TagForm from "./tag_form";
 
 const mapStateToProps = ({ errors }) => {
   return {
     errors: errors.session,
-    formType: 'new-tag'
+    formType: "new-tag"
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    processForm: (tag) => dispatch(createTag(tag)),
+    processForm: tag => dispatch(createTag(tag)),
     closeModal: () => dispatch(closeModal())
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TagForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TagForm);

@@ -1,20 +1,23 @@
-import { connect } from 'react-redux';
-import { createNotebook } from '../../../actions/notebook_actions';
-import { closeModal } from '../../../actions/modal_actions';
-import NewNotebookForm from './new_notebook_form';
+import { connect } from "react-redux";
+import { createNotebook } from "../../../actions/notebook_actions";
+import { closeModal } from "../../../actions/modal_actions";
+import NewNotebookForm from "./new_notebook_form";
 
 const mapStateToProps = ({ errors }) => {
   return {
     errors: errors.session,
-    formType: 'new-notebook'
+    formType: "new-notebook"
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    processForm: (notebook) => dispatch(createNotebook(notebook)),
+    processForm: notebook => dispatch(createNotebook(notebook)),
     closeModal: () => dispatch(closeModal())
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewNotebookForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewNotebookForm);
