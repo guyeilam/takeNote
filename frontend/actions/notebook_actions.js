@@ -1,6 +1,7 @@
 import * as NotebookAPIUtil from "../util/notebook_api_util";
 
 export const RECEIVE_ALL_NOTEBOOKS = "RECEIVE_ALL_NOTEBOOKS";
+export const RECEIVE_ONLY_NOTEBOOKS = "RECEIVE_ONLY_NOTEBOOKS";
 export const RECEIVE_SINGLE_NOTEBOOK = "RECEIVE_SINGLE_NOTEBOOK";
 export const REMOVE_NOTEBOOK = "REMOVE_NOTEBOOK";
 export const RECEIVE_NOTEBOOK_ERRORS = "RECEIVE_NOTEBOOK_ERRORS";
@@ -17,10 +18,23 @@ export const receiveAllNotebooks = payload => ({
   payload
 });
 
+export const receiveOnlyNotebooks = payload => ({
+  type: RECEIVE_ONLY_NOTEBOOKS,
+  payload
+});
+
 export const requestAllNotebooks = () => dispatch => {
   dispatch(loadNotebooks());
   return NotebookAPIUtil.fetchAllNotebooks().then(
     payload => dispatch(receiveAllNotebooks(payload)),
+    err => dispatch(receiveNotebookErrors(err.responseJSON))
+  );
+};
+
+export const requestOnlyNotebooks = () => dispatch => {
+  dispatch(loadNotebooks());
+  return NotebookAPIUtil.fetchAllNotebooks().then(
+    payload => dispatch(receiveOnlyNotebooks(payload)),
     err => dispatch(receiveNotebookErrors(err.responseJSON))
   );
 };

@@ -5,6 +5,7 @@ import {
   RECEIVE_SINGLE_NOTEBOOK,
   REMOVE_NOTEBOOK,
   RECEIVE_UPDATED_NOTEBOOK,
+  RECEIVE_ONLY_NOTEBOOKS
 } from '../actions/notebook_actions';
 import { REMOVE_NOTE } from '../actions/note_actions';
 
@@ -24,6 +25,9 @@ const notebooksReducer = (oldState = {}, action) => {
     case REMOVE_NOTEBOOK:
       newState = merge({}, oldState);
       delete newState[action.notebookId];
+      return newState;
+    case RECEIVE_ONLY_NOTEBOOKS:
+      newState = action.payload.notebooks;
       return newState;
     // case REMOVE_NOTE_FROM_NOTEBOOK:
     //   newState = merge({}, oldState);

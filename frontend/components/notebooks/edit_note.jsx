@@ -263,7 +263,7 @@ class EditNote extends Component {
       >
         {whoIsTyping}
 
-        {loadingIcon}
+        {/* {loadingIcon} */}
 
         <NoteHeader note={this.props.notes} />
 

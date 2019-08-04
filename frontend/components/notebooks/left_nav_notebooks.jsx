@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { truncateStr } from "../../util/string_util";
 import { setCurrentNote } from "../../actions/note_actions";
-import { requestAllNotebooks } from "../../actions/notebook_actions";
+import { requestOnlyNotebooks } from "../../actions/notebook_actions";
 
 const LeftNavNotebooks = props => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const LeftNavNotebooks = props => {
   const allNotebooks = useSelector(state => state.entities.notebooks);
 
   useEffect(() => {
-    dispatch(requestAllNotebooks());
+    dispatch(requestOnlyNotebooks());
   }, []);
 
   const openNotebook = notebookId => {

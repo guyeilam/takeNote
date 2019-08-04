@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 import merge from "lodash/merge";
@@ -7,16 +7,21 @@ import NavModal from "../modal/nav_modal";
 import { sortedItems } from "../../reducers/selectors";
 import { setSort } from "../../actions/ui_actions";
 import { updateNote } from "../../actions/note_actions";
+import { requestAllNotebooks } from "../../actions/notebook_actions";
 import { openModal, openNavModal } from "../../actions/modal_actions";
 
 const NotebooksIndex = props => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(requestAllNotebooks());
+  }, [])
+
   const [notesVisible, setNotesVisible] = useState({});
   const [draggedNoteId, setDraggedNoteId] = useState(null);
   const [hoverOverNotebook, setHoverOverNotebook] = useState(null);
   const [titleSortIcon, setTitleSortIcon] = useState("");
   const [updatedSortIcon, setUpdatedSortIcon] = useState("");
-
-  const dispatch = useDispatch();
 
   const currentId = useSelector(state => state.session.id);
   const currentUser =
